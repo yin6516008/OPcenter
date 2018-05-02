@@ -1,157 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="renderer" content="webkit">
-    <title>TS网络监控</title>
+{% extends 'master.html' %}
 
-    <!--[if lt IE 9]>
-    <meta http-equiv="refresh" content="0;ie.html" />
-    <![endif]-->
-
-    <link rel="shortcut icon" href="favicon.ico">
-    <link href="/static/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="/static/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="/static/css/animate.min.css" rel="stylesheet">
-    <link href="/static/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+{% block css %}
     <link rel="stylesheet" href="/static/css/mycss/index.css">
     <link rel="stylesheet" href="/static/css/mycss/show_areas.css">
-</head>
+{% endblock %}
 
-<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
-    <div id="wrapper">
-        <!--左侧导航开始-->
-        <nav class="navbar-default navbar-static-side" role="navigation">
-            <div class="nav-close"><i class="fa fa-times-circle"></i>
-            </div>
-            <div class="sidebar-collapse">
-                <ul class="nav" id="side-menu">
-                    <li class="nav-header">
-                        <div class=" profile-element">
-                          <img src="/static/img/logo.png" alt="">
-                        </div>
-                        <div class="logo-element">T S
-                        </div>
-                    </li>
-                    <li class="active">
-                        <a href="#">
-                            <i class="fa fa-desktop"></i>
-                            <span class="nav-label">网站监控</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level">
-                            <li class="active">
-                                <a class="" href="/webmoni/areas/" data-index="0">区域展示</a>
-                            </li>
-                            <li>
-                                <a class="" href="show_table_monitor.html" data-index="0">服务质量监控</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-internet-explorer"></i>
-                            <span class="nav-label">域名管理</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level ulhide">
-                            <li>
-                                <a class="J_menuItem" href="table_domainnames.html" data-index="0">域名监控表格视图</a>
-                            </li>
-                            <li>
-                              <a class="J_menuItem" href="graph_echarts.html" data-index="0">echarts视图</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-object-group"></i>
-                            <span class="nav-label">DNS管理</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level ulhide">
-                            <li>
-                                <a class="J_menuItem" href="DNS_managementA.html">A服务商</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="DNS_managementB.html">B服务商</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-file"></i>
-                            <span class="nav-label">证书管理</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level ulhide">
-                            <li><a class="J_menuItem" href="credential_apply.html">证书申请</a>
-                            </li>
-                            <li><a class="J_menuItem" href="credential_info.html">所有证书信息</a>
-                            </li>
-                            
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">日志分析</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level ulhide">
-                            <li><a class="J_menuItem" href="log_users.html">用户操作记录</a>
-                            </li>
-                            <li><a class="J_menuItem" href="log_websites.html">网站和域名监控分析图</a>
-                            </li>
-                            
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-wrench"></i> <span class="nav-label">用户设置</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level ulhide">
-                            <li><a class="J_menuItem" href="setting_new.html">新建</a>
-                            </li>
-                            <li><a class="J_menuItem" href="setting_delete.html">删除</a>
-                            </li>
-                            
-                            <li><a class="J_menuItem" href="setting_authority.html">权限管理</a>
-                            </li>
-                            <li><a class="J_menuItem" href="setting_email.html">警告邮箱</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <!--左侧导航结束-->
+{% block content %}
         <!--右侧部分开始-->
-        <div id="page-wrapper" class="gray-bg dashbard-1">
-            <div class="row border-bottom">
-                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-                    <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                    </div>
-                    <div class="dropdown profile-element">
-                        <span><img alt="image" class="img-circle" src="./static/img/5stars.png" /></span>
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear">
-                            <span class="text-muted text-xs block">Mingde<b class="caret"></b></span>
-                            </span>
-                        </a>
-                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a class="J_menuItem" href="login.html">修改头像</a>
-                            </li>
-                            <li><a class="J_menuItem" href="profile.html">个人资料</a>
-                            </li>
-                            <li><a class="J_menuItem" href="contacts.html">联系我们</a>
-                            </li>
-                            <li><a class="J_menuItem" href="mailbox.html">信箱</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="login.html">安全退出</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-            
-            
             <div class="row J_mainContent animated fadeInRight" id="content-main">
                 <!-- 头部横条 -->
                 <div class="ibox-title">
@@ -164,92 +19,18 @@
                     <div class="pull-right">
                         <div class="select_area">
                             <div class="btn-group select_btn1">
-                                <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">选项 <span class="caret"></span>
+                                <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">项目 <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">选项一</a>
-                                      <ul class="third-menu">
-                                        <li>
-                                          <a href="#">选项一-子选项1</a>
-                                        </li>
-                                        <li>
-                                          <a href="#">选项一-子选项2</a>
-                                        </li>
-                                      </ul>
-                                    </li>
-                                    <li><a href="#">选项二</a>
-                                      <ul class="third-menu">
-                                        <li>
-                                          <a href="#">选项二-子选项1</a>
-                                        </li>
-                                        <li>
-                                          <a href="#">选项二-子选项2</a>
-                                        </li>
-                                        <li>
-                                          <a href="#">选项二-子选项3</a>
-                                        </li>
-                                      </ul>
-                                    </li>
-                                    <li><a href="#">选项三</a>
-                                      <ul class="third-menu">
-                                        <li>
-                                          <a href="#">选项三-子选项1</a>
-                                        </li>
-                                        <li>
-                                          <a href="#">选项三-子选项2</a>
-                                        </li>
-                                        <li>
-                                          <a href="#">选项三-子选项3</a>
-                                        </li>
-                                        <li>
-                                          <a href="#">选项三-子选项4</a>
-                                        </li>
-                                      </ul>
+                                    <li><a href="#">项目1</a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="btn-group select_btn2">
-                                <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">选项 <span class="caret"></span>
+                                <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">域名 <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">选项一</a>
-                                      <ul class="third-menu">
-                                        <li>
-                                          <a href="#">选项一-子选项1</a>
-                                        </li>
-                                        <li>
-                                          <a href="#">选项一-子选项2</a>
-                                        </li>
-                                      </ul>
-                                    </li>
-                                    <li><a href="#">选项二</a>
-                                      <ul class="third-menu">
-                                        <li>
-                                          <a href="#">选项二-子选项1</a>
-                                        </li>
-                                        <li>
-                                          <a href="#">选项二-子选项2</a>
-                                        </li>
-                                        <li>
-                                          <a href="#">选项二-子选项3</a>
-                                        </li>
-                                      </ul>
-                                    </li>
-                                    <li><a href="#">选项三</a>
-                                      <ul class="third-menu">
-                                        <li>
-                                          <a href="#">选项三-子选项1</a>
-                                        </li>
-                                        <li>
-                                          <a href="#">选项三-子选项2</a>
-                                        </li>
-                                        <li>
-                                          <a href="#">选项三-子选项3</a>
-                                        </li>
-                                        <li>
-                                          <a href="#">选项三-子选项4</a>
-                                        </li>
-                                      </ul>
+                                    <li><a href="#">域名1</a>
                                     </li>
                                 </ul>
                             </div>
@@ -295,9 +76,7 @@
                 <div class="pull-right">&copy; 2016-2018 <a href="#" target="_blank">TS网络监控</a>
                 </div>
             </div>
-        </div>
         <!--右侧部分结束-->
-    </div>
     <!-- echarts依赖项 -->
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
@@ -321,8 +100,8 @@
 
     option = {
     title: {
-        text: '用户分布图',
-        subtext: '纯属虚构',
+        text: '区域概览',
+        subtext: '网站区域服务质量检测',
         left: 'center'
     },
     tooltip: {
@@ -344,7 +123,7 @@
         text: ['高','低'],           // 文本，默认为数值文本
         calculable: true,
         inRange:{
-            color:['#ffffff','#d00000']
+            color:['#99ffcc','#d00000']
         }
     },
     toolbox: {
@@ -360,57 +139,7 @@
     },
     series: [
         {
-            name: 'iphone6',
-            type: 'map',
-            mapType: 'china',
-            roam: true,
-            label: {
-                normal: {
-                    show: true
-                },
-                emphasis: {
-                    show: true
-                }
-            },
-            data:[
-                {name: '北京',value: randomData() },
-                {name: '天津',value: randomData() },
-                {name: '上海',value: randomData() },
-                {name: '重庆',value: randomData() },
-                {name: '河北',value: randomData() },
-                {name: '河南',value: randomData() },
-                {name: '云南',value: randomData() },
-                {name: '辽宁',value: randomData() },
-                {name: '黑龙江',value: randomData() },
-                {name: '湖南',value: randomData() },
-                {name: '安徽',value: randomData() },
-                {name: '山东',value: randomData() },
-                {name: '新疆',value: randomData() },
-                {name: '江苏',value: randomData() },
-                {name: '浙江',value: randomData() },
-                {name: '江西',value: randomData() },
-                {name: '湖北',value: randomData() },
-                {name: '广西',value: randomData() },
-                {name: '甘肃',value: randomData() },
-                {name: '山西',value: randomData() },
-                {name: '内蒙古',value: randomData() },
-                {name: '陕西',value: randomData() },
-                {name: '吉林',value: randomData() },
-                {name: '福建',value: randomData() },
-                {name: '贵州',value: randomData() },
-                {name: '广东',value: randomData() },
-                {name: '青海',value: randomData() },
-                {name: '西藏',value: randomData() },
-                {name: '四川',value: randomData() },
-                {name: '宁夏',value: randomData() },
-                {name: '海南',value: randomData() },
-                {name: '台湾',value: randomData() },
-                {name: '香港',value: randomData() },
-                {name: '澳门',value: randomData() }
-            ]
-        },
-        {
-            name: 'iphone7',
+            name: '北京',
             type: 'map',
             mapType: 'china',
             label: {
@@ -422,51 +151,11 @@
                 }
             },
             data:[
-                {name: '北京',value: randomData() },
-                {name: '天津',value: randomData() },
-                {name: '上海',value: randomData() },
-                {name: '重庆',value: randomData() },
-                {name: '河北',value: randomData() },
-                {name: '安徽',value: randomData() },
-                {name: '新疆',value: randomData() },
-                {name: '浙江',value: randomData() },
-                {name: '江西',value: randomData() },
-                {name: '山西',value: randomData() },
-                {name: '内蒙古',value: randomData() },
-                {name: '吉林',value: randomData() },
-                {name: '福建',value: randomData() },
-                {name: '广东',value: randomData() },
-                {name: '西藏',value: randomData() },
-                {name: '四川',value: randomData() },
-                {name: '宁夏',value: randomData() },
-                {name: '香港',value: randomData() },
-                {name: '澳门',value: randomData() }
-            ]
-        },
-        {
-            name: 'iphoneX',
-            type: 'map',
-            mapType: 'china',
-            label: {
-                normal: {
-                    show: true
-                },
-                emphasis: {
-                    show: true
-                }
-            },
-            data:[
-                {name: '北京',value: randomData() },
-                {name: '天津',value: randomData() },
-                {name: '上海',value: randomData() },
-                {name: '广东',value: randomData() },
-                {name: '台湾',value: randomData() },
-                {name: '香港',value: randomData() },
-                {name: '澳门',value: randomData() }
+                {name: '北京',value: 50 },
             ]
         }
     ]
-    };;
+    };
     if (option && typeof option === "object") {
     myChart.setOption(option, true);
     }
@@ -491,23 +180,14 @@
               smooth: true
           }]
       };
-      ;
+
       if (option && typeof option === "object") {
           myChart.setOption(option, true);
       }
     </script>
-  
+{% endblock %}
 
-    <script src="/static/js/jquery.min.js?v=2.1.4"></script>
-    <script src="/static/js/bootstrap.min.js?v=3.3.6"></script>
-    <script src="/static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="/static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="/static/js/plugins/layer/layer.min.js"></script>
-    <script src="/static/js/hplus.min.js?v=4.1.0"></script>
-    <script src="/static/js/contabs.min.js"></script>
-    <script src="/static/js/plugins/pace/pace.min.js"></script>
+{% block js %}
     <script src="/static/js/index.js"></script>
     <script src="/static/js/show_areas.js"></script>
-</body>
-
-</html>
+{% endblock %}

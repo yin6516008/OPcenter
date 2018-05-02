@@ -1,192 +1,38 @@
-<!DOCTYPE html>
-<html>
+{% extends 'master.html' %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>TS网络监控</title>
-
-    <!--[if lt IE 9]>
-    <meta http-equiv="refresh" content="0;ie.html" />
-    <![endif]-->
-
-    <link rel="shortcut icon" href="favicon.ico">
-    <link href="/static/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="/static/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="/static/css/animate.min.css" rel="stylesheet">
-    <link href="/static/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+{% block css %}
     <link rel="stylesheet" href="/static/css/mycss/index.css">
-</head>
+{% endblock %}
 
-<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
-    <div id="wrapper">
-        <!--左侧导航开始-->
-        <nav class="navbar-default navbar-static-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="side-menu">
-                    <li class="nav-header">
-                        <div class=" profile-element">
-                          <img src="/static/img/logo.png" alt="">
+{% block content %}
+        <div class="row J_mainContent animated fadeInRight" id="content-main">
+            <!-- echarts图表部分 -->
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>数据展示</h5>
                         </div>
-                        <div class="logo-element">T S
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-desktop"></i>
-                            <span class="nav-label">网站监控</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level ulhide">
-                            <li>
-                                <a href="/webmoni/areas/" data-index="0">区域展示</a>
-                            </li>
-                            <li>
-                                <a href="show_table_monitor.html" data-index="0">服务质量监控</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-internet-explorer"></i>
-                            <span class="nav-label">域名管理</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level ulhide">
-                            <li>
-                                <a href="table_domainnames.html" data-index="0">域名监控表格视图</a>
-                            </li>
-                            <li>
-                              <a href="graph_echarts.html" data-index="0">echarts视图</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-object-group"></i>
-                            <span class="nav-label">DNS管理</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level ulhide">
-                            <li>
-                                <a href="DNS_managementA.html">A服务商</a>
-                            </li>
-                            <li>
-                                <a href="DNS_managementB.html">B服务商</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-file"></i>
-                            <span class="nav-label">证书管理</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level ulhide">
-                            <li><a href="credential_apply.html">证书申请</a>
-                            </li>
-                            <li><a href="credential_info.html">所有证书信息</a>
-                            </li>
-                            
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">日志分析</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level ulhide">
-                            <li><a href="log_users.html">用户操作记录</a>
-                            </li>
-                            <li><a href="log_websites.html">网站和域名监控分析图</a>
-                            </li>
-                            
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-wrench"></i> <span class="nav-label">用户设置</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level ulhide">
-                            <li><a href="setting_new.html">新建</a>
-                            </li>
-                            <li><a href="setting_delete.html">删除</a>
-                            </li>
-                            
-                            <li><a href="setting_authority.html">权限管理</a>
-                            </li>
-                            <li><a href="setting_email.html">警告邮箱</a>
-                            </li>
-                           
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        
-        <!--左侧导航结束-->
-        <!--右侧部分开始-->
-        <div id="page-wrapper" class="gray-bg dashbard-1">
-            <div class="row border-bottom">
-                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-                    <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                    </div>
-                    <div class="dropdown profile-element">
-                        <span><img alt="image" class="img-circle" src="/static/img/5stars.png" /></span>
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear">
-                            <span class="text-muted text-xs block">Mingde<b class="caret"></b></span>
-                            </span>
-                        </a>
-                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="login.html">修改头像</a>
-                            </li>
-                            <li><a href="profile.html">个人资料</a>
-                            </li>
-                            <li><a href="contacts.html">联系我们</a>
-                            </li>
-                            <li><a href="mailbox.html">信箱</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="login.html">安全退出</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-            
-            
-            <div class="row J_mainContent animated fadeInRight" id="content-main">
-                <!-- echarts图表部分 -->
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="ibox float-e-margins">
-                            <div class="ibox-title">
-                                <h5>数据展示</h5>
-                            </div>
-                            <div class="ibox-content">
-                                <div style="height:400px" id="container-left"></div>
-                            </div>
+                        <div class="ibox-content">
+                            <div style="height:400px" id="container-left"></div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="ibox float-e-margins">
-                            <div class="ibox-title">
-                                <h5>数据展示</h5>
-                                <!-- 工具箱 -->
-                            </div>
-                            <div class="ibox-content">
-                                <div style="height:400px" id="container-right"></div>
-                            </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>数据展示</h5>
+                            <!-- 工具箱 -->
+                        </div>
+                        <div class="ibox-content">
+                            <div style="height:400px" id="container-right"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- 右下角版权标识 -->
-            <div class="footer">
-                <div class="pull-right">&copy; 2016-2018 <a href="#" target="_blank">TS网络监控</a>
-                </div>
-            </div>
-        </div>
-        <!--右侧部分结束-->
-    </div>
+
+
+
     <!-- echarts依赖项 -->
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
@@ -205,13 +51,13 @@
       option = null;
       option = {
           title: {
-              text: '区域访问速度'
+              text: '网站异常'
           },
           tooltip: {
               trigger: 'axis'
           },
           legend: {
-              data:['武汉','北京','上海','广州']
+              data:['北京']
           },
           grid: {
               left: '3%',
@@ -230,39 +76,21 @@
               data: ['周一','周二','周三','周四','周五','周六','周日']
           },
           yAxis: {
-              name: '访问速度',
+              name: '数量',
               type: 'value',
               min: 0,
-              max: 1500
+              max: 50
           },
           series: [
-              {
-                  name:'武汉',
-                  type:'line',
-                  stack: '总量',
-                  data:[120, 132, 101, 134, 90, 230, 210]
-              },
               {
                   name:'北京',
                   type:'line',
                   stack: '总量',
-                  data:[220, 182, 191, 234, 290, 330, 310]
+                  data:[23, 45, 32, 11, 4, 5, 32]
               },
-              {
-                  name:'上海',
-                  type:'line',
-                  stack: '总量',
-                  data:[150, 232, 201, 154, 190, 330, 410]
-              },
-              {
-                  name:'广州',
-                  type:'line',
-                  stack: '总量',
-                  data:[320, 332, 301, 334, 390, 330, 320]
-              }
           ]
       };
-      ;
+
       if (option && typeof option === "object") {
           myChart.setOption(option, true);
       }
@@ -275,13 +103,13 @@
     option = null;
     option = {
         title: {
-            text: '区域访问速度'
+            text: '网站高延迟'
         },
         tooltip: {
             trigger: 'axis'
         },
         legend: {
-            data:['武汉','北京','上海','广州']
+            data:['北京']
         },
         grid: {
             left: '3%',
@@ -300,53 +128,30 @@
             data: ['周一','周二','周三','周四','周五','周六','周日']
         },
         yAxis: {
-            name: '访问速度',
+            name: '数量',
             type: 'value',
             min: 0,
-            max: 1000
+            max: 50
         },
         series: [
-            {
-                name:'武汉',
-                type:'line',
-                stack: '总量',
-                data:[120, 132, 101, 134, 90, 230, 210]
-            },
             {
                 name:'北京',
                 type:'line',
                 stack: '总量',
-                data:[220, 182, 191, 234, 290, 330, 310]
+                data:[3, 24, 14, 0, 22, 7, 2]
             },
-            {
-                name:'上海',
-                type:'line',
-                stack: '总量',
-                data:[150, 232, 201, 154, 190, 330, 410]
-            },
-            {
-                name:'广州',
-                type:'line',
-                stack: '总量',
-                data:[320, 332, 301, 334, 390, 330, 320]
-            }
         ]
     };
-    ;
+
     if (option && typeof option === "object") {
         myChart.setOption(option, true);
     }
     </script>
+    </div>
+{% endblock %}
 
-    <script src="/static/js/jquery.min.js?v=2.1.4"></script>
-    <script src="/static/js/bootstrap.min.js?v=3.3.6"></script>
-    <script src="/static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="/static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="/static/js/plugins/layer/layer.min.js"></script>
-    <script src="/static/js/hplus.min.js?v=4.1.0"></script>
-    <script type="text/javascript" src="/static/js/contabs.min.js"></script>
-    <script src="/static/js/plugins/pace/pace.min.js"></script>
-    <script src="/static/js/index.js"></script>
-</body>
 
-</html>
+{% block js %}
+<script src="/static/js/index.js"></script>
+{% endblock %}
+
