@@ -1,0 +1,95 @@
+/* 左侧选项按钮样式调整 */
+.ibox-title {
+  position: relative;
+}
+.btn-group {
+  position: absolute;
+}
+.dropdown-menu {
+  min-width: 65px;
+}
+.dropdown-menu>li>a {
+  padding: 3px 14px;
+}
+
+/* 右侧输入框样式调整 */
+.form-group {
+  margin-bottom: 0px;
+  position: absolute;
+  right: 60px;
+  top: -9px;
+  width: 200px;
+}
+.form-group input {
+  border: 1px solid #1BB394;
+  border-radius: 10px;
+  height: 34px;
+}
+.pull-right {
+  position: relative;
+}
+.btn.confirm {
+  margin-bottom: 0px;
+  position: absolute;
+  top: -9px;
+  right: 0px;
+}
+ul li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.dropdown-menu>li {
+  position: relative;
+}
+.third-menu {
+  position: absolute;
+  width: 120px;
+  background-color: #F5F5F5;
+  top: 0px;
+  left: 73px;
+  padding-left: 0px;
+  border: 1px solid rgb(247, 244, 244);
+  box-shadow: #ccc 2px 2px 2px;
+}
+.third-menu a {
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+}
+.third-menu a:hover {
+  background-color: #ccc;
+}
+
+#content-main>.ibox-title {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.select_btn1 {
+  position: absolute;
+  top: -27px;
+  left: -600px;
+}
+.select_btn2 {
+  position: absolute;
+  top: -27px;
+  left: -500px;
+}
+.ibox-title>.btns  {
+  position: absolute;
+  top: 5px;
+}
+/* 四个按钮 */
+btn-success a {
+  color: inherit;
+}
+.btn-info a {
+  color: inherit;
+}
+.btn-warning a {
+  color: inherit;
+}
+.btn-danger a {
+  color: inherit;
+}

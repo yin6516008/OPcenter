@@ -1,0 +1,54 @@
+html,body {
+  margin: 0;
+  padding: 0;
+}
+.box {
+  margin: 100px auto;
+}
+table {
+  text-align: center;
+}
+table th {
+  text-align: center;
+}
+.add_btn {
+  margin-bottom: 20px;
+}
+.title_position {
+  text-align: center;
+}
+.input-group {
+  margin: 10px 0;
+  width: 100%;
+}
+.input-group span {
+  width: 20%;
+}
+.dropdown-menu {
+  min-width: 60px;
+}
+.dropdown-menu>li>a {
+  padding: 3px 17px;
+}
+/* 表格在显示区域的宽度 */
+.container.box {
+  width: 1600px;
+}
+/* 搜索框样式 */
+#inputSearch {
+  border: 1px solid #1BB394;
+  border-radius: 10px;
+  height: 34px;
+}
+.navbar-form-custom {
+  width: 260px;
+  position: relative;
+}
+.navbar-form-custom>div {
+  display: inline-block;
+  margin-right: 8px;
+  height: 50px;
+}
+.navbar-form-custom>button {
+  vertical-align: top;
+}

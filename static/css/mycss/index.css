@@ -1,0 +1,68 @@
+body.fixed-sidebar.mini-navbar .navbar-static-side {
+  width: 75px;
+}
+.dropdown.profile-element {
+  float: right;
+  /* padding-right: 60px;   */
+  margin-right: 60px;  
+  display: block;
+}
+.dropdown-menu.animated.fadeInRight {
+  min-width: 100px;
+}
+.nav-header {
+  background: #fff;
+  padding: 0 25px;
+  height: 50px;
+}
+.nav-header:hover {
+  cursor: pointer;
+}
+.navbar.navbar-static-top {
+  min-height: 50px;
+  border-bottom: 1px solid #ccc;
+  height: 50px;
+}
+.logo-element {
+  min-height: 108px;
+  line-height: 50px;
+  padding: 0;
+}
+.active>a>.fa.arrow:before {
+  content: "\f107";
+}
+/* body, body.full-height-layout #page-wrapper, body.full-height-layout #wrapper, html {
+  display: flex;
+  flex-direction: column;
+} */
+/* 左侧导航栏每次刷新时隐藏 */
+.ulhide {
+  display: none;
+}
+
+.row.border-bottom {
+  height: 50px;
+}
+.navbar-minimalize.minimalize-styl-2.btn.btn-primary  {
+  margin-top: 10px;
+}
+#top-search {
+  height: 50px;
+}
+.img-circle {
+  height: 49px;
+}
+.dropdown-toggle {
+  float: right;
+  margin-top: 18px;
+}
+#content-main {
+  overflow-y: auto;
+}
+/* 右下角copyright */
+#page-wrapper>.footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+}
