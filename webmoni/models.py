@@ -5,8 +5,12 @@ from django.db import models
 class Node(models.Model):
     node = models.CharField(max_length=20,unique=True)
 
+class Project(models.Model):
+    name = models.CharField(max_length=20,unique=True,null=True)
+
 class DomainName(models.Model):
     url = models.CharField(max_length=60,unique=True)
+    project_name = models.ForeignKey('Project',null=True)
 
 class MonitorData(models.Model):
     node = models.ForeignKey('Node')
