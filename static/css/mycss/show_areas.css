@@ -47,7 +47,7 @@ ul li {
   width: 120px;
   background-color: #F5F5F5;
   top: 0px;
-  left: 73px;
+  right: -120px;
   padding-left: 0px;
   border: 1px solid rgb(247, 244, 244);
   box-shadow: #ccc 2px 2px 2px;
@@ -69,8 +69,12 @@ ul li {
 .select_btn1 {
   position: absolute;
   top: -27px;
-  left: -600px;
+  left: -400px;
 }
+.select_btn1 .btn.btn-primary.dropdown-toggle {
+  width: 100px;
+}
+
 .select_btn2 {
   position: absolute;
   top: -27px;
@@ -80,7 +84,7 @@ ul li {
   position: absolute;
   top: 5px;
 }
-/* 四个按钮 */
+/* 左上角按钮 */
 btn-success a {
   color: inherit;
 }
@@ -92,4 +96,50 @@ btn-success a {
 }
 .btn-danger a {
   color: inherit;
+}
+
+/* 删除按钮模态框 */
+.delbtn {
+  width: 200px;
+}
+.delbtn .modal-title,
+.delbtn .modal-footer {
+  text-align: center;
+}
+.tableArea {
+  padding: 10px 20px;
+}
+.tableArea th,
+.tableArea td {
+  text-align: center;
+}
+.input-group {
+  margin-top: 5px;
+}
+.input-group-addon {
+  width: 130px;
+  float: left;
+  margin: 0;
+  padding: 9px;
+}
+.input-group .form-control {
+  width: 400px;
+}
+.itemAdd {
+  background-color: rgb(233, 229, 229);
+}
+.modalAdd ul>li>a{
+  text-align: center;
+}
+#itemInput {
+  width: 130px;
+  float: left;
+}
+textarea {
+  width: 400px;
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+textarea:focus {
+  border: 1px solid #1BB394;
 }
