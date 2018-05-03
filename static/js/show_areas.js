@@ -9,12 +9,7 @@ $(function () {
 
   // 点击"点此新增项目名称"按钮将 选择项目按钮变为input输入框
   $('#itemInput').hide()
-  // $('#itemChoice').dblclick(function () {
-  //   $('#itemChoice').hide()
-  //   $('#itemInput').show()
-  // })
   $('#itemAdd').click(function () {
-    console.log(8888)
     $('#itemChoice').hide()
     $('#itemInput').show()
   })
@@ -32,6 +27,10 @@ $(function () {
   $('textarea').dblclick(function () {
     $(this).hide()
     $('#itemDetail').show()
+  })
+
+  $('.dropdown-item').click(function () {
+    $('#itemChoice').text($(this).text())
   })
 })
 
