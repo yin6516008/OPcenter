@@ -21,45 +21,17 @@
                                 <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle ">选择域名 <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                  <li><a href="#">www.baidu.com</a>
+                                {% for k,y in project_list.items %}
+                                  <li><a href="#">{{ k }}</a>
                                     <ul class="third-menu">
+                                    {% for i in y %}
                                       <li>
-                                        <a href="#">选项一-子选项1</a>
+                                        <a href="/webmoni/{{ i.id }}/">{{ i.url }}</a>
                                       </li>
-                                      <li>
-                                        <a href="#">选项一-子选项2</a>
-                                      </li>
+                                    {% endfor %}
                                     </ul>
                                   </li>
-                                  <li><a href="#">www.go.com</a>
-                                    <ul class="third-menu">
-                                      <li>
-                                        <a href="#">选项二-子选项1</a>
-                                      </li>
-                                      <li>
-                                        <a href="#">选项二-子选项2</a>
-                                      </li>
-                                      <li>
-                                        <a href="#">选项二-子选项3</a>
-                                      </li>
-                                    </ul>
-                                  </li>
-                                  <li><a href="#">www.sina.com</a>
-                                    <ul class="third-menu">
-                                      <li>
-                                        <a href="#">选项三-子选项1</a>
-                                      </li>
-                                      <li>
-                                        <a href="#">选项三-子选项2</a>
-                                      </li>
-                                      <li>
-                                        <a href="#">选项三-子选项3</a>
-                                      </li>
-                                      <li>
-                                        <a href="#">选项三-子选项4</a>
-                                      </li>
-                                    </ul>
-                                  </li>
+                                {% endfor %}
                                 </ul>
                             </div>
                         </div>
@@ -104,71 +76,37 @@
                     <thead>
                         <tr>
                             <th>域名</th>
-                            <th>证书有效期</th>
-                            <th>剩余天数</th>
-                            <th>更新时间</th>
-                            <th>状态</th>
+                            <th>区域</th>
+                            <th>响应码</th>
+                            <th>域名解析</th>
+                            <th>建立连接</th>
+                            <th>准备传输</th>
+                            <th>传输开始</th>
+                            <th>传输结束</th>
+                            <th>数据包大小</th>
+                            <th>HTTP头部大小</th>
+                            <th>平均下载速度</th>
+
                         </tr>
                     </thead>
                     <tbody id="content">
+                    {% for k,y in defaultDomainData.items %}
                         <tr>
-                            <td><a href="#">www.baidu.com</a></td>
-                            <td>2010/01/01</td>
-                            <td>111</td>
-                            <td>2018/4/27</td>
-                            <td>正常</td>
-                           
+                        {% for i in y %}
+                            <td><a href="#">{{ k }}</a></td>
+                            <td>北京</td>
+                            <td>{{ i.http_code }}</td>
+                            <td>{{ i.namelookup_time }}ms</td>
+                            <td>{{ i.connect_time }}ms</td>
+                            <td>{{ i.pretransfer_time }}ms</td>
+                            <td>{{ i.starttransfer_time }}ms</td>
+                            <td>{{ i.total_time }}ms</td>
+                            <td>{{ i.size_download }}byte</td>
+                            <td>{{ i.header_size }}byte</td>
+                            <td>{{ i.speed_download }}byte</td>
+                        {% endfor %}
                         </tr>
-                        <tr>
-                            <td><a href="#">www.alibaba.com</a></td>
-                            <td>2011/02/02</td>
-                            <td>222</td>
-                            <td>2018/4/28</td>
-                            <td>异常</td>
-                            
-                        </tr>
-                        <tr>
-                            <td><a href="#">www.google.com</a></td>
-                            <td>2012/03/03</td>
-                            <td>333</td>
-                            <td>2018/4/29</td>
-                            <td>正常</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">www.google.com</a></td>
-                            <td>2012/03/03</td>
-                            <td>333</td>
-                            <td>2018/4/29</td>
-                            <td>正常</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">www.google.com</a></td>
-                            <td>2012/03/03</td>
-                            <td>333</td>
-                            <td>2018/4/29</td>
-                            <td>正常</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">www.google.com</a></td>
-                            <td>2012/03/03</td>
-                            <td>333</td>
-                            <td>2018/4/29</td>
-                            <td>正常</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">www.google.com</a></td>
-                            <td>2012/03/03</td>
-                            <td>333</td>
-                            <td>2018/4/29</td>
-                            <td>正常</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">www.google.com</a></td>
-                            <td>2012/03/03</td>
-                            <td>333</td>
-                            <td>2018/4/29</td>
-                            <td>正常</td>
-                        </tr>
+                    {% endfor %}
                     </tbody>
                   </table>
                   <nav aria-label="Page navigation">
