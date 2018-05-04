@@ -7,6 +7,10 @@
 }
 .dropdown-menu {
   min-width: 65px;
+  top: 34px;
+}
+.dropdown-menu-my {
+  top: 50px;
 }
 .dropdown-menu>li>a {
   padding: 3px 14px;
@@ -117,7 +121,7 @@ btn-success a {
   margin-top: 5px;
 }
 .input-group-addon {
-  width: 130px;
+  width: 108px;
   float: left;
   margin: 0;
   padding: 9px;
@@ -132,7 +136,7 @@ btn-success a {
   text-align: center;
 }
 #itemInput {
-  width: 130px;
+  width: 108px;
   float: left;
 }
 textarea {

@@ -20,18 +20,18 @@
                             <div class="btn-group select_btn1">
                                 <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle ">选择域名 <span class="caret"></span>
                                 </button>
-                                <ul class="dropdown-menu">
+                                <ul class="dropdown-menu dropdown-menu-my">
                                 {% for k,y in project_list.items %}
                                   <li><a href="#">{{ k }}</a>
-                                    <ul class="third-menu">
-                                    {% for i in y %}
-                                      <li>
-                                        <a href="/webmoni/{{ i.id }}/">{{ i.url }}</a>
+                                        <ul class="third-menu">
+                                        {% for i in y %}
+                                          <li>
+                                            <a href="/webmoni/{{ i.id }}/">{{ i.url }}</a>
+                                          </li>
+                                        {% endfor %}
+                                        </ul>
                                       </li>
                                     {% endfor %}
-                                    </ul>
-                                  </li>
-                                {% endfor %}
                                 </ul>
                             </div>
                         </div>
@@ -150,13 +150,13 @@
                         </button>
                         <input type="text" class="form-control" placeholder="请输入项目名称" id="itemInput" autofocus>
                         <ul class="dropdown-menu">
-                          <li><a href="#">游戏</a>
+                          <li class="dropdown-item"><a href="#">游戏</a>
                           </li>
-                          <li><a href="#">论坛</a>
+                          <li class="dropdown-item"><a href="#">论坛</a>
                           </li>
-                          <li><a href="#">主页</a>
+                          <li class="dropdown-item"><a href="#">主页</a>
                           </li>
-                          <li><a href="#" id="itemAdd">新增项目</a>
+                          <li><a href="#" id="itemAdd">新增项目名称</a>
                           </li>
                         </ul>
                         <input type="text" class="form-control domain_name" placeholder="请输入要添加的域名(双击切换为文本域)" id="itemDetail" aria-describedby="basic-addon1">
