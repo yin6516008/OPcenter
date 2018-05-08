@@ -30,7 +30,9 @@ $(function () {
   })
 
   $('.dropdown-item').click(function () {
-    $('#itemChoice').text($(this).text())
+    $('#itemChoice').text($(this).text());
+
+  $('[type="hidden"]').val($(this).val())
   })
 })
 
