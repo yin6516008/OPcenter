@@ -134,20 +134,20 @@
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="btn_close_top">
                       &times;
                     </button>
                     <h4 class="modal-title" id="myModalLabel">
                       编辑内容
                     </h4>
                   </div>
-                  <form action="/webmoni/create/" method="post">
+                  <form action="/webmoni/create/" method="post" id="add_edit_form">
                     <div class="modal-body modalAdd">
                       <div class="input-group">
                         <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle input-group-addon" id="itemChoice">选择项目<span class="caret"></span>
                         </button>
-                        <input type="hidden" name="project">
-                        <input type="text" class="form-control" name='new_project' placeholder="请输入项目名称" id="itemInput" autofocus>
+                        <input type="hidden" name="project" id="project">
+                        <input type="text" class="form-control" name="new_project" placeholder="请输入项目名称" id="itemInput" autofocus>
                         <ul class="dropdown-menu">
                           {% for row in project_list %}
                           <li class="dropdown-item" value="{{ row.id }}"><a href="#">{{ row.name }}</a>
@@ -157,15 +157,12 @@
                           </li>
                         </ul>
                         <input type="text" class="form-control domain_name" name="domain" placeholder="请输入要添加的域名(双击切换批量模式)" id="itemDetail" aria-describedby="basic-addon1">
-                        <textarea name="domains"  placeholder="请输入要添加的域名..." id="" cols="30" rows="10"></textarea>
+                        <textarea name="domains"  placeholder="请输入要添加的域名..." id="domains" cols="30" rows="10"></textarea>
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                      </button>
-                      <button type="submit" class="btn btn-primary">
-                        保存
-                      </button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal" id="btn_close_bottom">关闭</button>
+                      <button type="submit" class="btn btn-primary" id="btn_save">保存</button>
                     </div>
                   </form>
                 </div><!-- /.modal-content -->
