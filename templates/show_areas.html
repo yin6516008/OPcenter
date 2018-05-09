@@ -26,7 +26,7 @@
                                         <ul class="third-menu">
                                         {% for i in project.domainname_set.all %}
                                           <li>
-                                            <a href="/webmoni/areas/{{ i.id }}/">{{ i.url }}</a>
+                                            <a href="/webmoni/areas-{{ i.id }}/">{{ i.url }}</a>
                                           </li>
                                         {% endfor %}
                                         </ul>
@@ -577,152 +577,69 @@
                 }
             }
         }],
-        series: [{
-            name: '',
-            type: 'line',
-            smooth: true,
-            symbol: 'circle',
-            symbolSize: 5,
-            showSymbol: false,
-            lineStyle: {
-                normal: {
-                    width: 1
-                }
-            },
-            areaStyle: {
-                normal: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: 'rgba(137, 189, 27, 0.3)'
-                    }, {
-                        offset: 0.8,
-                        color: 'rgba(137, 189, 27, 0)'
-                    }], false),
-                    shadowColor: 'rgba(0, 0, 0, 0.1)',
-                    shadowBlur: 10
-                }
-            },
-            itemStyle: {
-                normal: {
-                    color: 'rgb(137,189,27)',
-                    borderColor: 'rgba(137,189,2,0.27)',
-                    borderWidth: 12
-
-                }
-            },
-            data: []
-        }, {
-            name: '',
-            type: 'line',
-            smooth: true,
-            symbol: 'circle',
-            symbolSize: 5,
-            showSymbol: false,
-            lineStyle: {
-                normal: {
-                    width: 1
-                }
-            },
-            areaStyle: {
-                normal: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: 'rgba(137, 189, 27, 0.3)'
-                    }, {
-                        offset: 0.8,
-                        color: 'rgba(137, 189, 27, 0)'
-                    }], false),
-                    shadowColor: 'rgba(0, 0, 0, 0.1)',
-                    shadowBlur: 10
-                }
-            },
-            itemStyle: {
-                normal: {
-                    color: 'rgb(137,189,27)',
-                    borderColor: 'rgba(137,189,2,0.27)',
-                    borderWidth: 12
-
-                }
-            },
-            data: []
-        }, {
-            name: '',
-            type: 'line',
-            smooth: true,
-            symbol: 'circle',
-            symbolSize: 5,
-            showSymbol: false,
-            lineStyle: {
-                normal: {
-                    width: 1
-                }
-            },
-            areaStyle: {
-                normal: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: 'rgba(0, 136, 212, 0.3)'
-                    }, {
-                        offset: 0.8,
-                        color: 'rgba(0, 136, 212, 0)'
-                    }], false),
-                    shadowColor: 'rgba(0, 0, 0, 0.1)',
-                    shadowBlur: 10
-                }
-            },
-            itemStyle: {
-                normal: {
-                    color: 'rgb(0,136,212)',
-                    borderColor: 'rgba(0,136,212,0.2)',
-                    borderWidth: 12
-
-                }
-            },
-            data: []
-        }, {
-            name: '',
-            type: 'line',
-            smooth: true,
-            symbol: 'circle',
-            symbolSize: 5,
-            showSymbol: false,
-            lineStyle: {
-                normal: {
-                    width: 1
-                }
-            },
-            areaStyle: {
-                normal: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: 'rgba(219, 50, 51, 0.3)'
-                    }, {
-                        offset: 0.8,
-                        color: 'rgba(219, 50, 51, 0)'
-                    }], false),
-                    shadowColor: 'rgba(0, 0, 0, 0.1)',
-                    shadowBlur: 10
-                }
-            },
-            itemStyle: {
-                normal: {
-
-                    color: 'rgb(219,50,51)',
-                    borderColor: 'rgba(219,50,51,0.2)',
-                    borderWidth: 12
-                }
-            },
-            data: []
-        }, ]
+        series: []
     };
 
     if (option && typeof option === "object") {
         var graph_data = {{ graph_data | safe }}
         option['xAxis'][0]['data'] = graph_data['time_list']
+        var color = [
+            '255, 0, 0',
+            '255, 150, 0',
+            '150, 255, 0',
+            '0, 255, 150',
+            '0, 200, 255',
+            '0, 100, 255',
+            '0, 0, 255',
+            '150, 0, 255',
+            '255, 0, 255'
+           ]
         for ( var i in graph_data['data']){
+            var curve =   {
+            name: '',
+            type: 'line',
+            smooth: true,
+            symbol: 'circle',
+            symbolSize: 5,
+            showSymbol: false,
+            lineStyle: {
+                normal: {
+                    width: 1
+                }
+            },
+            areaStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: ''
+                    }, {
+                        offset: 0.8,
+                        color: ''
+                    }], false),
+                    shadowColor: 'rgba(0, 0, 0, 0.1)',
+                    shadowBlur: 10
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '',
+                    borderColor: '',
+                    borderWidth: 12
+
+                }
+            },
+            data: []
+        }
             option['legend']['data'][i] = graph_data['data'][i]['node']
-            option['series'][i]['name'] = graph_data['data'][i]['node']
-            option['series'][i]['data'] = graph_data['data'][i]['values']
+            curve['name'] = graph_data['data'][i]['node']
+            curve['areaStyle']['normal']['color'].colorStops[0]['color'] = 'rgba(' + color[i] + ', 0.1)'
+            curve['areaStyle']['normal']['color'].colorStops[1]['color'] = 'rgba(' + color[i] + ', 0)'
+            curve['itemStyle']['normal']['color'] = 'rgba(' + color[i] + ')'
+            curve['itemStyle']['normal']['borderColor'] = 'rgba(' + color[i] + ', 0.2)'
+            {#console.log(curve['areaStyle']['normal']['color'].colorStops[0]['color'])#}
+            curve['data'] = graph_data['data'][i]['values']
+            option['series'][i] = curve
+
         }
         myChart.setOption(option, true);
     }

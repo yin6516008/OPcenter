@@ -30,7 +30,8 @@ def areas(request,url_id=None):
             defaultDomain = DomainName.objects.first()
         else:
             # 如果选择了域名,就拿到选择的域名
-            defaultDomain = DomainName.objects.filter(url=url_id).first()
+            defaultDomain = DomainName.objects.filter(id=url_id).first()
+            print(defaultDomain.url)
 
         # 拿到所有的节点,通过节点去数据库查找数据,网站五分钟检测一次
 
@@ -57,7 +58,11 @@ def areas(request,url_id=None):
                     defaultDomainData.append(time_node_data)
 
                 if time_node_data is not None:
-                    node_data['values'].insert(0,time_node_data.total_time)
+                    if time_node_data.total_time is None:
+                        print(time_node_data.total_time)
+                        node_data['values'].insert(0, '')
+                    else:
+                        node_data['values'].insert(0,time_node_data.total_time)
                 else:
                     node_data['values'].insert(0,'')
                 start_time = stop_time
@@ -81,7 +86,7 @@ def create(request):
                 DomainName.objects.create(url=domain,project_name_id=project_id)
             if request.POST.get('domains'):
                 domains = request.POST.get('domains')
-                for i in domains.split('\n'):
+                for i in domains.split('\r\n'):
                     DomainName.objects.create(url=i, project_name_id=project_id)
 
         if request.POST.get('new_project'):
@@ -93,6 +98,7 @@ def create(request):
                 DomainName.objects.create(url=domain, project_name_id=new_project.id)
             if request.POST.get('domains'):
                 domains = request.POST.get('domains')
-                for i in domains.split('\n'):
+                for i in domains.split('\r\n'):
                     DomainName.objects.create(url=i, project_name_id=new_project.id)
+
     return redirect('/webmoni/areas/')
