@@ -94,6 +94,18 @@ $(function () {
   $('#btn_close_bottom_edit,#btn_close_top_edit').click(function () {
     $('#project_edit,#itemInput_edit,#itemDetail_edit').val('')
   })
+
+  // ================消息提示框================
+  $('#btn_confirm').click(function (e) {
+    e.preventDefault() //阻止了表单提交默认事件
+    $('.alert-danger').css("display", "block").addClass('fadeInRight')
+    setTimeout(function () {
+      $('.alert-danger').fadeOut()
+    }, 2000)
+  })
+  $('#tip_close').click(function () {
+    $(this).parent().hide()
+  })
   
 })
 

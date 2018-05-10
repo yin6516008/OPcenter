@@ -39,7 +39,7 @@
                             <div class="form-group">
                                 <input type="search" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="inputSearch">
                             </div>
-                            <button type="submit" class="btn btn-primary confirm">确定</button>
+                            <button type="submit" class="btn btn-primary confirm" id="btn_confirm">确定</button>
                             <div class="alert alert-danger alert-dismissible fade in" role="alert">
                               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                               <h4>温馨提示</h4>
@@ -163,6 +163,10 @@
                         </ul>
                         <input type="text" class="form-control domain_name" name="domain" placeholder="请输入要添加的域名(双击切换批量模式)" id="itemDetail" aria-describedby="basic-addon1">
                         <textarea name="domains"  placeholder="请输入要添加的域名..." id="domains" cols="30" rows="10"></textarea>
+                        <div class="pull-right checkbox-area">
+                          <input type="checkbox">不添加
+                          <input type="checkbox">不警告
+                        </div>
                       </div>
                     </div>
                     <div class="modal-footer">
@@ -220,6 +224,10 @@
                           </li>
                         </ul>
                         <input type="text" class="form-control domain_name" name="domain" placeholder="请输入要修改的域名" id="itemDetail_edit" aria-describedby="basic-addon1">                        
+                        <div class="pull-right checkbox-area">
+                          <input type="checkbox">不添加
+                          <input type="checkbox">不警告
+                        </div>
                       </div>
                     </div>
                     <div class="modal-footer">

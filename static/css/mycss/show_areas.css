@@ -151,7 +151,6 @@ textarea {
 textarea:focus {
   border: 1px solid #1BB394;
 }
-
 .alert-danger {
   position: absolute;
   top: 30px;
@@ -160,4 +159,12 @@ textarea:focus {
   width: 260px;
   height: 70px;
   margin: 0;
+  display: none;
+}
+.checkbox-area {
+  right: 30px;
+  top: 10px;
+}
+input[type="checkbox"] {
+  margin-left: 20px;
 }
