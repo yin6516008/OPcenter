@@ -10,7 +10,7 @@ class Project(models.Model):
 class DomainName(models.Model):
     url = models.CharField(max_length=60,unique=True)
     project_name = models.ForeignKey('Project',to_field='id',null=True)
-    status = models.ForeignKey('Event_Type',to_field='id',null=True)
+    status = models.ForeignKey('Event_Type',to_field='id',null=True,default=1)
     check_id = models.IntegerField(default=0)
 
 class MonitorData(models.Model):

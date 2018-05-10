@@ -79,3 +79,83 @@ $(function () {
   })
 })
 
+function update_graph(option,graph_data) {
+    option['xAxis'][0]['data'] = graph_data['time_list']
+        var color = [
+            '255, 0, 0',
+            '255, 150, 0',
+            '150, 255, 0',
+            '0, 255, 150',
+            '0, 200, 255',
+            '0, 100, 255',
+            '0, 0, 255',
+            '150, 0, 255',
+            '255, 0, 255'
+           ]
+        for ( var i in graph_data['data']){
+            var curve =   {
+            name: '',
+            type: 'line',
+            smooth: true,
+            symbol: 'circle',
+            symbolSize: 5,
+            showSymbol: false,
+            lineStyle: {
+                normal: {
+                    width: 1
+                }
+            },
+            areaStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: ''
+                    }, {
+                        offset: 0.8,
+                        color: ''
+                    }], false),
+                    shadowColor: 'rgba(0, 0, 0, 0.1)',
+                    shadowBlur: 10
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '',
+                    borderColor: '',
+                    borderWidth: 12
+
+                }
+            },
+            data: []
+        }
+            option['legend']['data'][i] = graph_data['data'][i]['node']
+            curve['name'] = graph_data['data'][i]['node']
+            curve['areaStyle']['normal']['color'].colorStops[0]['color'] = 'rgba(' + color[i] + ', 0.1)'
+            curve['areaStyle']['normal']['color'].colorStops[1]['color'] = 'rgba(' + color[i] + ', 0)'
+            curve['itemStyle']['normal']['color'] = 'rgba(' + color[i] + ')'
+            curve['itemStyle']['normal']['borderColor'] = 'rgba(' + color[i] + ', 0.2)'
+            curve['data'] = graph_data['data'][i]['values']
+            option['series'][i] = curve
+
+        }
+        return option
+ }
+
+
+
+
+function timing_update(option,url_id) {
+  $.ajax({
+     type: "POST",
+     url: "/webmoni/update/",
+     data: {
+        'url_id': url_id,
+      },
+     success: function(graph_data) {
+       console.log(JSON.parse(graph_data))
+        var new_option = update_graph(option,JSON.parse(graph_data))
+        myChart.setOption(new_option, true);
+     }
+})
+}
+

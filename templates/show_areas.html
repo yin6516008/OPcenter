@@ -176,10 +176,14 @@
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                             <h4 class="modal-title" id="delModalLabel">确认删除？</h4>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                            <button type="button" class="btn btn-primary">确认</button>
-                        </div>
+                        <form action="/webmoni/delete/" method="post">
+                            <div class="modal-footer">
+                                <input type="hidden" name="del_id" value="{{ graph_data.id }}" style="display: none" >
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="submit" class="btn btn-primary">确认</button>
+                            </div>
+                        </form>
+
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div>
@@ -208,18 +212,24 @@
     var dom = document.getElementById("container-left");
     var myChart = echarts.init(dom);
     var app = {};
-    var areas = [];
-    option = null;
+    var areas = []
 
-    $('#content').children().each(function (i) {
-        var ll = {};
-        ll['name'] = $(this).children("td[name='node']").attr('value')
-        ll['value'] = parseInt($(this).children("td[name='total_time']").attr('value'))
-        areas[i] = ll
-    });
-    var domain = $('#content').children().attr('value')
-    var name_title = domain
-    var subname = '单位/ms'
+    option = null;
+    var areas_data = {{ graph_data | safe }}
+    for ( var i in areas_data['data']){
+        single_area = {}
+        single_area['name'] = areas_data['data'][i]['node']
+        var values = areas_data['data'][i]['values'][areas_data['data'][i]['values'].length - 1]
+        if ( values == ""){
+            single_area['value'] = null
+        }else{
+            single_area['value'] = values
+        }
+        areas[i] = single_area
+    }
+
+    var name_title = areas_data['domain']
+    var subname = '状态：' + areas_data['status']
     var nameColor = " rgb(55, 75, 113)"
     var name_fontFamily = '等线'
     var subname_fontSize = 15
@@ -291,7 +301,7 @@
                             }
                         }
                     }
-                    console.log(toolTiphtml)
+                    {#console.log(toolTiphtml)#}
                     // console.log(convertData(data))
                     return toolTiphtml;
                 } else {
@@ -304,7 +314,7 @@
                             }
                         }
                     }
-                    console.log(toolTiphtml)
+
                     // console.log(convertData(data))
                     return toolTiphtml;
                 }
@@ -468,13 +478,17 @@
 
         ]
     };
-    myChart.setOption(option);
+    if (option && typeof option === "object") {
+        myChart.setOption(option);
+    }
+
 
 
 
     </script>
     <!-- echarts图表-右边 -->
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+    <script src="/static/js/show_areas.js"></script>
     <script>
     var dom = document.getElementById("container-right");
     var myChart = echarts.init(dom);
@@ -529,27 +543,6 @@
                 }
             },
             data: []
-        }, {
-            axisPointer: {
-                show: false
-            },
-            axisLine: {
-                lineStyle: {
-                    color: '#57617B'
-                }
-            },
-            axisTick: {
-                show: false
-            },
-
-            position: 'bottom',
-            offset: 20,
-            data: ['', '', '', '', '', '', '', '', '', '', {
-                value: '周六',
-                textStyle: {
-                    align: 'left'
-                }
-            }, '周日']
         }],
         yAxis: [{
             type: 'value',
@@ -579,71 +572,13 @@
 
     if (option && typeof option === "object") {
         var graph_data = {{ graph_data | safe }}
-        option['xAxis'][0]['data'] = graph_data['time_list']
-        var color = [
-            '255, 0, 0',
-            '255, 150, 0',
-            '150, 255, 0',
-            '0, 255, 150',
-            '0, 200, 255',
-            '0, 100, 255',
-            '0, 0, 255',
-            '150, 0, 255',
-            '255, 0, 255'
-           ]
-        for ( var i in graph_data['data']){
-            var curve =   {
-            name: '',
-            type: 'line',
-            smooth: true,
-            symbol: 'circle',
-            symbolSize: 5,
-            showSymbol: false,
-            lineStyle: {
-                normal: {
-                    width: 1
-                }
-            },
-            areaStyle: {
-                normal: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: ''
-                    }, {
-                        offset: 0.8,
-                        color: ''
-                    }], false),
-                    shadowColor: 'rgba(0, 0, 0, 0.1)',
-                    shadowBlur: 10
-                }
-            },
-            itemStyle: {
-                normal: {
-                    color: '',
-                    borderColor: '',
-                    borderWidth: 12
-
-                }
-            },
-            data: []
-        }
-            option['legend']['data'][i] = graph_data['data'][i]['node']
-            curve['name'] = graph_data['data'][i]['node']
-            curve['areaStyle']['normal']['color'].colorStops[0]['color'] = 'rgba(' + color[i] + ', 0.1)'
-            curve['areaStyle']['normal']['color'].colorStops[1]['color'] = 'rgba(' + color[i] + ', 0)'
-            curve['itemStyle']['normal']['color'] = 'rgba(' + color[i] + ')'
-            curve['itemStyle']['normal']['borderColor'] = 'rgba(' + color[i] + ', 0.2)'
-            {#console.log(curve['areaStyle']['normal']['color'].colorStops[0]['color'])#}
-            curve['data'] = graph_data['data'][i]['values']
-            option['series'][i] = curve
-
-        }
-        myChart.setOption(option, true);
+        var new_options = update_graph(option,graph_data)
+        myChart.setOption(new_options, true);
+        var int = self.setInterval("timing_update(option,graph_data['id'])",30000)
     }
     </script>
 {% endblock %}
 
 {% block js %}
     <script src="/static/js/index.js"></script>
-    <script src="/static/js/show_areas.js"></script>
 {% endblock %}
