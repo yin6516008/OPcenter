@@ -9,6 +9,7 @@ body.fixed-sidebar.mini-navbar .navbar-static-side {
 }
 .dropdown-menu.animated.fadeInRight {
   min-width: 100px;
+  top: 50px;
 }
 .nav-header {
   background: #fff;
@@ -31,10 +32,6 @@ body.fixed-sidebar.mini-navbar .navbar-static-side {
 .active>a>.fa.arrow:before {
   content: "\f107";
 }
-/* body, body.full-height-layout #page-wrapper, body.full-height-layout #wrapper, html {
-  display: flex;
-  flex-direction: column;
-} */
 /* 左侧导航栏每次刷新时隐藏 */
 .ulhide {
   display: none;

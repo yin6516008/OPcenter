@@ -9,8 +9,11 @@
   min-width: 65px;
   top: 34px;
 }
-.dropdown-menu-my {
+.dropdown-menu-domains {
   top: 50px;
+}
+.dropdown-menu-domains>li {
+  width: 100px;
 }
 .dropdown-menu>li>a {
   padding: 3px 14px;
@@ -135,7 +138,8 @@ btn-success a {
 .modalAdd ul>li>a{
   text-align: center;
 }
-#itemInput {
+#itemInput,
+#itemInput_edit {
   width: 108px;
   float: left;
 }
@@ -146,4 +150,14 @@ textarea {
 }
 textarea:focus {
   border: 1px solid #1BB394;
+}
+
+.alert-danger {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  z-index: 1;
+  width: 260px;
+  height: 70px;
+  margin: 0;
 }
