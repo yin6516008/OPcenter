@@ -132,8 +132,10 @@ btn-success a {
 .input-group .form-control {
   width: 400px;
 }
-.itemAdd {
-  background-color: rgb(233, 229, 229);
+#itemAdd {
+  background-color: #51aa98;
+  margin-bottom: 0;
+  color: #fff
 }
 .modalAdd ul>li>a{
   text-align: center;
@@ -167,4 +169,9 @@ textarea:focus {
 }
 input[type="checkbox"] {
   margin-left: 20px;
+}
+.caret-edit {
+  position: absolute;
+  top: 15px;
+  left: 85px;
 }

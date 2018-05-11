@@ -6,6 +6,7 @@ $(function () {
   $('.dropdown-menu>li').mouseout(function () {
     $(this).find('.third-menu').hide();
   })
+  $('#itemAdd').parent().css("backgroundColor","#18a689")
 
   // ================新增模态框================
   // 点击"新增项目名称" 选择项目按钮变为input输入框
@@ -34,11 +35,13 @@ $(function () {
     $(this).hide().val('')
     $('#itemDetail').show()
   })
-
-  $('.dropdown-item').click(function () {
+  // 点击下拉列表的选项
+  $('.dropdown-item-add').click(function () {
+    // $(this).hide()
     $('#itemChoice').text($(this).text());
     $('#add_edit_form').find('[type="hidden"]').val($(this).val())
   })
+
   
   // 点击关闭按钮或者× 清除表单内的四个val值
   $('#btn_close_bottom,#btn_close_top').click(function () {
@@ -85,11 +88,21 @@ $(function () {
     $('#itemChoice_edit').show()
     // $('#project').val(projectId)
   })
-  $('#add_edit_editForm').find('.dropdown-item').click(function () {
+  $('#add_edit_editForm').find('.dropdown-item-edit').click(function () {
     $('#itemChoice_edit').text($(this).text())
     $('#add_edit_editForm').find('[type="hidden"]').val($(this).val())
   })
 
+  // 默认渲染到button按钮的值和列表中的值一样的时候 隐藏列表中的
+  $('#add_edit_editForm').find('.dropdown-item-edit').children('a')
+  .each(function(index, item) {
+    var btnText = $('#itemChoice_edit').text()
+    if($(item).text() == btnText) {
+      $(item).parent().hide()
+    }
+  })
+  
+  
   // 点击关闭按钮或者× 清除表单内的三个val值
   $('#btn_close_bottom_edit,#btn_close_top_edit').click(function () {
     $('#project_edit,#itemInput_edit,#itemDetail_edit').val('')
@@ -106,6 +119,16 @@ $(function () {
   $('#tip_close').click(function () {
     $(this).parent().hide()
   })
+
+  // 下拉菜单过长改变子选项显示位置
+  // $('#domainsUl').mousemove(function (e) {
+  //   var mouseY = e.pageY
+  //   // console.log(mouseY)
+  //   if(mouseY > 500) {
+  //     console.log(8888888)
+  //     $('.third-menu').css({'top':'','bottom':'0'})
+  //   }
+  // })
   
 })
 

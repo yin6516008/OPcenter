@@ -20,7 +20,7 @@
                             <div class="btn-group select_btn1">
                                 <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle ">选择域名 <span class="caret"></span>
                                 </button>
-                                <ul class="dropdown-menu dropdown-menu-domains">
+                                <ul class="dropdown-menu dropdown-menu-domains" id="domainsUl">
                                 {% for project in project_list %}
                                   <li><a href="#">{{ project.name }}</a>
                                         <ul class="third-menu">
@@ -154,7 +154,7 @@
                         <input type="text" class="form-control" name="new_project" placeholder="请输入项目名称" id="itemInput" autofocus>
                         <ul class="dropdown-menu">
                           {% for row in project_list %}
-                          <li class="dropdown-item" value="{{ row.id }}"><a href="#">{{ row.name }}</a>
+                          <li class="dropdown-item dropdown-item-add" value="{{ row.id }}"><a href="#">{{ row.name }}</a>
                           </li>
                           {% endfor %}
                           <li><a href="#" id="itemAdd">新增项目名称</a>
@@ -210,15 +210,15 @@
                   <form action="#" method="post" id="add_edit_editForm">
                     <div class="modal-body modalAdd">
                       <div class="input-group">
-                        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle input-group-addon" id="itemChoice_edit">选择项目<span class="caret"></span>
-                        </button>
+                        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle input-group-addon" id="itemChoice_edit">777</button>
+                        <span class="caret caret-edit"></span>
                         <input type="hidden" name="project" id="project_edit">
                         <input type="text" class="form-control" name="new_project" placeholder="请输入项目名称" id="itemInput_edit" autofocus>
                         <ul class="dropdown-menu">
                           {% for row in project_list %}
-                          <li class="dropdown-item" value="{{ row.id }}"><a href="#">{{ row.name }}</a>
+                          <li class="dropdown-item dropdown-item-edit" value="{{ row.id }}"><a href="#">{{ row.name }}</a>
                           </li>
-                          {% endfor %}
+                          {% endfor %}                        
                           <li><a href="#" id="itemAdd_edit">新增项目名称</a>
                           </li>
                         </ul>
