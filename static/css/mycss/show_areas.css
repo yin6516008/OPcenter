@@ -15,9 +15,19 @@
 .dropdown-menu-domains>li {
   width: 100px;
 }
+.dropdown-menu-domains>li>a:hover {
+  background-color: #ccc;
+}
+.dropdown-menu-domains>li>a {
+  padding: 0px 14px;
+  /* margin: 4px 0; */
+  border-radius: 0;
+}
 .dropdown-menu>li>a {
   padding: 3px 14px;
+  border-radius: 0;
 }
+
 
 /* 右侧输入框样式调整 */
 .form-group {
@@ -51,13 +61,17 @@ ul li {
 }
 .third-menu {
   position: absolute;
-  width: 120px;
+  width: 363px;
   background-color: #F5F5F5;
   top: 0px;
-  right: -120px;
+  left: 100px;
   padding-left: 0px;
   border: 1px solid rgb(247, 244, 244);
-  box-shadow: #ccc 2px 2px 2px;
+  box-shadow: #ccc 1px 1px 1px;
+}
+.third-menu>li {
+  float: left;
+  width: 120px;
 }
 .third-menu a {
   display: block;
@@ -76,7 +90,7 @@ ul li {
 .select_btn1 {
   position: absolute;
   top: -27px;
-  left: -400px;
+  left: -520px;
 }
 .select_btn1 .btn.btn-primary.dropdown-toggle {
   width: 100px;
@@ -133,9 +147,14 @@ btn-success a {
   width: 400px;
 }
 #itemAdd {
-  background-color: #51aa98;
+  background-color: #18a689;
   margin-bottom: 0;
   color: #fff
+}
+#itemAdd_edit {
+  background-color: #18a689;
+  margin-bottom: 0;
+  color: #fff;
 }
 .modalAdd ul>li>a{
   text-align: center;
@@ -174,4 +193,7 @@ input[type="checkbox"] {
   position: absolute;
   top: 15px;
   left: 85px;
+}
+#itemDetail_cate {
+  width: 108px
 }

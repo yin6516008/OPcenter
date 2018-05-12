@@ -163,8 +163,8 @@
                         <input type="text" class="form-control domain_name" name="domain" placeholder="请输入要添加的域名(双击切换批量模式)" id="itemDetail" aria-describedby="basic-addon1">
                         <textarea name="domains"  placeholder="请输入要添加的域名..." id="domains" cols="30" rows="10"></textarea>
                         <div class="pull-right checkbox-area">
-                          <input type="checkbox">不添加
-                          <input type="checkbox">不警告
+                          <input type="checkbox" id="add_notadd">不添加
+                          <input type="checkbox" id="add_notwarn">不警告
                         </div>
                       </div>
                     </div>
@@ -210,22 +210,12 @@
                   <form action="#" method="post" id="add_edit_editForm">
                     <div class="modal-body modalAdd">
                       <div class="input-group">
-                        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle input-group-addon" id="itemChoice_edit">777</button>
-                        <span class="caret caret-edit"></span>
-                        <input type="hidden" name="project" id="project_edit">
-                        <input type="text" class="form-control" name="new_project" placeholder="请输入项目名称" id="itemInput_edit" autofocus>
-                        <ul class="dropdown-menu">
-                          {% for row in project_list %}
-                          <li class="dropdown-item dropdown-item-edit" value="{{ row.id }}"><a href="#">{{ row.name }}</a>
-                          </li>
-                          {% endfor %}                        
-                          <li><a href="#" id="itemAdd_edit">新增项目名称</a>
-                          </li>
-                        </ul>
-                        <input type="text" class="form-control domain_name" name="domain" placeholder="请输入要修改的域名" id="itemDetail_edit" aria-describedby="basic-addon1">                        
+                        <!-- <button class="btn btn-primary dropdown-toggle input-group-addon" id="itemChoice_edit">777</button> -->
+                        <input type="text" class="form-control domain_name" name="category" id="itemDetail_cate" aria-describedby="basic-addon1" disabled value="游戏大厅">                     
+                        <input type="text" class="form-control domain_name" name="domain" id="itemDetail_edit" aria-describedby="basic-addon1" disabled value="666666666666">                     
                         <div class="pull-right checkbox-area">
-                          <input type="checkbox">不添加
-                          <input type="checkbox">不警告
+                          <input type="checkbox" id="edit_notadd">不添加
+                          <input type="checkbox" id="edit_notwarn">不警告
                         </div>
                       </div>
                     </div>
