@@ -20,7 +20,7 @@
                             <div class="btn-group select_btn1">
                                 <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle ">选择域名 <span class="caret"></span>
                                 </button>
-                                <ul class="dropdown-menu dropdown-menu-domains">
+                                <ul class="dropdown-menu dropdown-menu-domains" id="domainsUl">
                                 {% for project in project_list %}
                                   <li><a href="#">{{ project.name }}</a>
                                         <ul class="third-menu">
@@ -152,7 +152,7 @@
                         <input type="text" class="form-control" name="new_project" placeholder="请输入项目名称" id="itemInput" autofocus>
                         <ul class="dropdown-menu">
                           {% for row in project_list %}
-                          <li class="dropdown-item" value="{{ row.id }}"><a href="#">{{ row.name }}</a>
+                          <li class="dropdown-item dropdown-item-add" value="{{ row.id }}"><a href="#">{{ row.name }}</a>
                           </li>
                           {% endfor %}
                           <li><a href="#" id="itemAdd">新增项目名称</a>
@@ -161,8 +161,13 @@
                         <input type="text" class="form-control domain_name" name="domain" placeholder="请输入要添加的域名(双击切换批量模式)" id="itemDetail" aria-describedby="basic-addon1">
                         <textarea name="domains"  placeholder="请输入要添加的域名..." id="domains" cols="30" rows="10"></textarea>
                         <div class="pull-right checkbox-area">
+<<<<<<< HEAD
                           <input type="checkbox" name="check_id">不检测
                           <input type="checkbox" name="warning">不警告
+=======
+                          <input type="checkbox" id="add_notadd">不添加
+                          <input type="checkbox" id="add_notwarn">不警告
+>>>>>>> 40f3d1c6badc16335133ca967a48ca2e4e0994f9
                         </div>
                       </div>
                     </div>
@@ -208,18 +213,12 @@
                   <form action="#" method="post" id="add_edit_editForm">
                     <div class="modal-body modalAdd">
                       <div class="input-group">
-                        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle input-group-addon" id="itemChoice_edit">选择项目<span class="caret"></span>
-                        </button>
-                        <input type="hidden" name="project" id="project_edit">
-                        <input type="text" class="form-control" name="new_project" placeholder="请输入项目名称" id="itemInput_edit" autofocus>
-                        <ul class="dropdown-menu">
-                          <li class="dropdown-item" value="">{{ graph_data.domain }}<a href="#"></a>
-                          </li>
-                        </ul>
-                        <input type="text" class="form-control domain_name" name="domain" placeholder="请输入要修改的域名" id="itemDetail_edit" aria-describedby="basic-addon1">                        
+                        <!-- <button class="btn btn-primary dropdown-toggle input-group-addon" id="itemChoice_edit">777</button> -->
+                        <input type="text" class="form-control domain_name" name="category" id="itemDetail_cate" aria-describedby="basic-addon1" disabled value="游戏大厅">                     
+                        <input type="text" class="form-control domain_name" name="domain" id="itemDetail_edit" aria-describedby="basic-addon1" disabled value="666666666666">                     
                         <div class="pull-right checkbox-area">
-                          <input type="checkbox" name="check_id">不检测
-                          <input type="checkbox" name="warning">不警告
+                          <input type="checkbox" id="edit_notadd">不添加
+                          <input type="checkbox" id="edit_notwarn">不警告
                         </div>
                       </div>
                     </div>
@@ -232,11 +231,6 @@
               </div><!-- /.modal -->
             </div>
 
-            <!-- 右下角版权标识 -->
-            <div class="footer">
-                <div class="pull-right">&copy; 2016-2018 <a href="#" target="_blank">TS网络监控</a>
-                </div>
-            </div>
         <!--右侧部分结束-->
     <!-- echarts依赖项 -->
     <script src="/static/js/jquery.min.js"></script>

@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="77792de5-4b67-4ddd-9ed3-8a13e94e9f4f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/index/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/mycss/show_areas.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/mycss/show_areas.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/show_areas.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/show_areas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/master.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/master.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/show_areas.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/show_areas.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webmoni/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/webmoni/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webmoni/publicFunc.py" beforeDir="false" afterPath="$PROJECT_DIR$/webmoni/publicFunc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webmoni/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/webmoni/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webmoni/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/webmoni/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -87,20 +83,30 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webmoni/admin.py">
+      <file leaf-file-name="show_areas.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/show_areas.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="512">
+              <caret line="217" column="71" selection-start-line="217" selection-start-column="71" selection-end-line="217" selection-end-column="71" />
+              <folding>
+                <element signature="e#3259#3279#0#HTML" expanded="true" />
+                <element signature="e#3846#3866#0#HTML" expanded="true" />
+                <element signature="e#6050#6057#1#HTML" expanded="true" />
+                <element signature="e#6546#6553#1#HTML" expanded="true" />
+                <element signature="e#7150#7157#0#HTML" expanded="true" />
+                <element signature="e#10315#10336#0#HTML" expanded="true" />
+                <element signature="e#11159#11166#0#HTML" expanded="true" />
+                <element signature="e#13434#13714#0#HTML" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="show_areas.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/show_areas.html">
+      <file leaf-file-name="show_areas.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/css/mycss/show_areas.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="479">
-              <caret line="224" column="26" lean-forward="true" selection-start-line="224" selection-start-column="26" selection-end-line="224" selection-end-column="26" />
+            <state relative-caret-position="-345">
+              <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -117,8 +123,8 @@
       <file leaf-file-name="show_areas.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/js/show_areas.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3096">
-              <caret line="129" selection-start-line="129" selection-end-line="129" />
+            <state relative-caret-position="802">
+              <caret line="143" selection-start-line="143" selection-end-line="143" />
             </state>
           </provider>
         </entry>
@@ -196,7 +202,6 @@
         <option value="$PROJECT_DIR$/static/js/index.js" />
         <option value="$PROJECT_DIR$/templates/master.html" />
         <option value="$USER_HOME$/Desktop/测试脚本/检测web服务质量.py" />
-        <option value="$PROJECT_DIR$/static/css/mycss/show_areas.css" />
         <option value="$PROJECT_DIR$/webmoni/admin.py" />
         <option value="$PROJECT_DIR$/OPcenter/settings.py" />
         <option value="$PROJECT_DIR$/webmoni/public func.py" />
@@ -207,6 +212,7 @@
         <option value="$PROJECT_DIR$/index/views.py" />
         <option value="$PROJECT_DIR$/webmoni/publicFunc.py" />
         <option value="$PROJECT_DIR$/templates/index.html" />
+        <option value="$PROJECT_DIR$/static/css/mycss/show_areas.css" />
         <option value="$PROJECT_DIR$/templates/show_areas.html" />
       </list>
     </option>
@@ -253,6 +259,19 @@
               <item name="OPcenter" type="b2602c69:ProjectViewProjectNode" />
               <item name="OPcenter" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OPcenter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OPcenter" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OPcenter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OPcenter" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+              <item name="mycss" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="OPcenter" type="b2602c69:ProjectViewProjectNode" />
@@ -460,9 +479,9 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32998884" />
       <window_info anchor="bottom" id="Python Console" order="9" weight="0.32998884" />
-      <window_info active="true" anchor="right" id="Run" order="5" visible="true" weight="0.064430244" />
+      <window_info anchor="right" id="Run" order="5" visible="true" weight="0.064430244" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32998884" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.11022364" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11022364" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="4" />
@@ -662,13 +681,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/css/mycss/show_areas.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="149" selection-start-line="149" selection-end-line="149" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/OPcenter/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1944">
@@ -711,13 +723,6 @@
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/show_areas.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3096">
-          <caret line="129" selection-start-line="129" selection-end-line="129" />
         </state>
       </provider>
     </entry>
@@ -768,10 +773,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/show_areas.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="802">
+          <caret line="143" selection-start-line="143" selection-end-line="143" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/mycss/show_areas.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-345">
+          <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/show_areas.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="224" column="26" lean-forward="true" selection-start-line="224" selection-start-column="26" selection-end-line="224" selection-end-column="26" />
+        <state relative-caret-position="512">
+          <caret line="217" column="71" selection-start-line="217" selection-start-column="71" selection-end-line="217" selection-end-column="71" />
+          <folding>
+            <element signature="e#3259#3279#0#HTML" expanded="true" />
+            <element signature="e#3846#3866#0#HTML" expanded="true" />
+            <element signature="e#6050#6057#1#HTML" expanded="true" />
+            <element signature="e#6546#6553#1#HTML" expanded="true" />
+            <element signature="e#7150#7157#0#HTML" expanded="true" />
+            <element signature="e#10315#10336#0#HTML" expanded="true" />
+            <element signature="e#11159#11166#0#HTML" expanded="true" />
+            <element signature="e#13434#13714#0#HTML" />
+          </folding>
         </state>
       </provider>
     </entry>
