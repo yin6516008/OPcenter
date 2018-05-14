@@ -12,6 +12,7 @@ class DomainName(models.Model):
     project_name = models.ForeignKey('Project',to_field='id',null=True)
     status = models.ForeignKey('Event_Type',to_field='id',null=True,default=1)
     check_id = models.IntegerField(default=0)
+    warning = models.IntegerField(default=0)
 
 class MonitorData(models.Model):
     node = models.ForeignKey('Node',to_field='id')

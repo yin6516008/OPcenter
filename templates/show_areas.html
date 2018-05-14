@@ -35,16 +35,14 @@
                                 </ul>
                             </div>
                         </div>
-                        <form role="search" method="post" action="#" id="searchForm">
-                            <div class="form-group">
-                                <input type="search" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="inputSearch">
-                            </div>
-                            <button type="submit" class="btn btn-primary confirm" id="btn_confirm">确定</button>
-                            <div class="alert alert-danger alert-dismissible fade in" role="alert">
-                              <h4>温馨提示</h4>
-                              <p>好像出了点小问题！</p>
-                            </div>
-                        </form>
+                        <div class="form-group">
+                            <input type="search" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="inputSearch">
+                        </div>
+                        <button type="submit" class="btn btn-primary confirm" id="btn_confirm">确定</button>
+                        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                          <h4>温馨提示</h4>
+                          <p id="search_tip"></p>
+                        </div>
                     </div>                                
                 </div>
                 <!-- echarts图表 -->
@@ -163,8 +161,8 @@
                         <input type="text" class="form-control domain_name" name="domain" placeholder="请输入要添加的域名(双击切换批量模式)" id="itemDetail" aria-describedby="basic-addon1">
                         <textarea name="domains"  placeholder="请输入要添加的域名..." id="domains" cols="30" rows="10"></textarea>
                         <div class="pull-right checkbox-area">
-                          <input type="checkbox">不添加
-                          <input type="checkbox">不警告
+                          <input type="checkbox" name="check_id">不检测
+                          <input type="checkbox" name="warning">不警告
                         </div>
                       </div>
                     </div>
@@ -215,17 +213,13 @@
                         <input type="hidden" name="project" id="project_edit">
                         <input type="text" class="form-control" name="new_project" placeholder="请输入项目名称" id="itemInput_edit" autofocus>
                         <ul class="dropdown-menu">
-                          {% for row in project_list %}
-                          <li class="dropdown-item" value="{{ row.id }}"><a href="#">{{ row.name }}</a>
-                          </li>
-                          {% endfor %}
-                          <li><a href="#" id="itemAdd_edit">新增项目名称</a>
+                          <li class="dropdown-item" value="">{{ graph_data.domain }}<a href="#"></a>
                           </li>
                         </ul>
                         <input type="text" class="form-control domain_name" name="domain" placeholder="请输入要修改的域名" id="itemDetail_edit" aria-describedby="basic-addon1">                        
                         <div class="pull-right checkbox-area">
-                          <input type="checkbox">不添加
-                          <input type="checkbox">不警告
+                          <input type="checkbox" name="check_id">不检测
+                          <input type="checkbox" name="warning">不警告
                         </div>
                       </div>
                     </div>

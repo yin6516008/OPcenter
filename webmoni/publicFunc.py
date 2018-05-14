@@ -53,3 +53,23 @@ def get_areas_data(url_id):
 
     return  defaultDomainData,graph_data
 
+
+def get_index_pie():
+    ok_number = DomainName.objects.filter(status=0).filter(check_id=0).count()
+    error_number = DomainName.objects.filter(~Q(status= 0)).filter(check_id=0).count()
+    no_check = DomainName.objects.filter(~Q(check_id=0)).count()
+    data = [
+        {
+            'value': ok_number,
+            'name': '正常'
+        },
+        {
+            'value':error_number,
+            'name':'异常'
+        },
+        {
+            'value':no_check,
+            'name':'不检测'
+        }
+    ]
+    return data

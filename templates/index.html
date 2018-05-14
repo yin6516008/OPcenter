@@ -11,7 +11,7 @@
                 <div class="col-sm-6">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>数据展示</h5>
+                            <h5>网站监控统计</h5>
                         </div>
                         <div class="ibox-content">
                             <div style="height:400px" id="container-left"></div>
@@ -45,51 +45,111 @@
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
     <!-- 左边视图canvas -->
     <script type="text/javascript">
-      var dom = document.getElementById("container-left");
-      var myChart = echarts.init(dom);
-      var app = {};
-      option = null;
-      option = {
-          title: {
-              text: '网站异常'
-          },
-          tooltip: {
-              trigger: 'axis'
-          },
-          legend: {
-              data:['北京']
-          },
-          grid: {
-              left: '3%',
-              right: '4%',
-              bottom: '3%',
-              containLabel: true
-          },
-          toolbox: {
-              feature: {
-                  saveAsImage: {}
-              }
-          },
-          xAxis: {
-              type: 'category',
-              boundaryGap: false,
-              data: ['周一','周二','周三','周四','周五','周六','周日']
-          },
-          yAxis: {
-              name: '数量',
-              type: 'value',
-              min: 0,
-              max: 50
-          },
-          series: [
-              {
-                  name:'北京',
-                  type:'line',
-                  stack: '总量',
-                  data:[23, 45, 32, 11, 4, 5, 32]
-              },
-          ]
-      };
+    var dom = document.getElementById("container-left");
+    var myChart = echarts.init(dom);
+    var app = {};
+    option = null;
+    var scale = 1;
+    var echartData = {{ pie_data | safe }}
+          console.log(echartData)
+    var rich = {
+        yellow: {
+            color: "#676a6c",
+            fontSize: 30 * scale,
+            padding: [5, 4],
+            align: 'center'
+        },
+        total: {
+            color: "#676a6c",
+            fontSize: 30 * scale,
+            align: 'center'
+        },
+        white: {
+            color: "#676a6c",
+            align: 'center',
+            fontSize: 16 * scale,
+            padding: [14, 0]
+        },
+        blue: {
+            color: '#49dff0',
+            fontSize: 20 * scale,
+            align: 'center'
+        },
+        hr: {
+            borderColor: '#0b5263',
+            width: '100%',
+            borderWidth: 1,
+            height: 0,
+        }
+    };
+    option = {
+        backgroundColor: '#FFFFFF',
+        title: {
+            text:'总考生数',
+            left:'center',
+            top:'53%',
+            padding:[21,0],
+            textStyle:{
+                color:'#fff',
+                fontSize:16 * scale,
+                align:'center'
+            }
+        },
+        legend: {
+            selectedMode:false,
+            formatter: function(name) {
+                var total = 0; //各科正确率总和
+                var averagePercent; //综合正确率
+                echartData.forEach(function(value, index, array) {
+                    total += value.value;
+                });
+                return '{total|' + total + '}';
+            },
+            data: [echartData[0].name],
+            // data: ['高等教育学'],
+            // itemGap: 50,
+            left: 'center',
+            top: 'center',
+            icon: 'none',
+            align:'center',
+            textStyle: {
+                color: "#fff",
+                fontSize: 16 * scale,
+                rich: rich
+            },
+        },
+        series: [{
+            name: '总考生数量',
+            type: 'pie',
+            radius: ['50%', '40%'],
+            hoverAnimation: false,
+            color: ['#00cc33', '#ff0033', '#49dff0', '#034079', '#6f81da', '#00ffb4'],
+            label: {
+                normal: {
+                    formatter: function(params, ticket, callback) {
+                        var total = 0; //考生总数量
+                        var percent = 0; //考生占比
+                        echartData.forEach(function(value, index, array) {
+                            total += value.value;
+                        });
+                        percent = ((params.value / total) * 100).toFixed(1);
+                        return '{white|' + params.name + '}\n{hr|}\n{yellow|' + params.value + '}\n{blue|' + percent + '%}';
+                    },
+                    rich: rich
+                },
+            },
+            labelLine: {
+                normal: {
+                    length: 55 * scale,
+                    length2: 0,
+                    lineStyle: {
+                        color: '#0b5263'
+                    }
+                }
+            },
+            data: echartData
+        }]
+    };
 
       if (option && typeof option === "object") {
           myChart.setOption(option, true);

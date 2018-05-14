@@ -84,6 +84,7 @@ $(function () {
     $(this).hide().val('')
     $('#itemChoice_edit').show()
     // $('#project').val(projectId)
+
   })
   $('#add_edit_editForm').find('.dropdown-item').click(function () {
     $('#itemChoice_edit').text($(this).text())
@@ -97,16 +98,37 @@ $(function () {
 
   // ================消息提示框================
   $('#btn_confirm').click(function (e) {
-    e.preventDefault() //阻止了表单提交默认事件
-    $('.alert-danger').css("display", "block").addClass('fadeInRight')
-    setTimeout(function () {
-      $('.alert-danger').fadeOut()
-    }, 2000)
+    var search_url = $('#inputSearch').val()
+    console.log(search_url)
+    if ( search_url == '' ){
+        $('#search_tip').text('请输入域名')
+        $('.alert-danger').css("display", "block").addClass('fadeInRight')
+        setTimeout(function () {
+        $('.alert-danger').fadeOut()
+        }, 2000)
+    }else{
+      $.ajax({
+         type: "POST",
+         url: "/webmoni/search/",
+         data: {
+            'url': search_url,
+          },
+         success: function(url_id) {
+             if ( url_id == 'no'){
+                $('#search_tip').text('没有这个域名！')
+                $('.alert-danger').css("display", "block").addClass('fadeInRight')
+                setTimeout(function () {
+                $('.alert-danger').fadeOut()
+                }, 2000)
+             }else{
+                 window.location.href="/webmoni/areas-" + url_id;
+             }
+         }
+        })
+}
+
+
   })
-  $('#tip_close').click(function () {
-    $(this).parent().hide()
-  })
-  
 })
 
 function update_graph(option,graph_data) {
