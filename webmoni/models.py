@@ -6,12 +6,17 @@ class Node(models.Model):
 
 class Project(models.Model):
     name = models.CharField(max_length=20,unique=True,null=True)
+    def __str__(self):
+        return self.name
 
 class DomainName(models.Model):
     url = models.CharField(max_length=60,unique=True)
     project_name = models.ForeignKey('Project',to_field='id',null=True)
     status = models.ForeignKey('Event_Type',to_field='id',null=True,default=1)
     check_id = models.IntegerField(default=0)
+    warning = models.IntegerField(default=0)
+    def __str__(self):
+        return self.url
 
 class MonitorData(models.Model):
     node = models.ForeignKey('Node',to_field='id')
@@ -25,7 +30,7 @@ class MonitorData(models.Model):
     size_download = models.IntegerField(null=True)
     header_size = models.IntegerField(null=True)
     speed_download = models.IntegerField(null=True)
-    datetime = models.DateTimeField()
+    datetime = models.DateTimeField(db_index=True)
 
 class Event_Log(models.Model):
     node = models.ForeignKey('Node',to_field='id')
@@ -35,3 +40,5 @@ class Event_Log(models.Model):
 
 class Event_Type(models.Model):
     event_type = models.CharField(max_length=60,unique=True)
+    def __str__(self):
+        return self.event_type
