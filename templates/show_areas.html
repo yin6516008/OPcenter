@@ -35,14 +35,16 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <input type="search" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="inputSearch">
-                        </div>
-                        <button type="submit" class="btn btn-primary confirm" id="btn_confirm">确定</button>
-                        <div class="alert alert-danger alert-dismissible fade in" role="alert">
-                          <h4>温馨提示</h4>
-                          <p id="search_tip"></p>
-                        </div>
+                        <form role="search" method="post" action="#" id="searchForm">
+                            <div class="form-group">
+                                <input type="search" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="inputSearch">
+                            </div>
+                            <button type="submit" class="btn btn-primary confirm" id="btn_confirm">确定</button>
+                            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                              <h4>温馨提示</h4>
+                              <p></p>
+                            </div>
+                        </form>
                     </div>                                
                 </div>
                 <!-- echarts图表 -->
@@ -161,13 +163,8 @@
                         <input type="text" class="form-control domain_name" name="domain" placeholder="请输入要添加的域名(双击切换批量模式)" id="itemDetail" aria-describedby="basic-addon1">
                         <textarea name="domains"  placeholder="请输入要添加的域名..." id="domains" cols="30" rows="10"></textarea>
                         <div class="pull-right checkbox-area">
-<<<<<<< HEAD
-                          <input type="checkbox" name="check_id">不检测
-                          <input type="checkbox" name="warning">不警告
-=======
-                          <input type="checkbox" id="add_notadd">不添加
-                          <input type="checkbox" id="add_notwarn">不警告
->>>>>>> 40f3d1c6badc16335133ca967a48ca2e4e0994f9
+                          <input type="checkbox" name="check_id" id="add_notadd">不检测
+                          <input type="checkbox" name="warning" id="add_notwarn">不警告
                         </div>
                       </div>
                     </div>
@@ -210,15 +207,16 @@
                       修改区域
                     </h4>
                   </div>
-                  <form action="#" method="post" id="add_edit_editForm">
+                  <form action="/webmoni/update_domain/" method="post" id="add_edit_editForm">
                     <div class="modal-body modalAdd">
                       <div class="input-group">
                         <!-- <button class="btn btn-primary dropdown-toggle input-group-addon" id="itemChoice_edit">777</button> -->
-                        <input type="text" class="form-control domain_name" name="category" id="itemDetail_cate" aria-describedby="basic-addon1" disabled value="游戏大厅">                     
-                        <input type="text" class="form-control domain_name" name="domain" id="itemDetail_edit" aria-describedby="basic-addon1" disabled value="666666666666">                     
+                        <input type="text" class="form-control domain_name" name="project" id="itemDetail_cate" aria-describedby="basic-addon1" disabled value="{{ graph_data.project}}">
+                        <input type="text" class="form-control domain_name" id="itemDetail_edit" aria-describedby="basic-addon1" disabled value="{{ graph_data.domain }}">
+                        <input type="text" name="domain" style="display: none ;" value="{{ graph_data.id }}">
                         <div class="pull-right checkbox-area">
-                          <input type="checkbox" id="edit_notadd">不添加
-                          <input type="checkbox" id="edit_notwarn">不警告
+                          <input type="checkbox" name="check_id" id="edit_notadd">不检测
+                          <input type="checkbox" name="warning" id="edit_notwarn">不警告
                         </div>
                       </div>
                     </div>
@@ -611,8 +609,19 @@
         var graph_data = {{ graph_data | safe }}
         var new_options = update_graph(option,graph_data)
         myChart.setOption(new_options, true);
-        var int = self.setInterval("timing_update(option,graph_data['id'])",30000)
+        var int = self.setInterval("timing_update(option,graph_data['id'])",60000)
     }
+
+    $(function () {
+      var graph_data = {{ graph_data | safe }}
+      console.log(graph_data)
+      if ( graph_data['check_id'] == 1){
+          $('#edit_notadd').attr('checked',true)
+      }
+      if ( graph_data['warning'] == 1){
+          $('#edit_notwarn').attr('checked',true)
+      }
+    })
     </script>
 {% endblock %}
 

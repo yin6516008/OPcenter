@@ -1,77 +1,77 @@
 $(function () {
-  $('.third-menu').hide()
-  $('.dropdown-menu>li').mouseover(function () {
-    $(this).find('.third-menu').show();
-  })
-  $('.dropdown-menu>li').mouseout(function () {
-    $(this).find('.third-menu').hide();
-  })
-  $('#itemAdd,#itemAdd_edit').parent().css("backgroundColor","#18a689")
+    $('.third-menu').hide()
+    $('.dropdown-menu>li').mouseover(function () {
+        $(this).find('.third-menu').show();
+    })
+    $('.dropdown-menu>li').mouseout(function () {
+        $(this).find('.third-menu').hide();
+    })
+    $('#itemAdd,#itemAdd_edit').parent().css("backgroundColor", "#18a689")
 
-  // ================新增模态框================
-  // 点击"新增项目名称" 选择项目按钮变为input输入框
-  $('#itemInput').hide()
-  var projectId = null
-  $('#itemAdd').click(function () {
-    $('#itemChoice').hide()
-    $('#itemInput').show()
-    // 点击"新增项目名称" 清空隐藏域里input的value值 方便验证
-    projectId = $('#project').val()
-    $('#project').val('')
-  })
-  $('#itemInput').dblclick(function () {
-    // 双击新增项目输入框 变回下拉选项框之前清空已经输入的值
-    $(this).hide().val('')
-    $('#itemChoice').show()
-    $('#project').val(projectId)
-  })
-  // 双击 添加域名input框 将input改变为textarea框 再双击 切换
-  $('textarea').hide()
-  $('#itemDetail').dblclick(function () {
-    $(this).hide().val('')
-    $('textarea').show()
-  })
-  $('textarea').dblclick(function () {
-    $(this).hide().val('')
-    $('#itemDetail').show()
-  })
-  // 点击下拉列表的选项
-  $('.dropdown-item-add').click(function () {
-    // $(this).hide()
-    $('#itemChoice').text($(this).text());
-    $('#add_edit_form').find('[type="hidden"]').val($(this).val())
-  })
+    // ================新增模态框================
+    // 点击"新增项目名称" 选择项目按钮变为input输入框
+    $('#itemInput').hide()
+    var projectId = null
+    $('#itemAdd').click(function () {
+        $('#itemChoice').hide()
+        $('#itemInput').show()
+        // 点击"新增项目名称" 清空隐藏域里input的value值 方便验证
+        projectId = $('#project').val()
+        $('#project').val('')
+    })
+    $('#itemInput').dblclick(function () {
+        // 双击新增项目输入框 变回下拉选项框之前清空已经输入的值
+        $(this).hide().val('')
+        $('#itemChoice').show()
+        $('#project').val(projectId)
+    })
+    // 双击 添加域名input框 将input改变为textarea框 再双击 切换
+    $('textarea').hide()
+    $('#itemDetail').dblclick(function () {
+        $(this).hide().val('')
+        $('textarea').show()
+    })
+    $('textarea').dblclick(function () {
+        $(this).hide().val('')
+        $('#itemDetail').show()
+    })
+    // 点击下拉列表的选项
+    $('.dropdown-item-add').click(function () {
+        // $(this).hide()
+        $('#itemChoice').text($(this).text());
+        $('#add_edit_form').find('[type="hidden"]').val($(this).val())
+    })
 
-  
-  // 点击关闭按钮或者× 清除表单内的四个val值 复选框勾选清除
-  $('#btn_close_bottom,#btn_close_top').click(function () {
-    $('#project,#itemInput,#itemDetail,#domains').val('')
-    $('#add_notadd,#add_notwarn').attr('checked',false)
-  })
 
-  // 表单提交验证
-  $('#btn_save').attr('disabled','true')  
-  $(document).mousemove(function () {
-    if($('#project').val() != '') {
-      if($('#itemDetail').val() != '') {
-        $('#btn_save').removeAttr("disabled")
-      }else if($('#domains').val() != '') {
-        $('#btn_save').removeAttr("disabled")
-      }else {
-        $('#btn_save').attr('disabled','true')
-      }
-    }
+    // 点击关闭按钮或者× 清除表单内的四个val值 复选框勾选清除
+    $('#btn_close_bottom,#btn_close_top').click(function () {
+        $('#project,#itemInput,#itemDetail,#domains').val('')
+        $('#add_notadd,#add_notwarn').attr('checked', false)
+    })
 
-    if($('#itemInput').val() != '') {
-      if($('#itemDetail').val() != '') {
-        $('#btn_save').removeAttr("disabled")
-      }else if($('#domains').val() != '') {
-        $('#btn_save').removeAttr("disabled")
-      }else {
-        $('#btn_save').attr('disabled','true')
-      }
-    }
-  })
+    // 表单提交验证
+    $('#btn_save').attr('disabled', 'true')
+    $(document).mousemove(function () {
+        if ($('#project').val() != '') {
+            if ($('#itemDetail').val() != '') {
+                $('#btn_save').removeAttr("disabled")
+            } else if ($('#domains').val() != '') {
+                $('#btn_save').removeAttr("disabled")
+            } else {
+                $('#btn_save').attr('disabled', 'true')
+            }
+        }
+
+        if ($('#itemInput').val() != '') {
+            if ($('#itemDetail').val() != '') {
+                $('#btn_save').removeAttr("disabled")
+            } else if ($('#domains').val() != '') {
+                $('#btn_save').removeAttr("disabled")
+            } else {
+                $('#btn_save').attr('disabled', 'true')
+            }
+        }
+    })
 
   // ================修改模态框================
   // 点击"新增项目名称" 选择项目按钮变为input输入框
@@ -88,7 +88,6 @@ $(function () {
     $(this).hide().val('')
     $('#itemChoice_edit').show()
     // $('#project').val(projectId)
-
   })
   $('#add_edit_editForm').find('.dropdown-item-edit').click(function () {
     $('#itemChoice_edit').text($(this).text())
@@ -111,40 +110,9 @@ $(function () {
   })
 
   // ================消息提示框================
-  $('#btn_confirm').click(function (e) {
-    var search_url = $('#inputSearch').val()
-    console.log(search_url)
-    if ( search_url == '' ){
-        $('#search_tip').text('请输入域名')
-        $('.alert-danger').css("display", "block").addClass('fadeInRight')
-        setTimeout(function () {
-        $('.alert-danger').fadeOut()
-        }, 2000)
-    }else{
-      $.ajax({
-         type: "POST",
-         url: "/webmoni/search/",
-         data: {
-            'url': search_url,
-          },
-         success: function(url_id) {
-             if ( url_id == 'no'){
-                $('#search_tip').text('没有这个域名！')
-                $('.alert-danger').css("display", "block").addClass('fadeInRight')
-                setTimeout(function () {
-                $('.alert-danger').fadeOut()
-                }, 2000)
-             }else{
-                 window.location.href="/webmoni/areas-" + url_id;
-             }
-         }
-        })
-}
-
-
+  $('#tip_close').click(function () {
+    $(this).parent().hide()
   })
-<<<<<<< HEAD
-=======
 
   $('#domainsUl>li').mouseover(function () {
     $(this).children('a').css('backgroundColor','#ccc')
@@ -156,26 +124,6 @@ $(function () {
     var e = event || window.event;
     return {'x':e.clientX,'y':e.clientY}
   }
-  $('#domainsUl').mousemove(function (e) {
-    // var mouseY = e.pageY
-    // console.log(mouseY)
-    // console.log($(this).height())
-    // if(mouseY > 500) {
-    //   console.log(8888888)
-    //   // $('.third-menu').removeAttr('top').attr('bottom',0)
-    //   $('.third-menu').css({'top':'', 'bottom':'0'})
-    // }else {
-    //   // $('.third-menu').removeAttr('bottom').attr('top',0)
-    //   $('.third-menu').css({'bottom':'', 'top':'0'})
-    // }
-
-    // 如果mouseY+ul的高度>850px 则让ul的scroll出现 并且max-height=850-mouseY
-    
-
-
-  })
-  
->>>>>>> 40f3d1c6badc16335133ca967a48ca2e4e0994f9
 })
 
 function update_graph(option,graph_data) {
@@ -242,11 +190,41 @@ function update_graph(option,graph_data) {
 
 
 
+// ================消息提示框================
+$('#btn_confirm').click(function (e) {
+var search_url = $('#inputSearch').val()
+if ( search_url == '' ){
+    $('#search_tip').text('请输入域名')
+    $('.alert-danger').css("display", "block").addClass('fadeInRight')
+    setTimeout(function () {
+    $('.alert-danger').fadeOut()
+    }, 2000)
+}else {
+    $.ajax({
+        type: "POST",
+        url: "/webmoni/search/",
+        data: {
+            'url': search_url,
+        },
+        success: function (url_id) {
+            if (url_id == 'no') {
+                $('#search_tip').text('没有这个域名！')
+                $('.alert-danger').css("display", "block").addClass('fadeInRight')
+                setTimeout(function () {
+                    $('.alert-danger').fadeOut()
+                }, 2000)
+            } else {
+                window.location.href = "/webmoni/areas-" + url_id;
+            }
+        }
+    })
+    }
+})
 
 function timing_update(option,url_id) {
   $.ajax({
      type: "POST",
-     url: "/webmoni/update/",
+     url: "/webmoni/update_graph/",
      data: {
         'url_id': url_id,
       },
@@ -257,4 +235,3 @@ function timing_update(option,url_id) {
      }
 })
 }
-

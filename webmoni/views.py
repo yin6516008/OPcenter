@@ -84,7 +84,7 @@ def delete(request):
 
 
 
-def update(request):
+def update_graph(request):
     """
     更新曲线图
     :param request:
@@ -95,6 +95,17 @@ def update(request):
         url_id = request.POST.get('url_id')
         defaultDomainData, graph_data = get_areas_data(url_id)
         return HttpResponse(json.dumps(graph_data))
+
+def update_domain(request):
+    if request.method == 'POST':
+        domain_id = request.POST.get('domain')
+        check_id = 0 if request.POST.get('check_id') is None else 1
+        warning = 0 if request.POST.get('warning') is None else 1
+        DomainName.objects.filter(id=domain_id).update(check_id=check_id,warning=warning)
+        print(domain_id,check_id,warning)
+
+        return redirect('/webmoni/areas-' + domain_id + '/')
+
 
 def search(request):
     """
