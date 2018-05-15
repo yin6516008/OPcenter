@@ -1,0 +1,47 @@
+.ibox-title {
+  position: relative;
+}
+.pull-left {
+  margin-right: 30px;
+}
+.ibox-title {
+  margin: 10px 0;
+}
+.btn.btn-primary.dropdown-toggle {
+  margin-top: 0;
+}
+.select_area {
+  position: absolute;
+  top: 5px;
+  left: 20px;
+}
+.pull-left.btns {
+  position: absolute;
+  top: 5px;
+  left: 140px;
+}
+.pull-left.btns>button>a {
+  color: #fff;
+}
+.pull-left.btns>button:hover {
+  opacity: .8;
+}
+.btn.btn-outline.btn-danger {
+  margin-right: 20px;
+  background-color: #ed5565;
+}
+.btn.btn-outline.btn-warning {
+  margin-right: 20px;
+  background-color: #f8ac59;
+}
+.btn.btn-outline.btn-info {
+  background-color: #23c6c8;
+}
+.tableArea {
+  padding: 0 20px;
+}
+.dropdown-menu-domains {
+  min-width: 94px;
+}
+/* 左侧边栏的样式调整 */
+

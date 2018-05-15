@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^update_graph/', views.update_graph),
     url(r'^update_domain/', views.update_domain),
     url(r'^search/', views.search),
+    url(r'^tables/', views.tables)
 ]

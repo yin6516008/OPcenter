@@ -3,9 +3,12 @@ body.fixed-sidebar.mini-navbar .navbar-static-side {
 }
 .dropdown.profile-element {
   float: right;
-  /* padding-right: 60px;   */
   margin-right: 60px;  
   display: block;
+}
+.dropdown.profile-element>a {
+  float: right;
+  margin-top: 18px;
 }
 .dropdown-menu.animated.fadeInRight {
   min-width: 100px;
