@@ -131,24 +131,6 @@ $(function () {
     var e = event || window.event;
     return {'x':e.clientX,'y':e.clientY}
   }
-  $('#domainsUl').mousemove(function (e) {
-    // var mouseY = e.pageY
-    // console.log(mouseY)
-    // console.log($(this).height())
-    // if(mouseY > 500) {
-    //   console.log(8888888)
-    //   // $('.third-menu').removeAttr('top').attr('bottom',0)
-    //   $('.third-menu').css({'top':'', 'bottom':'0'})
-    // }else {
-    //   // $('.third-menu').removeAttr('bottom').attr('top',0)
-    //   $('.third-menu').css({'bottom':'', 'top':'0'})
-    // }
-
-    // 如果mouseY+ul的高度>850px 则让ul的scroll出现 并且max-height=850-mouseY
-    
-
-
-  })
   
 })
 
