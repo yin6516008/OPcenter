@@ -61,7 +61,8 @@ def normal_domain(request):
         if API_verify(normalData['node'],client_ip):
             MonitorData.objects.create(**normalData['data'])
             return HttpResponse('OK')
-
+        else:
+            return HttpResponse('出错啦')
     if request.method == 'GET':
         return HttpResponse('连接拒绝')
 
@@ -76,6 +77,7 @@ def fault_domain(request):
             DomainName.objects.filter(id=faultData['url_id']).update(**faultData['domain'])
             Event_Log.objects.create(**faultData['event_log'])
             return HttpResponse('OK')
-
+        else:
+            return HttpResponse('ERROR')
     if request.method == 'GET':
         return HttpResponse('连接拒绝')
