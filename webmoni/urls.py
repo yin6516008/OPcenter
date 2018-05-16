@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'^update_domain/', views.update_domain),
     url(r'^search/', views.search),
     url(r'^api/domain_all/', api.domain_all),
-    url(r'^tables/', views.tables)
+    url(r'^tables/', views.tables),
+    url(r'^tables/p/(\d+)', views.tables_project)
 ]
