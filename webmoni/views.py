@@ -121,3 +121,7 @@ def search(request):
             return HttpResponse('no')
         else:
             return HttpResponse(url_obj.id)
+
+
+def tables(request):
+    return render(request,'show_quality.html')
