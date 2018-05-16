@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 class Node(models.Model):
     node = models.CharField(max_length=20,unique=True)
+    ip = models.CharField(max_length=20,null=True)
 
 class Project(models.Model):
     name = models.CharField(max_length=20,unique=True,null=True)

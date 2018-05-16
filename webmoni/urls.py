@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from webmoni import views
+from webmoni import api
 
 urlpatterns = [
     url(r'^$', views.areas),
@@ -10,4 +11,6 @@ urlpatterns = [
     url(r'^update_graph/', views.update_graph),
     url(r'^update_domain/', views.update_domain),
     url(r'^search/', views.search),
+    url(r'^api/domain_all/', api.domain_all),
+
 ]
