@@ -37,4 +37,28 @@ $(function () {
     }
     
   })
+
+  // 若tr的id大于20 则隐藏
+  $('tbody>tr').each(function () {
+    var id = ($(this).attr('id'))
+    if(id > 20) {
+      $(this).hide()
+    }
+  })
+  // 设置页码的点击事件
+  $('.pageClick').click(function () {
+    var pageNum = $(this).find('a').text()
+    var idMax = pageNum * 20
+    var idMin = idMax - 19
+    $('tbody>tr').each(function () {
+      var id = Number(($(this).attr('id')))
+      console.log(id)
+      if(id>=idMin & idMax>=id) {
+        $(this).show()
+      }else {
+        $(this).hide()
+      }
+    })
+  })
+
 })

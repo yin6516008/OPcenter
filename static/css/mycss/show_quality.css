@@ -20,8 +20,14 @@
   top: 5px;
   left: 140px;
 }
+.filterBtn>button {
+  padding: 6px 3px;
+  width: 94px;
+}
 .filterBtn>button>a {
+  display: block;
   color: #fff;
+  width: 68px;
 }
 .filterBtn>button:hover {
   opacity: .8;
@@ -46,10 +52,13 @@
   margin-right: 20px;
   position: relative;
 }
-.filterBtn>.badge {
+.badge.badge-danger {
   position: absolute;
-  right: -10px;
-  top: -5px;
+  right: 4px;
+  top: 8px;
+}
+.btn-warning>a {
+  padding-left: 10px;
 }
 /* 右上角搜索框 */
 .ibox-title>.pull-right {
@@ -82,4 +91,12 @@ form>.alert-danger {
   padding-top: 10px;
   display: none;
 }
-
+#domainsUl>li>a {
+  padding: 3px 6px;
+}
+.pagination {
+  margin: 0;
+}
+.badge-danger {
+  background-color: transparent;
+}
