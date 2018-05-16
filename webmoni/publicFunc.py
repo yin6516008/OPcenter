@@ -2,6 +2,7 @@ from webmoni.models import *
 from django.db.models import Q
 import datetime
 
+# 根据url_id获取网站监控--》域名状态页面的数据并返回
 def get_areas_data(url_id):
     # 如果没选择域名,默认展示第一条域名
     if url_id is None:
@@ -72,6 +73,7 @@ def get_areas_data(url_id):
     return  table_data,graph_data
 
 
+# 获取主页 "网站监控统计" 图里的数据
 def get_index_pie():
     ok_number = DomainName.objects.filter(status=0).filter(check_id=0).count()
     error_number = DomainName.objects.filter(~Q(status= 0)).filter(check_id=0).count()
@@ -91,3 +93,12 @@ def get_index_pie():
         }
     ]
     return data
+
+# webmoni APP的API验证方法,通过验证客户端IP,实现只有节点机器才能调用API
+def API_verify(node_id,client_ip):
+    if node_id is None:
+        return False
+    node_obj = Node.objects.filter(id=node_id).first()
+    if node_obj is None:
+        return False
+    return True if client_ip == node_obj.ip else False
