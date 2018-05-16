@@ -68,7 +68,7 @@
                         </thead>
                         <tbody>
                         {% for row in data.domainall %}
-                            <tr>
+                            <tr id="{{ forloop.counter }}">
                                 <td>{{ forloop.counter }}</td>
                                 <td>{{ row.project_name.name }}</td>
                                 <td>{{ row.url }}</td>
@@ -89,11 +89,11 @@
                                   <span aria-hidden="true">&laquo;</span>
                               </a>
                           </li>
-                          <li><a href="#">1</a></li>
-                          <li><a href="#">2</a></li>
-                          <li><a href="#">3</a></li>
-                          <li><a href="#">4</a></li>
-                          <li><a href="#">5</a></li>
+                          <li class="pageClick"><a href="#">1</a></li>
+                          <li class="pageClick"><a href="#">2</a></li>
+                          <li class="pageClick"><a href="#">3</a></li>
+                          <li class="pageClick"><a href="#">4</a></li>
+                          <li class="pageClick"><a href="#">5</a></li>
                           <li>
                               <a href="#" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
