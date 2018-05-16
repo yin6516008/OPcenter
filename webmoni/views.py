@@ -135,9 +135,47 @@ def tables(request):
             'domainall':domainall,
             'Not_check_number':Not_check_number
         }
-
     return render(request,'domain_ table.html',{'data':data})
 
 
-def tables_project(request):
-    return render(request, 'domain_ table.html')
+def tables_project(request,project_id):
+    if request.method == 'GET':
+        project_all = Project.objects.all()
+        domainall = DomainName.objects.filter(project_name=project_id)
+        fault_number = DomainName.objects.filter(~Q(status_id=0) & Q(check_id=0)).count()
+        Not_check_number = DomainName.objects.filter(check_id=1).count()
+        data = {
+            'project_all':project_all,
+            'fault_number':fault_number,
+            'domainall':domainall,
+            'Not_check_number':Not_check_number
+        }
+    return render(request,'domain_ table.html',{'data':data})
+
+def tables_fault(request):
+    if request.method == 'GET':
+        project_all = Project.objects.all()
+        domainall = DomainName.objects.filter(~Q(status_id=0) & Q(check_id=0))
+        fault_number = DomainName.objects.filter(~Q(status_id=0) & Q(check_id=0)).count()
+        Not_check_number = DomainName.objects.filter(check_id=1).count()
+        data = {
+            'project_all':project_all,
+            'fault_number':fault_number,
+            'domainall':domainall,
+            'Not_check_number':Not_check_number
+        }
+    return render(request,'domain_ table.html',{'data':data})
+
+def tables_notcheck(request):
+    if request.method == 'GET':
+        project_all = Project.objects.all()
+        domainall = DomainName.objects.filter(check_id=1)
+        fault_number = DomainName.objects.filter(~Q(status_id=0) & Q(check_id=0)).count()
+        Not_check_number = DomainName.objects.filter(check_id=1).count()
+        data = {
+            'project_all':project_all,
+            'fault_number':fault_number,
+            'domainall':domainall,
+            'Not_check_number':Not_check_number
+        }
+    return render(request,'domain_ table.html',{'data':data})
