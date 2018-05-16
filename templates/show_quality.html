@@ -25,10 +25,31 @@
                         </div>
                     </div>   
                     <div class="pull-left btns">
-                        <button type="button" class="btn btn-outline btn-danger" data-toggle="modal" data-target="#delModal"><a href="#">故障线路</a></button>
-                        <button type="button" class="btn btn-outline btn-warning" data-toggle="modal" data-target="#editModal"><a href="#">暂停线路</a></button>
-                        <button type="button" class="btn btn-outline btn-info" data-toggle="modal" data-target="#myModal"><a href="#">缓慢线路</a></button>                        
-                    </div>                             
+                        <div class="filterBtn">
+                          <button type="button" class="btn btn-outline btn-success" data-toggle="modal" data-target="#delModal"><a href="#">故障线路</a></button>
+                          <span class="badge badge-danger pull-right">5</span>
+                        </div>
+                        <div class="filterBtn">
+                          <button type="button" class="btn btn-outline btn-warning" data-toggle="modal" data-target="#editModal"><a href="#">暂停线路</a></button>
+                          <span class="badge badge-danger pull-right">0</span>                          
+                        </div>
+                        <div class="filterBtn">
+                          <button type="button" class="btn btn-outline btn-info" data-toggle="modal" data-target="#myModal"><a href="#">缓慢线路</a></button>                        
+                          <span class="badge badge-danger pull-right">8</span>                                                    
+                        </div>
+                    </div>  
+                    <div class="pull-right">
+                      <form role="search" method="post" action="#" id="searchForm">
+                        <div class="form-group">
+                            <input type="search" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="inputSearch" autofocus>
+                        </div>
+                        <button type="submit" class="btn btn-primary confirm" id="btn_confirm">确定</button>
+                        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                          <h4>温馨提示</h4>
+                          <p id="search_tip"></p>
+                        </div>
+                      </form>
+                    </div>                           
                 </div>
                 <!-- 表格部分 -->
                 <div class="tableArea">
@@ -125,5 +146,5 @@
 {% endblock %}
 
 {% block js %}
-    <script src="/static/js/index.js"></script>
+    <script src="/static/js/show_quality.js"></script>
 {% endblock %}

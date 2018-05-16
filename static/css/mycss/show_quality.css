@@ -20,18 +20,16 @@
   top: 5px;
   left: 140px;
 }
-.pull-left.btns>button>a {
+.filterBtn>button>a {
   color: #fff;
 }
-.pull-left.btns>button:hover {
+.filterBtn>button:hover {
   opacity: .8;
 }
-.btn.btn-outline.btn-danger {
-  margin-right: 20px;
-  background-color: #ed5565;
+.btn.btn-outline.btn-success {
+  background-color: #1c84c6;
 }
 .btn.btn-outline.btn-warning {
-  margin-right: 20px;
   background-color: #f8ac59;
 }
 .btn.btn-outline.btn-info {
@@ -43,5 +41,45 @@
 .dropdown-menu-domains {
   min-width: 94px;
 }
-/* 左侧边栏的样式调整 */
+.filterBtn {
+  display: inline-block;
+  margin-right: 20px;
+  position: relative;
+}
+.filterBtn>.badge {
+  position: absolute;
+  right: -10px;
+  top: -5px;
+}
+/* 右上角搜索框 */
+.ibox-title>.pull-right {
+  position: absolute;
+  width: 260px;
+  top: 5px;
+  right: 20px;
+}
+.form-group>input {
+  border: 1px solid #1BB394;
+  border-radius: 10px;
+  height: 34px;
+  width: 200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+/* 搜索确定按钮 */
+form>.confirm {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+form>.alert-danger {
+  position: absolute;
+  top: 40px;
+  width: 260px;
+  height: 70px;
+  z-index: 1;
+  padding-top: 10px;
+  display: none;
+}
 
