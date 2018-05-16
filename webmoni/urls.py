@@ -13,6 +13,8 @@ urlpatterns = [
     url(r'^search/$', views.search),
     url(r'^api/domain_all/$', api.domain_all),
     url(r'^api/event_type/$', api.event_type),
+    url(r'^api/normal_domain/$', api.normal_domain),
+    url(r'^api/fault_domain/$', api.fault_domain),
     url(r'^tables/$', views.tables),
     url(r'^tables/fault/$', views.tables_fault),
     url(r'^tables/notcheck/$', views.tables_notcheck),

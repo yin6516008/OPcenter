@@ -9,6 +9,8 @@ from webmoni.models import DomainName
 from webmoni.models import Project
 from webmoni.models import Node
 from webmoni.models import Event_Type
+from webmoni.models import Event_Log
+from webmoni.models import MonitorData
 
 from webmoni.publicFunc import API_verify
 import datetime
@@ -48,16 +50,32 @@ def event_type(request):
     if request.method == 'GET':
         return HttpResponse('连接拒绝')
 
+
+
 def normal_domain(request):
     if request.method == 'POST':
-        data = {}
 
-        node_id = request.POST.get('node')
+        normalData = json.loads(request.POST.get('normalData'))
+        print(normalData['data'])
         client_ip = request.META['REMOTE_ADDR']
-        if API_verify(node_id,client_ip):
-            return HttpResponse('连接拒绝')
+        if API_verify(normalData['node'],client_ip):
+            MonitorData.objects.create(**normalData['data'])
+            return HttpResponse('OK')
 
     if request.method == 'GET':
         return HttpResponse('连接拒绝')
 
+def fault_domain(request):
+    if request.method == 'POST':
 
+        faultData = json.loads(request.POST.get('faultData'))
+        print(faultData['data'])
+        client_ip = request.META['REMOTE_ADDR']
+        if API_verify(faultData['node'],client_ip):
+            MonitorData.objects.create(**faultData['data'])
+            DomainName.objects.filter(id=faultData['url_id']).update(**faultData['domain'])
+            Event_Log.objects.create(**faultData['event_log'])
+            return HttpResponse('OK')
+
+    if request.method == 'GET':
+        return HttpResponse('连接拒绝')
