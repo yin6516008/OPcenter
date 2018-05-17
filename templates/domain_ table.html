@@ -71,7 +71,7 @@
                             <tr id="{{ forloop.counter }}">
                                 <td>{{ forloop.counter }}</td>
                                 <td>{{ row.project_name.name }}</td>
-                                <td>{{ row.url }}</td>
+                                <td><a href="/webmoni/areas-{{row.id}}/">{{ row.url }}</a></td>
                                 <td>{{ row.status.event_type }}</td>
                                 <td>空</td>
                                 <td>空</td>
@@ -85,17 +85,20 @@
                   <nav aria-label="Page navigation">
                       <ul class="pagination pull-right">
                           <li>
-                              <a href="#" aria-label="Previous">
+                              <a href="#" aria-label="Previous" id="previous">
                                   <span aria-hidden="true">&laquo;</span>
                               </a>
                           </li>
-                          <li class="pageClick"><a href="#">1</a></li>
-                          <li class="pageClick"><a href="#">2</a></li>
-                          <li class="pageClick"><a href="#">3</a></li>
-                          <li class="pageClick"><a href="#">4</a></li>
-                          <li class="pageClick"><a href="#">5</a></li>
+                          <li><a href="#" class="pageClick">1</a></li>
+                          <li><a href="#" class="pageClick">2</a></li>
+                          <li><a href="#" class="pageClick">3</a></li>
+                          <li><a href="#" class="pageClick">4</a></li>
+                          <li><a href="#" class="pageClick">5</a></li>
+                          <li><a href="#" class="pageClick">6</a></li>
+                          <li><a href="#" class="pageClick">7</a></li>
+                          <li><a href="#" class="pageClick">8</a></li>
                           <li>
-                              <a href="#" aria-label="Next">
+                              <a href="#" aria-label="Next" id="next">
                                 <span aria-hidden="true">&raquo;</span>
                               </a>
                           </li>
