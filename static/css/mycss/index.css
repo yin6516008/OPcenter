@@ -1,3 +1,6 @@
+html {
+  min-width: 990px;
+}
 body.fixed-sidebar.mini-navbar .navbar-static-side {
   width: 75px;
 }

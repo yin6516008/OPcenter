@@ -7,9 +7,9 @@ $(function () {
  })
   //  点击确定按钮弹出提示框
   $('#btn_confirm').click(function (e) {
+    e.preventDefault()    
     var search_url = $('#inputSearch').val()
     if(search_url == '') {
-      e.preventDefault()
       $('#search_tip').text('请输入域名！')
       $('.alert-danger').css("display", "block").addClass('fadeInRight')
       setTimeout(function () {
@@ -35,20 +35,25 @@ $(function () {
         }
       })
     }
-    
+    $('#inputSearch').val('')
   })
+
+
 
   // ==========页码区域==========
   var id = null
   var idMax = null
   var idMin = null
   var pageNum = null
-  var totalPages = Math.ceil(id / 20)  //总页数
-
+  var totalPagesNum = Math.ceil($('tbody>tr').length / 20)  //总页数
+  for(var i=totalPagesNum; i>=1; i--) {
+    $('<li><a href="#" class="pageClick">'+i+'</a></li>').insertAfter('#nodeLi')
+  }
+  // 页面一加载 设置页码1的背景色
+  $('#nodeLi').next().children().css({ "backgroundColor": "#999", "color": "#0d71c7" })
   // 页面一加载 若tr的id大于20 则隐藏
   $('tbody>tr').each(function () {
     id = Number($(this).attr('id'))
-    // console.log(id)
     if(id > 20) {
       $(this).hide()
     }

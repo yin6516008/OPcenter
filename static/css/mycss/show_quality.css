@@ -133,7 +133,8 @@ tr>th:nth-of-type(9) {
 }
 .tableArea {
   position: relative;
-  height: calc(100% - 110px);
+  margin-bottom: 30px;
+  min-height: 792px;
 }
 .tableArea>nav {
   position: absolute;
