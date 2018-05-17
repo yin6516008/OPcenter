@@ -93,10 +93,50 @@ form>.alert-danger {
 }
 #domainsUl>li>a {
   padding: 3px 6px;
+  text-align: center;
 }
 .pagination {
   margin: 0;
 }
 .badge-danger {
   background-color: transparent;
+}
+tr>th:nth-of-type(1) {
+  width: 5%;
+}
+tr>th:nth-of-type(2) {
+  width: 10%;
+}
+tr>th:nth-of-type(3),
+tr>th:nth-of-type(4) {
+  width: 17.5%;
+}
+tr>th:nth-of-type(5),
+tr>th:nth-of-type(6),
+tr>th:nth-of-type(7),
+tr>th:nth-of-type(8)
+tr>th:nth-of-type(9) {
+  width: 10%;
+}
+.pagination>li>a:focus,
+.pagination>li>a:hover,
+.pagination>li>span:focus,
+.pagination>li>span:hover {
+  z-index: 2;
+  color: #23527c;
+  background-color: #999;
+  border-color: #ddd;
+}
+.pagination>li:first-child>a,
+.pagination>li:last-child>a {
+  background-color: #eee;
+}
+.tableArea {
+  position: relative;
+  height: calc(100% - 110px);
+}
+.tableArea>nav {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
 }
