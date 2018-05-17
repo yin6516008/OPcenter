@@ -14,6 +14,8 @@ class DomainName(models.Model):
     url = models.CharField(max_length=60,unique=True)
     project_name = models.ForeignKey('Project',to_field='id',null=True)
     status = models.ForeignKey('Event_Type',to_field='id',null=True,default=1)
+    cert_valid_date = models.DateField(null=True,default=None)
+    cert_valid_days = models.CharField(null=True,max_length=20,default=None)
     check_id = models.IntegerField(default=0)
     warning = models.IntegerField(default=0)
     def __str__(self):
