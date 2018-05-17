@@ -66,6 +66,7 @@ def normal_domain(request):
     if request.method == 'GET':
         return HttpResponse('连接拒绝')
 
+
 def fault_domain(request):
     if request.method == 'POST':
 
