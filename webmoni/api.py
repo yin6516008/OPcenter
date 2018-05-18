@@ -58,7 +58,7 @@ def normal_domain(request):
         normalData = json.loads(request.POST.get('normalData'))
         print(normalData['data'])
         client_ip = request.META['REMOTE_ADDR']
-        if API_verify(normalData['node'],client_ip):
+        if API_verify(normalData.get('node'),client_ip):
             MonitorData.objects.create(**normalData['data'])
             return HttpResponse('OK')
         else:
@@ -73,10 +73,23 @@ def fault_domain(request):
         faultData = json.loads(request.POST.get('faultData'))
         print(faultData['data'])
         client_ip = request.META['REMOTE_ADDR']
-        if API_verify(faultData['node'],client_ip):
+        if API_verify(faultData.get('node'),client_ip):
             MonitorData.objects.create(**faultData['data'])
             DomainName.objects.filter(id=faultData['url_id']).update(**faultData['domain'])
             Event_Log.objects.create(**faultData['event_log'])
+            return HttpResponse('OK')
+        else:
+            return HttpResponse('ERROR')
+    if request.method == 'GET':
+        return HttpResponse('连接拒绝')
+
+def cert_update(request):
+    if request.method == 'POST':
+        cert_info = json.loads(request.POST.get('cert_info'))
+        print(cert_info['data'])
+        client_ip = request.META['REMOTE_ADDR']
+        if API_verify(cert_info.get('node'),client_ip):
+            DomainName.objects.filter(id=cert_info['url_id']).update(**cert_info['data'])
             return HttpResponse('OK')
         else:
             return HttpResponse('ERROR')

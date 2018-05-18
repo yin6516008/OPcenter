@@ -17,7 +17,7 @@
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-domains" id="domainsUl">
                                   {% for row in data.project_all %}
-                                  <li><a href="/webmoni/tables/p/{{ row.id }}/">{{ row.name }}</a></li>
+                                  <li><a href="/webmoni/tables/p/{{ row.id }}/" name="{{ row.name }}">{{ row.name }}</a></li>
                                   {% endfor %}
                                 </ul>
                             </div>
@@ -33,8 +33,8 @@
                           <span class="badge badge-danger pull-right">{{ data.Not_check_number }}</span>
                         </div>
                         <div class="filterBtn">
-                          <button type="button" class="btn btn-outline btn-info" data-toggle="modal" data-target="#myModal"><a href="/webmoni/tables/">全部域名</a></button>
-                          <span class="badge badge-danger pull-right">{{ data.Not_check_number }}</span>
+                          <button type="button" class="btn btn-outline btn-info" data-toggle="modal" data-target="#myModal"><a href="/webmoni/tables/lt_30/">证书即将过期</a></button>
+                          <span class="badge badge-danger pull-right">{{ data.lt_30 }}</span>
                         </div>
                     </div>  
                     <div class="pull-right">
@@ -60,8 +60,7 @@
                                 <th>域名</th>
                                 <th>HTTP检测状态</th>
                                 <th>证书剩余天数</th>
-                                <th>证书状态</th>
-                                <th>证书更新时间</th>
+                                <th>证书到期时间</th>
                                 <th>是否检测</th>
                                 <th>是否告警</th>
                             </tr>
@@ -73,11 +72,18 @@
                                 <td>{{ row.project_name.name }}</td>
                                 <td><a href="/webmoni/areas-{{row.id}}/">{{ row.url }}</a></td>
                                 <td>{{ row.status.event_type }}</td>
-                                <td>空</td>
-                                <td>空</td>
-                                <td>空</td>
-                                <td>{{ row.check_id }}</td>
-                                <td>{{ row.warning }}</td>
+                                <td>{{ row.cert_valid_days }}</td>
+                                <td>{{ row.cert_valid_date }}</td>
+                                {% if row.check_id == 0  %}
+                                <td>是</td>
+                                {% else  %}
+                                <td>否</td>
+                                {% endif %}
+                                {% if row.warning == 0  %}
+                                <td>是</td>
+                                {% else %}
+                                <td>否</td>
+                                {% endif %}
                             </tr>
                         {% endfor %}
                         </tbody>

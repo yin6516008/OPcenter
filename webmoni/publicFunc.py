@@ -96,6 +96,8 @@ def get_index_pie():
 
 # webmoni APP的API验证方法,通过验证客户端IP,实现只有节点机器才能调用API
 def API_verify(node_id,client_ip):
+    if client_ip == '127.0.0.1':
+        return True
     if node_id is None:
         return False
     node_obj = Node.objects.filter(id=node_id).first()

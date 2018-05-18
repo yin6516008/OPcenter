@@ -15,8 +15,10 @@ urlpatterns = [
     url(r'^api/event_type/$', api.event_type),
     url(r'^api/normal_domain/$', api.normal_domain),
     url(r'^api/fault_domain/$', api.fault_domain),
+    url(r'^api/cert_update/$', api.cert_update),
     url(r'^tables/$', views.tables),
     url(r'^tables/fault/$', views.tables_fault),
     url(r'^tables/notcheck/$', views.tables_notcheck),
+    url(r'^tables/lt_30/$', views.tables_lt_30),
     url(r'^tables/p/(\d+)/$', views.tables_project)
 ]
