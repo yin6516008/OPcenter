@@ -24,6 +24,9 @@
   padding: 6px 3px;
   width: 94px;
 }
+.filterBtn:nth-of-type(3)>button {
+  width: 116px;
+}
 .filterBtn>button>a {
   display: block;
   color: #fff;

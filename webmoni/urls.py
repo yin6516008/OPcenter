@@ -20,5 +20,7 @@ urlpatterns = [
     url(r'^tables/fault/$', views.tables_fault),
     url(r'^tables/notcheck/$', views.tables_notcheck),
     url(r'^tables/lt_30/$', views.tables_lt_30),
+    url(r'^tables/search/$', views.tables_search),
+    url(r'^tables/search-(\d+)/$', views.tables_search),
     url(r'^tables/p/(\d+)/$', views.tables_project)
 ]
