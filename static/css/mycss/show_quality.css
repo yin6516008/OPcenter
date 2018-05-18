@@ -80,12 +80,12 @@
   left: 0;
 }
 /* 搜索确定按钮 */
-form>.confirm {
+#btn_confirm {
   position: absolute;
   right: 0;
   top: 0;
 }
-form>.alert-danger {
+.alert.alert-danger {
   position: absolute;
   top: 40px;
   width: 260px;
