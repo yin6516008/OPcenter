@@ -233,16 +233,21 @@ def tables_search(request,url_id=None):
 
 def nodes(request):
     if request.method == 'GET':
-        project_all = Project.objects.all()
-        # domainall = DomainName.objects.all()
-        # fault_number = DomainName.objects.filter(~Q(status_id=0) & Q(check_id=0)).count()
-        # Not_check_number = DomainName.objects.filter(check_id=1).count()
-        # lt_30 = DomainName.objects.filter(cert_valid_days__lt=30).count()
-        # data = {
-        #     'project_all':project_all,
-        #     'fault_number':fault_number,
-        #     'domainall':domainall,
-        #     'Not_check_number':Not_check_number,
-        #     'lt_30':lt_30
-        # }
-    return render(request,'node_management.html')
+        node_all = Node.objects.all()
+
+    return render(request,'node_management.html',{'node_all':node_all})
+
+
+def nodes_create(request):
+    if request.method == "POST":
+        node_name = request.POST.get('node_name')
+        node_ip = request.POST.get('node_ip')
+        node_description = request.POST.get('node_description')
+        Node.objects.create(node=node_name,ip=node_ip,description=node_description)
+        return redirect('/webmoni/nodes/')
+
+def nodes_delete(request):
+    if request.method == "POST":
+        node_id = request.POST.get('del_node')
+        Node.objects.filter(id=node_id).delete()
+        return redirect('/webmoni/nodes/')

@@ -4,6 +4,7 @@ from django.db import models
 class Node(models.Model):
     node = models.CharField(max_length=20,unique=True)
     ip = models.CharField(max_length=20,null=True)
+    description = models.CharField(max_length=4096,null=True)
 
 class Project(models.Model):
     name = models.CharField(max_length=20,unique=True,null=True)

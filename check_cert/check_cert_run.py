@@ -17,8 +17,6 @@ os.environ['DJANGO_SETTINGS_MODULE'] ='OPcenter.settings'
 django.setup()
 from webmoni.models import *
 
-
-
 # 记录日志
 def write_log(e):
     # 异常出现时间
@@ -52,16 +50,16 @@ def getmyssl(domain_obj):
     # 如果CA_info_doc为空,证明获取证书信息失败
     if "data" in CA_info_d:
         certs = CA_info_d['data']["status"]["certs"]
-        certs["rsas"][0].get("leaf_cert_info")
         if certs["rsas"][0].get("leaf_cert_info"):
             valid_d = certs["rsas"][0].get("leaf_cert_info")
+        elif certs["eccs"][0].get("leaf_cert_info"):
+            valid_d = certs["rsas"][0].get("leaf_cert_info")
         else:
-            valid_d = certs["eccs"][0].get("leaf_cert_info")
+            return False
         endValid_s = valid_d["valid_to"].split("T")[0]
         endValid_l = endValid_s.split("-")
         endValid = datetime.datetime(int(endValid_l[0]), int(endValid_l[1]), int(endValid_l[2]))
         valid = endValid - datetime.datetime.today()
-
         return [endValid_s,valid.days]
     else:
         return False
@@ -106,7 +104,7 @@ def get_cert(domain_obj):
 def sendMail(content,email):
     now_time = time.strftime("%Y-%m-%d  %H:%M:%S", time.localtime())
     try:
-        result = subprocess.getstatusoutput("echo '%s' | mail -s '%s站点:%s' %s" % (content, NODE,str(now_time),email))
+        subprocess.getstatusoutput("echo '%s' | mail -s '%s站点:%s' %s" % (content, NODE,str(now_time),email))
     except Exception as e:
         write_log(e)
         return False
@@ -134,5 +132,3 @@ if __name__ == '__main__':
         sendMail(content='节点%s：进程池异常\n except:%s' % (NODE, e,), email='492960429@qq.com')
         write_log(e)
         exit()
-
-
