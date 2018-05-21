@@ -5,6 +5,10 @@ $(function () {
   var idMin = null
   var pageNum = null
   var totalPagesNum = Math.ceil($('tbody>tr').length / 20)  //总页数
+  // 若总页数等于1 隐藏页码区域
+  if(totalPagesNum === 1) {
+    $('.tableArea>nav').hide()
+  }
   for(var i=totalPagesNum; i>=1; i--) {
     $('<li><a href="#" class="pageClick">'+i+'</a></li>').insertAfter('#nodeLi')
   }

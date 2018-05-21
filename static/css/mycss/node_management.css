@@ -1,0 +1,82 @@
+/* 左侧边栏公共部分 */
+#side-menu>li:nth-of-type(2)>ul>li:nth-of-type(1)>a {
+  color: #a7b1c2;
+}
+#side-menu>li:nth-of-type(2)>ul>li:nth-of-type(3)>a {
+  color: #fff;
+}
+
+/* 新增节点按钮 */
+.ibox-title {
+  padding: 7px 20px;
+  margin: 10px 0;
+  height: 52px;
+}
+.ibox-title .btn-primary {
+  background-color: #1ab394;
+}
+.ibox-title .btn-primary a {
+  color: #fff;
+}
+.ibox-title .btn-primary a:hover {
+  opacity: .8
+}
+/* 下拉选项框 */
+.btn.dropdown-toggle {
+  margin: 0;
+}
+.dropdown-menu {
+  min-width: 66px;
+}
+.dropdown-menu>li>a {
+  margin: 0;
+}
+/* 表格部分 */
+.tableArea {
+  padding: 20px;
+}
+/* 新增节点模态框 */
+.modal-title {
+  text-align: center;
+}
+.modal-body .input-group {
+  margin-bottom: 10px;
+}
+#addNode .modal-body>.input-group>textarea {
+  margin: 0;
+  height: 110px;
+  width: 540px;
+  padding: 10px;
+  resize: none;
+}
+.input-group input:nth-of-type(1) {
+  display: inline-block;
+  width: 138px;
+}
+.input-group input:nth-of-type(2) {
+  display: inline-block;
+  width: 400px;
+}
+/* 删除模态框 */
+#delNode>div {
+  margin-top: 230px;
+}
+#delNode>div>.modal-content {
+  width: 280px;
+  margin-left: 165px;
+}
+#delNode .modal-content .modal-footer {
+  text-align: center;
+}
+#delNode .modal-footer button:nth-of-type(2) {
+  margin-left: 45px;
+}
+
+/* 编辑模态框 */
+#editNode .modal-body>.input-group>textarea {
+  margin: 0;
+  height: 110px;
+  width: 540px;
+  padding: 10px;
+  resize: none;
+}

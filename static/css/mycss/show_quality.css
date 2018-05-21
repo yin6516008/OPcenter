@@ -1,3 +1,10 @@
+#side-menu>li:nth-of-type(2)>ul>li:nth-of-type(1)>a {
+  color: #a7b1c2;
+}
+#side-menu>li:nth-of-type(2)>ul>li:nth-of-type(2)>a {
+  color: #fff;
+}
+
 .ibox-title {
   position: relative;
 }
@@ -144,3 +151,9 @@ tr>th:nth-of-type(9) {
   bottom: 10px;
   right: 20px;
 }
+/* #side-menu>li:nth-of-type(2)>ul>li>a {
+
+}
+#side-menu>li:nth-of-type(2)>ul>li>a {
+  color: #fff;
+} */

@@ -230,3 +230,19 @@ def tables_search(request,url_id=None):
                 'lt_30': lt_30
             }
         return render(request, 'domain_table.html', {'data': data})
+
+def nodes(request):
+    if request.method == 'GET':
+        project_all = Project.objects.all()
+        # domainall = DomainName.objects.all()
+        # fault_number = DomainName.objects.filter(~Q(status_id=0) & Q(check_id=0)).count()
+        # Not_check_number = DomainName.objects.filter(check_id=1).count()
+        # lt_30 = DomainName.objects.filter(cert_valid_days__lt=30).count()
+        # data = {
+        #     'project_all':project_all,
+        #     'fault_number':fault_number,
+        #     'domainall':domainall,
+        #     'Not_check_number':Not_check_number,
+        #     'lt_30':lt_30
+        # }
+    return render(request,'node_management.html')

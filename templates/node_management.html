@@ -1,0 +1,183 @@
+{% extends 'master.html' %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/css/mycss/index.css">
+    <link rel="stylesheet" href="/static/css/mycss/node_management.css">
+{% endblock %}
+
+{% block content %}
+        <!--右侧部分开始-->
+            <div class="row J_mainContent animated fadeInRight" id="content-main">
+              <div class="ibox-title">
+                <div class="pull-left btns">
+                    <button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="#addNode"><a href="#">新增节点</a></button>
+                </div>
+            </div>
+                <!-- 表格部分 -->
+                <div class="tableArea">
+                    <table class="table table-striped table-bordered col-xs-12">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>项目</th>
+                                <th>域名</th>
+                                <th>HTTP检测状态</th>
+                                <th>证书剩余天数</th>
+                                <th>证书到期时间</th>
+                                <th>是否检测</th>
+                                <th>是否告警</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                              <td>01</td>
+                              <td>666</td>
+                              <td><a href="#">www.baidu.com</a></td>
+                              <td>OK</td>
+                              <td>365</td>
+                              <td>2019-05-21</td>
+                              <td>是</td>
+                              <td>是</td>
+                              <td>
+                                <div class="btn-group">
+                                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    操作 <span class="caret"></span>
+                                  </button>
+                                  <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#" data-toggle="modal" data-target="#delNode">删除</a></li>
+                                    <li><a href="#" data-toggle="modal" data-target="#editNode">编辑</a></li>
+                                  </ul>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>01</td>
+                              <td>666</td>
+                              <td><a href="#">www.baidu.com</a></td>
+                              <td>OK</td>
+                              <td>365</td>
+                              <td>2019-05-21</td>
+                              <td>是</td>
+                              <td>是</td>
+                              <td>
+                                <div class="btn-group">
+                                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    操作 <span class="caret"></span>
+                                  </button>
+                                  <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#" data-toggle="modal" data-target="#delNode">删除</a></li>
+                                    <li><a href="#" data-toggle="modal" data-target="#editNode">编辑</a></li>
+                                  </ul>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>01</td>
+                              <td>666</td>
+                              <td><a href="#">www.baidu.com</a></td>
+                              <td>OK</td>
+                              <td>365</td>
+                              <td>2019-05-21</td>
+                              <td>是</td>
+                              <td>是</td>
+                              <td>
+                                <div class="btn-group">
+                                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    操作 <span class="caret"></span>
+                                  </button>
+                                  <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#" data-toggle="modal" data-target="#delNode">删除</a></li>
+                                    <li><a href="#" data-toggle="modal" data-target="#editNode">编辑</a></li>
+                                  </ul>
+                                </div>
+                              </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        <!-- 新增节点模态框 -->
+        <div class="modal fade" id="addNode" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="close">
+                  &times;
+                </button>
+                <h4 class="modal-title">
+                  新增节点
+                </h4>
+              </div>
+              <form action="#" method="post">
+                <div class="modal-body">
+                  <div class="input-group">
+                      <input type="text" class="form-control" id="nodeNames" placeholder="请输入节点名称">
+                      <input type="text" class="form-control" id="nodeDetail" placeholder="请输入节点详情">
+                  </div>
+                  <div class="input-group">
+                      <textarea name="" class="form-control description" id="addNodeDes" cols="30" rows="10" placeholder="这里输入节点描述"></textarea>
+                  </div>
+              </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal" id="addNodeClose">关闭</button>
+                  <button type="submit" class="btn btn-primary" id="addNodeSave">保存</button>
+                </div>
+              </form>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal -->
+        </div>
+        <!-- 删除按钮的模态框 -->
+        <div class="modal fade" id="delNode" tabindex="-1" role="dialog" aria-labelledby="delModalLabeldel" aria-hidden="true">
+          <div class="modal-dialog delbtn">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                      <h4 class="modal-title" id="delModalLabel">确认删除？</h4>
+                  </div>
+                  <form action="#" method="post">
+                      <div class="modal-footer">
+                          <input type="hidden" name="del_id" value="">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                          <button type="submit" class="btn btn-primary">确认</button>
+                      </div>
+                  </form>
+              </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div>
+        <!-- 编辑模态框 -->
+        <div class="modal fade" id="editNode" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                  &times;
+                </button>
+                <h4 class="modal-title">
+                  编辑节点
+                </h4>
+              </div>
+              <form action="#" method="post">
+                <div class="modal-body">
+                  <div class="input-group">
+                    <input type="text" class="form-control" value="传入编辑的节点名称">
+                    <input type="text" class="form-control" value="传入编辑的节点详情">
+                  </div>
+                  <div class="input-group">
+                    <textarea name="" class="form-control node_edit_description" cols="30" rows="10" placeholder="编辑节点描述"></textarea>
+                  </div>
+              </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                  <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+              </form>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal -->
+        </div>
+{% endblock %}
+
+{% block js %}
+    <script src="/static/js/node_management.js"></script>
+{% endblock %}
