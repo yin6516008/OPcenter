@@ -27,17 +27,17 @@ $(function () {
     $('#delModalLabel').text('确认删除 "'+ nodePlace + '" 节点吗?')
   })
 
-  // 编辑按钮
-  $('[data-target="#editNode"]').click(function () {
-    var node = $(this).parent().parent().parent()
-    .parent().parent()
-    var nodePlace = node.find('td:nth-of-type(2)').text()
-    var nodeIP = node.find('td:nth-of-type(3)').text()
-    var nodeDesc = node.find('td:nth-of-type(4)').text()
-    console.log(nodePlace, nodeIP)
-    $('#place').val(nodePlace)
-    $('#ipAddress').val(nodeIP)
-    $('#editDesc').val(nodeDesc)
-  })
+  // // 编辑按钮
+  // $('[data-target="#editNode"]').click(function () {
+  //   var node = $(this).parent().parent().parent()
+  //   .parent().parent()
+  //   var nodePlace = node.find('td:nth-of-type(2)').text()
+  //   var nodeIP = node.find('td:nth-of-type(3)').text()
+  //   var nodeDesc = node.find('td:nth-of-type(4)').text()
+  //   console.log(nodePlace, nodeIP)
+  //   $('#place').val(nodePlace)
+  //   $('#ipAddress').val(nodeIP)
+  //   $('#editDesc').val(nodeDesc)
+  // })
 
 })

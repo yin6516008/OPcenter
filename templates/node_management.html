@@ -39,7 +39,6 @@
                                   </button>
                                   <ul class="dropdown-menu" role="menu">
                                     <li><a href="#" data-toggle="modal" data-target="#delNode">删除</a></li>
-                                    <li><a href="#" data-toggle="modal" data-target="#editNode">编辑</a></li>
                                   </ul>
                                 </div>
                               </td>
@@ -99,35 +98,6 @@
           </div><!-- /.modal-dialog -->
         </div>
         <!-- 编辑模态框 -->
-        <div class="modal fade" id="editNode" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                  &times;
-                </button>
-                <h4 class="modal-title">
-                  编辑节点
-                </h4>
-              </div>
-              <form action="#" method="post">
-                <div class="modal-body">
-                  <div class="input-group">
-                    <input type="text" class="form-control" id="place" value="">
-                    <input type="text" class="form-control" id="ipAddress" value="">
-                  </div>
-                  <div class="input-group">
-                    <textarea name="" class="form-control node_edit_description" cols="30" rows="10" placeholder="编辑节点描述" id="editDesc"></textarea>
-                  </div>
-              </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                  <button type="submit" class="btn btn-primary">保存</button>
-                </div>
-              </form>
-            </div><!-- /.modal-content -->
-          </div><!-- /.modal -->
-        </div>
 {% endblock %}
 
 {% block js %}
