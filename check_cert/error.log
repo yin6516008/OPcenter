@@ -1,0 +1,347 @@
+[2018-05-18 13:41:06] 正常域名提交时,API认证失败
+[2018-05-18 13:41:06] 正常域名提交时,API认证失败
+[2018-05-18 13:41:06] 正常域名提交时,API认证失败
+[2018-05-18 13:41:06] 正常域名提交时,API认证失败
+[2018-05-18 13:41:07] 正常域名提交时,API认证失败
+[2018-05-18 13:41:07] 正常域名提交时,API认证失败
+[2018-05-18 13:41:08] 正常域名提交时,API认证失败
+[2018-05-18 13:41:08] 正常域名提交时,API认证失败
+[2018-05-18 13:41:08] 正常域名提交时,API认证失败
+[2018-05-18 13:41:10] 正常域名提交时,API认证失败
+[2018-05-18 13:41:10] 正常域名提交时,API认证失败
+[2018-05-18 13:42:55] 正常域名提交时,API认证失败
+[2018-05-18 13:42:55] 正常域名提交时,API认证失败
+[2018-05-18 13:42:55] 正常域名提交时,API认证失败
+[2018-05-18 13:42:56] 正常域名提交时,API认证失败
+[2018-05-18 13:42:56] 正常域名提交时,API认证失败
+[2018-05-18 13:42:56] 正常域名提交时,API认证失败
+[2018-05-18 13:42:56] 正常域名提交时,API认证失败
+[2018-05-18 13:42:57] 正常域名提交时,API认证失败
+[2018-05-18 13:45:11] 正常域名提交时,API认证失败
+[2018-05-18 13:45:11] 正常域名提交时,API认证失败
+[2018-05-18 13:45:11] 正常域名提交时,API认证失败
+[2018-05-18 13:45:11] HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /webmoni/api/cert_update/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x111077cf8>: Failed to establish a new connection: [Errno 61] Connection refused',))
+[2018-05-18 13:45:11] HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /webmoni/api/cert_update/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x111056518>: Failed to establish a new connection: [Errno 61] Connection refused',))
+[2018-05-18 13:45:11] HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /webmoni/api/cert_update/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x111051e80>: Failed to establish a new connection: [Errno 61] Connection refused',))
+[2018-05-18 13:45:12] 正常域名提交时,API认证失败
+[2018-05-18 13:45:12] 正常域名提交时,API认证失败
+[2018-05-18 13:45:12] 正常域名提交时,API认证失败
+[2018-05-18 13:45:14] 正常域名提交时,API认证失败
+[2018-05-18 13:45:15] 正常域名提交时,API认证失败
+[2018-05-18 13:48:39] 正常域名提交时,API认证失败
+[2018-05-18 13:48:39] 正常域名提交时,API认证失败
+[2018-05-18 13:48:39] 正常域名提交时,API认证失败
+[2018-05-18 13:48:40] 正常域名提交时,API认证失败
+[2018-05-18 13:48:40] 正常域名提交时,API认证失败
+[2018-05-18 13:48:40] 正常域名提交时,API认证失败
+[2018-05-18 13:48:40] 正常域名提交时,API认证失败
+[2018-05-18 13:48:40] 正常域名提交时,API认证失败
+[2018-05-18 13:48:41] 正常域名提交时,API认证失败
+[2018-05-18 13:48:41] itx5588.net myssl Json DecodeError
+[2018-05-18 13:48:45] 正常域名提交时,API认证失败
+[2018-05-18 13:50:15] 正常域名提交时,API认证失败
+[2018-05-18 13:50:15] 正常域名提交时,API认证失败
+[2018-05-18 13:50:15] 正常域名提交时,API认证失败
+[2018-05-18 13:50:15] 正常域名提交时,API认证失败
+[2018-05-18 13:50:15] 正常域名提交时,API认证失败
+[2018-05-18 13:50:15] 正常域名提交时,API认证失败
+[2018-05-18 13:50:15] 正常域名提交时,API认证失败
+[2018-05-18 13:50:16] 正常域名提交时,API认证失败
+[2018-05-18 13:50:16] 正常域名提交时,API认证失败
+[2018-05-18 13:50:19] 正常域名提交时,API认证失败
+[2018-05-18 13:51:39] 正常域名提交时,API认证失败
+[2018-05-18 13:51:39] 正常域名提交时,API认证失败
+[2018-05-18 13:51:39] 正常域名提交时,API认证失败
+[2018-05-18 13:51:40] 正常域名提交时,API认证失败
+[2018-05-18 13:51:40] 正常域名提交时,API认证失败
+[2018-05-18 13:51:40] 正常域名提交时,API认证失败
+[2018-05-18 13:51:41] 正常域名提交时,API认证失败
+[2018-05-18 13:51:41] 正常域名提交时,API认证失败
+[2018-05-18 13:52:21] ag.tw22.net myssl IndexError
+[2018-05-18 13:52:22] sun.tw22.net myssl IndexError
+[2018-05-18 13:52:25] bng.tw22.net myssl IndexError
+[2018-05-18 13:52:25] itx5588.net myssl IndexError
+[2018-05-18 13:52:53] itx5588.com myssl 连接超时
+[2018-05-18 13:52:58] www.bs5588.net myssl IndexError
+[2018-05-18 13:53:01] www.bs588.net myssl IndexError
+[2018-05-18 13:53:02] wj222.net myssl IndexError
+[2018-05-18 13:53:15] db888.net myssl IndexError
+[2018-05-18 13:53:15] jc666.net myssl IndexError
+[2018-05-18 13:53:21] tz33.net myssl IndexError
+[2018-05-18 13:53:22] id.wb222.net myssl IndexError
+[2018-05-18 13:53:28] 5588.wb222.net myssl IndexError
+[2018-05-18 13:53:28] 777.wb222.net myssl IndexError
+[2018-05-18 13:53:37] 2cdn.jukf.net myssl 连接超时
+[2018-05-18 13:53:39] pic2.jukf.net myssl 连接超时
+[2018-05-18 14:29:00] ag.tw22.net myssl IndexError
+[2018-05-18 14:29:00] bng.tw22.net myssl IndexError
+[2018-05-18 14:29:01] sun.tw22.net myssl IndexError
+[2018-05-18 14:29:04] itx5588.net myssl IndexError
+[2018-05-18 14:29:30] www.bs5588.net myssl IndexError
+[2018-05-18 14:29:35] www.bs588.net myssl IndexError
+[2018-05-18 14:29:38] wj222.net myssl IndexError
+[2018-05-18 14:29:55] jc666.net myssl IndexError
+[2018-05-18 14:29:55] db888.net myssl IndexError
+[2018-05-18 14:29:57] tz33.net myssl IndexError
+[2018-05-18 14:30:01] id.wb222.net myssl IndexError
+[2018-05-18 14:30:09] 777.wb222.net myssl IndexError
+[2018-05-18 14:30:09] 5588.wb222.net myssl IndexError
+[2018-05-21 11:44:03] 
+[2018-05-21 11:49:48] bng.tw22.net myssl IndexError
+[2018-05-21 11:49:51] sun.tw22.net myssl IndexError
+[2018-05-21 11:49:52] ag.tw22.net myssl IndexError
+[2018-05-21 11:49:53] itx5588.net myssl IndexError
+[2018-05-21 11:50:26] iju888.net myssl 连接超时
+[2018-05-21 11:50:28] www.bs5588.net myssl IndexError
+[2018-05-21 11:50:30] www.bs588.net myssl IndexError
+[2018-05-21 11:50:33] wj222.net myssl IndexError
+[2018-05-21 11:50:56] jc666.net myssl IndexError
+[2018-05-21 11:50:56] db888.net myssl IndexError
+[2018-05-21 11:50:57] tz33.net myssl IndexError
+[2018-05-21 11:51:02] id.wb222.net myssl IndexError
+[2018-05-21 11:51:02] 777.wb222.net myssl IndexError
+[2018-05-21 11:51:04] 5588.wb222.net myssl IndexError
+[2018-05-21 12:09:10] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:09:10] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:09:10] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:09:10] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:09:10] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:09:11] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:09:11] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:09:12] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:09:13] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:09:14] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:09:14] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:09:16] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:36:41] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:36:41] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:36:41] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:36:41] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:36:42] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:36:43] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:36:45] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:36:45] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:36:45] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:36:46] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:36:46] _ssl.c:703: The handshake operation timed out
+[2018-05-21 12:36:47] timed out
+[2018-05-21 12:36:50] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:36:50] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:36:50] list index out of range
+[2018-05-21 12:36:50] list index out of range
+[2018-05-21 12:36:53] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:36:53] list index out of range
+[2018-05-21 12:36:53] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:36:53] list index out of range
+[2018-05-21 12:36:54] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:36:55] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:36:56] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:36:58] timed out
+[2018-05-21 12:37:00] timed out
+[2018-05-21 12:37:00] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:00] hostname 'itx66.net' doesn't match either of 'www.speedlottery.com', 'speedlottery.com'
+[2018-05-21 12:37:01] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:03] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:04] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:04] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:04] timed out
+[2018-05-21 12:37:05] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:10] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:10] [Errno 61] Connection refused
+[2018-05-21 12:37:10] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:13] _ssl.c:703: The handshake operation timed out
+[2018-05-21 12:37:13] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:14] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:15] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:15] timed out
+[2018-05-21 12:37:16] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:19] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:20] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:21] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:21] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:21] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:25] timed out
+[2018-05-21 12:37:26] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:27] list index out of range
+[2018-05-21 12:37:27] timed out
+[2018-05-21 12:37:28] list index out of range
+[2018-05-21 12:37:28] _ssl.c:703: The handshake operation timed out
+[2018-05-21 12:37:29] timed out
+[2018-05-21 12:37:32] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:32] _ssl.c:703: The handshake operation timed out
+[2018-05-21 12:37:32] list index out of range
+[2018-05-21 12:37:32] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:33] _ssl.c:703: The handshake operation timed out
+[2018-05-21 12:37:36] _ssl.c:703: The handshake operation timed out
+[2018-05-21 12:37:37] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:39] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:40] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:41] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:41] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:42] _ssl.c:703: The handshake operation timed out
+[2018-05-21 12:37:45] timed out
+[2018-05-21 12:37:47] list index out of range
+[2018-05-21 12:37:47] list index out of range
+[2018-05-21 12:37:47] timed out
+[2018-05-21 12:37:48] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:50] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:51] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:52] timed out
+[2018-05-21 12:37:52] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:53] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 12:37:53] list index out of range
+[2018-05-21 12:37:55] timed out
+[2018-05-21 12:37:55] timed out
+[2018-05-21 12:37:56] list index out of range
+[2018-05-21 12:38:01] list index out of range
+[2018-05-21 12:38:02] list index out of range
+[2018-05-21 13:20:17] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:17] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:17] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:18] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:18] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:19] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:19] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:20] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:20] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:21] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:22] _ssl.c:703: The handshake operation timed out
+[2018-05-21 13:20:23] _ssl.c:703: The handshake operation timed out
+[2018-05-21 13:20:25] list index out of range
+[2018-05-21 13:20:25] list index out of range
+[2018-05-21 13:20:26] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:26] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:26] list index out of range
+[2018-05-21 13:20:27] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:29] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:29] list index out of range
+[2018-05-21 13:20:30] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:31] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:31] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:32] [Errno 61] Connection refused
+[2018-05-21 13:20:33] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:34] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:34] timed out
+[2018-05-21 13:20:34] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:34] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:34] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:35] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:36] timed out
+[2018-05-21 13:20:39] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:40] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:42] _ssl.c:703: The handshake operation timed out
+[2018-05-21 13:20:42] _ssl.c:703: The handshake operation timed out
+[2018-05-21 13:20:43] [Errno 61] Connection refused
+[2018-05-21 13:20:43] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:44] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:45] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:20:46] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:36] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:36] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:36] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:36] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:36] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:37] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:38] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:38] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:40] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:41] _ssl.c:703: The handshake operation timed out
+[2018-05-21 13:23:41] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:41] _ssl.c:703: The handshake operation timed out
+[2018-05-21 13:23:44] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:45] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:47] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:48] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:49] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:49] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:50] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:50] [Errno 61] Connection refused
+[2018-05-21 13:23:51] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:51] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:51] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:51] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:52] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:52] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:52] timed out
+[2018-05-21 13:23:54] timed out
+[2018-05-21 13:23:55] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:55] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:57] [Errno 61] Connection refused
+[2018-05-21 13:23:58] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:58] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:58] _ssl.c:703: The handshake operation timed out
+[2018-05-21 13:23:59] _ssl.c:703: The handshake operation timed out
+[2018-05-21 13:23:59] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:23:59] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:24:00] _ssl.c:703: The handshake operation timed out
+[2018-05-21 13:24:02] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:24:06] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:24:06] _ssl.c:703: The handshake operation timed out
+[2018-05-21 13:24:06] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:24:07] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:24:07] _ssl.c:703: The handshake operation timed out
+[2018-05-21 13:24:08] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:24:13] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:24:14] timed out
+[2018-05-21 13:43:10] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:10] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:10] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:10] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:11] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:12] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:13] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:13] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:13] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:14] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:14] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:14] jb22.net myssl Json DecodeError
+[2018-05-21 13:43:15] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:19] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:20] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:22] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:22] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:24] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:25] timed out
+[2018-05-21 13:43:26] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:26] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:26] hostname 'itx66.net' doesn't match either of 'www.speedlottery.com', 'speedlottery.com'
+[2018-05-21 13:43:28] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:28] timed out
+[2018-05-21 13:43:29] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:29] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:30] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:30] timed out
+[2018-05-21 13:43:32] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:32] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:33] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:34] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:34] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:35] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:36] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:37] timed out
+[2018-05-21 13:43:37] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:38] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:38] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:39] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:39] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:43] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:43] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:44] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:45] timed out
+[2018-05-21 13:43:47] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:47] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:48] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:50] [Errno 61] Connection refused
+[2018-05-21 13:43:51] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:53] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:53] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:54] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:56] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:57] timed out
+[2018-05-21 13:43:58] timed out
+[2018-05-21 13:43:58] timed out
+[2018-05-21 13:43:59] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:43:59] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:44:00] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:44:00] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
+[2018-05-21 13:44:01] [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:719)
