@@ -79,3 +79,14 @@ table,
 th {
   text-align: center;
 }
+
+/* 设置所有按钮的hover阴影效果 */
+.ibox-title button:hover {
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+  transform: translate3d(0, -1px, 0) !important;
+}
+
+/* 设置所有表格hover阴影效果 */
+table {
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2) !important;
+}

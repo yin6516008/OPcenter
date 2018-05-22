@@ -1,3 +1,4 @@
+/* 调整左侧边栏样式 */
 #side-menu>li:nth-of-type(2)>ul>li:nth-of-type(1)>a {
   color: #a7b1c2;
 }
