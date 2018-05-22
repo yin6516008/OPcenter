@@ -35,14 +35,14 @@
 
     <!-- echarts依赖项 -->
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+    <!-- <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-    <!-- <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script> -->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script> 
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script> -->
     <!-- 左边视图canvas -->
     <script type="text/javascript">
     var dom = document.getElementById("container-left");
@@ -154,8 +154,20 @@
       if (option && typeof option === "object") {
           myChart.setOption(option, true);
       }
+
+    myChart.on('click', function (param){  
+        var name=param.name;  
+        if(name=="不检测"){  
+            window.location.href="/webmoni/tables/notcheck/";  
+        }else if(name=="异常"){  
+            window.location.href="/webmoni/tables/fault/";  
+        }else if(name=="正常"){  
+            window.location.href="http://www.baidu.com";  
+        }else{  
+        window.location.href="http://www.baidu.com";  
+        }                      
+    });  
     </script>
-    <!-- 右边视图canvas-->
 
     </div>
 {% endblock %}
