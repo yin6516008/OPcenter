@@ -17,12 +17,21 @@
                         <th>域名</th>
                         <th>事件</th>
                         <th>节点</th>
-                        <th>时间</th>
+                        <th class="dropdown">
+                          <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                            时间
+                            <span class="caret"></span>
+                          </a>
+                          <ul class="dropdown-menu" aria-labelledby="drop2">
+                            <li><a href="/webmoni/log/7/">最近一周</a></li>
+                            <li><a href="/webmoni/log/30/">最近30天</a></li>
+                          </ul>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                 {% for row in log_all %}
-                    <tr>
+                    <tr id="{{ forloop.counter }}">
                       <td>{{ forloop.counter }}</td>
                       <td>{{ row.url }}</td>
                       <td>{{ row.event_type }}</td>

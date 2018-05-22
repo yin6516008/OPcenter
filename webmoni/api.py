@@ -54,7 +54,6 @@ def event_type(request):
 
 def normal_domain(request):
     if request.method == 'POST':
-
         normalData = json.loads(request.POST.get('normalData'))
         print(normalData['data'])
         client_ip = request.META['REMOTE_ADDR']

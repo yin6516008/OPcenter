@@ -265,7 +265,9 @@ def nodes_delete(request):
         return redirect('/webmoni/nodes/')
 
 @check_login
-def log(request):
+def log(request,day=1):
     if request.method == 'GET':
-        log_all = Event_Log.objects.all()[0:100]
+        today = datetime.datetime.now().replace(hour=0,minute=0, second=0)
+        stop_data = today - datetime.timedelta(days=int(day))
+        log_all = Event_Log.objects.filter(datetime__gt=stop_data)
         return render(request,'webmoni_log.html',{'log_all':log_all})
