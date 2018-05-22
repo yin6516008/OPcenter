@@ -1,0 +1,19 @@
+/* 调整左侧边栏样式 */
+#side-menu>li:nth-of-type(2)>ul>li:nth-of-type(1)>a {
+  color: #a7b1c2;
+}
+#side-menu>li:nth-of-type(2)>ul>li:nth-of-type(4)>a {
+  color: #fff;
+}
+/* 表样式 */
+.tableArea {
+  position: relative;
+  margin-bottom: 30px;
+  min-height: 792px;
+  padding: 20px;
+}
+.tableArea>nav {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+}

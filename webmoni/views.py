@@ -5,6 +5,8 @@ from webmoni.models import MonitorData
 from webmoni.models import DomainName
 from webmoni.models import Project
 from webmoni.models import Node
+from webmoni.models import Event_Log
+
 import datetime
 import json
 
@@ -254,4 +256,5 @@ def nodes_delete(request):
 
 def log(request):
     if request.method == 'GET':
-        return render(request,'webmoni_log.html')
+        log_all = Event_Log.objects.all()[0:100]
+        return render(request,'webmoni_log.html',{'log_all':log_all})
