@@ -4,5 +4,7 @@ from django.shortcuts import render
 
 
 def login(request):
-    print('login')
-    return render(request,'login.html')
+    if request.method == "GET":
+        return render(request,'login.html')
+    if request.method == "POST":
+        return render(request, 'login.html')
