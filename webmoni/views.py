@@ -251,3 +251,7 @@ def nodes_delete(request):
         node_id = request.POST.get('del_node')
         Node.objects.filter(id=node_id).delete()
         return redirect('/webmoni/nodes/')
+
+def log(request):
+    if request.method == 'GET':
+        return render(request,'webmoni_log.html')
