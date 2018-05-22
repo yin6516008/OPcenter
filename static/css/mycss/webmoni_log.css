@@ -14,6 +14,38 @@
 }
 .tableArea>nav {
   position: absolute;
-  bottom: 10px;
+  bottom: -20px;
   right: 20px;
+}
+tr>th:nth-of-type(1) {
+  width: 5%;
+}
+tr>th:nth-of-type(2) {
+  width: 10%;
+}
+tr>th:nth-of-type(3),
+tr>th:nth-of-type(4) {
+  width: 17.5%;
+}
+tr>th:nth-of-type(5),
+tr>th:nth-of-type(6),
+tr>th:nth-of-type(7),
+tr>th:nth-of-type(8)
+tr>th:nth-of-type(9) {
+  width: 10%;
+}
+/* 时间筛选按钮 */
+.tableArea .dropdown-toggle {
+  float: none;
+}
+/* 时间筛选选项ul */
+.dropdown>.dropdown-menu {
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+  min-width: 0;
+  box-shadow: 0 15px 30px rgba(0,0,0,.3)
+}
+.dropdown>a {
+  color: #676a6c;
 }

@@ -49,7 +49,8 @@ $(function () {
       pageNum++
     }
     // 获取到当前页展示的id 然后根据这个id往后加上20项显示
-    if(idMax > id) {
+    console.log(idMax,id)
+    if(idMax >= id) {
       return false
     }
     idMax += 20
@@ -104,4 +105,6 @@ $(function () {
       }
     })
   })
+
+
 })
