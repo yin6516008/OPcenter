@@ -16,6 +16,7 @@
                                 <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle ">选择域名 <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-domains" id="domainsUl">
+                                    <li><a href="/webmoni/tables/">全部域名</a></li>
                                   {% for row in data.project_all %}
                                   <li><a href="/webmoni/tables/p/{{ row.id }}/" name="{{ row.name }}">{{ row.name }}</a></li>
                                   {% endfor %}

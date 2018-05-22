@@ -7,6 +7,7 @@ from webmoni.models import Project
 from webmoni.models import Node
 from webmoni.models import Event_Log
 
+from genericFunc import check_login
 import datetime
 import json
 
@@ -16,7 +17,7 @@ from webmoni.publicFunc import get_areas_data
 
 # Create your views here
 
-
+@check_login
 def areas(request,url_id=None):
     """
     区域展示页面
@@ -36,7 +37,7 @@ def areas(request,url_id=None):
                                                  'graph_data':graph_data})
 
 
-
+@check_login
 def create(request):
     """
     新建域名函数
@@ -71,7 +72,7 @@ def create(request):
     return redirect('/webmoni/areas/')
 
 
-
+@check_login
 def delete(request):
     """
     删除域名函数
@@ -85,7 +86,7 @@ def delete(request):
 
 
 
-
+@check_login
 def update_graph(request):
     """
     更新曲线图
@@ -98,6 +99,7 @@ def update_graph(request):
         defaultDomainData, graph_data = get_areas_data(url_id)
         return HttpResponse(json.dumps(graph_data))
 
+@check_login
 def update_domain(request):
     if request.method == 'POST':
         domain_id = request.POST.get('domain')
@@ -108,7 +110,7 @@ def update_domain(request):
 
         return redirect('/webmoni/areas-' + domain_id + '/')
 
-
+@check_login
 def search(request):
     """
     搜索函数
@@ -124,7 +126,7 @@ def search(request):
         else:
             return HttpResponse(url_obj.id)
 
-
+@check_login
 def tables(request):
     if request.method == 'GET':
         project_all = Project.objects.all()
@@ -141,7 +143,7 @@ def tables(request):
         }
     return render(request,'domain_table.html',{'data':data})
 
-
+@check_login
 def tables_project(request,project_id):
     if request.method == 'GET':
         project_all = Project.objects.all()
@@ -159,6 +161,7 @@ def tables_project(request,project_id):
         }
     return render(request,'domain_table.html',{'data':data})
 
+@check_login
 def tables_fault(request):
     if request.method == 'GET':
         project_all = Project.objects.all()
@@ -175,6 +178,7 @@ def tables_fault(request):
         }
     return render(request,'domain_table.html',{'data':data})
 
+@check_login
 def tables_notcheck(request):
     if request.method == 'GET':
         project_all = Project.objects.all()
@@ -191,6 +195,7 @@ def tables_notcheck(request):
         }
     return render(request,'domain_table.html',{'data':data})
 
+@check_login
 def tables_lt_30(request):
     if request.method == 'GET':
         project_all = Project.objects.all()
@@ -207,6 +212,7 @@ def tables_lt_30(request):
         }
     return render(request,'domain_table.html',{'data':data})
 
+@check_login
 def tables_search(request,url_id=None):
     if request.method == 'POST':
         url = request.POST.get('url')
@@ -233,6 +239,8 @@ def tables_search(request,url_id=None):
             }
         return render(request, 'domain_table.html', {'data': data})
 
+
+@check_login
 def nodes(request):
     if request.method == 'GET':
         node_all = Node.objects.all()
@@ -240,6 +248,7 @@ def nodes(request):
     return render(request,'node_management.html',{'node_all':node_all})
 
 
+@check_login
 def nodes_create(request):
     if request.method == "POST":
         node_name = request.POST.get('node_name')
@@ -248,12 +257,14 @@ def nodes_create(request):
         Node.objects.create(node=node_name,ip=node_ip,description=node_description)
         return redirect('/webmoni/nodes/')
 
+@check_login
 def nodes_delete(request):
     if request.method == "POST":
         node_id = request.POST.get('del_node')
         Node.objects.filter(id=node_id).delete()
         return redirect('/webmoni/nodes/')
 
+@check_login
 def log(request):
     if request.method == 'GET':
         log_all = Event_Log.objects.all()[0:100]
