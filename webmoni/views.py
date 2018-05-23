@@ -148,7 +148,7 @@ def tables_project(request,project_id):
     if request.method == 'GET':
         project_all = Project.objects.all()
         domainall = DomainName.objects.filter(project_name=project_id)
-        fault_number = DomainName.objects.filter(~Q(status_id=0) & Q(check_id=0)).count()
+        fault_number = DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0)).count()
         Not_check_number = DomainName.objects.filter(check_id=1).count()
         lt_30 = DomainName.objects.filter(cert_valid_days__lt=30).count()
         data = {
@@ -165,8 +165,8 @@ def tables_project(request,project_id):
 def tables_fault(request):
     if request.method == 'GET':
         project_all = Project.objects.all()
-        domainall = DomainName.objects.filter(~Q(status_id=0) & Q(check_id=0))
-        fault_number = DomainName.objects.filter(~Q(status_id=0) & Q(check_id=0)).count()
+        domainall = DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0))
+        fault_number = DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0)).count()
         Not_check_number = DomainName.objects.filter(check_id=1).count()
         lt_30 = DomainName.objects.filter(cert_valid_days__lt=30).count()
         data = {
@@ -183,7 +183,7 @@ def tables_notcheck(request):
     if request.method == 'GET':
         project_all = Project.objects.all()
         domainall = DomainName.objects.filter(check_id=1)
-        fault_number = DomainName.objects.filter(~Q(status_id=0) & Q(check_id=0)).count()
+        fault_number = DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0)).count()
         Not_check_number = DomainName.objects.filter(check_id=1).count()
         lt_30 = DomainName.objects.filter(cert_valid_days__lt=30).count()
         data = {
@@ -200,7 +200,7 @@ def tables_lt_30(request):
     if request.method == 'GET':
         project_all = Project.objects.all()
         domainall = DomainName.objects.filter(cert_valid_days__lt=30)
-        fault_number = DomainName.objects.filter(~Q(status_id=0) & Q(check_id=0)).count()
+        fault_number = DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0)).count()
         Not_check_number = DomainName.objects.filter(check_id=1).count()
         lt_30 = DomainName.objects.filter(cert_valid_days__lt=30).count()
         data = {
@@ -227,7 +227,7 @@ def tables_search(request,url_id=None):
         else:
             project_all = Project.objects.all()
             domainall = DomainName.objects.filter(id=url_id)
-            fault_number = DomainName.objects.filter(~Q(status_id=0) & Q(check_id=0)).count()
+            fault_number = DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0)).count()
             Not_check_number = DomainName.objects.filter(check_id=1).count()
             lt_30 = DomainName.objects.filter(cert_valid_days__lt=30).count()
             data = {

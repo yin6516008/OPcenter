@@ -79,14 +79,7 @@
                         <tr>
                             <th>区域</th>
                             <th>响应码</th>
-                            <th>域名解析</th>
-                            <th>建立连接</th>
-                            <th>准备传输</th>
-                            <th>传输开始</th>
                             <th>总耗时</th>
-                            <th>数据包大小</th>
-                            <th>HTTP头部大小</th>
-                            <th>平均下载速度</th>
                             <th>更新时间</th>
 
                         </tr>
@@ -96,14 +89,7 @@
                         <tr value="{{ row.url.url }}" >
                             <td name="node" value="{{ row.node.node }}">{{ row.node.node }}</td>
                             <td>{{ row.http_code }}</td>
-                            <td>{{ row.namelookup_time }}ms</td>
-                            <td>{{ row.connect_time }}ms</td>
-                            <td>{{ row.pretransfer_time }}ms</td>
-                            <td>{{ row.starttransfer_time }}ms</td>
                             <td name="total_time" value="{{ row.total_time }}">{{ row.total_time }}ms</td>
-                            <td>{{ row.size_download }}byte</td>
-                            <td>{{ row.header_size }}byte</td>
-                            <td>{{ row.speed_download }}byte</td>
                             <td>{{ row.datetime }}</td>
                         </tr>
                     {% endfor %}
