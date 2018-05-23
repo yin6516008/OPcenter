@@ -137,4 +137,32 @@ if ( search_url == '' ){
     }
 })
 
+// 删除按钮
+$('[data-target="#delDomain"]').click(function () {
+  var node = $(this).parent().parent().parent()
+  .parent().parent()
+  // 获取到对应的tr的节点号 --> 填充到隐藏域value
+  console.log(node)
+  var nodeNum = node.attr("data-id")
+  $('#delete').val(nodeNum)
+
+  // 确认删除模态框中添加对应节点名
+  var nodeDomain = node.find('td:nth-of-type(3)').text()
+  $('#delModalLabel').text('确认删除域名 "'+ nodeDomain + '" 吗?')
+})
+
+// 编辑按钮
+$('[data-target="#editDomain"]').click(function () {
+  var node = $(this).parent().parent().parent()
+  .parent().parent()
+  // 隐藏域value值
+  var nodeNum = node.find('td:nth-of-type(1)').text()
+  $('[type="hidden"]').val(nodeNum)
+  $('#itemDetail_cate').val(node.find('td:nth-of-type(2)').text())
+  $('#itemDetail_edit').val(node.find('td:nth-of-type(3)').text())
+})
+// 关闭编辑模态框 清除选中的值
+$('#btn_close_bottom_edit,#btn_close_top_edit').click(function () {
+  $('#edit_notadd,#edit_notwarn').attr('checked',false)
+})
 })

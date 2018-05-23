@@ -73,6 +73,12 @@ $(function () {
         }
     })
 
+  // =================删除模态框====================
+  console.log(name_title)
+  $('[data-target="#delModal"]').click(function () {
+    $('#delModalLabel').text('确认删除域名 "'+ name_title + '" 吗?')
+  })
+
   // ================修改模态框================
   // 点击"新增项目名称" 选择项目按钮变为input输入框
   $('#itemInput_edit').hide()

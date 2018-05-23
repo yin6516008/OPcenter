@@ -35,6 +35,9 @@
 .tableArea {
   padding: 20px;
 }
+th {
+  height: 51px;
+}
 /* 新增节点模态框 */
 .modal-title {
   text-align: center;
