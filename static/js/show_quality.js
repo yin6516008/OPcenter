@@ -13,7 +13,7 @@ $(function () {
     $('<li><a href="#" class="pageClick">'+i+'</a></li>').insertAfter('#nodeLi')
   }
   // 页面一加载 设置页码1的背景色
-  $('#nodeLi').next().children().css({ "backgroundColor": "#999", "color": "#0d71c7" })
+  $('#nodeLi').next().children().css({ "backgroundColor": "#C6C6C7", "color": "#0d71c7" })
   // 页面一加载 若tr的id大于20 则隐藏
   $('tbody>tr').each(function () {
     id = Number($(this).attr('id'))
@@ -37,7 +37,7 @@ $(function () {
     })
     // 被点击的样式
     $('.pageClick').css({ "backgroundColor": "", "color": "" })    
-    $(this).css({ "backgroundColor": "#999", "color": "#0d71c7" })
+    $(this).css({ "backgroundColor": "#C6C6C7", "color": "#0d71c7" })
   })
 
   // 下一页的点击事件
@@ -66,7 +66,7 @@ $(function () {
     pageNum++
     $('.pageClick').each(function () {
       if(pageNum === Number($(this).text())){
-        $(this).css({ "backgroundColor": "#999", "color": "#0d71c7" })
+        $(this).css({ "backgroundColor": "#C6C6C7", "color": "#0d71c7" })
       }else {
         $(this).css({ "backgroundColor": "", "color": "" })
       }
@@ -98,7 +98,7 @@ $(function () {
     pageNum--
     $('.pageClick').each(function () {
       if(pageNum === Number($(this).text())){
-        $(this).css({ "backgroundColor": "#999", "color": "#0d71c7" })
+        $(this).css({ "backgroundColor": "#C6C6C7", "color": "#0d71c7" })
       }else {
         $(this).css({ "backgroundColor": "", "color": "" })
       }
@@ -142,7 +142,6 @@ $('[data-target="#delDomain"]').click(function () {
   var node = $(this).parent().parent().parent()
   .parent().parent()
   // 获取到对应的tr的节点号 --> 填充到隐藏域value
-  console.log(node)
   var nodeNum = node.attr("data-id")
   $('#delete').val(nodeNum)
 
@@ -151,13 +150,37 @@ $('[data-target="#delDomain"]').click(function () {
   $('#delModalLabel').text('确认删除域名 "'+ nodeDomain + '" 吗?')
 })
 
+// =========删除的模态框==========
+$('#confirmDel').click(function () { //点击确认按钮
+  // $('.modal-backdrop').click(function () { //使点击遮罩失效
+  //   $('#waving').show()
+  // })
+  
+
+  var $that = $(this).siblings('input').val()
+  // $('tbody>tr[data-id='+ $that +']').remove()
+  // 请求数据
+  $.ajax({
+    type: "POST",
+    url: "/webmoni/tables/delete/",
+    data: {'url_id': $('#delete').val()},
+    success: function (result) {
+      if (result == 'OK') {
+        $('tbody>tr[data-id='+ $that +']').remove()
+      }
+    }
+  })
+})
+
+
+
 // 编辑按钮
 $('[data-target="#editDomain"]').click(function () {
   var node = $(this).parent().parent().parent()
   .parent().parent()
   // 隐藏域value值
-  var nodeNum = node.find('td:nth-of-type(1)').text()
-  $('[type="hidden"]').val(nodeNum)
+  var nodeNum = node.attr('data-id')
+  $('#edit').val(nodeNum)
   $('#itemDetail_cate').val(node.find('td:nth-of-type(2)').text())
   $('#itemDetail_edit').val(node.find('td:nth-of-type(3)').text())
 })
