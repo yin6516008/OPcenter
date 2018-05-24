@@ -131,7 +131,7 @@ def tables(request):
     if request.method == 'GET':
         project_all = Project.objects.all()
         domainall = DomainName.objects.all()
-        fault_number = DomainName.objects.filter(~Q(status_id=0) & Q(check_id=0)).count()
+        fault_number = DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0)).count()
         Not_check_number = DomainName.objects.filter(check_id=1).count()
         lt_30 = DomainName.objects.filter(cert_valid_days__lt=30).count()
         data = {
@@ -269,5 +269,5 @@ def log(request,day=1):
     if request.method == 'GET':
         today = datetime.datetime.now().replace(hour=0,minute=0, second=0)
         stop_data = today - datetime.timedelta(days=int(day))
-        log_all = Event_Log.objects.filter(datetime__gt=stop_data)
+        log_all = Event_Log.objects.filter(datetime__gt=stop_data).order_by('-id')
         return render(request,'webmoni_log.html',{'log_all':log_all})

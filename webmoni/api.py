@@ -89,7 +89,7 @@ def cert_update(request):
         print(cert_info['data'])
         client_ip = request.META['REMOTE_ADDR']
         if API_verify(cert_info.get('node'),client_ip):
-            DomainName.objects.filter(id=cert_info['url_id']).update(['data'])
+            DomainName.objects.filter(id=cert_info['url_id']).update(**cert_info['data'])
             return HttpResponse('OK')
         else:
             return HttpResponse('ERROR')
