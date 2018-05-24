@@ -241,6 +241,14 @@ def tables_search(request,url_id=None):
 
 
 @check_login
+def tables_delete(request):
+    if request.method == "POST":
+        del_id = request.POST.get('del_id')
+        DomainName.objects.filter(id=del_id).delete()
+        return HttpResponse('OK')
+
+
+@check_login
 def nodes(request):
     if request.method == 'GET':
         node_all = Node.objects.all()

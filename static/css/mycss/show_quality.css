@@ -152,9 +152,59 @@ tr>th:nth-of-type(9) {
   bottom: 10px;
   right: 20px;
 }
-/* #side-menu>li:nth-of-type(2)>ul>li>a {
-
+.tableArea .dropdown-menu {
+  min-width: 66px;
 }
-#side-menu>li:nth-of-type(2)>ul>li>a {
-  color: #fff;
-} */
+.tableArea .dropdown-menu>li>a {
+  margin: 4px 0;
+}
+/* 调整操作按钮行高 */
+.tableArea .btn.btn-primary.dropdown-toggle {
+  padding: 0 12px;
+  border: 0;
+}
+tbody>tr>td:last-child {
+  padding: 0 8px;
+}
+.tableArea .btn.btn-primary.dropdown-toggle,
+.tableArea .btn.btn-primary.dropdown-toggle:hover,
+.tableArea button,
+.tableArea button:hover {
+  background-color: inherit;
+  color: #7d7b7b;
+}
+
+/* 删除模态框 */
+.delbtn {
+  width: 300px;
+  margin-top: 200px;
+}
+.delbtn .modal-title,
+.delbtn .modal-footer {
+  text-align: center;
+}
+.modal-footer {
+  position: relative;
+  height: 65px;
+}
+.delbtn .modal-footer button:nth-of-type(1) {
+  position: absolute;
+  left: 25%;
+}
+.delbtn .modal-footer button:nth-of-type(2) {
+  position: absolute;
+  left: 55%;
+}
+/* 修改模态框 */
+.input-group .form-control {
+  width: 400px;
+}
+#itemDetail_cate {
+  width: 108px;
+}
+/* 复选框 */
+.checkbox-area {
+  position: relative;
+  right: 30px;
+  top: 10px;
+}
