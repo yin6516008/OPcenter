@@ -46,6 +46,17 @@ $(function () {
       }
     })
   })
+  // 调整第20行操作选项菜单
+  $('tbody>tr>td:nth-of-type(9)').each(function () {
+    $(this).click(function () {
+      if($(this).siblings(':first').text() == 20) {
+        $('.tableArea .dropdown-menu').removeClass('fadeInUp').addClass('fadeInDown').css({ 'box-shadow':'0 -6px 12px rgba(0,0,0,.3)', 'top':'-84px' })
+      }else {
+        $('.tableArea .dropdown-menu').removeClass('fadeInDown').addClass('fadeInUp').css({ 'box-shadow':'', 'top':'' })
+      }
+    })
+  })
+  
   // 删除按钮
   $('[data-target="#delDomain"]').click(function () {
     var node = $(this).parent().parent().parent()
