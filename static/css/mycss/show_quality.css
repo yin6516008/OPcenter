@@ -140,6 +140,10 @@ tr>th:nth-of-type(9) {
 }
 .pagination>li:first-child>a,
 .pagination>li:last-child>a {
+  background-color: #C6C6C7;
+}
+#previous,
+#next {
   background-color: #eee;
 }
 .tableArea {

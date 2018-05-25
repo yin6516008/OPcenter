@@ -84,7 +84,7 @@ DATABASES = {
         'NAME': 'OPcenter',
         'USER': 'opcenter',
         'PASSWORD': 'Kemingjunde888',
-        'HOST': '127.0.0.1',
+        'HOST': '192.168.2.233',
         'PORT': '3306',
     }
 }

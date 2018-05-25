@@ -170,6 +170,20 @@ def tables_project(request,project_id):
     return render(request,'domain_table.html',{'data':data})
 
 @check_login
+def tables_edit(request):
+    if request.method == "POST":
+        try:
+            url_id = request.POST.get('url_id')
+            check_id = request.POST.get('check_id')
+            warning = request.POST.get('warning')
+            DomainName.objects.filter(id=url_id).update(check_id=check_id,warning=warning)
+            return HttpResponse('true')
+        except Exception:
+            return HttpResponse('false')
+
+
+
+@check_login
 def tables_fault(request):
     if request.method == 'GET':
         project_all = Project.objects.all()
