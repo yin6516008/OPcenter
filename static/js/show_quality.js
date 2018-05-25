@@ -31,6 +31,21 @@ $(function () {
     }
   })
 
+  // 改变警告为“否”的背景颜色
+  $('tbody>tr>td').each(function () {
+    if($(this).text().trim() == '否') {
+      $(this).css('backgroundColor','#ffffcc')
+    }
+    var $that = $(this)
+    $(this).parent().mouseenter(function () {
+      $that.css('backgroundColor','')
+    })
+    $(this).parent().mouseleave(function () {
+      if($that.text().trim() == '否') {
+        $that.css('backgroundColor','#ffffcc')
+      }
+    })
+  })
   // 删除按钮
   $('[data-target="#delDomain"]').click(function () {
     var node = $(this).parent().parent().parent()
@@ -76,7 +91,6 @@ $(function () {
     // 拿到是否检测和是否警告的状态
     $checkStatus = node.find('td:nth-of-type(7)').text()
     $warningStatus = node.find('td:nth-of-type(8)').text()
-    console.log($checkStatus, $warningStatus)
     if($checkStatus == '否') {
       $('#edit_notadd').prop('checked','true')
     }
@@ -101,6 +115,8 @@ $(function () {
         success: function (result) {
           if (result == 'true') {
             window.location.reload()
+          }else {
+            alert('修改失败！')
           }
         }
       })
