@@ -11,7 +11,7 @@ from webmoni.models import Node
 from webmoni.models import Event_Type
 from webmoni.models import Event_Log
 from webmoni.models import MonitorData
-
+from django.db.utils import  IntegrityError
 from webmoni.publicFunc import API_verify
 import datetime
 import json
@@ -58,9 +58,12 @@ def normal_domain(request):
         print(normalData)
         client_ip = request.META['REMOTE_ADDR']
         if API_verify(normalData.get('node'),client_ip):
-            MonitorData.objects.create(**normalData['data'])
-            DomainName.objects.filter(id=normalData['url_id']).update(**normalData['domain'])
-            return HttpResponse('OK')
+            try:
+                MonitorData.objects.create(**normalData['data'])
+                DomainName.objects.filter(id=normalData['url_id']).update(**normalData['domain'])
+                return HttpResponse('OK')
+            except IntegrityError :
+                return HttpResponse('出错啦')
         else:
             return HttpResponse('出错啦')
     if request.method == 'GET':
@@ -74,12 +77,16 @@ def fault_domain(request):
         print(faultData)
         client_ip = request.META['REMOTE_ADDR']
         if API_verify(faultData.get('node'),client_ip):
-            MonitorData.objects.create(**faultData['data'])
-            DomainName.objects.filter(id=faultData['url_id']).update(**faultData['domain'])
-            Event_Log.objects.create(**faultData['event_log'])
-            return HttpResponse('OK')
+            try:
+                MonitorData.objects.create(**faultData['data'])
+                DomainName.objects.filter(id=faultData['url_id']).update(**faultData['domain'])
+                Event_Log.objects.create(**faultData['event_log'])
+                return HttpResponse('OK')
+            except IntegrityError :
+                return HttpResponse('ERROR')
         else:
             return HttpResponse('ERROR')
+
     if request.method == 'GET':
         return HttpResponse('连接拒绝')
 
@@ -89,8 +96,11 @@ def cert_update(request):
         print(cert_info['data'])
         client_ip = request.META['REMOTE_ADDR']
         if API_verify(cert_info.get('node'),client_ip):
-            DomainName.objects.filter(id=cert_info['url_id']).update(**cert_info['data'])
-            return HttpResponse('OK')
+            try:
+                DomainName.objects.filter(id=cert_info['url_id']).update(**cert_info['data'])
+                return HttpResponse('OK')
+            except IntegrityError :
+                return HttpResponse('ERROR')
         else:
             return HttpResponse('ERROR')
     if request.method == 'GET':

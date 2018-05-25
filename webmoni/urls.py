@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^api/fault_domain/$', api.fault_domain),
     url(r'^api/cert_update/$', api.cert_update),
     url(r'^tables/$', views.tables),
+    url(r'^tables/(\d+)/$', views.tables),
     url(r'^tables/fault/$', views.tables_fault),
     url(r'^tables/notcheck/$', views.tables_notcheck),
     url(r'^tables/lt_30/$', views.tables_lt_30),
@@ -28,5 +29,6 @@ urlpatterns = [
     url(r'^nodes/create/$', views.nodes_create),
     url(r'^nodes/delete/$', views.nodes_delete),
     url(r'^log/$', views.log),
-    url(r'^log/(\d+)/$', views.log)
+    url(r'^log/(\d+)/(\d+)/$', views.log)
+
 ]

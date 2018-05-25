@@ -135,7 +135,7 @@ tr>th:nth-of-type(9) {
 .pagination>li>span:hover {
   z-index: 2;
   color: #23527c;
-  background-color: #999;
+  background-color: #C6C6C7;
   border-color: #ddd;
 }
 .pagination>li:first-child>a,
@@ -153,12 +153,22 @@ tr>th:nth-of-type(9) {
   right: 20px;
 }
 .tableArea .dropdown-menu {
-  min-width: 66px;
+  min-width: 60px;
+  box-shadow: 0 6px 12px rgba(0,0,0,.3);
+  top: 25px;
 }
 .tableArea .dropdown-menu>li>a {
   margin: 4px 0;
 }
-/* 调整操作按钮行高 */
+.tableArea .dropdown-menu>li:nth-of-type(1)>a {
+  color: #d73d32;
+  padding: 3px 12px;
+}
+.tableArea .dropdown-menu>li:nth-of-type(2)>a {
+  color: #57b5e3;
+  padding: 3px 12px;
+}
+/* 调整操作按钮 */
 .tableArea .btn.btn-primary.dropdown-toggle {
   padding: 0 12px;
   border: 0;
@@ -173,7 +183,18 @@ tbody>tr>td:last-child {
   background-color: inherit;
   color: #7d7b7b;
 }
-
+.tableArea .btn:active {
+  box-shadow: none;
+}
+/* tr鼠标经过样式 */
+tr:hover {
+  background-color: #C6C6C7 !important;
+  box-shadow: 35px 0px 5px -2px #C6C6C7, -27px 0px 5px -2px #C6C6C7;
+}
+tr:first-child:hover {
+  background-color: none;
+  border: none;
+}
 /* 删除模态框 */
 .delbtn {
   width: 300px;
@@ -207,4 +228,8 @@ tbody>tr>td:last-child {
   position: relative;
   right: 30px;
   top: 10px;
+}
+/* 动画 */
+#waving {
+  top: 50%;
 }

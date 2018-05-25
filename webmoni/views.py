@@ -6,7 +6,7 @@ from webmoni.models import DomainName
 from webmoni.models import Project
 from webmoni.models import Node
 from webmoni.models import Event_Log
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from genericFunc import check_login
 import datetime
 import json
@@ -106,7 +106,7 @@ def update_domain(request):
         check_id = 0 if request.POST.get('check_id') is None else 1
         warning = 0 if request.POST.get('warning') is None else 1
         DomainName.objects.filter(id=domain_id).update(check_id=check_id,warning=warning)
-        print(domain_id,check_id,warning)
+
 
         return redirect('/webmoni/areas-' + domain_id + '/')
 
@@ -120,26 +120,34 @@ def search(request):
     if request.method == 'POST':
         url = request.POST.get('url')
         url_obj = DomainName.objects.filter(url=url).first()
-        print(url_obj)
+
         if url_obj is None:
             return HttpResponse('no')
         else:
             return HttpResponse(url_obj.id)
 
 @check_login
-def tables(request):
+def tables(request,page=1):
     if request.method == 'GET':
         project_all = Project.objects.all()
         domainall = DomainName.objects.all()
+        paginator = Paginator(domainall, 20)
+        try:
+            one_page = paginator.page(page)
+        except PageNotAnInteger:
+            one_page = paginator.page(1)
+        except EmptyPage:
+            one_page = paginator.page(paginator.num_pages)
         fault_number = DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0)).count()
         Not_check_number = DomainName.objects.filter(check_id=1).count()
         lt_30 = DomainName.objects.filter(cert_valid_days__lt=30).count()
         data = {
             'project_all':project_all,
             'fault_number':fault_number,
-            'domainall':domainall,
+            'domainall':one_page,
             'Not_check_number':Not_check_number,
-            'lt_30':lt_30
+            'lt_30':lt_30,
+            'paginator':paginator
         }
     return render(request,'domain_table.html',{'data':data})
 
@@ -243,8 +251,8 @@ def tables_search(request,url_id=None):
 @check_login
 def tables_delete(request):
     if request.method == "POST":
-        del_id = request.POST.get('del_id')
-        DomainName.objects.filter(id=del_id).delete()
+        url_id = request.POST.get('url_id')
+        DomainName.objects.filter(id=url_id).delete()
         return HttpResponse('OK')
 
 
@@ -273,9 +281,22 @@ def nodes_delete(request):
         return redirect('/webmoni/nodes/')
 
 @check_login
-def log(request,day=1):
+def log(request,days=1,page=1):
     if request.method == 'GET':
         today = datetime.datetime.now().replace(hour=0,minute=0, second=0)
-        stop_data = today - datetime.timedelta(days=int(day))
+        stop_data = today - datetime.timedelta(days=int(days))
         log_all = Event_Log.objects.filter(datetime__gt=stop_data).order_by('-id')
-        return render(request,'webmoni_log.html',{'log_all':log_all})
+        paginator = Paginator(log_all,20)
+        try:
+            one_page = paginator.page(page)
+        except PageNotAnInteger:
+            one_page = paginator.page(1)
+        except EmptyPage:
+            one_page = paginator.page(paginator.num_pages)
+
+        data = {
+            'paginator':paginator,
+            'one_page':one_page,
+            'days':days
+        }
+        return render(request,'webmoni_log.html',{'data':data})
