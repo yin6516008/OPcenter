@@ -140,6 +140,10 @@ tr>th:nth-of-type(9) {
 }
 .pagination>li:first-child>a,
 .pagination>li:last-child>a {
+  background-color: #C6C6C7;
+}
+#previous,
+#next {
   background-color: #eee;
 }
 .tableArea {
@@ -191,8 +195,9 @@ tr:hover {
   background-color: #C6C6C7 !important;
   box-shadow: 35px 0px 5px -2px #C6C6C7, -27px 0px 5px -2px #C6C6C7;
 }
-tr:first-child:hover {
+thead>tr:hover {
   background-color: none;
+  box-shadow: none;
   border: none;
 }
 /* 删除模态框 */

@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^api/cert_update/$', api.cert_update),
     url(r'^tables/$', views.tables),
     url(r'^tables/(\d+)/$', views.tables),
+    url(r'^tables/edit/$', views.tables_edit),
     url(r'^tables/fault/$', views.tables_fault),
     url(r'^tables/notcheck/$', views.tables_notcheck),
     url(r'^tables/lt_30/$', views.tables_lt_30),

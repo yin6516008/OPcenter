@@ -91,7 +91,7 @@
                                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                       操作 <span class="caret"></span>
                                     </button>
-                                    <ul class="dropdown-menu animated fadeInDown" role="menu">
+                                    <ul class="dropdown-menu animated fadeInUp" role="menu">
                                       <li><a href="#" data-toggle="modal" data-target="#delDomain"><i class="fa fa-trash-o"></i>&nbsp;  删除</a></li>
                                       <li><a href="#" data-toggle="modal" data-target="#editDomain"><i class="fa fa-edit"></i>  编辑</a></li>
                                     </ul>
@@ -102,7 +102,7 @@
                         </tbody>
                     </table>
                   <nav aria-label="Page navigation">
-                      <ul class="pagination pull-right">
+                      <ul class="pagination pull-right" id="pageUl">
                       {% if data.domainall.has_previous %}
                           <li id="nodeLi">
                               <a href="/webmoni/tables/{{ data.domainall.previous_page_number }}/" aria-label="Previous" id="previous">
@@ -153,23 +153,21 @@
                     修改区域
                   </h4>
                 </div>
-                <form action="/webmoni/update_domain/" method="post" id="add_edit_editForm">
-                  <div class="modal-body modalAdd">
-                    <div class="input-group">
-                      <input type="text" class="form-control domain_name" name="project" id="itemDetail_cate" aria-describedby="basic-addon1" disabled value="{{ graph_data.project}}">
-                      <input type="text" class="form-control domain_name" id="itemDetail_edit" aria-describedby="basic-addon1" disabled value="{{ graph_data.domain }}">
-                      <input type="hidden" name="domain" value="" id="edit">
-                      <div class="pull-right checkbox-area">
-                        <input type="checkbox" name="check_id" id="edit_notadd">不检测
-                        <input type="checkbox" name="warning" id="edit_notwarn">不警告
-                      </div>
+                <div class="modal-body modalAdd">
+                  <div class="input-group">
+                    <input type="text" class="form-control domain_name" name="project" id="itemDetail_cate" aria-describedby="basic-addon1" disabled value="{{ graph_data.project}}">
+                    <input type="text" class="form-control domain_name" id="itemDetail_edit" aria-describedby="basic-addon1" disabled value="{{ graph_data.domain }}">
+                    <input type="hidden" name="domain" value="" id="edit">
+                    <div class="pull-right checkbox-area">
+                      <input type="checkbox" name="check_id" id="edit_notadd">不检测
+                      <input type="checkbox" name="warning" id="edit_notwarn">不警告
                     </div>
                   </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" id="btn_close_bottom_edit">关闭</button>
-                    <button type="submit" class="btn btn-primary" id="btn_save_edit">保存</button>
-                  </div>
-                </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal" id="btn_close_bottom_edit">关闭</button>
+                  <button type="submit" class="btn btn-primary" id="btn_save_edit">保存</button>
+                </div>
               </div><!-- /.modal-content -->
             </div><!-- /.modal -->
           </div>
