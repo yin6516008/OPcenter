@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="77792de5-4b67-4ddd-9ed3-8a13e94e9f4f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OPcenter/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/OPcenter/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/mycss/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/mycss/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/show_areas.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/show_areas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/show_quality.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/show_quality.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -43,7 +47,7 @@
         <entry file="file://$PROJECT_DIR$/webmoni/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="79">
-              <caret line="196" column="34" lean-forward="true" selection-start-line="196" selection-start-column="34" selection-end-line="196" selection-end-column="34" />
+              <caret line="196" column="34" selection-start-line="196" selection-start-column="34" selection-end-line="196" selection-end-column="34" />
               <folding>
                 <element signature="e#0#57#0" expanded="true" />
               </folding>
@@ -60,14 +64,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="api.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="api.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webmoni/api.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="65" column="42" lean-forward="true" selection-start-line="65" selection-start-column="42" selection-end-line="65" selection-end-column="42" />
+            <state relative-caret-position="342">
+              <caret line="74" selection-start-line="74" selection-end-line="74" />
               <folding>
                 <element signature="e#52#109#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/user/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="48">
+              <caret line="2" column="26" lean-forward="true" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -84,20 +97,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/OPcenter/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2112">
-              <caret line="88" column="5" selection-start-line="88" selection-start-column="5" selection-end-line="88" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="domain_table.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/domain_table.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2016">
-              <caret line="84" column="35" selection-start-line="84" selection-start-column="35" selection-end-line="84" selection-end-column="35" />
+            <state relative-caret-position="256">
+              <caret line="41" column="14" lean-forward="true" selection-start-line="41" selection-start-column="14" selection-end-line="41" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -226,7 +230,6 @@
         <option value="$PROJECT_DIR$/templates/domain_table.html" />
         <option value="$PROJECT_DIR$/webmoni/urls.py" />
         <option value="$PROJECT_DIR$/static/js/webmoni_log.js" />
-        <option value="$PROJECT_DIR$/OPcenter/settings.py" />
         <option value="$PROJECT_DIR$/templates/webmoni_log.html" />
         <option value="$PROJECT_DIR$/webmoni/views.py" />
         <option value="$PROJECT_DIR$/templates/login.html" />
@@ -234,6 +237,8 @@
         <option value="$PROJECT_DIR$/send_warning/config.py" />
         <option value="$PROJECT_DIR$/send_warning/send_mail.py" />
         <option value="$PROJECT_DIR$/webmoni/api.py" />
+        <option value="$PROJECT_DIR$/user/models.py" />
+        <option value="$PROJECT_DIR$/OPcenter/settings.py" />
       </list>
     </option>
   </component>
@@ -275,35 +280,7 @@
             <path>
               <item name="OPcenter" type="b2602c69:ProjectViewProjectNode" />
               <item name="OPcenter" type="462c0819:PsiDirectoryNode" />
-              <item name="send_warning" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OPcenter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OPcenter" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OPcenter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OPcenter" type="462c0819:PsiDirectoryNode" />
-              <item name="webmoni" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OPcenter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OPcenter" type="462c0819:PsiDirectoryNode" />
-              <item name="webmoni" type="462c0819:PsiDirectoryNode" />
-              <item name="api.py" type="8704e2dd:PyFileNode" />
-            </path>
-            <path>
-              <item name="OPcenter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OPcenter" type="462c0819:PsiDirectoryNode" />
-              <item name="webmoni" type="462c0819:PsiDirectoryNode" />
-              <item name="publicFunc.py" type="8704e2dd:PyFileNode" />
-            </path>
-            <path>
-              <item name="OPcenter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OPcenter" type="462c0819:PsiDirectoryNode" />
-              <item name="webmoni" type="462c0819:PsiDirectoryNode" />
-              <item name="views.py" type="8704e2dd:PyFileNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -322,19 +299,19 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/webmoni" />
-      <recent name="$PROJECT_DIR$/templates" />
-      <recent name="$PROJECT_DIR$/static/css/mycss" />
-      <recent name="$PROJECT_DIR$/static/inner" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/static" />
       <recent name="$PROJECT_DIR$/static/css/mycss" />
       <recent name="$PROJECT_DIR$/static/js" />
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/static/js/plugins/echarts" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/webmoni" />
+      <recent name="$PROJECT_DIR$/templates" />
+      <recent name="$PROJECT_DIR$/static/css/mycss" />
+      <recent name="$PROJECT_DIR$/static/inner" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -349,7 +326,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.send_mail">
+  <component name="RunManager" selected="Django server.OPcenter">
     <configuration name="check_cert_run" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="OPcenter" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -517,8 +494,8 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32998884" />
       <window_info anchor="bottom" id="Python Console" order="9" weight="0.32998884" />
-      <window_info anchor="right" id="Run" order="5" weight="0.22151224" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.23634337" />
+      <window_info anchor="right" id="Run" order="5" visible="true" weight="0.22151224" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.23634337" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15069222" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" weight="0.32960597" />
@@ -555,7 +532,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/errors_echarts.html" />
     <entry file="file://$PROJECT_DIR$/OPcenter/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="24">
@@ -796,13 +772,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OPcenter/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2112">
-          <caret line="88" column="5" selection-start-line="88" selection-start-column="5" selection-end-line="88" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/login/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="384">
@@ -847,7 +816,7 @@
     <entry file="file://$PROJECT_DIR$/webmoni/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="79">
-          <caret line="196" column="34" lean-forward="true" selection-start-line="196" selection-start-column="34" selection-end-line="196" selection-end-column="34" />
+          <caret line="196" column="34" selection-start-line="196" selection-start-column="34" selection-end-line="196" selection-end-column="34" />
           <folding>
             <element signature="e#0#57#0" expanded="true" />
           </folding>
@@ -856,11 +825,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/webmoni/api.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="65" column="42" lean-forward="true" selection-start-line="65" selection-start-column="42" selection-end-line="65" selection-end-column="42" />
+        <state relative-caret-position="342">
+          <caret line="74" selection-start-line="74" selection-end-line="74" />
           <folding>
             <element signature="e#52#109#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="2" column="26" lean-forward="true" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OPcenter/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="41" column="14" lean-forward="true" selection-start-line="41" selection-start-column="14" selection-end-line="41" selection-end-column="14" />
         </state>
       </provider>
     </entry>

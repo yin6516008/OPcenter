@@ -4,9 +4,9 @@ $(function () {
     var search_url = $('#inputSearch').val()
     if ( search_url == '' ){
         $('#search_tip').text('请输入域名')
-        $('.alert-danger').css("display", "block").addClass('fadeInRight')
+        $('.alert-danger').css("display", "block")
         setTimeout(function () {
-        $('.alert-danger').fadeOut()
+          $('.alert-danger').fadeOut()
         }, 2000)
     }else {
         $.ajax({
@@ -29,6 +29,13 @@ $(function () {
             }
         })
     }
+    $('#inputSearch').val('')
+  })
+  // 监听回车事件
+  $('#inputSearch').keyup(function (e) {
+    if(e.keyCode == '13') {
+      $('#btn_confirm').click()
+    }
   })
 
   // 改变警告为“否”的背景颜色
@@ -50,9 +57,11 @@ $(function () {
   $('tbody>tr>td:nth-of-type(9)').each(function () {
     $(this).click(function () {
       if($(this).siblings(':first').text() == 20) {
-        $('.tableArea .dropdown-menu').removeClass('fadeInUp').addClass('fadeInDown').css({ 'box-shadow':'0 -6px 12px rgba(0,0,0,.3)', 'top':'-84px' })
+        $('.tableArea .dropdown-menu').removeClass('fadeInUp').addClass('fadeInDown')
+        .css({ 'box-shadow':'0 -6px 12px rgba(0,0,0,.3)', 'top':'-84px' })
       }else {
-        $('.tableArea .dropdown-menu').removeClass('fadeInDown').addClass('fadeInUp').css({ 'box-shadow':'', 'top':'' })
+        $('.tableArea .dropdown-menu').removeClass('fadeInDown').addClass('fadeInUp')
+        .css({ 'box-shadow':'', 'top':'' })
       }
     })
   })
@@ -141,10 +150,17 @@ $(function () {
   })
 
   // 改变翻页的样式
-  var paramNum = window.location.pathname.replace(/[^0-9]/ig,"")
+  var paramNum = window.location.pathname.replace(/[^0-9]/ig,"") || 1
   $('#pageUl').find('li').children().each(function () {
-    if($(this).text() == paramNum) {
+    if($(this).text() == paramNum) { //页数等于地址栏参数
       $(this).css({ "backgroundColor": "#C6C6C7", "color": "#0d71c7" })
+      // 分页过多以···显示
+      $(this).parent().prev().prev().prev().prevAll().hide() //当页之前 除邻近3项 全部隐藏
+      $(this).parent().next().next().next().nextAll().hide() //当页之后 除邻近3项 全部隐藏
+      $(this).parent().prev().prev().prev().children().text('···')
+      $(this).parent().next().next().next().children().text('···')
     }
   })
+  $('#previous').parent().show().children().html('&laquo;')
+  $('#next').parent().show().children().html('&raquo;')
 })

@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login',
     'index',
-    'webmoni'
+    'webmoni',
+    'user'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -84,7 +85,7 @@ DATABASES = {
         'NAME': 'OPcenter',
         'USER': 'opcenter',
         'PASSWORD': 'Kemingjunde888',
-        'HOST': '192.168.2.233',
+        'HOST': '192.168.2.236',
         'PORT': '3306',
     }
 }
