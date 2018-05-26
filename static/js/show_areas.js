@@ -198,33 +198,40 @@ function update_graph(option,graph_data) {
 
 // ================消息提示框================
 $('#btn_confirm').click(function (e) {
-var search_url = $('#inputSearch').val()
-if ( search_url == '' ){
-    $('#search_tip').text('请输入域名')
-    $('.alert-danger').css("display", "block").addClass('fadeInRight')
-    setTimeout(function () {
-    $('.alert-danger').fadeOut()
-    }, 2000)
-}else {
-    $.ajax({
-        type: "POST",
-        url: "/webmoni/search/",
-        data: {
-            'url': search_url,
-        },
-        success: function (url_id) {
-            if (url_id == 'no') {
-                $('#search_tip').text('没有这个域名！')
-                $('.alert-danger').css("display", "block").addClass('fadeInRight')
-                setTimeout(function () {
-                    $('.alert-danger').fadeOut()
-                }, 2000)
-            } else {
-                window.location.href = "/webmoni/areas-" + url_id;
-            }
-        }
-    })
-    }
+  var search_url = $('#inputSearch').val()
+  if ( search_url == '' ){
+      $('#search_tip').text('请输入域名')
+      $('.alert-danger').css("display", "block")
+      setTimeout(function () {
+        $('.alert-danger').fadeOut()
+      }, 2000)
+  }else {
+      $.ajax({
+          type: "POST",
+          url: "/webmoni/search/",
+          data: {
+              'url': search_url,
+          },
+          success: function (url_id) {
+              if (url_id == 'no') {
+                  $('#search_tip').text('没有这个域名！')
+                  $('.alert-danger').css("display", "block").addClass('fadeInRight')
+                  setTimeout(function () {
+                      $('.alert-danger').fadeOut()
+                  }, 2000)
+              } else {
+                  window.location.href = "/webmoni/areas-" + url_id;
+              }
+          }
+      })
+  }
+  $('#inputSearch').val('')
+})
+// 监听回车事件
+$('#inputSearch').keyup(function (e) {
+  if(e.keyCode == '13') {
+    $('#btn_confirm').click()
+  }
 })
 
 function timing_update(option,url_id) {

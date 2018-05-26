@@ -40,7 +40,7 @@ body.fixed-sidebar.mini-navbar .navbar-static-side {
 }
 /* 左侧导航栏每次刷新时隐藏 */
 .ulhide {
-  display: none;
+  display: none !important;
 }
 
 .row.border-bottom {
