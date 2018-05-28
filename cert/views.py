@@ -3,6 +3,8 @@ from cert.acme import ACME_cll
 import json
 # Create your views here.
 
+
+
 def cert_list(request):
     return render(request,'cert_list.html')
 
@@ -16,3 +18,12 @@ def cert_apply_postdomain(request):
         acme_obj = ACME_cll(domain)
         result = acme_obj.generTXT()
         return HttpResponse(json.dumps(result))
+
+
+def cert_apply_genercert(request):
+    if request.method == 'POST':
+        domain = request.POST.get('domain')
+        acme_obj = ACME_cll(domain)
+        result = acme_obj.generCert()
+        files = acme_obj.getcertfile()
+        return HttpResponse(json.dumps(files))

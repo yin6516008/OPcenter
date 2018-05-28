@@ -11,14 +11,13 @@ $(function () {
           url:'/cert/apply/postdomain/',
           data:{'domain':domain},
           type:'post',
-          success:function (result) {
+          success:function (msg) {
               $('#wave').hide()
-              JSON.parse(result)
+              var result = JSON.parse(msg)
               if(result.status == 'OK') {
                 $('#TXT_info').show()
-                var host = result.host
                 var TXT = result.TXT
-                $('#hostname').text(host)
+                $('#hostname').text('_acme-challenge')
                 $('#TXTval').text(TXT)
               }else {
                 $('#err').show()

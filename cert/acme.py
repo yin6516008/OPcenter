@@ -1,18 +1,20 @@
 import subprocess
 import  re
-
+import sys,os
 
 d = 'limlin.cn'
 
 class ACME_cll(object):
     def __init__(self,domain):
         self.domain = domain
+        self.basedir = '/root/.acme.sh/'
         self.acme = '/root/.acme.sh/acme.sh'
 
 
     def generTXT(self):
         result = subprocess.getstatusoutput(self.acme + ' --issue  --dns -d ' + self.domain  + ' --yes-I-know-dns-manual-mode-enough-go-ahead-please')
-        if  re.search(r'TXT value', result) is None:
+        print(result)
+        if  re.search(r'TXT value', result[1]) is None:
             return {
                 'status': 'ERROR',
                 'data':result[1]
@@ -22,8 +24,8 @@ class ACME_cll(object):
             TXT_val = re.search(r"TXT value: \'(.+)\'", result[1])
         return {
             'status': 'OK',
-            'host': domain,
-            'TXT':TXT_val
+            'host': domain.group(1),
+            'TXT':TXT_val.group(1)
         }
 
     def generCert(self):
@@ -31,6 +33,11 @@ class ACME_cll(object):
             self.acme + ' --renew  -d ' + self.domain + ' --yes-I-know-dns-manual-mode-enough-go-ahead-please')
 
         return result
+
+    def getcertfile(self):
+        files = os.listdir(self.basedir+self.domain)
+        return files
+
 
 content = '''
 [2018年 05月 28日 星期一 14:44:04 CST] Single domain='limlin.cn'
@@ -50,6 +57,3 @@ content = '''
 content1 = '''(1, '[2018年 05月 28日 星期一 13:45:46 CST] Creating domain key\n[2018年 05月 28日 星期一 13:45:46 CST] The domain key is here: /root/.acme.sh/baidu.com/baidu.com.key\n[2018年 05月 28日 星期一 13:45:46 CST] Single domain=\'baidu.com\'\n[2018年 05月 28日 星期一 13:45:46 CST] Getting domain auth token for each domain\n[2018年 05月 28日 星期一 13:45:46 CST] Getting webroot for domain=\'baidu.com\'\n[2018年 05月 28日 星期一 13:45:46 CST] Getting new-authz for domain=\'baidu.com\'\n[2018年 05月 28日 星期一 13:45:51 CST] The new-authz request is ok.\n[2018年 05月 28日 星期一 13:45:51 CST] new-authz error: {"type":"urn:acme:error:rejectedIdentifier","detail":"Error creating new authz :: Policy forbids issuing for name","status": 400}\n[2018年 05月 28日 星期一 13:45:51 CST] Please check log file for more details: /root/.acme.sh/acme.sh.log')
 '''
 
-result = re.search(r'TXT value',content)
-if result is None:
-    print(result)

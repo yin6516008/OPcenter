@@ -34,7 +34,7 @@ form>div {
 }
 #TXT_info {
   padding-top: 20px;
-  /* display: none; */
+  display: none;
 }
 #TXT_info>h3 {
   display: inline;
