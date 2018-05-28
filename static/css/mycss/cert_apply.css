@@ -1,0 +1,22 @@
+/* 左侧边栏样式调整 */
+#side-menu>li:nth-of-type(5)>ul>li:nth-of-type(2)>a {
+  color: #fff;
+}
+
+#content-main>.col-sm-12 {
+  margin-top: 50px;
+  padding: 0 450px;
+}
+.ibox {
+  margin-bottom: 0;
+}
+form {
+  padding: 15px 50px;
+}
+.certInput {
+  border: 1px solid #1ab394;
+  width: 400px !important;
+}
+form>div {
+  margin-top: 50px;
+}

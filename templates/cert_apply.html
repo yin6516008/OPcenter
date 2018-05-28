@@ -1,5 +1,36 @@
 {% extends 'master.html' %}
 
+{% block css %}
+    <link rel="stylesheet" href="/static/css/mycss/index.css">
+    <link rel="stylesheet" href="/static/css/mycss/cert_apply.css">
+{% endblock %}
+
 {% block content %}
-    <p>证书申请</p>
+<!--右侧部分开始-->
+    <div class="row J_mainContent animated fadeInRight" id="content-main">
+      <div class="col-sm-12">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <i class="fa fa-info-circle"></i> 证书申请
+            </div>
+            <div class="panel-body">
+              <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <input type="text" class="form-control certInput" placeholder="请输入域名">
+                    <button id="getTXT" type="button" class="btn btn-sm btn-primary pull-right">获取TXT值</button>
+                    <div class="alert alert-warning">
+                      <p id="host"></p>
+                      <p id="TXT"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="/static/js/cert_apply.js"></script>
 {% endblock %}

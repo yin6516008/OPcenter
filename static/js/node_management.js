@@ -1,4 +1,10 @@
 $(function () {
+  // 左侧边栏
+  $('#side-menu>li:nth-of-type(2)').addClass('active')
+  $('#side-menu>li:nth-of-type(2)>ul').removeClass('ulhide')
+  $('#side-menu>li:nth-of-type(2)>ul').addClass('collapse')
+  $('#side-menu>li:nth-of-type(2)>ul').addClass('in')
+
   // 新增节点模态框
   // 关闭模态框时，清除模态框内文字
   $('#addNodeClose,#close').click(function () {
@@ -26,18 +32,5 @@ $(function () {
     var nodePlace = node.find('td:nth-of-type(2)').text()
     $('#delModalLabel').text('确认删除 "'+ nodePlace + '" 节点吗?')
   })
-
-  // // 编辑按钮
-  // $('[data-target="#editNode"]').click(function () {
-  //   var node = $(this).parent().parent().parent()
-  //   .parent().parent()
-  //   var nodePlace = node.find('td:nth-of-type(2)').text()
-  //   var nodeIP = node.find('td:nth-of-type(3)').text()
-  //   var nodeDesc = node.find('td:nth-of-type(4)').text()
-  //   console.log(nodePlace, nodeIP)
-  //   $('#place').val(nodePlace)
-  //   $('#ipAddress').val(nodeIP)
-  //   $('#editDesc').val(nodeDesc)
-  // })
 
 })
