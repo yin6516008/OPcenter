@@ -23,3 +23,31 @@ form {
 form>div {
   margin-top: 50px;
 }
+#wave {
+  display: none;
+}
+#wave>h3 {
+  text-align: center;
+}
+#err {
+  display: none;
+}
+#TXT_info {
+  padding-top: 20px;
+  /* display: none; */
+}
+#TXT_info>h3 {
+  display: inline;
+}
+#TXT_info>span {
+  font-size: 20px;
+  font-weight: 900;
+  padding-bottom: 20px;
+  display: inline-block;
+}
+#TXT_info>p {
+  font-size: 18px;
+}
+#TXT_info>p:nth-of-type(2) {
+  margin-top: 60px;
+}

@@ -23,8 +23,27 @@
                               <button id="getTXT" class="btn btn-lg btn-primary" type="submit">获取TXT值</button>
                           </div>
                       </div>
-                      <div class="alert alert-warning">
-                          <p id="TXT_info"></p>
+                      <!-- 动画 -->
+                      <div id="wave">
+                        <h3>TXT值获取中，请稍后···</h3>
+                        <div class="sk-spinner sk-spinner-wave">
+                            <div class="sk-rect1"></div>
+                            <div class="sk-rect2"></div>
+                            <div class="sk-rect3"></div>
+                            <div class="sk-rect4"></div>
+                            <div class="sk-rect5"></div>
+                        </div>
+                      </div>
+                      <div id="TXT_info">
+                        <span>主机名：</span><h3 id="hostname"></h3><br>
+                        <span>TXT值：</span> <h3 id="TXTval"></h3>
+                        <p>请为该域名添加一条TXT记录，主机名为：_acme-challenge，记录值为TXT值。</p>
+                        <p>添加成功后请点击“生成证书”按钮</p>
+                        <button class="btn btn-primary">生成证书</button>
+                      </div>
+                      <div class="alert alert-danger" id="err">
+                        出错啦：
+                        <pre></pre>
                       </div>
                   </div>
                 </div>
