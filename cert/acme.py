@@ -15,9 +15,8 @@ class ACME_cll(object):
         # domain = re.search(r"Domain: \'(.*\.\w+)\'", result[1])
         # TXT_val = re.search(r"TXT value: \'(.+)\'", result[1])
         print(result)
-        return {
-            'data':result[1],
-        }
+        return result[1]
+
 
     def generCert(self):
         result = subprocess.getstatusoutput(
