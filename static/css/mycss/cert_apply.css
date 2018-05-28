@@ -46,6 +46,9 @@
   padding-bottom: 30px;
   border-bottom: 1px dashed #23c6c8;
 }
+pre {
+  background: #e2a4ae;
+}
 /* 生成证书按钮所在div */
 #TXT_info>div {
   width: 100%;

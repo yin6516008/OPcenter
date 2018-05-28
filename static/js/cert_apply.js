@@ -34,11 +34,14 @@ $(function () {
       })
 
       $('#generateCert').click(function () {
+        $('#wave').show()
+        $('#wave>h3').text('证书生成中，请稍后···')
         $.ajax({
           url: '/cert/apply/genercert/',
           data: {'domain':domain},
           type: 'post',
           success: function (msg) {
+            $('#wave').hide()
             var res = JSON.parse(msg)
             if(res.status == 'OK') {
               // 正确返回的处理
