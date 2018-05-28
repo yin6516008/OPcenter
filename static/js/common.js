@@ -1,2 +1,6 @@
-// 启用、隐藏模态框
-$('#add').modal("hide")
+$(document).ready(function () {
+  // $('#side-menu>li').click(function () {
+  //   $(this).addClass('active')
+  //   $(this).find('ul').addClass('active')
+  // })
+})
