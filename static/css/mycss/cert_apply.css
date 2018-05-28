@@ -5,7 +5,10 @@
 
 #content-main>.col-sm-12 {
   margin-top: 50px;
-  padding: 0 450px;
+  padding: 0 300px;
+}
+#content-main>.col-sm-12>.panel {
+  min-width: 530px;
 }
 .ibox {
   margin-bottom: 0;
