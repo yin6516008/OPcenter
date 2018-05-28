@@ -5,15 +5,14 @@ $(function () {
   $('#side-menu>li:nth-of-type(5)>ul').addClass('in')
 
   $('#getTXT').click(function () {
-      var domain = $('.certInput').val()
+      var domain = $('.input-lg').val()
+      console.log(domain)
       $.ajax({
           url:'/cert/apply/postdomain/',
           data:{'domain':domain},
           type:'post',
-          success:function (msg) {
-              var result = JSON.parse(msg)
-              $('#host').text(result['host'])
-              $('#TXT').text(result['TXT'])
+          success:function (result) {
+              $('#TXT_info').html(result)
           }
       })
   })

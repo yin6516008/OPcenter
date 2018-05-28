@@ -15,4 +15,4 @@ def cert_apply_postdomain(request):
         domain = request.POST.get('domain')
         acme_obj = ACME_cll(domain)
         result = acme_obj.generTXT()
-        return HttpResponse(json.dumps(result))
+        return HttpResponse(result)
