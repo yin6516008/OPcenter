@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'login',
     'index',
     'webmoni',
-    'user'
+    'user',
+    'cert'
+
 ]
 
 MIDDLEWARE_CLASSES = [
