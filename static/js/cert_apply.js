@@ -6,6 +6,12 @@ $(function () {
 
   $('#getTXT').click(function () {
       $('#wave').show() // 点击按钮 显示动画
+      if($('#TXT_info').is(':visible')) {
+        $('#TXT_info').hide()
+      }
+      if($('#err').is(':visible')) {
+        $('#err').hide()
+      }
       var domain = $('.input-lg').val()
       $.ajax({
           url:'/cert/apply/postdomain/',
@@ -26,6 +32,31 @@ $(function () {
               }
           }
       })
+
+      $('#generateCert').click(function () {
+        $.ajax({
+          url: '/cert/apply/genercert/',
+          data: {'domain':domain},
+          type: 'post',
+          success: function (msg) {
+            var res = JSON.parse(msg)
+            if(res.status == 'OK') {
+              // 正确返回的处理
+              $('#certList').show()
+              var files = res.files
+              for(var i=0; i<files.length; i++) {
+                var fileName = files[i]
+                $('#certList>ul').prepend("<li><a href='/cert/apply/"+domain+"/"+fileName+"/'>"+fileName+"</a></li>")
+              }
+            }else {
+              // 错误的处理
+              $('#err').show()
+              $('#err>pre').text(res.data)
+            }
+          }
+        })
+      })
+      
   })
 
 

@@ -38,8 +38,15 @@
                         <span>主机名：</span><h3 id="hostname"></h3><br>
                         <span>TXT值：</span> <h3 id="TXTval"></h3>
                         <p>请为该域名添加一条TXT记录，主机名为：_acme-challenge，记录值为TXT值。</p>
-                        <p>添加成功后请点击“生成证书”按钮</p>
-                        <button class="btn btn-primary">生成证书</button>
+                        <div>
+                            <p>添加成功后请点击“生成证书”按钮</p>
+                            <button class="btn btn-primary" id="generateCert">生成证书</button>
+                        </div>
+                      </div>
+                      <div class="alert alert-success" id="certList">
+                          <ul>
+                            
+                          </ul>
                       </div>
                       <div class="alert alert-danger" id="err">
                         出错啦：

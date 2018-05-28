@@ -13,15 +13,9 @@
 .ibox {
   margin-bottom: 0;
 }
-form {
-  padding: 15px 50px;
-}
 .certInput {
   border: 1px solid #1ab394;
   width: 400px !important;
-}
-form>div {
-  margin-top: 50px;
 }
 #wave {
   display: none;
@@ -36,7 +30,7 @@ form>div {
   padding-top: 20px;
   display: none;
 }
-#TXT_info>h3 {
+#TXT_info h3 {
   display: inline;
 }
 #TXT_info>span {
@@ -45,9 +39,26 @@ form>div {
   padding-bottom: 20px;
   display: inline-block;
 }
-#TXT_info>p {
+#TXT_info p {
   font-size: 18px;
 }
-#TXT_info>p:nth-of-type(2) {
-  margin-top: 60px;
+#TXT_info>p {
+  padding-bottom: 30px;
+  border-bottom: 1px dashed #23c6c8;
+}
+/* 生成证书按钮所在div */
+#TXT_info>div {
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+  padding: 30px 50px 10px 0;
+}
+#TXT_info>div>p {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+/* 生成证书的相关文件列表 */
+#certList {
+  display: none;
 }

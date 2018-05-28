@@ -31,8 +31,10 @@ class ACME_cll(object):
     def generCert(self):
         result = subprocess.getstatusoutput(
             self.acme + ' --renew  -d ' + self.domain + ' --yes-I-know-dns-manual-mode-enough-go-ahead-please')
-
-        return result
+        if re.serach(r'success',result[1]) is not None:
+            return True
+        else:
+            return result[1]
 
     def getcertfile(self):
         files = os.listdir(self.basedir+self.domain)

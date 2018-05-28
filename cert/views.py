@@ -25,5 +25,14 @@ def cert_apply_genercert(request):
         domain = request.POST.get('domain')
         acme_obj = ACME_cll(domain)
         result = acme_obj.generCert()
-        files = acme_obj.getcertfile()
-        return HttpResponse(json.dumps(files))
+        if result == True:
+            files = acme_obj.getcertfile()
+            return HttpResponse(json.dumps({
+              'status':'OK',
+              'files':files
+            }))
+        else:
+            return HttpResponse(json.dumps({
+              'status':'ERROR',
+              'data':result
+            }))
