@@ -1,7 +1,8 @@
 import subprocess
 import  re
 import sys,os
-
+import shutil
+from django.http import HttpResponse
 d = 'limlin.cn'
 
 class ACME_cll(object):
@@ -12,8 +13,16 @@ class ACME_cll(object):
 
 
     def generTXT(self):
+        # cert_dir = self.basedir + self.domain
+        # if os.path.exists(cert_dir):shutil.rmtree(cert_dir)
         result = subprocess.getstatusoutput(self.acme + ' --issue  --dns -d ' + self.domain  + ' --yes-I-know-dns-manual-mode-enough-go-ahead-please')
         print(result)
+        if re.search(r'Cert success.', result[1]) is not None:
+            return {
+                'status':'SUCCESS',
+                'data':self.getcertfile()
+            }
+
         if  re.search(r'TXT value', result[1]) is None:
             return {
                 'status': 'ERROR',
@@ -31,7 +40,7 @@ class ACME_cll(object):
     def generCert(self):
         result = subprocess.getstatusoutput(
             self.acme + ' --renew  -d ' + self.domain + ' --yes-I-know-dns-manual-mode-enough-go-ahead-please')
-        if re.serach(r'success',result[1]) is not None:
+        if re.search(r'Cert success.',result[1]) is not None:
             return True
         else:
             return result[1]
@@ -39,6 +48,17 @@ class ACME_cll(object):
     def getcertfile(self):
         files = os.listdir(self.basedir+self.domain)
         return files
+
+
+    def cert_download(self,file_path):
+        file = self.basedir + file_path
+        return str(file)
+
+
+
+
+
+
 
 
 content = '''

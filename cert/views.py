@@ -1,6 +1,7 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,redirect
 from cert.acme import ACME_cll
-import json
+import json,os
+from django.http import FileResponse
 # Create your views here.
 
 
@@ -36,3 +37,17 @@ def cert_apply_genercert(request):
               'status':'ERROR',
               'data':result
             }))
+
+def cert_download(request,domain,file):
+    if request.method == 'GET':
+        file_path = domain + '/' + file
+        acme_obj = ACME_cll(domain)
+        file_abspath = acme_obj.cert_download(file_path)
+        if os.path.exists(file_abspath):
+            file_download = open(file_abspath,'rb')
+            response = FileResponse(file_download)
+            response['Content-Type'] = 'application/octet-stream'
+            response['Content-Disposition'] = 'attachment;filename=%s'%file
+            return response
+        else:
+            return redirect("/cert/apply/")

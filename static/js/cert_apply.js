@@ -6,12 +6,12 @@ $(function () {
 
   $('#getTXT').click(function () {
       $('#wave').show() // 点击按钮 显示动画
-      if($('#TXT_info').is(':visible')) {
-        $('#TXT_info').hide()
-      }
-      if($('#err').is(':visible')) {
-        $('#err').hide()
-      }
+      $('#TXT_info').hide()
+
+
+      console.log(88888888888)
+      $('#err').hide()
+
       var domain = $('.input-lg').val()
       $.ajax({
           url:'/cert/apply/postdomain/',
@@ -22,9 +22,16 @@ $(function () {
               var result = JSON.parse(msg)
               if(result.status == 'OK') {
                 $('#TXT_info').show()
+                var host = result.host
                 var TXT = result.TXT
-                $('#hostname').text('_acme-challenge')
+                $('#hostname').text(host)
                 $('#TXTval').text(TXT)
+              }else if ( result.status == 'SUCCESS'){
+                var files = res.files
+                for(var i=0; i<files.length; i++) {
+                var fileName = files[i]
+                $('#certList>ul').prepend("<li><a href='/cert/download/"+domain+"/"+fileName+"/'>"+fileName+"</a></li>")
+                }
               }else {
                 $('#err').show()
                 var errInfo = result.data
@@ -49,7 +56,7 @@ $(function () {
               var files = res.files
               for(var i=0; i<files.length; i++) {
                 var fileName = files[i]
-                $('#certList>ul').prepend("<li><a href='/cert/apply/"+domain+"/"+fileName+"/'>"+fileName+"</a></li>")
+                $('#certList>ul').prepend("<li><a href='/cert/download/"+domain+"/"+fileName+"/'>"+fileName+"</a></li>")
               }
             }else {
               // 错误的处理
