@@ -8,7 +8,7 @@ d = 'limlin.cn'
 class ACME_cll(object):
     def __init__(self,domain):
         self.domain = domain
-        self.basedir = '/root/.acme.sh/'
+        self.basedir = '/root/.acme.sh/certdir/'
         self.acme = '/root/.acme.sh/acme.sh'
 
 
