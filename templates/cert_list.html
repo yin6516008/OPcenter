@@ -1,12 +1,242 @@
 {% extends 'master.html' %}
 
 {% block css %}
-    <link rel="stylesheet" href="/static/css/mycss/index.css">
     <link rel="stylesheet" href="/static/css/mycss/cert_list.css">
 {% endblock %}
 
 {% block content %}
-<h1>证书列表</h1>
+<!--右侧部分开始-->
+    <div class="row J_mainContent animated fadeInRight" id="content-main">
+      <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="file-manager">
+                            <div class="top-box">
+                                <h3>证书列表项</h3>
+                                <input type="text" id="filterName" class="form-control col-sm-8" placeholder="请输入搜索内容···" autofocus>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <ul class="folder-list">
+                                <li><a href="#"><i class="fa fa-folder"></i> 证书1</a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-folder"></i> 证书2</a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-folder"></i> 证书3</a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-folder"></i> 证书4</a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-folder"></i> 证书5</a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li> <li><a href="#"><i class="fa fa-folder"></i> 证书6</a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9 animated fadeInRight">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <!-- 文件项 -->
+                        <div class="file-box">
+                            <div class="file">
+                                <a href="#">
+                                    <span class="corner"></span>
+
+                                    <div class="icon">
+                                        <i class="fa fa-file"></i>
+                                    </div>
+                                    <div class="file-name">
+                                        Document_2014.doc
+                                        <br/>
+                                        <small>添加时间：2014-10-13</small>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="file-box">
+                            <div class="file">
+                                <a href="#">
+                                    <span class="corner"></span>
+
+                                    <div class="icon">
+                                        <i class="fa fa-file"></i>
+                                    </div>
+                                    <div class="file-name">
+                                        Document_2014.doc
+                                        <br/>
+                                        <small>添加时间：2014-10-13</small>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="file-box">
+                            <div class="file">
+                                <a href="#">
+                                    <span class="corner"></span>
+
+                                    <div class="icon">
+                                        <i class="fa fa-file"></i>
+                                    </div>
+                                    <div class="file-name">
+                                        Document_2014.doc
+                                        <br/>
+                                        <small>添加时间：2014-10-13</small>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="file-box">
+                            <div class="file">
+                                <a href="#">
+                                    <span class="corner"></span>
+
+                                    <div class="icon">
+                                        <i class="fa fa-file"></i>
+                                    </div>
+                                    <div class="file-name">
+                                        Document_2014.doc
+                                        <br/>
+                                        <small>添加时间：2014-10-13</small>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="file-box">
+                            <div class="file">
+                                <a href="#">
+                                    <span class="corner"></span>
+
+                                    <div class="icon">
+                                        <i class="fa fa-file"></i>
+                                    </div>
+                                    <div class="file-name">
+                                        Document_2014.doc
+                                        <br/>
+                                        <small>添加时间：2014-10-13</small>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="file-box">
+                            <div class="file">
+                                <a href="#">
+                                    <span class="corner"></span>
+
+                                    <div class="icon">
+                                        <i class="fa fa-file"></i>
+                                    </div>
+                                    <div class="file-name">
+                                        Document_2014.doc
+                                        <br/>
+                                        <small>添加时间：2014-10-13</small>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="file-box">
+                            <div class="file">
+                                <a href="#">
+                                    <span class="corner"></span>
+
+                                    <div class="icon">
+                                        <i class="fa fa-file"></i>
+                                    </div>
+                                    <div class="file-name">
+                                        Document_2014.doc
+                                        <br/>
+                                        <small>添加时间：2014-10-13</small>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="file-box">
+                            <div class="file">
+                                <a href="#">
+                                    <span class="corner"></span>
+
+                                    <div class="icon">
+                                        <i class="fa fa-file"></i>
+                                    </div>
+                                    <div class="file-name">
+                                        Document_2014.doc
+                                        <br/>
+                                        <small>添加时间：2014-10-13</small>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
 {% endblock %}
 
 {% block js %}
