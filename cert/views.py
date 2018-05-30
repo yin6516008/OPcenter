@@ -7,7 +7,11 @@ from django.http import FileResponse
 
 
 def cert_list(request):
-    return render(request,'cert_list.html')
+    acme_obj = ACME_cll()
+    cert_dir = acme_obj.getcertdir()
+    return render(request,'cert_list.html',{
+        'cert_dir':cert_dir
+    })
 
 
 def cert_apply(request):
@@ -51,3 +55,10 @@ def cert_download(request,domain,file):
             return response
         else:
             return redirect("/cert/apply/")
+
+def cert_getfile(request):
+    if request.method == 'POST':
+        domain = request.POST.get('domain')
+        acme_obj = ACME_cll(domain)
+        files = acme_obj.getcertfile()
+        return HttpResponse(json.dumps(files))

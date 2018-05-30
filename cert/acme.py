@@ -6,9 +6,9 @@ from django.http import HttpResponse
 d = 'limlin.cn'
 
 class ACME_cll(object):
-    def __init__(self,domain):
+    def __init__(self,domain=None):
         self.domain = domain
-        self.basedir = '/root/.acme.sh/certdir/'
+        self.basedir = '/root/.acme.sh/'
         self.acme = '/root/.acme.sh/acme.sh'
 
 
@@ -54,7 +54,10 @@ class ACME_cll(object):
         file = self.basedir + file_path
         return str(file)
 
-
+    def getcertdir(self):
+        result = subprocess.getstatusoutput(self.acme + " --list | awk '{print $1}' |tail -n +2")
+        cert_dir = result[1].split('\n')
+        return cert_dir
 
 
 

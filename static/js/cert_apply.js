@@ -7,11 +7,7 @@ $(function () {
   $('#getTXT').click(function () {
       $('#wave').show() // 点击按钮 显示动画
       $('#TXT_info').hide()
-
-
-      console.log(88888888888)
       $('#err').hide()
-
       var domain = $('.input-lg').val()
       $.ajax({
           url:'/cert/apply/postdomain/',

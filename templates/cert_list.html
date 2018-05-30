@@ -1,12 +1,44 @@
 {% extends 'master.html' %}
 
 {% block css %}
-    <link rel="stylesheet" href="/static/css/mycss/index.css">
     <link rel="stylesheet" href="/static/css/mycss/cert_list.css">
 {% endblock %}
 
 {% block content %}
-<h1>证书列表</h1>
+<!--右侧部分开始-->
+    <div class="row J_mainContent animated fadeInRight" id="content-main">
+      <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="file-manager">
+                            <div class="top-box">
+                                <h3>证书列表</h3>
+                                <input type="text" id="filterName" class="form-control col-sm-8" placeholder="请输入搜索内容···" autofocus>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <ul class="folder-list">
+                                {% for row in cert_dir %}
+                                <li data-id="{{ row }}"><a href="#"><i class="fa fa-folder"></i>{{ row }}</a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9 animated fadeInRight">
+                <div class="row">
+                    <div id="file_table" class="col-sm-12">
+                        <!-- 文件项 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
 {% endblock %}
 
 {% block js %}
