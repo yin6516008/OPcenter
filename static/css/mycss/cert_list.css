@@ -8,6 +8,21 @@
   max-height: 700px;
   overflow-y: scroll;
 }
+.folder-list>li>a {
+    width: 80%;
+    padding: 10px 0;
+}
+.folder-list>li {
+    position: relative;
+}
+.folder-list>li>button {
+    position: absolute;
+    top: 4px;
+    right: 10px;
+    height: 30px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
 .file .icon i {
   font-size: 70px;
   color: #1ab3948a;
@@ -22,4 +37,26 @@
   width: 75%;
   border-radius: 5px;
   border: 1px solid #1ab394;  
+}
+
+/*删除按钮模态框*/
+.delbtn {
+    width: 300px;
+    margin-top: 200px;
+}
+.delbtn .modal-title,
+.delbtn .modal-footer {
+    text-align: center;
+}
+.modal-footer {
+    position: relative;
+    height: 65px;
+}
+.delbtn .modal-footer button:nth-of-type(1) {
+    position: absolute;
+    left: 25%;
+}
+.delbtn .modal-footer button:nth-of-type(2) {
+    position: absolute;
+    left: 55%;
 }

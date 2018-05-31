@@ -15,8 +15,8 @@ $(function () {
       }
   });
 
-    $('.folder-list>li').click(function () {
-        var domain = $(this).attr('data-id')
+    $('.folder-list>li>a').click(function () {
+        var domain = $(this).parent().attr('data-id')
         $.ajax({
             url:'/cert/getfile/',
             type:'post',

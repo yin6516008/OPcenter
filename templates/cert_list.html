@@ -21,7 +21,9 @@
                             <div class="hr-line-dashed"></div>
                             <ul class="folder-list">
                                 {% for row in cert_dir %}
-                                <li data-id="{{ row }}"><a href="#"><i class="fa fa-folder"></i>{{ row }}</a>
+                                <li data-id="{{ row }}">
+                                  <a href="#"><i class="fa fa-folder"></i>{{ row }}</a>
+                                  <button type="button" class="btn btn-outline btn-danger" data-toggle="modal" data-target="#myModal"><a href="#">删除</a></button>
                                 </li>
                                 {% endfor %}
                             </ul>
@@ -40,6 +42,29 @@
         </div>
       </div>
     </div>
+<!-- 删除证书的模态框 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog delbtn">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    确认删除域名"www.baidu.com"吗？
+                </h4>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="del_id" value="" id="delete">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary">
+                    确定
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 {% endblock %}
 
 {% block js %}

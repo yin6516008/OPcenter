@@ -28,13 +28,14 @@
 }
 #TXT_info {
   padding-top: 20px;
-  display: none;
+   display: none;
 }
-#TXT_info h3 {
-  display: inline;
+#TXT_info h4 {
+  display: inline-block;
+  word-break: break-word;
 }
 #TXT_info>span {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 900;
   padding-bottom: 20px;
   display: inline-block;
@@ -64,4 +65,19 @@ pre {
 /* 生成证书的相关文件列表 */
 #certList {
   display: none;
+}
+
+.panel-heading i{
+  font-size: 25px;
+}
+.panel-info>.panel-heading {
+  font-size: 20px;
+}
+#content-main>.col-sm-6 {
+  margin-top: 20px;
+}
+
+.panel.panel-info>.panel-body {
+  height: 760px;
+  overflow-y: scroll;
 }

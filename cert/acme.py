@@ -15,7 +15,9 @@ class ACME_cll(object):
     def generTXT(self):
         # cert_dir = self.basedir + self.domain
         # if os.path.exists(cert_dir):shutil.rmtree(cert_dir)
-        result = subprocess.getstatusoutput(self.acme + ' --issue  --dns -d ' + self.domain  + ' --yes-I-know-dns-manual-mode-enough-go-ahead-please')
+        excode = self.acme + ' --issue  --dns -d ' + self.domain  + ' --yes-I-know-dns-manual-mode-enough-go-ahead-please'
+        print(type(excode))
+        result = subprocess.getstatusoutput(excode)
         print(result)
         if re.search(r'Cert success.', result[1]) is not None:
             return {
