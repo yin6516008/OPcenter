@@ -6,14 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="77792de5-4b67-4ddd-9ed3-8a13e94e9f4f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cert/acme.py" beforeDir="false" afterPath="$PROJECT_DIR$/cert/acme.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cert/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cert/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cert/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/cert/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/mycss/cert_list.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/mycss/cert_list.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/cert_apply.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/cert_apply.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/cert_list.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/cert_list.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/cert_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cert_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/master.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/master.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -50,80 +44,7 @@
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="cert_apply.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/cert_apply.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1215">
-              <caret line="45" column="69" selection-start-line="45" selection-start-column="59" selection-end-line="45" selection-end-column="67" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cert/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cert_apply.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/js/cert_apply.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1215">
-              <caret line="45" column="35" selection-start-line="54" selection-start-column="73" selection-end-line="54" selection-end-column="79" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cert/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="461">
-              <caret line="55" column="13" lean-forward="true" selection-start-line="55" selection-start-column="13" selection-end-line="55" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#57#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cert_list.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/cert_list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="14" column="50" lean-forward="true" selection-start-line="14" selection-start-column="50" selection-end-line="14" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cert_list.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/js/cert_list.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="26" column="33" lean-forward="true" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="acme.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cert/acme.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="47" column="26" lean-forward="true" selection-start-line="47" selection-start-column="26" selection-end-line="47" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#17#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -172,7 +93,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/static/errors_echarts.html" />
         <option value="$PROJECT_DIR$/OPcenter/__init__.py" />
         <option value="$PROJECT_DIR$/templates/areas.html" />
         <option value="$PROJECT_DIR$/templates/head.html" />
@@ -218,11 +138,12 @@
         <option value="$PROJECT_DIR$/OPcenter/settings.py" />
         <option value="$PROJECT_DIR$/templates/cert_apply.html" />
         <option value="$PROJECT_DIR$/static/js/cert_apply.js" />
-        <option value="$PROJECT_DIR$/cert/acme.py" />
         <option value="$PROJECT_DIR$/cert/urls.py" />
         <option value="$PROJECT_DIR$/cert/views.py" />
-        <option value="$PROJECT_DIR$/static/js/cert_list.js" />
         <option value="$PROJECT_DIR$/templates/cert_list.html" />
+        <option value="$PROJECT_DIR$/cert/acme.py" />
+        <option value="$PROJECT_DIR$/static/js/cert_list.js" />
+        <option value="$PROJECT_DIR$/static/css/mycss/iconfont.css" />
       </list>
     </option>
   </component>
@@ -267,6 +188,19 @@
               <item name="OPcenter" type="b2602c69:ProjectViewProjectNode" />
               <item name="OPcenter" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OPcenter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OPcenter" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OPcenter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OPcenter" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+              <item name="mycss" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="OPcenter" type="b2602c69:ProjectViewProjectNode" />
@@ -482,7 +416,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="5" weight="0.32998884" />
       <window_info anchor="bottom" id="Event Log" order="6" side_tool="true" />
@@ -528,7 +461,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/show_areas1.html" />
     <entry file="file://$PROJECT_DIR$/static/js/show_areas1.js" />
     <entry file="file://$PROJECT_DIR$/../lib/python3.5/site-packages/django/conf/__init__.py" />
     <entry file="file://$USER_HOME$/Downloads/4web/run_.py" />
@@ -815,16 +747,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/cert_apply.html">
+    <entry file="file://$PROJECT_DIR$/cert/acme.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1215">
-          <caret line="45" column="69" selection-start-line="45" selection-start-column="59" selection-end-line="45" selection-end-column="67" />
+        <state relative-caret-position="405">
+          <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/mycss/iconfont.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="75" lean-forward="true" selection-start-line="6" selection-start-column="75" selection-end-line="6" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/cert_list.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="62" column="49" lean-forward="true" selection-start-line="62" selection-start-column="49" selection-end-line="62" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/cert_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-79">
+          <caret line="4" column="65" lean-forward="true" selection-start-line="4" selection-start-column="65" selection-end-line="4" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cert/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="55" column="13" lean-forward="true" selection-start-line="55" selection-start-column="13" selection-end-line="55" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#57#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/js/cert_apply.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1215">
+        <state relative-caret-position="685">
           <caret line="45" column="35" selection-start-line="54" selection-start-column="73" selection-end-line="54" selection-end-column="79" />
         </state>
       </provider>
@@ -839,37 +805,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cert/acme.py">
+    <entry file="file://$PROJECT_DIR$/templates/cert_apply.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="47" column="26" lean-forward="true" selection-start-line="47" selection-start-column="26" selection-end-line="47" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cert/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="55" column="13" lean-forward="true" selection-start-line="55" selection-start-column="13" selection-end-line="55" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/cert_list.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="26" column="33" lean-forward="true" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/cert_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="14" column="50" lean-forward="true" selection-start-line="14" selection-start-column="50" selection-end-line="14" selection-end-column="50" />
+        <state relative-caret-position="417">
+          <caret line="45" column="69" selection-start-line="45" selection-start-column="59" selection-end-line="45" selection-end-column="67" />
         </state>
       </provider>
     </entry>
