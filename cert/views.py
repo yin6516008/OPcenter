@@ -9,6 +9,7 @@ from django.http import FileResponse
 def cert_list(request):
     acme_obj = ACME_cll()
     cert_dir = acme_obj.getcertdir()
+    print(cert_dir)
     return render(request,'cert_list.html',{
         'cert_dir':cert_dir
     })
@@ -30,17 +31,8 @@ def cert_apply_genercert(request):
         domain = request.POST.get('domain')
         acme_obj = ACME_cll(domain)
         result = acme_obj.generCert()
-        if result == True:
-            files = acme_obj.getcertfile()
-            return HttpResponse(json.dumps({
-              'status':'OK',
-              'files':files
-            }))
-        else:
-            return HttpResponse(json.dumps({
-              'status':'ERROR',
-              'data':result
-            }))
+        print(result)
+        return HttpResponse(json.dumps(result))
 
 def cert_download(request,domain,file):
     if request.method == 'GET':
@@ -62,3 +54,13 @@ def cert_getfile(request):
         acme_obj = ACME_cll(domain)
         files = acme_obj.getcertfile()
         return HttpResponse(json.dumps(files))
+
+def cert_delete(request):
+    if request.method == 'POST':
+        domain = request.POST.get('domain')
+        acme_obj = ACME_cll(domain)
+        resute = acme_obj.cert_delete()
+        if resute:
+            return HttpResponse('OK')
+        else:
+            return HttpResponse('ERROR')

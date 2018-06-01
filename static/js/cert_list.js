@@ -1,19 +1,19 @@
 $(function () {
-  $('#side-menu>li:nth-of-type(5)').addClass('active')
-  $('#side-menu>li:nth-of-type(5)>ul').removeClass('ulhide')
-  $('#side-menu>li:nth-of-type(5)>ul').addClass('collapse')
-  $('#side-menu>li:nth-of-type(5)>ul').addClass('in')
+    $('#side-menu>li:nth-of-type(5)').addClass('active')
+    $('#side-menu>li:nth-of-type(5)>ul').removeClass('ulhide')
+    $('#side-menu>li:nth-of-type(5)>ul').addClass('collapse')
+    $('#side-menu>li:nth-of-type(5)>ul').addClass('in')
 
-  $("#filterName").keyup(function(e) {
-      $(".file-manager>ul>li")
-        .hide()
-        .filter(":contains('" + ($(this).val()).trim() + "')")
-        .show();
-      if($(this).val().trim() == "") {
+    $("#filterName").keyup(function(e) {
         $(".file-manager>ul>li")
-        .show()
-      }
-  });
+          .hide()
+          .filter(":contains('" + ($(this).val()).trim() + "')")
+          .show();
+        if($(this).val().trim() == "") {
+          $(".file-manager>ul>li")
+          .show()
+        }
+    });
 
     $('.folder-list>li>a').click(function () {
         var domain = $(this).parent().attr('data-name')
@@ -54,15 +54,35 @@ $(function () {
         })
     })
 
+    var $that = null
     $('.folder-list>li>a:nth-of-type(2)').click(function () {
-        var deleteId = $(this).parent().attr('data-id')
-        $.ajax({
-            url:'',
-            type:'post',
-            data:{'id': deleteId},
-            success:function (res) {
+        var domainName = $(this).parent().attr('data-name')
+        $('#myModalLabel').text('确认删除域名"'+domainName+'"吗？')
+        $('#hiddenIput').val(domainName)
+        $that = $(this)
+    })
 
+    // 模态框确认删除按钮
+    $('#btnConfirm').click(function () {
+        var domain = $('#hiddenIput').val()
+        $.ajax({
+            url:'/cert/delete/',
+            type:'post',
+            data:{'domain':domain},
+            success:function (msg) {
+                if ( msg == 'OK'){
+                    $that.parent().remove()
+                    $('#file_table').empty()
+                    $('#btnClose').click()
+                }else{
+                    window.location.reload()
+                }
             }
         })
+    })
+
+    // 模态框关闭按钮
+    $('#btnClose, #cross').click(function () {
+        $('#hiddenIput').val('')
     })
 })

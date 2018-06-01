@@ -21,10 +21,14 @@
                             <div class="hr-line-dashed"></div>
                             <ul class="folder-list">
                                 {% for row in cert_dir %}
-                                <li data-name="{{ row }}">
-                                  <a href="#"><i class="fa fa-folder"></i>{{ row }}</a>
-                                  <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o"></i></a>
-                                </li>
+                                    {% if row == '' %}
+                                        <p>目前还没有任何证书。</p>
+                                    {% else %}
+                                    <li data-name="{{ row }}">
+                                        <a href="#"><i class="fa fa-folder"></i>{{ row }}</a>
+                                        <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o"></i></a>
+                                    </li>
+                                    {% endif %}
                                 {% endfor %}
                             </ul>
                             <div class="clearfix"></div>
@@ -47,20 +51,16 @@
     <div class="modal-dialog delbtn">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="cross">
                     &times;
                 </button>
                 <h4 class="modal-title" id="myModalLabel">
-                    确认删除域名"www.baidu.com"吗？
                 </h4>
             </div>
             <div class="modal-footer">
-                <input type="hidden" name="del_id" value="" id="delete">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                </button>
-                <button type="button" class="btn btn-primary">
-                    确定
-                </button>
+                <input type="hidden" name="del_id" value="" id="hiddenIput">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose" >关闭</button>
+                <button type="button" class="btn btn-primary" id="btnConfirm" >确定</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->

@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^apply/genercert/$', views.cert_apply_genercert),
     url(r'^download/(.*)/(.*)/$', views.cert_download),
     url(r'^getfile/$', views.cert_getfile),
+    url(r'^delete/$', views.cert_delete)
 
 ]

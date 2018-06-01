@@ -17,18 +17,18 @@ $(function () {
           type:'post',
           success:function (msg) {
               $('#wave').hide()
-              var result = JSON.parse(msg)
-              var TXT = result.TXT
-              var excode = result.excode //后台记录
-              $('#record').append('<hr/>').append(excode) //后台记录添加到右侧
-              if(result.status == 'OK') {
+              var resultult = JSON.parse(msg)
+              var TXT = resultult.TXT
+              var sys_info = resultult.sys_info//后台记录
+              $('#record').append('<hr/>').append(sys_info)  //后台记录添加到右侧
+              if(resultult.status == 'OK') {
                 $('#TXT_info').show()
-                var host = result.host
+                var host = resultult.host
                 $('#hostname').text(host)
                 $('#TXTval').text(TXT)
-              }else if ( result.status == 'SUCCESS'){
+              }else if ( resultult.status == 'SUCCESS'){
                 $('#certList').show()
-                var files = res.files
+                var files = result.files
                 for(var i=0; i<files.length; i++) {
                 var fileName = files[i]
                 $('#certList>ul').prepend("<li><a href='/cert/download/"+domain+"/"+fileName+"/'>"+fileName+"</a></li>")
@@ -54,13 +54,16 @@ $(function () {
           type: 'post',
           success: function (msg) {
               $('#wave').hide()
-              var res = JSON.parse(msg)
-              var excode = res.excode
-              $('#record').append('<hr/>').append(excode)
-              if(res.status == 'OK') {
+              var result = JSON.parse(msg)
+              console.log(result.sys_info)
+              console.log(result)
+              var sys_info = result.sys_info
+              $('#record').append('<hr/>').append(sys_info)
+              if(result.status == 'OK') {
                   // 正确返回的处理
+
                   $('#certList').show()
-                  var files = res.files
+                  var files = result.files
                   for(var i=0; i<files.length; i++) {
                       var fileName = files[i]
                       $('#certList>ul').prepend("<li><a href='/cert/download/"+domain+"/"+fileName+"/'>"+fileName+"</a></li>")
