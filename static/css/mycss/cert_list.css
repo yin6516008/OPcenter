@@ -24,6 +24,10 @@
     padding-bottom: 0px;
     font-size: 12px;
 }
+.progress-striped.active {
+    margin: 0 18px 6px 0;
+    height: 6px;
+}
 .folder-list>li>a:nth-of-type(2) {
     position: absolute;
     top: 9px;

@@ -54,6 +54,12 @@ $(function () {
         })
     })
 
+    // 证书剩余天数百分比显示
+    var remainDays = $('.folder-list>li>span').text().replace(/[^0-9]/ig,"")
+    var days = remainDays/90*100+ '%'
+    $('.folder-list>li>div>div').css('width',days)
+
+
     var $that = null
     $('.folder-list>li>a:nth-of-type(2)').click(function () {
         var domainName = $(this).parent().attr('data-name')
