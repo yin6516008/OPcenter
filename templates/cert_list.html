@@ -24,8 +24,8 @@
                                     {% if row == '' %}
                                         <p>目前还没有任何证书。</p>
                                     {% else %}
-                                    <li data-name="{{ row }}">
-                                        <a href="#"><i class="fa fa-folder"></i>{{ row }}</a>
+                                    <li data-name="{{ row.domain }}">
+                                        <a href="#"><i class="fa fa-folder"></i>{{ row.domain }}</a>
                                         <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o"></i></a>
                                     </li>
                                     {% endif %}

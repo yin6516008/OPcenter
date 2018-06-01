@@ -70,8 +70,7 @@ class ACME_cll(object):
         return str(file)
 
     def getcertdir(self):
-        result = subprocess.getstatusoutput(self.acme + " --list | awk '{print $1}' |tail -n +2")
-        print(result)
+        result = subprocess.getstatusoutput(self.acme + " --list |tail -n +2")
         cert_dir = result[1].split('\n')
         return cert_dir
 

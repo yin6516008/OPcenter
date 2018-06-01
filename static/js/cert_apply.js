@@ -66,7 +66,7 @@ $(function () {
                   var files = result.files
                   for(var i=0; i<files.length; i++) {
                       var fileName = files[i]
-                      $('#certList>ul').prepend("<li><a href='/cert/download/"+domain+"/"+fileName+"/'>"+fileName+"</a></li>")
+                      $('#certList>ul').append("<li><a href='/cert/download/"+domain+"/"+fileName+"/'>"+fileName+"</a></li>")
                   }
               }else {
                   $('#err').show() //出错提示

@@ -1,6 +1,7 @@
 from django.shortcuts import render,HttpResponse,redirect
 from cert.acme import ACME_cll
 import json,os
+import time
 from django.http import FileResponse
 # Create your views here.
 
@@ -8,8 +9,12 @@ from django.http import FileResponse
 
 def cert_list(request):
     acme_obj = ACME_cll()
-    cert_dir = acme_obj.getcertdir()
-    print(cert_dir)
+    cert_info_list = acme_obj.getcertdir()
+    cert_dir = []
+    for row in cert_info_list:
+        cert_time = row.split('  ')
+        valid_day = int((int(cert_time[1]) + 90*3600*24 - time.time()) / (3600 * 24))
+        cert_dir.append({'domain':cert_time[0],'valid_day':valid_day})
     return render(request,'cert_list.html',{
         'cert_dir':cert_dir
     })
