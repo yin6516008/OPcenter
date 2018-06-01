@@ -20,16 +20,25 @@
                             </div>
                             <div class="hr-line-dashed"></div>
                             <ul class="folder-list">
-                                {% for row in cert_dir %}
-                                    {% if row == '' %}
+                            {% if cert_dir == '' %}
                                         <p>目前还没有任何证书。</p>
-                                    {% else %}
+                            {% else %}
+                                {% for row in cert_dir %}
                                     <li data-name="{{ row.domain }}">
                                         <a href="#"><i class="fa fa-folder"></i>{{ row.domain }}</a>
+                                        {% if row.valid_day == '' %}
+                                            <span>未成功</span>
+                                        {% else %}
+                                        <span>{{ row.valid_day }}天</span>
+                                            <div class="progress progress-striped active">
+                                                <div role="progressbar" class="progress-bar progress-bar-warning">
+                                                </div>
+                                            </div>
+                                        {% endif %}
                                         <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o"></i></a>
                                     </li>
-                                    {% endif %}
                                 {% endfor %}
+                            {% endif %}
                             </ul>
                             <div class="clearfix"></div>
                         </div>

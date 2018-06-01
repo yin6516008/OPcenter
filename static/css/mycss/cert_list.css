@@ -9,11 +9,24 @@
   overflow-y: scroll;
 }
 .folder-list>li>a:nth-of-type(1) {
-    width: 80%;
+    width: 50%;
     padding: 10px 0;
 }
 .folder-list>li {
     position: relative;
+}
+/*剩余天数显示*/
+.folder-list>li>span {
+    position: absolute;
+    top: 10px;
+    right: 80px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-size: 12px;
+}
+.progress-striped.active {
+    margin: 0 18px 6px 0;
+    height: 6px;
 }
 .folder-list>li>a:nth-of-type(2) {
     position: absolute;

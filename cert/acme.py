@@ -22,7 +22,7 @@ class ACME_cll(object):
         if re.search(r'Cert success.', result[1]) is not None:
             return {
                 'status':'SUCCESS',
-                'data':self.getcertfile(),
+                'files':self.getcertfile(),
                 'sys_info':result[1]
             }
 
@@ -71,8 +71,11 @@ class ACME_cll(object):
 
     def getcertdir(self):
         result = subprocess.getstatusoutput(self.acme + " --list |tail -n +2")
-        cert_dir = result[1].split('\n')
-        return cert_dir
+        if result[1] == '':
+            return None
+        else:
+            cert_dir = result[1].split('\n')
+            return cert_dir
 
     def cert_delete(self):
         cert_abs_path = self.basedir + self.domain

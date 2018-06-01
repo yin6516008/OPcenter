@@ -8,7 +8,7 @@ $(function () {
       $('#wave').show() // 点击按钮 显示动画
       $('#TXT_info').hide()
       $('#err').hide()
-      $('#certList').hide().html('')
+      $('#certList').remove()
       $('#record').text('系统操作信息：')
       var domain = $('#inputBox').val()
       $.ajax({
@@ -17,21 +17,23 @@ $(function () {
           type:'post',
           success:function (msg) {
               $('#wave').hide()
-              var resultult = JSON.parse(msg)
-              var TXT = resultult.TXT
-              var sys_info = resultult.sys_info//后台记录
+              var result = JSON.parse(msg)
+              var TXT = result.TXT
+              var sys_info = result.sys_info//后台记录
               $('#record').append('<hr/>').append(sys_info)  //后台记录添加到右侧
-              if(resultult.status == 'OK') {
+              if(result.status == 'OK') {
                 $('#TXT_info').show()
-                var host = resultult.host
+                var host = result.host
                 $('#hostname').text(host)
                 $('#TXTval').text(TXT)
-              }else if ( resultult.status == 'SUCCESS'){
+              }else if ( result.status == 'SUCCESS'){
+                $('#wave').after($('<div class="alert alert-success" id="certList"><ul></ul></div>'))
                 $('#certList').show()
                 var files = result.files
                 for(var i=0; i<files.length; i++) {
                 var fileName = files[i]
-                $('#certList>ul').prepend("<li><a href='/cert/download/"+domain+"/"+fileName+"/'>"+fileName+"</a></li>")
+                console.log(fileName)
+                $('#certList>ul').append("<li><a href='/cert/download/"+domain+"/"+fileName+"/'>"+fileName+"</a></li>")
                 }
               }else {
                 $('#err').show()
@@ -55,17 +57,17 @@ $(function () {
           success: function (msg) {
               $('#wave').hide()
               var result = JSON.parse(msg)
-              console.log(result.sys_info)
-              console.log(result)
               var sys_info = result.sys_info
               $('#record').append('<hr/>').append(sys_info)
               if(result.status == 'OK') {
                   // 正确返回的处理
 
+                  $('#wave').after($('<div class="alert alert-success" id="certList"><ul></ul></div>'))
                   $('#certList').show()
                   var files = result.files
                   for(var i=0; i<files.length; i++) {
                       var fileName = files[i]
+                      console.log(fileName)
                       $('#certList>ul').append("<li><a href='/cert/download/"+domain+"/"+fileName+"/'>"+fileName+"</a></li>")
                   }
               }else {
