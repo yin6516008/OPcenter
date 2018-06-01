@@ -39,34 +39,37 @@ $(function () {
           }
       })
 
-      $('#generateCert').click(function () {
-        $('#err').hide()
-        $('#wave').show()
-        $('#wave>h3').text('证书生成中，请稍后···')
-        $.ajax({
+
+  })
+      
+
+  $('#generateCert').click(function () {
+      var domain = $('#inputBox').val()
+      $('#err').hide()
+      $('#wave').show()
+      $('#wave>h3').text('证书生成中，请稍后···')
+      $.ajax({
           url: '/cert/apply/genercert/',
           data: {'domain':domain},
           type: 'post',
           success: function (msg) {
-            $('#wave').hide()
-            var res = JSON.parse(msg)
-            var excode = res.excode
-            $('#record').append('<hr/>').append(excode)
-            if(res.status == 'OK') {
-              // 正确返回的处理
-              $('#certList').show()
-              var files = res.files
-              for(var i=0; i<files.length; i++) {
-                var fileName = files[i]
-                $('#certList>ul').prepend("<li><a href='/cert/download/"+domain+"/"+fileName+"/'>"+fileName+"</a></li>")
+              $('#wave').hide()
+              var res = JSON.parse(msg)
+              var excode = res.excode
+              $('#record').append('<hr/>').append(excode)
+              if(res.status == 'OK') {
+                  // 正确返回的处理
+                  $('#certList').show()
+                  var files = res.files
+                  for(var i=0; i<files.length; i++) {
+                      var fileName = files[i]
+                      $('#certList>ul').prepend("<li><a href='/cert/download/"+domain+"/"+fileName+"/'>"+fileName+"</a></li>")
+                  }
+              }else {
+                  $('#err').show() //出错提示
               }
-            }else {
-              $('#err').show() //出错提示
-            }
           }
-        })
       })
-      
   })
 
   // 监听输入框回车事件
@@ -75,7 +78,6 @@ $(function () {
       $('#getTXT').click()
     }
   })
-
   // 点击复制
   $('#copyHostname').click(function () {
       copyContent('hostname')

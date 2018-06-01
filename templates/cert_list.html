@@ -21,9 +21,9 @@
                             <div class="hr-line-dashed"></div>
                             <ul class="folder-list">
                                 {% for row in cert_dir %}
-                                <li data-id="{{ row }}">
+                                <li data-name="{{ row }}">
                                   <a href="#"><i class="fa fa-folder"></i>{{ row }}</a>
-                                  <button type="button" class="btn btn-outline btn-danger" data-toggle="modal" data-target="#myModal"><a href="#">删除</a></button>
+                                  <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o"></i></a>
                                 </li>
                                 {% endfor %}
                             </ul>

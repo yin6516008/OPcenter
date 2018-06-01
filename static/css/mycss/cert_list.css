@@ -8,21 +8,27 @@
   max-height: 700px;
   overflow-y: scroll;
 }
-.folder-list>li>a {
+.folder-list>li>a:nth-of-type(1) {
     width: 80%;
     padding: 10px 0;
 }
 .folder-list>li {
     position: relative;
 }
-.folder-list>li>button {
+.folder-list>li>a:nth-of-type(2) {
     position: absolute;
-    top: 4px;
+    top: 9px;
     right: 10px;
     height: 30px;
-    padding-top: 0px;
+    padding-top: 1px;
     padding-bottom: 0px;
 }
+/* 垃圾桶字体图标 */
+.fa.fa-trash-o {
+  color: red;
+  font-size: 16px;
+}
+/* 右侧文件字体图标 */
 .file .icon i {
   font-size: 70px;
   color: #1ab3948a;
