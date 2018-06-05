@@ -14,8 +14,8 @@ def cert_list(request):
         return render(request,'cert_list.html',{'cert_dir':''})
     cert_dir = []
     for row in cert_info_list:
-        cert_time = row.split('  ')
-        if cert_time[1] == '':
+        cert_time = row.split()
+        if len(cert_time)<2:
             cert_dir.append({'domain':cert_time[0],'valid_day':''})
             continue
         valid_day = int((int(cert_time[1]) + 90*3600*24 - time.time()) / (3600 * 24))

@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2ce39062-dd1e-47b4-9c06-02ba7f9ec821" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/OPcenter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/OPcenter.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OPcenter/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/OPcenter/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/check_cert/check_cert_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/check_cert/check_cert_run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/check_cert/config.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/check_cert/error.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/send_warning/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/send_warning/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/send_warning/send_mail.py" beforeDir="false" afterPath="$PROJECT_DIR$/send_warning/send_mail.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webmoni/publicFunc.py" beforeDir="false" afterPath="$PROJECT_DIR$/webmoni/publicFunc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webmoni/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/webmoni/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="2ce39062-dd1e-47b4-9c06-02ba7f9ec821" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
