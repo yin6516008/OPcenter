@@ -76,7 +76,7 @@ def get_areas_data(url_id):
 # 获取主页 "网站监控统计" 图里的数据
 def get_index_pie():
     ok_number = DomainName.objects.filter(status=100).filter(check_id=0).count()
-    error_number = DomainName.objects.filter(~Q(status= 100)).filter(check_id=0).count()
+    error_number = DomainName.objects.filter(~Q(status= 100) & Q(cert_valid_days=None)).filter(check_id=0).count()
     no_check = DomainName.objects.filter(~Q(check_id=0)).count()
     data = [
         {

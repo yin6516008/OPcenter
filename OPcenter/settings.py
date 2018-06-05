@@ -84,10 +84,10 @@ WSGI_APPLICATION = 'OPcenter.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'OPcenter_2',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': '192.168.2.186',
+        'NAME': 'OPcenter',
+        'USER': 'opcenter',
+        'PASSWORD': 'Kemingjunde888',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }
