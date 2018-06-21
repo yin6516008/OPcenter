@@ -12,7 +12,11 @@ $(function () {
         $('#certList').remove()
         $('#record').text('系统操作信息：')
         var domain = $('#inputBox').val()
-        var algorithm = $('input[name="algorithm"]').val()
+        if ($('input[name="algorithm"]').prop('checked')) {
+            var algorithm = $('input[name="algorithm"]:eq(0)').val()
+        } else {
+            var algorithm = $('input[name="algorithm"]:eq(1)').val()
+        }
         console.log(algorithm)
         $.ajax({
             url:'/cert/TrustAsia_apply/create_order/',
