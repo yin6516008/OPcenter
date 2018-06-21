@@ -116,6 +116,7 @@ class TrustAsia(object):
             if not os.path.exists(domaindir):
                 os.makedirs(domaindir)
             pem = domaindir + domain +".pem"
+            CA_cert = domaindir +domain +".cer"
             key = domaindir + domain +".key"
             pfx = domaindir + domain +'.pfx'
 
@@ -125,7 +126,10 @@ class TrustAsia(object):
             password_file = domaindir + 'password-' + domain + '.txt'
 
             with open(pem,"w") as f:
-                f.write(cert_key["cacert"] + cert_key["cert"])
+                f.write(cert_key["cert"])
+
+            with open(CA_cert,"w") as pf:
+                pf.write(cert_key["cacert"])
 
             with open(key,"w") as k:
                 k.write(cert_key["key"])
@@ -135,7 +139,7 @@ class TrustAsia(object):
                 p.write(password)
 
             result = subprocess.getstatusoutput(
-                'openssl pkcs12 -export -in ' + pem + ' -inkey ' + key + ' -out ' + pfx + ' -certfile ' + pem + ' -password pass:' + password)
+                'openssl pkcs12 -export -in ' + pem + ' -inkey ' + key + ' -out ' + pfx + ' -certfile ' + CA_cert + ' -password pass:' + password)
 
 
             # 打开或新建压缩文件
