@@ -1,3 +1,3 @@
 # 检查间隔 单位：秒
-INTERVAL = 120
+INTERVAL = 600
 

@@ -12,8 +12,8 @@ import datetime
 import json
 
 # 导入通用的函数
-from webmoni.publicFunc import get_areas_data
-
+from webmoni.publicFunc import get_areas_data,Domain_table
+from OPcenter.settings import webmoni_error_trigger
 
 # Create your views here
 
@@ -129,8 +129,8 @@ def search(request):
 @check_login
 def tables(request,page=1):
     if request.method == 'GET':
-        project_all = Project.objects.all()
-        domainall = DomainName.objects.all()
+        Domain_table_obj = Domain_table()
+        domainall = Domain_table_obj.domain_all()
         paginator = Paginator(domainall, 20)
         try:
             one_page = paginator.page(page)
@@ -138,33 +138,28 @@ def tables(request,page=1):
             one_page = paginator.page(1)
         except EmptyPage:
             one_page = paginator.page(paginator.num_pages)
-        fault_number = DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0)).count()
-        Not_check_number = DomainName.objects.filter(check_id=1).count()
-        lt_30 = DomainName.objects.filter(cert_valid_days__lt=30).count()
+
         data = {
-            'project_all':project_all,
-            'fault_number':fault_number,
+            'project_all':Domain_table_obj.project_all(),
+            'fault_number':Domain_table_obj.fault_number(),
             'domainall':one_page,
-            'Not_check_number':Not_check_number,
-            'lt_30':lt_30,
+            'Not_check_number':Domain_table_obj.Not_check_number(),
+            'lt_10':Domain_table_obj.lt_10(),
             'paginator':paginator
         }
+
     return render(request,'domain_table.html',{'data':data})
 
 @check_login
 def tables_project(request,project_id):
     if request.method == 'GET':
-        project_all = Project.objects.all()
-        domainall = DomainName.objects.filter(project_name=project_id)
-        fault_number = DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0)).count()
-        Not_check_number = DomainName.objects.filter(check_id=1).count()
-        lt_30 = DomainName.objects.filter(cert_valid_days__lt=30).count()
+        Domain_table_obj = Domain_table()
         data = {
-            'project_all':project_all,
-            'fault_number':fault_number,
-            'domainall':domainall,
-            'Not_check_number':Not_check_number,
-            'lt_30':lt_30
+            'project_all':Domain_table_obj.project_all(),
+            'fault_number':Domain_table_obj.fault_number(),
+            'domainall':Domain_table_obj.domain_all(project_id),
+            'Not_check_number':Domain_table_obj.Not_check_number(),
+            'lt_10':Domain_table_obj.lt_10()
 
         }
     return render(request,'domain_table.html',{'data':data})
@@ -186,51 +181,39 @@ def tables_edit(request):
 @check_login
 def tables_fault(request):
     if request.method == 'GET':
-        project_all = Project.objects.all()
-        domainall = DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0))
-        fault_number = DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0)).count()
-        Not_check_number = DomainName.objects.filter(check_id=1).count()
-        lt_30 = DomainName.objects.filter(cert_valid_days__lt=30).count()
+        Domain_table_obj = Domain_table()
         data = {
-            'project_all':project_all,
-            'fault_number':fault_number,
-            'domainall':domainall,
-            'Not_check_number':Not_check_number,
-            'lt_30': lt_30
+            'project_all':Domain_table_obj.project_all(),
+            'fault_number':Domain_table_obj.fault_number(),
+            'domainall':Domain_table_obj.fault_domain_obj(),
+            'Not_check_number':Domain_table_obj.Not_check_number(),
+            'lt_10': Domain_table_obj.lt_10()
         }
     return render(request,'domain_table.html',{'data':data})
 
 @check_login
 def tables_notcheck(request):
     if request.method == 'GET':
-        project_all = Project.objects.all()
-        domainall = DomainName.objects.filter(check_id=1)
-        fault_number = DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0)).count()
-        Not_check_number = DomainName.objects.filter(check_id=1).count()
-        lt_30 = DomainName.objects.filter(cert_valid_days__lt=30).count()
+        Domain_table_obj = Domain_table()
         data = {
-            'project_all':project_all,
-            'fault_number':fault_number,
-            'domainall':domainall,
-            'Not_check_number':Not_check_number,
-            'lt_30': lt_30
+            'project_all':Domain_table_obj.project_all(),
+            'fault_number':Domain_table_obj.fault_number(),
+            'domainall':Domain_table_obj.DomainName.objects.filter(check_id=1),
+            'Not_check_number':Domain_table_obj.Not_check_number(),
+            'lt_10': Domain_table_obj.lt_10()
         }
     return render(request,'domain_table.html',{'data':data})
 
 @check_login
-def tables_lt_30(request):
+def tables_lt_10(request):
     if request.method == 'GET':
-        project_all = Project.objects.all()
-        domainall = DomainName.objects.filter(cert_valid_days__lt=30)
-        fault_number = DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0)).count()
-        Not_check_number = DomainName.objects.filter(check_id=1).count()
-        lt_30 = DomainName.objects.filter(cert_valid_days__lt=30).count()
+        Domain_table_obj = Domain_table()
         data = {
-            'project_all':project_all,
-            'fault_number':fault_number,
-            'domainall':domainall,
-            'Not_check_number':Not_check_number,
-            'lt_30': lt_30
+            'project_all':Domain_table_obj.project_all(),
+            'fault_number':Domain_table_obj.fault_number(),
+            'domainall':Domain_table_obj.DomainName.objects.filter(cert_valid_days__lt=10),
+            'Not_check_number':Domain_table_obj.Not_check_number(),
+            'lt_10': Domain_table_obj.lt_10()
         }
     return render(request,'domain_table.html',{'data':data})
 
@@ -243,21 +226,18 @@ def tables_search(request,url_id=None):
             return HttpResponse('no')
         else:
             return HttpResponse(url_obj.id)
+
     if request.method == 'GET':
         if url_id is None:
             return  redirect('/webmoni/tables/')
         else:
-            project_all = Project.objects.all()
-            domainall = DomainName.objects.filter(id=url_id)
-            fault_number = DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0)).count()
-            Not_check_number = DomainName.objects.filter(check_id=1).count()
-            lt_30 = DomainName.objects.filter(cert_valid_days__lt=30).count()
+            Domain_table_obj = Domain_table()
             data = {
-                'project_all': project_all,
-                'fault_number': fault_number,
-                'domainall': domainall,
-                'Not_check_number': Not_check_number,
-                'lt_30': lt_30
+                'project_all': Domain_table_obj.project_all(),
+                'fault_number': Domain_table_obj.fault_number(),
+                'domainall': Domain_table_obj.DomainName.objects.filter(id=url_id),
+                'Not_check_number': Domain_table_obj.Not_check_number(),
+                'lt_10': Domain_table_obj.lt_10()
             }
         return render(request, 'domain_table.html', {'data': data})
 

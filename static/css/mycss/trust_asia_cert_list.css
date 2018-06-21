@@ -1,0 +1,113 @@
+.table>thead>tr>th {
+    height: 40px;
+}
+>.table>tbody>tr{
+    height: 48px;
+    box-sizing: border-box;
+}
+.table>tbody>tr:hover {
+    background-color: #EBF7FF;
+}
+.table>tbody>tr>td {
+    padding: 5px;
+}
+.table tbody .table-cell .btn{
+    font-size: 12px;
+    margin-bottom: 0;
+}
+.ibox-content:hover {
+    box-shadow: 0 4px 4px #ccc;
+}
+.ibox-content .pagination-box {
+    height: 50px;
+}
+.ibox-content .pagination-box .right-position {
+    float: right;
+}
+
+/*模态框-证书详情*/
+.modal-content {
+    margin-top: 110px;
+}
+.inmodal.detail .modal-header {
+    padding: 15px;
+    text-align: left;
+}
+.modal-detail .modal-header>span {
+    font-size: 16px;
+    font-weight: bolder;
+    color: #000;
+}
+.inmodal.detail .modal-body .body-detail {
+    padding: 0 30px 10px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.inmodal.detail .modal-body .body-detail p {
+    margin-bottom: 10px;
+    margin-top: 16px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.inmodal.detail .modal-body .body-detail p span:first-child {
+    width: 100px;
+    display: inline-block;
+    text-align: right;
+    vertical-align: top;
+}
+.inmodal.detail .modal-body .body-detail p span:last-child {
+    width: 360px;
+    display: inline-block;
+    word-break: break-all;
+}
+/*模态框-证书下载*/
+.inmodal.download .modal-header>p {
+    margin-top: 10px;
+    font-size: 18px;
+}
+.inmodal.download .modal-body>div {
+    height: 40px;
+}
+.inmodal.download .modal-body a {
+    display: block;
+    width: 160px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 25px;
+    text-align: center;
+    color: #fff;
+}
+.inmodal.download .modal-body a:first-child {
+    float: left;
+    margin-left: 45px;
+    background-color: #F7A54A;
+}
+.inmodal.download .modal-body a:last-child {
+    float: right;
+    margin-right: 45px;
+    background-color: #1C84C6;
+}
+
+/*返回按钮*/
+.ibox-back {
+    position: relative;
+    width: 100%;
+    border-top: 1px solid #ccc;
+    height: 50px;
+    background-color: #fff;
+}
+.ibox-back a {
+    display: block;
+    width: 100px;
+    height: 32px;
+    background-color: #537494;
+    border-radius: 16px;
+    line-height: 32px;
+    color: #fff;
+    position: absolute;
+    top: 8px;
+    left: 20px;
+    text-align: center;
+}
+.ibox-back a:hover {
+    background-color: #293949;
+}

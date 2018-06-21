@@ -1,0 +1,209 @@
+/* 左侧边栏样式调整 */
+#side-menu>li:nth-of-type(5)>ul>li:nth-of-type(2)>a {
+    color: #fff;
+}
+
+#content-main>.col-sm-12 {
+    padding: 0 200px;
+    margin-top: 20px;
+}
+#content-main>.col-sm-12>.panel {
+    min-width: 530px;
+}
+.ibox {
+    margin-bottom: 0;
+}
+.certInput {
+    border: 1px solid #1ab394;
+    width: 400px !important;
+}
+#wave {
+    display: none;
+}
+#wave>h3 {
+    text-align: center;
+}
+#err {
+    display: none;
+}
+#TXT_info {
+    margin: 20px 0;
+    display: none;
+}
+#TXT_info h4 {
+    display: inline-block;
+    word-break: break-word;
+}
+#TXT_info>span {
+    font-size: 18px;
+    font-weight: 900;
+    padding-bottom: 20px;
+    display: inline-block;
+}
+#TXT_info p {
+    font-size: 18px;
+}
+#TXT_info>p {
+    padding-bottom: 30px;
+    border-bottom: 1px dashed #23c6c8;
+}
+pre {
+    background: #2f4050;
+    color: #fff;
+    font-size: 16px;
+    margin-top: 25px;
+}
+/* 生成证书按钮所在div */
+#TXT_info {
+    width: 100%;
+    padding: 30px 0px 10px 0px;
+}
+#TXT_info>div {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    margin: 30px 0;
+}
+#TXT_info>div>p {
+    display: inline-block;
+    margin-right: 20px;
+}
+#TXT_info span,
+#TXT_info h4,
+#TXT_info p {
+    color: #fff;
+    font-family: "Microsoft YaHei", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    font-size: 15px;
+}
+
+/* 生成证书的相关文件列表 */
+#certList {
+    display: none;
+}
+
+.panel-heading i{
+    font-size: 16px;
+}
+.panel-heading span {
+    font-size: 16px;
+    font-family: "Microsoft YaHei", Helvetica, Arial, sans-serif;
+    padding-left: 10px;
+    letter-spacing: 2px;
+}
+.panel-info {
+    border-color: snow;
+}
+.panel-info:hover {
+    box-shadow: 5px 5px 10px;
+}
+.panel-info>.panel-heading {
+    background-color: #31708f;
+    border-color: #31708f;
+    font-size: 20px;
+}
+#content-main>.col-sm-7,
+#content-main>.col-sm-5 {
+    margin-top: 20px;
+}
+
+.panel.panel-info>.panel-body {
+    height: 720px;
+    /*overflow-y: scroll;*/
+}
+
+.download-box {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+}
+.download-box>button:nth-of-type(1) {
+    margin-right: 30px;
+}
+.download-box a {
+    color: #fff;
+}
+#wave h3 {
+    color: #fff;
+}
+
+/*搜索框样式*/
+.search-form {
+    padding: 0 100px;
+}
+.input-group {
+    /*width: 800px;*/
+    margin: 30px auto;
+}
+.input-group img {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    width: 110px;
+    z-index: 9;
+}
+.input-style {
+    border-radius: 17px;
+    padding-left: 120px;
+}
+.alert-danger {
+    width: 800px;
+    margin: 0 auto;
+}
+.panel-body {
+    position: relative;
+    background-color: #2f4050;
+}
+/*列表按钮*/
+.cert-button {
+    width: 100%;
+    height: 40px;
+    padding-bottom: 60px;
+    background-color: #ccc;
+    box-shadow: 0 5px 5px;
+}
+.cert-button-left {
+    width: 160px;
+    height: 32px;
+    float: left;
+    background-color: #537494;
+    margin: 15px;
+    margin-bottom: 0;
+    border-radius: 16px;
+}
+.cert-button-left:hover {
+    background-color: #293949;
+}
+.cert-button-left a {
+    display: block;
+    line-height: 32px;
+    text-align: center;
+    color: #fff;
+}
+.cert-button-right {
+    float: left;
+    width: 160px;
+    height: 32px;
+    background-color: #537494;
+    margin: 15px;
+    margin-bottom: 0;
+    border-radius: 16px;
+}
+.cert-button-right:hover {
+    background-color: #293949;
+}
+.cert-button-right a {
+    display: block;
+    line-height: 32px;
+    text-align: center;
+    color: #fff;
+}
+/*单选框*/
+.input-radio input[type='radio'] {
+    margin: 0 10px;
+    vertical-align: middle;
+}
+.input-radio span {
+    color: #fff;
+    padding-right: 10px;
+}

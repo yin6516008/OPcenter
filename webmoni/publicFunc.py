@@ -1,6 +1,8 @@
 from webmoni.models import *
 from django.db.models import Q
 import datetime
+from OPcenter.settings import webmoni_error_trigger
+
 
 # 根据url_id获取网站监控--》域名状态页面的数据并返回
 def get_areas_data(url_id):
@@ -16,7 +18,7 @@ def get_areas_data(url_id):
     # 起始时间
     start_time = datetime.datetime.now().replace(minute=m, second=0)
     # 结束时间
-    stop_time = start_time - datetime.timedelta(hours=1)
+    stop_time = start_time - datetime.timedelta(hours=2)
 
     # 存放区域展示页面里表格的数据
     table_data = []
@@ -46,9 +48,9 @@ def get_areas_data(url_id):
 
         # 把一个小时以内的数据分成12段,每五分钟一段,将数据存入node_data
         head = start_time
-        for i in range(0,12):
+        for i in range(0,24):
             tail = head - datetime.timedelta(minutes=5)
-            if len(time_list) < 12:
+            if len(time_list) < 24:
                 time_list.insert(0,tail.strftime('%H:%M'))
             one_data = last_12.filter(Q(datetime__lt=head) & Q(datetime__gte=tail)).first()
             if one_data is None:
@@ -76,7 +78,14 @@ def get_areas_data(url_id):
 # 获取主页 "网站监控统计" 图里的数据
 def get_index_pie():
     ok_number = DomainName.objects.filter(status=100).filter(check_id=0).count()
-    error_number = DomainName.objects.filter(~Q(status= 100)).filter(check_id=0).count()
+    fault_list = DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0) & Q(warning=0))
+    error_number = 0
+    if len(fault_list) != 0:
+        for fault in fault_list:
+            start = datetime.datetime.now() - datetime.timedelta(minutes=5)
+            if MonitorData.objects.filter(
+                    Q(url_id=fault.id) & Q(datetime__gt=start) & ~Q(total_time=None)).count() < webmoni_error_trigger:
+                error_number += 1
     no_check = DomainName.objects.filter(~Q(check_id=0)).count()
     data = [
         {
@@ -105,3 +114,51 @@ def API_verify(node_id,client_ip):
         return False
     return True if client_ip == node_obj.ip else False
 
+
+
+
+class Domain_table(object):
+    def __init__(self):
+        self.DomainName = DomainName
+        self.MonitorData = MonitorData
+        self.Project = Project
+        self.Node = Node
+        self.Event_Log = Event_Log
+        self.Event_Type = Event_Type
+
+    def project_all(self):
+        return self.Project.objects.all()
+
+    def domain_all(self,project_name=None):
+        if project_name is None:
+            return self.DomainName.objects.all()
+        else:
+            return self.DomainName.objects.filter(project_name=project_name)
+
+    def fault_number(self):
+        fault_list = self.DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0) & Q(warning=0))
+        fault_number = 0
+        if len(fault_list) != 0:
+            for fault in fault_list:
+                start = datetime.datetime.now() - datetime.timedelta(minutes=5)
+                if self.MonitorData.objects.filter(Q(url_id=fault.id) & Q(datetime__gt=start) & ~Q(total_time=None)).count() < webmoni_error_trigger:
+                    fault_number += 1
+        return fault_number
+
+    def fault_domain_obj(self):
+        domainall = []
+        fault_list = DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0) & Q(warning=0))
+        fault_number = 0
+        if len(fault_list) != 0:
+            for fault in fault_list:
+                start = datetime.datetime.now() - datetime.timedelta(minutes=5)
+                if MonitorData.objects.filter(Q(url_id=fault.id) & Q(datetime__gt=start) & ~Q(total_time=None)).count() < webmoni_error_trigger:
+                    domainall.append(fault)
+                    fault_number += 1
+        return domainall
+
+    def Not_check_number(self):
+        return self.DomainName.objects.filter(check_id=1).count()
+
+    def lt_10(self):
+        return self.DomainName.objects.filter(cert_valid_days__lt=10).count()

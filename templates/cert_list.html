@@ -1,12 +1,79 @@
 {% extends 'master.html' %}
 
 {% block css %}
-    <link rel="stylesheet" href="/static/css/mycss/index.css">
     <link rel="stylesheet" href="/static/css/mycss/cert_list.css">
+    <link rel="stylesheet" href="/static/css/mycss/iconfont.css">
 {% endblock %}
 
 {% block content %}
-<h1>证书列表</h1>
+<!--右侧部分开始-->
+    <div class="row J_mainContent animated fadeInRight" id="content-main">
+      <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="file-manager">
+                            <div class="top-box">
+                                <h3>证书列表</h3>
+                                <input type="text" id="filterName" class="form-control col-sm-8" placeholder="请输入搜索内容···" autofocus>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <ul class="folder-list">
+                            {% if cert_dir == '' %}
+                                        <p>目前还没有任何证书。</p>
+                            {% else %}
+                                {% for row in cert_dir %}
+                                    <li data-name="{{ row.domain }}">
+                                        <a href="#"><i class="fa fa-folder"></i>{{ row.domain }}</a>
+                                        {% if row.valid_day == '' %}
+                                            <span>未成功</span>
+                                        {% else %}
+                                            <span>{{ row.valid_day }}天</span>
+                                            <div class="progress progress-striped active">
+                                                <div role="progressbar" class="progress-bar progress-bar-warning">
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                        <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o"></i></a>
+                                    </li>
+                                {% endfor %}
+                            {% endif %}
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8 animated fadeInRight">
+                <div class="row">
+                    <div id="file_table" class="col-sm-12">
+                        <!-- 文件项 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+<!-- 删除证书的模态框 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog delbtn">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="cross">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                </h4>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="del_id" value="" id="hiddenIput">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose" >关闭</button>
+                <button type="button" class="btn btn-primary" id="btnConfirm" >确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 {% endblock %}
 
 {% block js %}

@@ -2,3 +2,113 @@
 #side-menu>li:nth-of-type(5)>ul>li:nth-of-type(1)>a {
   color: #fff;
 }
+
+.top-box {
+    position: relative;
+}
+.top-box input {
+    position: absolute;
+    top: -10px;
+    right: 0;
+    width: 75%;
+    border-radius: 5px;
+    border: 1px solid #31708f;
+    outline-color: #31708f;
+}
+.folder-list {
+  padding: 0;
+  height: 700px;
+  overflow-y: scroll;
+}
+.folder-list>li>a:nth-of-type(1) {
+    width: 50%;
+    padding: 10px 0;
+    font-size: 14px;
+}
+.folder-list>li {
+    position: relative;
+}
+/*剩余天数显示*/
+.folder-list>li>span {
+    position: absolute;
+    top: 10px;
+    right: 80px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-size: 14px;
+}
+.progress-striped.active {
+    margin: 0 18px 6px 0;
+    height: 6px;
+}
+.folder-list>li>a:nth-of-type(2) {
+    position: absolute;
+    top: 9px;
+    right: 10px;
+    height: 30px;
+    padding-top: 1px;
+    padding-bottom: 0px;
+}
+/* 垃圾桶字体图标 */
+.fa.fa-trash-o {
+  color: red;
+  font-size: 16px;
+}
+/* 右侧文件字体图标 */
+.file .icon i {
+  font-size: 70px;
+  color: #31708f;
+}
+.file .file-name {
+    font-size: 14px;
+}
+
+
+/*删除按钮模态框*/
+.delbtn {
+    width: 300px;
+    margin-top: 200px;
+}
+.delbtn .modal-title,
+.delbtn .modal-footer {
+    text-align: center;
+}
+.modal-footer {
+    position: relative;
+    height: 65px;
+}
+.delbtn .modal-footer button:nth-of-type(1) {
+    position: absolute;
+    left: 25%;
+}
+.delbtn .modal-footer button:nth-of-type(2) {
+    position: absolute;
+    left: 55%;
+}
+
+/* 下拉切换按钮 */
+.switchBtn {
+    width: 74px;
+    position: absolute;
+    top: 5px;
+    right: 160px;
+}
+.switchBtn>button {
+    width: 100%;
+    margin: 0 !important;
+    padding: 3px 12px;
+}
+.switchBtn .dropdown-menu {
+    width: 100%;
+    min-width: 73px;
+}
+.switchBtn .dropdown-menu a {
+    text-align: center;
+    margin: 0;
+    line-height: 16px;
+}
+ .switchBtn .btn-default {
+     background-color: #fff;
+     color: #676A6C;
+     border: 1px dotted #dde2e4;
+ }

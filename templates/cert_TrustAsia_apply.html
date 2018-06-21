@@ -1,0 +1,91 @@
+{% extends "master.html" %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/css/mycss/trust_asia.css">
+    <link rel="stylesheet" href="/static/css/mycss/iconfont.css">
+{% endblock %}
+
+
+{% block content %}
+    <!--content 区域-->
+    <div class="row J_mainContent animated fadeInRight" id="content-main">
+        <div class="cert-button">
+            <div class="cert-button-left"><a href="/cert/TrustAsia_cert_list/">TrustAisa 证书列表</a></div>
+            <div class="cert-button-right"><a href="/cert/TrustAsia_order_list/">TrustAisa 订单列表</a></div>
+        </div>
+        <div class="col-sm-7">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <i class="iconfont icon-zhengshu-copy"></i><span>TrustAsia 证书申请</span>
+                </div>
+                <div class="panel-body">
+                    <div class="panel-bg"></div>
+                    <div class="col-sm-12">
+                        <div class="ibox float-e-margins">
+                            <div class="search-form">
+                                <div class="input-group">
+                                    <input type="text" placeholder="输入域名···" name="search" class="form-control input-style" id="inputBox" autofocus>
+                                    <img src="/static/img/https.png" alt="">
+                                    <div class="input-group-btn">
+                                        <button id="getTXT" class="btn btn-primary" type="submit">获取TXT值</button>
+                                        <p id="mediaId" style="display: none"></p>
+                                    </div>
+                                </div>
+                                <!--单选框-->
+                                <div class="input-radio">
+                                    <input type="radio" name="algorithm" checked value="ecc"><span>ECC</span>
+                                    <input type="radio" name="algorithm" value="rsa"><span>RSA</span>
+                                </div>
+                                <!--主机和TXT记录-->
+                                <div id="TXT_info">
+                                    <span>主机记录：</span><h4 id="hostname">0w7oIGLBBAR4Yv26JchmBiK_DIXgJL_Tl4f1gcJ16mU</h4><button class="btn btn-file pull-right" id="copyHostname">复制</button> <br>
+                                    <span>TXT记录值：</span> <h4 id="TXTval">Pro0Du4KEaRnYOT6dZUpvgLmAKH46yHKgAemoUp2AGs</h4>&nbsp;&nbsp;<button class="btn btn-file pull-right" id="copyTxtval">复制</button>
+                                    <p>请为该域名添加一条TXT记录，记录值为TXT值。</p>
+                                    <div>
+                                        <p>添加成功后请点击“生成证书”按钮</p>
+                                        <button class="btn btn-primary" id="generateCert">生成证书</button>
+                                    </div>
+                                </div>
+                                <!-- 动画 -->
+                                <div id="wave">
+                                    <h3>TXT值获取中，请稍后···</h3>
+                                    <div class="sk-spinner sk-spinner-wave">
+                                        <div class="sk-rect1"></div>
+                                        <div class="sk-rect2"></div>
+                                        <div class="sk-rect3"></div>
+                                        <div class="sk-rect4"></div>
+                                        <div class="sk-rect5"></div>
+                                    </div>
+                                </div>
+                                <!--下载按钮-->
+                                <div class="col-sm-12 download-box" id="downloadBox">
+                                    <button type="button" class="btn btn-w-m btn-warning"><a id="nginx" href="#">下载适用Nginx证书</a></button>
+                                    <button type="button" class="btn btn-w-m btn-success"><a id="iis" href="#">下载适用IIS证书</a></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <i class="fa fa-file-text"></i><span>返回信息记录</span>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <pre id="record">系统操作信息：</pre>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block js %}
+    <script src="/static/js/trust_asia_apply.js"></script>
+{% endblock %}

@@ -1,0 +1,170 @@
+{% extends "master.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/plugins/sweetalert/sweetalert.css">
+<link rel="stylesheet" href="/static/css/mycss/trust_asia_order_list.css">
+{% endblock %}
+
+{% block content %}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>订单列表</h5>
+                </div>
+                <div class="ibox-back">
+                    <a href="/cert/TrustAsia_cert_list/"><< 证书列表</a>
+                </div>
+                <div class="ibox-content">
+                    <!--表格-->
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>订单ID</th>
+                            <th>品牌名称</th>
+                            <th>通用名称</th>
+                            <th>创建时间</th>
+                            <th>备用名称</th>
+                            <th>状态</th>
+                            <th>更多操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for row in one_page %}
+                        <tr>
+                            <td>{{ row.id }}</td>
+                            <td>{{ row.brand }}</td>
+                            <td>{{ row.common_name }}</td>
+                            <td>{{ row.created_at }}</td>
+                            <td>{{ row.dns_names }}</td>
+                            {% if row.status != 4 %}
+                            <td><div class="status_div"><span class="status_unconfirmed"></span><span>待验证</span><button order_id="{{ row.id }}" common_name="{{ row.common_name }}" class="checkBtn" data-toggle="modal" data-target="#myModalCheck">验证</button></div></td>
+                            {% elif row.status == 4 %}
+                            <td><div class="status_div"><span class="status_confirmed"></span><span>完成</span></div></td>
+                            {% endif %}
+                            <td>
+                                <div class="table-cell">
+                                    <div>
+                                        <button class="btn btn-primary btnDetail" order_id="{{ row.id }}" data-toggle="modal" data-target="#myModal"><span>详情</span></button>
+                                        <button class="btn btn-danger" order_id="{{ row.id }}" status="{{ row.status }}"><span>删除</span></button>
+                                        <!--<button class="btn btn-success"><span>证书</span></button>-->
+                                        <a href="/cert/TrustAsia_cert_select/{{ row.id }}/" class="btn btn-success btnCert" order_id="{{ row.id }}">证书</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <!--分页-->
+                    <div class="dataTables_paginate paging_simple_numbers pagination-box" id="DataTables_Table_0_paginate">
+                        <ul class="pagination right-position">
+                            {% if one_page.has_previous %}
+                            <li class="paginate_button previous" aria-controls="DataTables_Table_0" tabindex="0" id="DataTables_Table_0_previous">
+                                <a href="/cert/TrustAsia_order_list/{{ one_page.previous_page_number }}/">上一页</a>
+                            </li>
+                            {% endif %}
+                            {% for row in paginator.page_range %}
+                            <li class="paginate_button" aria-controls="DataTables_Table_0" tabindex="0">
+                                <a href="/cert/TrustAsia_order_list/{{ row }}/">{{ row }}</a></li>
+                            {% endfor %}
+                            {% if one_page.has_next %}
+                            <li class="paginate_button next" aria-controls="DataTables_Table_0" tabindex="0" id="DataTables_Table_0_next">
+                                <a href="/cert/TrustAsia_order_list/{{ one_page.next_page_number }}/">下一页</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <!--模态框--详情界面-->
+                    <div class="modal inmodal detail" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content animated bounceInRight modal-detail">
+                                <div class="modal-header">
+                                    <span>证书详情</span>
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="body-detail">
+                                        <!--<p>-->
+                                            <!--<span>验证域名：</span>-->
+                                            <!--<span>test56.linlim.cn</span>-->
+                                        <!--</p>-->
+                                        <!--<p>-->
+                                            <!--<span>TXT 记录：</span>-->
+                                            <!--<span>_dnsauth.test56</span>-->
+                                        <!--</p>-->
+                                        <!--<p>-->
+                                            <!--<span>记录值：</span>-->
+                                            <!--<span>201806141027511lgvofobwkctb42ixoigj0jz9dmtv1i1ydp1lb5317ggs0iicu</span>-->
+                                        <!--</p>-->
+                                        <p>域名：</p>
+                                        <span id="checkDomain"></span>
+                                        <p>主机记录：</p>
+                                        <span id="txtRecord"></span>
+                                        <p>TXT记录：</p>
+                                        <span id="recordValue"></span>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" id="closeBtn">关闭</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--模态框--下载界面-->
+                    <div class="modal inmodal download" id="myModalDl" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content animated flipInY">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h5 class="modal-title">证书下载</h5>
+                                    <p>请选择需要下载的类型</p>
+                                </div>
+                                <div class="modal-body">
+                                    <div>
+                                        <a href="">下载适用Nginx证书</a>
+                                        <a href="">下载适用IIS证书</a>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                                    <button type="button" class="btn btn-primary">确认</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--模态框--验证界面-->
+                    <div class="modal inmodal fade" id="myModalCheck" tabindex="-1" role="dialog"  aria-hidden="true">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title checkMsg"></h4>
+                                    <!-- 动画 -->
+                                    <div id="wave">
+                                        <h3>正在验证，请稍后···</h3>
+                                        <div class="sk-spinner sk-spinner-wave">
+                                            <div class="sk-rect1"></div>
+                                            <div class="sk-rect2"></div>
+                                            <div class="sk-rect3"></div>
+                                            <div class="sk-rect4"></div>
+                                            <div class="sk-rect5"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="/static/js/content.min.js"></script>
+<script src="/static/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/static/js/trust_asia_order_list.js"></script>
+{% endblock %}

@@ -79,9 +79,9 @@ $(function () {
     })
 
   // =================删除模态框====================
-  console.log(name_title)
   $('[data-target="#delModal"]').click(function () {
-    $('#delModalLabel').text('确认删除域名 "'+ name_title + '" 吗?')
+    var name_title = $('#domainName').text()
+    $('#delModalLabel').text('确认删除'+ name_title + '吗?')
   })
 
   // ================修改模态框================
