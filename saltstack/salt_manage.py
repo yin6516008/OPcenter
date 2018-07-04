@@ -114,6 +114,7 @@ class Cmd_run(client.LocalClient):
         print(result)
         return result
 
+
 # file模块的使用-------------------
 class File_manage(client.LocalClient):
     # 文件权限检测
@@ -232,20 +233,32 @@ class Configuration(object):
         with open(self.sls_conf + edit_file, 'r') as f:
             return f.read()
 
-    # 执行初始化
+    # master执行初始化
     def master_init(self):
         # 判断salt安装与否
         if os.path.exists(self.salt_dir):
             # 创建salt文件目录
-            if not os.path.exists('/srv/salt'): # 基础环境目录
+            # 基础环境目录
+            if not os.path.exists('/srv/salt'):
                 os.makedirs('/srv/salt')
-            if not os.path.exists('/srv/salt/init'): # 初始化配置目录
-                os.makedirs('/srv/salt/init')
-            if not os.path.exists('/srv/salt/test'): # 测试环境目录
-                os.makedirs('/srv/salt/test')
-            if not os.path.exists('/srv/salt/prod'): # 生产环境目录
-                os.makedirs('/srv/salt/prod')
-
+            # 初始化配置目录 for linux
+            if not os.path.exists('/srv/salt/init/linux'):
+                os.makedirs('/srv/salt/init/linux')
+            # 初始化配置目录 for windows
+            if not os.path.exists('/srv/salt/init/windows'):
+                os.makedirs('/srv/salt/init/windows')
+            # 测试环境目录 for linux
+            if not os.path.exists('/srv/salt/test/linux'):
+                os.makedirs('/srv/salt/test/linux')
+            # 测试环境目录 for windows
+            if not os.path.exists('/srv/salt/test/windows'):
+                os.makedirs('/srv/salt/test/windows')
+            # 生产环境目录 for linux
+            if not os.path.exists('/srv/salt/prod/linux'):
+                os.makedirs('/srv/salt/prod/linux')
+            # 生产环境目录 for windows
+            if not os.path.exists('/srv/salt/prod/windows'):
+                os.makedirs('/srv/salt/prod/windows')
             # 备份master配置文件
             if os.path.exists(self.salt_dir+'master'):
                 master_bak = 'master_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S_%f')
@@ -254,41 +267,27 @@ class Configuration(object):
                 for master_bak in os.listdir(self.salt_dir):
                     if master_bak.startswith('master_') and time.time() - os.path.getmtime(self.salt_dir+master_bak) > 90*24*3600:
                         os.remove(master_bak)
-
             # 导入master的配置文件
             shutil.copyfile(self.sls_conf + 'master', self.salt_dir + 'master')
-            # 导入基础状态文件
-            shutil.copyfile(self.sls_conf + 'env_init.sls', self.file_roots + 'init/')
-            # 导入Python状态文件
-            shutil.copyfile(self.sls_conf + 'python3.sls', self.file_roots + 'init/')
-
-            # 检查配置文件
+            # # 导入基础状态文件
+            # shutil.copyfile(self.sls_conf + 'env_init.sls', self.file_roots + 'init/')
+            # # 导入Python状态文件
+            # shutil.copyfile(self.sls_conf + 'python3.sls', self.file_roots + 'init/')
             return True
 
         else:
             return False
 
-    # 执行初始化
-    def execute_init(self,minion_id,sls):
-        result = self.client.cmd(minion_id, 'state.sls', [sls])
 
 class File_upload(object):
     pass
 
-class Salt_script(object):
-    def __init__(self):
-        self.release_code = Copy_remote()
+class State_sls(client.LocalClient):
+    # 执行剧本
+    def execute_state(self, minion_id, sls):
+        result = self.cmd(minion_id, 'state.sls', [sls])
+        return result
 
-    def release_code(self,id_list):
-        # 将需要发布的文件目录挂载到salt目录下
-        subprocess.getstatusoutput(
-            "mkdir -p /srv/salt/test/OPcenter-slave && mount --bind /opt/OPcenter-slave /srv/salt/test/OPcenter-slave")
-        src_path = 'salt://test/OPcenter-slave'
-        # 发布到minion的指定目录
-        dst_path = '/test1/OPcenter-slave'
-        for id in id_list:
-            self.release_code.get_dir(id, src_path, dst_path)
-        return 'OK'
 
 """
 # test

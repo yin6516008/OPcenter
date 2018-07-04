@@ -675,11 +675,14 @@ file_roots:
   base:
     - /srv/salt
   init:
-    - /srv/salt/init
+    - /srv/salt/init/linux
+    - /srv/salt/init/windows
   test:
-    - /srv/salt/test
+    - /srv/salt/test/linux
+    - /srv/salt/test/windows
   prod:
-    - /srv/salt/prod
+    - /srv/salt/prod/linux
+    - /srv/salt/prod/windows
 #
 
 # The master_roots setting configures a master-only copy of the file_roots dictionary,

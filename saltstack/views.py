@@ -5,7 +5,7 @@ from django.shortcuts import render,redirect,HttpResponse
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from saltstack.models import Accepted_minion
-from saltstack.salt_manage import Key_manage,Cmd_run,Configuration,Copy_remote
+from saltstack.salt_manage import Key_manage,Cmd_run,Configuration,State_sls
 from login.AuthLogin import check_login
 from Aladdin.RedisQueue import Redis_Queue
 from OPcenter.settings import SUCCESS_DATA
@@ -178,8 +178,6 @@ def file_editor(request):
         #return HttpResponse(master_info)
         return render(request, 'show_editor.html', {'master_info':master_info})
 
-def release_code(request):
-    pass
 
 def control_center(request):
     if request.method == "GET":
@@ -190,12 +188,17 @@ def control_center(request):
         imported_files = conf.imported_files()
 
         data = {
-            'url':'/saltstack/',
             'host_list': host_list,
             'script':imported_files
         }
         return render(request, 'host_operate.html', {'data': data})
 
     if request.method == "POST":
-        pass
-
+        id = request.POST.get('id')
+        sls = request.POST.get('sls')
+        monion_check = Redis_Queue('execute_state')
+        task_id = time.time()
+        for id in id:
+            msg = {'pattern': 1, 'id': id,'sls':sls,'task_id':task_id}
+            monion_check.publish(msg)
+        return HttpResponse({'msg':task_id})

@@ -8,6 +8,8 @@
 }
 .div_search {
     position: relative;
+    height: 72px;
+    background-color: #fff;
 }
 .div_table {
 
@@ -34,9 +36,9 @@ table thead, tbody tr {
     left: 150px;
     top: 0;
 }
-.div_search button:first-child {
+.div_search .btnSearch {
     position: absolute;
-    left: 300px;
+    right: 100px;
     top: 0;
 }
 .div_search button:last-child {
@@ -46,7 +48,6 @@ table thead, tbody tr {
 }
 .div_table {
     position: relative;
-    margin-top: 35px;
 }
 .div_table table thead {
     position: relative;
