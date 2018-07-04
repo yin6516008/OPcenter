@@ -1,6 +1,6 @@
 from webmoni.models import *
 from django.db.models import Q
-import datetime
+import datetime,time
 from OPcenter.settings import webmoni_error_trigger
 
 
@@ -28,7 +28,8 @@ def get_areas_data(url_id):
     time_list =[]
 
     # 拿到所有的节点,通过节点去数据库查找数据,网站五分钟检测一次
-    defaultNode = Node.objects.all().order_by('id')
+    # defaultNode = Node.objects.all().order_by('id')
+    defaultNode = defaultDomain.nodes.all().order_by('id')
     for row in defaultNode:
         # 用于存放一个节点数据
         node_data = {
@@ -38,9 +39,6 @@ def get_areas_data(url_id):
         # 获取当前url一个小时以内的数据
         last_12 = row.monitordata_set.filter(Q(url=defaultDomain.id) &
             Q(datetime__lt=start_time) & Q(datetime__gte=stop_time)).order_by('datetime')
-
-        print(len(last_12))
-        print(last_12)
 
         # 表格只展示最后一次检测的数据
         if len(last_12) != 0:
@@ -80,11 +78,12 @@ def get_index_pie():
     ok_number = DomainName.objects.filter(status=100).filter(check_id=0).count()
     fault_list = DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0) & Q(warning=0))
     error_number = 0
-    if len(fault_list) != 0:
+    if len(fault_list) > 0:
         for fault in fault_list:
-            start = datetime.datetime.now() - datetime.timedelta(minutes=5)
+            start = datetime.datetime.fromtimestamp(time.time() - time.time() % 300 - 300)
+            stop = datetime.datetime.fromtimestamp(time.time() - time.time() % 300)
             if MonitorData.objects.filter(
-                    Q(url_id=fault.id) & Q(datetime__gt=start) & ~Q(total_time=None)).count() < webmoni_error_trigger:
+                    Q(url_id=fault.id) & Q(datetime__gte=start) & Q(datetime__lt=stop) &~Q(total_time=None)).count() < webmoni_error_trigger:
                 error_number += 1
     no_check = DomainName.objects.filter(~Q(check_id=0)).count()
     data = [
@@ -102,6 +101,8 @@ def get_index_pie():
         }
     ]
     return data
+
+
 
 # webmoni APP的API验证方法,通过验证客户端IP,实现只有节点机器才能调用API
 def API_verify(node_id,client_ip):

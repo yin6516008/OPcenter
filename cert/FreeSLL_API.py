@@ -5,7 +5,7 @@ import time
 import subprocess
 import zipfile
 import os
-import shutil
+
 
 class TrustAsia(object):
     def __init__(self):

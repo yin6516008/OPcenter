@@ -78,47 +78,6 @@ $(function () {
         }
     })
 
-  // =================删除模态框====================
-  $('[data-target="#delModal"]').click(function () {
-    var name_title = $('#domainName').text()
-    $('#delModalLabel').text('确认删除'+ name_title + '吗?')
-  })
-
-  // ================修改模态框================
-  // 点击"新增项目名称" 选择项目按钮变为input输入框
-  $('#itemInput_edit').hide()
-  // var projectId = null
-  $('#itemAdd_edit').click(function () {
-    $('#itemChoice_edit').hide()
-    $('#itemInput_edit').show()
-    // 点击"新增项目名称" 清空隐藏域里input的value值 方便验证
-    // projectId = $('#project').val()
-    $('#project_edit').val('')
-  })
-  $('#itemInput_edit').dblclick(function () {
-    $(this).hide().val('')
-    $('#itemChoice_edit').show()
-    // $('#project').val(projectId)
-  })
-  $('#add_edit_editForm').find('.dropdown-item-edit').click(function () {
-    $('#itemChoice_edit').text($(this).text())
-    $('#add_edit_editForm').find('[type="hidden"]').val($(this).val())
-  })
-
-  // 默认渲染到button按钮的值和列表中的值一样的时候 隐藏列表中的
-  $('#add_edit_editForm').find('.dropdown-item-edit').children('a')
-  .each(function(index, item) {
-    var btnText = $('#itemChoice_edit').text()
-    if($(item).text() == btnText) {
-      $(item).parent().hide()
-    }
-  })
-  
-  
-  // 点击关闭按钮或者× 清除表单内的三个val值
-  $('#btn_close_bottom_edit,#btn_close_top_edit').click(function () {
-    $('#edit_notadd,#edit_notwarn').attr('checked',false)
-  })
 
   // ================消息提示框================
   $('#tip_close').click(function () {

@@ -11,30 +11,25 @@
                 <!-- 头部横条 -->
                 <div class="ibox-title">
                     <div class="pull-left btns">
-                        <button type="button" class="btn btn-outline btn-info" data-toggle="modal" data-target="#myModal"><a href="#">新增</a></button>
-                        <button type="button" class="btn btn-outline btn-danger" data-toggle="modal" data-target="#delModal"><a href="#">删除</a></button>
-                        <button type="button" class="btn btn-outline btn-warning" data-toggle="modal" data-target="#editModal"><a href="#">修改</a></button>
-                    </div>
-                    <div class="pull-right">
-                        <div class="select_area">
                             <div class="btn-group select_btn1">
                                 <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle ">选择域名 <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-domains" id="domainsUl">
-                                {% for project in project_list %}
-                                  <li><a href="#">{{ project.name }}</a>
+                                    {% for project in project_list %}
+                                    <li><a href="#">{{ project.name }}</a>
                                         <ul class="third-menu">
-                                        {% for i in project.domainname_set.all %}
-                                          <li>
-                                            <a href="/webmoni/areas-{{ i.id }}/">{{ i.url }}</a>
-                                          </li>
-                                        {% endfor %}
+                                            {% for i in project.domainname_set.all %}
+                                            <li>
+                                                <a href="/webmoni/areas-{{ i.id }}/">{{ i.url }}</a>
+                                            </li>
+                                            {% endfor %}
                                         </ul>
-                                      </li>
+                                    </li>
                                     {% endfor %}
                                 </ul>
                             </div>
-                        </div>
+                    </div>
+                    <div class="pull-right">
                         <div class="form-group">
                             <input type="search" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="inputSearch">
                         </div>
@@ -133,59 +128,6 @@
                 </div><!-- /.modal-content -->
               </div><!-- /.modal -->
             </div>
-            <!-- 删除按钮的模态框 -->
-            <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="delModalLabeldel" aria-hidden="true">
-                <div class="modal-dialog delbtn">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="modal-title" id="delModalLabel">确认删除？</h4>
-                        </div>
-                        <form action="/webmoni/delete/" method="post">
-                            <div class="modal-footer">
-                                <input type="hidden" name="del_id" value="{{ graph_data.id }}" style="display: none" >
-                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                <button type="submit" class="btn btn-primary">确认</button>
-                            </div>
-                        </form>
-
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div>
-            <!-- 修改按钮的模态框 -->
-            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="btn_close_top_edit">
-                      &times;
-                    </button>
-                    <h4 class="modal-title" id="editModalLabel">
-                      修改区域
-                    </h4>
-                  </div>
-                  <form action="/webmoni/update_domain/" method="post" id="add_edit_editForm">
-                    <div class="modal-body modalAdd">
-                      <div class="input-group">
-                        <!-- <button class="btn btn-primary dropdown-toggle input-group-addon" id="itemChoice_edit">777</button> -->
-                        <input type="text" class="form-control domain_name" name="project" id="itemDetail_cate" aria-describedby="basic-addon1" disabled value="{{ graph_data.project}}">
-                        <input type="text" class="form-control domain_name" id="itemDetail_edit" aria-describedby="basic-addon1" disabled value="{{ graph_data.domain }}">
-                        <input type="text" name="domain" style="display: none ;" value="{{ graph_data.id }}">
-                        <div class="pull-right checkbox-area">
-                          <input type="checkbox" name="check_id" id="edit_notadd">不检测
-                          <input type="checkbox" name="warning" id="edit_notwarn">不警告
-                        </div>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal" id="btn_close_bottom_edit">关闭</button>
-                      <button type="submit" class="btn btn-primary" id="btn_save_edit">保存</button>
-                    </div>
-                  </form>
-                </div><!-- /.modal-content -->
-              </div><!-- /.modal -->
-            </div>
-
         <!--右侧部分结束-->
     <!-- echarts依赖项 -->
     <script src="/static/js/jquery.min.js"></script>

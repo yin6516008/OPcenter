@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -42,7 +43,7 @@ INSTALLED_APPS = [
     'webmoni',
     'user',
     'cert',
-    'salt'
+    'saltstack'
 
 ]
 
@@ -92,6 +93,11 @@ DATABASES = {
         'PORT': '3306',
     }
 }
+from redis import Redis
+REDIS_IP = '127.0.0.1'
+REDIS_PASSWORD = 'Kemingjunde888'
+REDIS = Redis(host=REDIS_IP,password=REDIS_PASSWORD)
+
 
 
 # Password validation
@@ -140,3 +146,13 @@ STATICFILES_DIRS = (
 # 正常节点小于webmoni_error_trigger个数时,属于异常。
 webmoni_error_trigger = 2
 
+# 异步提交成功返回的数据格式
+SUCCESS_DATA = {
+    'code':0,
+    'data':None
+}
+# 异步提交失败返回的数据格式
+EXCEPT_DATA = {
+    'code': 9527,
+    'data': None
+}

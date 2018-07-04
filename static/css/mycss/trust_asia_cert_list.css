@@ -111,3 +111,6 @@
 .ibox-back a:hover {
     background-color: #293949;
 }
+.gohome {
+    display: none;
+}

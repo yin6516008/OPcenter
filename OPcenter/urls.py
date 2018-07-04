@@ -25,5 +25,5 @@ urlpatterns = [
     url(r'^index/', include('index.urls')),
     url(r'^webmoni/', include('webmoni.urls')),
     url(r'^cert/', include('cert.urls')),
-
+    url(r'^saltstack/', include('saltstack.urls')),
 ]

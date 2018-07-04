@@ -1,53 +1,59 @@
 {% extends 'master.html' %}
 
 {% block css %}
+    <link rel="stylesheet" href="/static/css/plugins/iCheck/custom.css">
     <link rel="stylesheet" href="/static/css/mycss/index.css">
     <link rel="stylesheet" href="/static/css/mycss/show_quality.css">
-{% endblock %}
+                                    {% endblock %}
 
-{% block content %}
-        <!--右侧部分开始-->
-            <div class="row J_mainContent animated fadeInRight" id="content-main">
-                <!-- 头部工具栏 -->
-                <div class="ibox-title">
-                    <div class="pull-left">
-                        <div class="select_area">
-                            <div class="btn-group select_btn1">
-                                <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle ">选择域名 <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-domains" id="domainsUl">
-                                    <li><a href="/webmoni/tables/">全部域名</a></li>
-                                  {% for row in data.project_all %}
-                                  <li><a href="/webmoni/tables/p/{{ row.id }}/" name="{{ row.name }}">{{ row.name }}</a></li>
-                                  {% endfor %}
-                                </ul>
+                                    {% block content %}
+                                    <!--右侧部分开始-->
+                                    <div class="row J_mainContent animated fadeInRight" id="content-main">
+                                        <!-- 头部工具栏 -->
+                                        <div class="ibox-title">
+                                            <div class="pull-left">
+                                                <button type="button" class="btn addNew btn-outline btn-info" data-toggle="modal" data-target="#myModal"><a href="#">新增</a></button>
+                                            </div>
+                                            <div class="pull-right">
+                                                <div class="four-choose">
+                                                    <div class="select_area">
+                                                        <div class="btn-group select_btn1">
+                                    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle ">选择项目 <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-domains" id="domainsUl">
+                                        <li><a href="/webmoni/tables/">全部域名</a></li>
+                                        {% for row in data.project_all %}
+                                        <li><a href="/webmoni/tables/p/{{ row.id }}/" name="{{ row.name }}">{{ row.name }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>   
-                    <div class="pull-left btns">
-                        <div class="filterBtn">
-                          <button type="button" class="btn btn-outline btn-success" data-toggle="modal" data-target="#delModal"><a href="/webmoni/tables/fault/">故障域名</a></button>
-                          <span class="badge badge-danger pull-right">{{ data.fault_number }}</span>
+                        <div class="four-choose btns">
+                            <div class="filterBtn">
+                                <button type="button" class="btn btn-outline btn-success" data-toggle="modal" data-target="#delModal"><a href="/webmoni/tables/fault/">故障域名</a></button>
+                                <span class="badge badge-danger pull-right">{{ data.fault_number }}</span>
+                            </div>
+                            <div class="filterBtn">
+                                <button type="button" class="btn btn-outline btn-warning" data-toggle="modal" data-target="#editModal"><a href="/webmoni/tables/notcheck/">不检测</a></button>
+                                <span class="badge badge-danger pull-right">{{ data.Not_check_number }}</span>
+                            </div>
+                            <div class="filterBtn">
+                                <button type="button" class="btn btn-outline btn-info"><a href="/webmoni/tables/lt_10/">证书即将过期</a></button>
+                                <span class="badge badge-danger pull-right">{{ data.lt_10 }}</span>
+                            </div>
+                            <div class="filterBtn">
+                                <button type="button" class="btn btn-outline btn-danger cert_check" data-toggle="modal" data-target="#updateAllCert">更新全部证书</button>
+                            </div>
                         </div>
-                        <div class="filterBtn">
-                          <button type="button" class="btn btn-outline btn-warning" data-toggle="modal" data-target="#editModal"><a href="/webmoni/tables/notcheck/">不检测</a></button>
-                          <span class="badge badge-danger pull-right">{{ data.Not_check_number }}</span>
+                        <div class="form-group">
+                            <input type="search" placeholder="请输入您需要查找的域名 …" class="form-control" name="top-search" id="inputSearch" autofocus>
                         </div>
-                        <div class="filterBtn">
-                          <button type="button" class="btn btn-outline btn-info" data-toggle="modal" data-target="#myModal"><a href="/webmoni/tables/lt_10/">证书即将过期</a></button>
-                          <span class="badge badge-danger pull-right">{{ data.lt_10 }}</span>
+                        <button type="submit" class="btn btn-primary confirm" id="btn_confirm">确定</button>
+                        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                        <h4>温馨提示</h4>
+                        <p id="search_tip"></p>
                         </div>
-                    </div>  
-                    <div class="pull-right">
-
-                    <div class="form-group">
-                        <input type="search" placeholder="请输入您需要查找的域名 …" class="form-control" name="top-search" id="inputSearch" autofocus>
-                    </div>
-                    <button type="submit" class="btn btn-primary confirm" id="btn_confirm">确定</button>
-                    <div class="alert alert-danger alert-dismissible fade in" role="alert">
-                      <h4>温馨提示</h4>
-                      <p id="search_tip"></p>
-                    </div>
 
                     </div>                           
                 </div>
@@ -62,6 +68,7 @@
                                 <th>HTTP检测状态</th>
                                 <th>证书剩余天数</th>
                                 <th>证书到期时间</th>
+                                <th>CDN服务商</th>
                                 <th>是否检测</th>
                                 <th>是否告警</th>
                                 <th>操作</th>
@@ -76,6 +83,11 @@
                                 <td>{{ row.status.event_type }}</td>
                                 <td>{{ row.cert_valid_days }}</td>
                                 <td>{{ row.cert_valid_date }}</td>
+                                {% if row.cdn == "" or row.cdn == None %}
+                                <td class="cdn"></td>
+                                {% else %}
+                                <td class="cdn">{{ row.cdn }}</td>
+                                {% endif %}
                                 {% if row.check_id == 0  %}
                                 <td>是</td>
                                 {% else  %}
@@ -87,13 +99,14 @@
                                 <td>否</td>
                                 {% endif %}
                                 <td>
-                                  <div class="btn-group">
+                                  <div class="btn-group btn-refresh">
                                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                       操作 <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu animated fadeInUp" role="menu">
                                       <li><a href="#" data-toggle="modal" data-target="#delDomain"><i class="fa fa-trash-o"></i>&nbsp;  删除</a></li>
-                                      <li><a href="#" data-toggle="modal" data-target="#editDomain"><i class="fa fa-edit"></i>  编辑</a></li>
+                                      <li><a href="#" data-toggle="modal" project_id="{{ row.project_name_id }}" domain="{{ row.url }}" data-target="#editDomain"><i class="fa fa-edit"></i>  编辑</a></li>
+                                      <li class="update_cert"><a href="" data-toggle="modal" url="{{ row.id }}"><i class="fa fa-refresh"></i>  更新证书</a></li>
                                     </ul>
                                   </div>
                                 </td>
@@ -124,7 +137,67 @@
                   </nav>
                 </div>
             </div>
-            
+
+            <!-- 新增按钮的模态框 -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="btn_close_top">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    新增区域
+                </h4>
+            </div>
+                <div class="modal-body modalAdd">
+                    <div class="input-group">
+                        <div class="add_cdn">
+                            <label>
+                                <span>CDN</span>
+                                <input type="text" class="form-control cdn_value" name="cdn" placeholder="请输入要添加的CDN" aria-describedby="basic-addon1" value="">
+                            </label>
+                        </div>
+                        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle input-group-addon" id="itemChoice">选择项目<span class="caret"></span>
+                        </button>
+                        <input type="hidden" name="project" id="project">
+                        <input type="text" class="form-control" name="new_project" placeholder="请输入项目名称" id="itemInput" autofocus>
+                        <ul class="dropdown-menu">
+                            {% for row in data.project_all %}
+                            <li class="dropdown-item dropdown-item-add" value="{{ row.id }}"><a href="#">{{ row.name }}</a>
+                            </li>
+                            {% endfor %}
+                            <li class="add-new-proName"><a href="#" id="itemAdd">新增项目名称</a>
+                            </li>
+                        </ul>
+                        <input type="text" class="form-control domain_name" name="domain" placeholder="请输入要添加的域名(双击切换批量模式)" id="itemDetail" aria-describedby="basic-addon1">
+                        <textarea name="domains"  placeholder="请输入要添加的域名..." id="domains" cols="30" rows="10"></textarea>
+                        <div class="check_and_warning">
+                            <span>不检测：</span>
+                            <input type="checkbox" class="i-checks" name="check_id" id="add_notadd">
+                            <span>不警告：</span>
+                            <input type="checkbox" class="i-checks" name="warning" id="add_notwarn">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="node-position">
+                        <h4>节点位置：</h4>
+                        {% for row in data.node %}
+                        <span>{{ row.node }}</span>
+                        <input type="checkbox" class="i-checks" name="area" area_id="{{ row.id }}">
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div>
+                        <p id="errMsg"></p>
+                    </div>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="btn_close_bottom">关闭</button>
+                    <button type="submit" class="btn btn-primary" id="btn_save">保存</button>
+                </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
             <!-- 删除模态框 -->
             <div class="modal fade" id="delDomain" tabindex="-1" role="dialog" aria-labelledby="delModalLabeldel" aria-hidden="true">
               <div class="modal-dialog delbtn">
@@ -155,13 +228,37 @@
                 </div>
                 <div class="modal-body modalAdd">
                   <div class="input-group">
-                    <input type="text" class="form-control domain_name" name="project" id="itemDetail_cate" aria-describedby="basic-addon1" disabled value="{{ graph_data.project}}">
-                    <input type="text" class="form-control domain_name" id="itemDetail_edit" aria-describedby="basic-addon1" disabled value="{{ graph_data.domain }}">
+                      <div class="add_cdn">
+                          <label>
+                              <span>CDN</span>
+                              <input type="text" class="form-control domain_name" name="cdn" placeholder="请输入要添加的CDN" id="cdn_domain" aria-describedby="basic-addon1" value="">
+                          </label>
+                      </div>
+                      <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle input-group-addon" id="editBtn">
+                      </button>
+                      <ul class="dropdown-menu edit_ul">
+                          {% for row in data.project_all %}
+                          <li class="dropdown-item dropdown-item-add" value="{{ row.id }}"><a href="#">{{ row.name }}</a>
+                          </li>
+                          {% endfor %}
+                          </li>
+                      </ul>
+                    <input type="text" class="form-control domain_name" id="itemDetail_edit" aria-describedby="basic-addon1" value="">
                     <input type="hidden" name="domain" value="" id="edit">
-                    <div class="pull-right checkbox-area">
-                      <input type="checkbox" name="check_id" id="edit_notadd">不检测
-                      <input type="checkbox" name="warning" id="edit_notwarn">不警告
+                    <div class="check_and_warning">
+                      <span>不检测：</span>
+                      <input type="checkbox" class="i-checks" name="check_id" id="edit_notadd">
+                      <span>不警告：</span>
+                      <input type="checkbox" class="i-checks" name="warning" id="edit_notwarn">
                     </div>
+                  </div>
+                  <hr>
+                  <div class="edit-position">
+                     <h4>节点位置：</h4>
+                      {% for row in data.node %}
+                      <span>{{ row.node }}</span>
+                      <input type="checkbox" class="i-checks" name="area" area_id="{{ row.id }}">
+                      {% endfor %}
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -183,8 +280,30 @@
               </div>
             </div>
           </div>
+          <!--更新证书模态框-->
+          <div class="modal inmodal" id="updateAllCert" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content animated fadeIn">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h5 class="modal-title">是否更新全部证书？</h5>
+                    </div>
+                    <div class="modal-body modal-display-none">
+                        <span></span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">取消更新</button>
+                        <button type="button" class="btn btn-primary update_all_cert">确定更新</button>
+                    </div>
+                </div>
+            </div>
+</div>
 {% endblock %}
 
 {% block js %}
+    <script src="/static/js/plugins/iCheck/icheck.min.js"></script>
     <script src="/static/js/show_quality.js"></script>
+    <script>
+        $(document).ready(function(){$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green"})});
+    </script>
 {% endblock %}

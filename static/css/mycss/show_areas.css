@@ -7,6 +7,9 @@
 .ibox-title {
   position: relative;
 }
+pull-left {
+  float: left;
+}
 .btn-group {
   position: absolute;
 }
@@ -95,8 +98,8 @@ ul li {
 }
 .select_btn1 {
   position: absolute;
-  top: -27px;
-  left: -520px;
+  top: -18px;
+  left: 2px;
 }
 .select_btn1 .btn.btn-primary.dropdown-toggle {
   width: 100px;
@@ -227,17 +230,6 @@ input[type="checkbox"] {
 }
 
 /*域名名称和状态*/
-.col-sm-12 .ibox-title .pull-left:nth-of-type(1) {
-  margin-left: 5px;
-  padding-bottom: 8px;
-}
-.col-sm-12 .ibox-title .pull-left:nth-of-type(2){
-  padding-top: 2px;
-}
-.col-sm-12 .ibox-title .pull-left:nth-of-type(3) {
-  padding-top: 2px;
-  margin-left: 10px;
-}
 .sk-spinner-cube-grid.sk-spinner,
 .sk-spinner-pulse.sk-spinner{
   width: 20px;

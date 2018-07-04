@@ -1,0 +1,293 @@
+{% extends 'master.html' %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/css/mycss/host_list.css">
+{% endblock %}
+
+
+{% block content %}
+    <!--选项卡-->
+    <div class="col-sm-12 tab_card">
+        <div class="tabs-container">
+            <div class="tab_wrapper_nav">
+                <ul class="nav nav-tabs nav-ul">
+                    <li class="active bg"><a data-toggle="tab" href="#tab-1" aria-expanded="true">已添加的主机</a>
+                    </li>
+                    <li class="bg"><a data-toggle="tab" href="#tab-2" aria-expanded="false">待添加的主机</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                            <form action="/saltstack/minion_search/" method="get">
+                                <div class="panel-body panel-type">
+                                    <label><span>主机ID：</span><input class="form-control" name="id" type="text" placeholder="输入主机ID或Minion_ID" value=""></label>
+                                    <label><span>IP地址：</span><input class="form-control" name="ip" type="text" placeholder="输入主机IPv4地址" value=""></label>
+                                    <div class="system_type">
+                                        <span>系统类型：</span>
+                                        <input class="form-control" type="text" name="os" placeholder="选择系统类型" value="" autocomplete="off">
+                                        <i class="arrow" ></i>
+                                        <ul>
+                                            <li><a href="javascript:void(0)">Linux</a></li>
+                                            <li><a href="javascript:void(0)">Windows</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="tab_search"><button type="submit" class="btn-primary btn-outline">搜索</button></div>
+                            </form>
+                        <div class="btn-primary btn-outline tab_refresh"><a href="">刷新列表</a></div>
+                        <!--表格-->
+                        <div class="col-sm-12 table-responsive">
+                        <table class="table table-striped table_host">
+                            <thead>
+                            <tr>
+                                <th><input type="checkbox" class="i-checks" name="input[]" id="check_status"></th>
+                                <th>序号</th>
+                                <th>主机ID</th>
+                                <th>状态</th>
+                                <th>公网IP</th>
+                                <th>所在城市</th>
+                                <th>系统类型</th>
+                                <th>架构</th>
+                                <th>CPU(核)</th>
+                                <th>内存(GB)</th>
+                                <th>更新时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            {% for row in data.one_page %}
+                            <tr>
+                                <td>
+                                    <input type="checkbox">
+                                </td>
+                                <td>{{ forloop.counter|add:data.start }}</td>
+                                <td>{{ row.id }}</td>
+                                {% if row.status == 0 %}
+                                <td style="color: red">离线</td>
+                                {% elif row.status == 1 %}
+                                <td style="color: green">在线</td>
+                                {% elif row.status == 2 %}
+                                <td style="color: deepskyblue">检测中</td>
+                                {% else %}
+                                <td>异常</td>
+                                {% endif %}
+                                <td>{{ row.ipv4 }}</td>
+                                <td>{{ row.city }}</td>
+                                <td>{{ row.osfinger }}</td>
+                                <td>{{ row.cpuarch }}</td>
+                                <td>{{ row.num_cpus }}</td>
+                                <td>{{ row.mem_gib }}</td>
+                                <td>{{ row.datetime|date:"Y-m-d H:i:s" }}</td>
+                                <!--<td><a href="" class="btn btn-primary btn_gap">查看详情</a><a href="" class="btn btn-success">远程连接</a></td>-->
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+
+                        </table>
+
+                        <div class="col-sm-6 management">
+                            <span>批量操作：</span>
+                            <button type="button" class="btn btn-danger">状态检测</button>
+                            <!--<a href="">文件管理</a>-->
+                        </div>
+                        <div class="col-sm-6 pagination">
+                            <div class="dataTables_paginate paging_simple_numbers pagination-box" id="DataTables_Table_0_paginate">
+                                <ul class="pagination right-position">
+                                    {% if data.one_page.has_previous %}
+                                    <li>
+                                        <a href="{{ data.url }}{{ data.one_page.previous_page_number }}/" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                    {% for row in data.paginator.page_range %}
+                                    {% if data.where %}
+                                    <li><a href="{{ data.url }}{{ row }}/?id={{ data.where.id }}&ip={{ data.where.ip }}&os={{ data.where.os }}" class="pageClick">{{ row }}</a></li>
+                                    {% else %}
+                                    <li><a href="{{ data.url }}{{ row }}/" class="pageClick">{{ row }}</a></li>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% if data.one_page.has_next %}
+                                    <li>
+                                        <a href="{{ data.url }}{{ data.one_page.next_page_number }}/" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab-2" class="tab-pane">
+                    <!--表格-->
+                    <!--<div class="col-sm-4 table-responsive">-->
+                        <!--<table class="table table-striped table_host">-->
+                            <!--<thead>-->
+                            <!--<tr>-->
+                                <!--<th>序号</th>-->
+                                <!--<th>主机ID</th>-->
+                                <!--<th>操作</th>-->
+                            <!--</tr>-->
+                            <!--</thead>-->
+                            <!--<tbody>-->
+                            <!--{% for row in unaccepted_list %}-->
+                            <!--<tr>-->
+                                <!--<td>1</td>-->
+                                <!--<td>{{ row }}</td>-->
+                                <!--<td><a href="" class="btn btn-success addInfo" instanceId="{{ row }}" data-toggle="modal" data-target="#addIpAndPosition">添加</a></td>-->
+                            <!--</tr>-->
+                            <!--{% endfor %}-->
+                            <!--</tbody>-->
+                        <!--</table>-->
+                        <!--&lt;!&ndash;<div class="col-sm-6 management">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="checkbox" class="i-checks" name="input[]">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="">批量发布</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="">文件管理</a>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;模态框&ndash;&gt;-->
+                        <!--<div class="modal inmodal add_operation" id="addIpAndPosition" tabindex="-1" role="dialog"  aria-hidden="true">-->
+                            <!--<div class="modal-dialog">-->
+                                <!--<div class="modal-content animated fadeIn">-->
+                                    <!--<div class="modal-header">-->
+                                        <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                                        <!--<h2>请补全主机信息</h2>-->
+                                        <!--<div class="add_ip">-->
+                                            <!--<label><span>IP地址</span><input type="text" class="form-control ipAddr" placeholder="请输入公网IP" value=""></label>-->
+                                            <!--<span class="ip_err_blank">请输入公网IP！</span>-->
+                                            <!--<span class="ip_err_format">公网IP地址格式不符合，请输入正确的格式！</span>-->
+                                        <!--</div>-->
+                                        <!--<div class="add_position">-->
+                                            <!--<label><span>地理位置</span><input type="text" class="form-control cityPosition" placeholder="请输入所在城市" value=""></label>-->
+                                            <!--<span class="position_err_blank">请输入所在城市！</span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--&lt;!&ndash;<div class="modal-body">&ndash;&gt;-->
+
+                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                    <!--<div class="modal-footer">-->
+                                        <!--<button type="button" class="btn btn-white" data-dismiss="modal">取消</button>-->
+                                        <!--<button type="button" class="btn btn-primary closeBtn">确认</button>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash;分页&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="col-sm-6 pagination">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="dataTables_paginate paging_simple_numbers pagination-box" id="DataTables_Table_1_paginate">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<ul class="pagination right-position">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<li class="paginate_button previous" aria-controls="DataTables_Table_0" tabindex="0" id="DataTables_Table_1_previous">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<a href="">上一页</a>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<li class="paginate_button" aria-controls="DataTables_Table_0" tabindex="0">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<a href="">1</a>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<li class="paginate_button" aria-controls="DataTables_Table_0" tabindex="0">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<a href="">2</a>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<li class="paginate_button" aria-controls="DataTables_Table_0" tabindex="0">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<a href="">3</a>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<li class="paginate_button next" aria-controls="DataTables_Table_0" tabindex="0" id="DataTables_Table_1_next">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<a href="">下一页</a>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--</div>-->
+                    <div class="col-sm-4 wait_add">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content">
+                                <div class="file-manager">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table_host">
+                                            <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>主机ID</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for row in unaccepted_list %}
+                                            <tr>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ row }}</td>
+                                                <td><a href="" class="btn btn-success addInfo" instanceId="{{ row }}" data-toggle="modal" data-target="#addIpAndPosition">添加</a></td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        <!--<div class="col-sm-6 management">-->
+                                        <!--<input type="checkbox" class="i-checks" name="input[]">-->
+                                        <!--<a href="">批量发布</a>-->
+                                        <!--<a href="">文件管理</a>-->
+                                        <!--</div>-->
+                                        <!--模态框-->
+                                        <div class="modal inmodal add_operation" id="addIpAndPosition" tabindex="-1" role="dialog"  aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content animated fadeIn">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                        <h2>请补全主机信息</h2>
+                                                        <div class="add_ip">
+                                                            <label><span>IP地址</span><input type="text" class="form-control ipAddr" placeholder="请输入公网IP" value=""></label>
+                                                            <span class="ip_err_blank">请输入公网IP！</span>
+                                                            <span class="ip_err_format">公网IP地址格式不符合，请输入正确的格式！</span>
+                                                        </div>
+                                                        <div class="add_position">
+                                                            <label><span>地理位置</span><input type="text" class="form-control cityPosition" placeholder="请输入所在城市" value=""></label>
+                                                            <span class="position_err_blank">请输入所在城市！</span>
+                                                        </div>
+                                                    </div>
+                                                    <!--<div class="modal-body">-->
+
+                                                    <!--</div>-->
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                                                        <button type="button" class="btn btn-primary closeBtn">确认</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--分页-->
+                                        <!--<div class="col-sm-6 pagination">-->
+                                        <!--<div class="dataTables_paginate paging_simple_numbers pagination-box" id="DataTables_Table_1_paginate">-->
+                                        <!--<ul class="pagination right-position">-->
+                                        <!--<li class="paginate_button previous" aria-controls="DataTables_Table_0" tabindex="0" id="DataTables_Table_1_previous">-->
+                                        <!--<a href="">上一页</a>-->
+                                        <!--</li>-->
+                                        <!--<li class="paginate_button" aria-controls="DataTables_Table_0" tabindex="0">-->
+                                        <!--<a href="">1</a>-->
+                                        <!--</li>-->
+                                        <!--<li class="paginate_button" aria-controls="DataTables_Table_0" tabindex="0">-->
+                                        <!--<a href="">2</a>-->
+                                        <!--</li>-->
+                                        <!--<li class="paginate_button" aria-controls="DataTables_Table_0" tabindex="0">-->
+                                        <!--<a href="">3</a>-->
+                                        <!--</li>-->
+                                        <!--<li class="paginate_button next" aria-controls="DataTables_Table_0" tabindex="0" id="DataTables_Table_1_next">-->
+                                        <!--<a href="">下一页</a>-->
+                                        <!--</li>-->
+                                        <!--</ul>-->
+                                        <!--</div>-->
+                                        <!--</div>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="/static/js/host_list.js"></script>
+{% endblock %}

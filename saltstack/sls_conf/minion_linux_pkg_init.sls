@@ -1,0 +1,24 @@
+pkg-init:
+  pkg.installed:
+    - names:
+      - vim
+      - wget
+      - curl
+      - net-tools
+      - gcc
+      - gcc-c++
+      - make
+      - openssl
+      - openssl-devel
+      - zlib-devel
+      - xz-devel
+      - libpcap-devel
+      - db4-devel
+      - gdbm-devel
+      - tk-devel
+      - readline-devel
+      - ncurses-devel
+      - bzip2-devel
+      - autoconf
+      - glibc
+      - git

@@ -4,12 +4,18 @@ from django.contrib import admin
 
 from webmoni.models import Project,DomainName,Event_Type
 
+@admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ['id','name']
+    ordering = ('id',)
 
+@admin.register(DomainName)
 class DomainNameAdmin(admin.ModelAdmin):
-    list_display = ['id','url','status','check_id','warning']
+    list_display = ['id','url','project_name','status','check_id','warning','cert_valid_date','cert_valid_days']
+    ordering = ('id',)
+    list_display_links = ['url']
 
-admin.site.register(Project,ProjectAdmin)
-admin.site.register(DomainName,DomainNameAdmin)
-admin.site.register(Event_Type)
+@admin.register(Event_Type)
+class EventTypeAdmin(admin.ModelAdmin):
+    list_display = ['id','event_type']
+    ordering = ('id',)

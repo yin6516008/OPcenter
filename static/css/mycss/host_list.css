@@ -1,0 +1,282 @@
+/*选项卡*/
+.tab_card {
+    margin-top: 30px;
+}
+.nav-ul li.bg {
+    background-color: #aaa;
+    border-radius: 4px 4px 0 0;
+    width: 150px;
+    text-align: center;
+}
+.nav-ul li a {
+    width: 100%;
+    color: #fff !important;
+    font-size: 14px;
+    font-weight: normal;
+}
+.nav-ul li.active a {
+    background-color: #2f4050 !important;
+}
+.tab_wrapper_nav {
+    position: relative;
+}
+
+/*刷新列表*/
+.tab_refresh {
+    position: absolute;
+    top: 62px;
+    right: 140px;
+}
+.tab_refresh:hover a {
+    color: #fff;
+}
+.tab_refresh a {
+    display: block;
+    width: 100px;
+    height: 30px;
+    color: #000;
+    text-align: center;
+    border: 1px solid #1ab394;
+    line-height: 30px;
+}
+
+.tab-content .panel-type label {
+    margin-right: 20px;
+}
+.tab-content .panel-type label span {
+
+}
+.tab-content .panel-type label input {
+    width: 250px;
+    height: 30px;
+    padding-left: 10px;
+    outline: none;
+    font-size: 14px;
+    font-weight: normal;
+    display: inline-block;
+}
+.tab-content .panel-type .system_type {
+    position: absolute;
+    left: 675px;
+    top: 20px;
+}
+.tab-content .panel-type .system_type input {
+    width: 250px;
+    height: 30px;
+    padding-left: 10px;
+    outline: none;
+    font-size: 14px;
+    font-weight: normal;
+    display: inline-block;
+}
+.tab-content .panel-type .system_type span {
+    font-weight: 700;
+}
+.tab-content .panel-type .system_type .arrow {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    border-top: 6px dashed;
+    border-right: 6px solid transparent;
+    border-left: 6px solid transparent;
+    cursor: pointer;
+}
+.tab-content .panel-type .system_type ul {
+    list-style: none;
+    position: absolute;
+    right: 0;
+    top: 30px;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    display: none;
+    z-index: 9;
+}
+.tab-content .panel-type .system_type ul li {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+}
+.tab-content .panel-type .system_type ul li a {
+    color: #000;
+    font-size: 14px;
+    font-weight: normal;
+}
+.tab-content .panel-type .system_type ul li:hover {
+    background-color: #eee;
+}
+
+/*搜索列表*/
+.tabs-container {
+    position: relative;
+}
+.tab_wrapper_nav {
+    padding: 0 15px;
+}
+.tab-content {
+    padding: 0 15px;
+}
+.tab_search {
+    position: absolute;
+    top: 62px;
+    right: 500px;
+}
+.tab_search:hover {
+    color: #fff;
+}
+.tab_search {
+    width: 100px;
+    height: 30px;
+    color: #000;
+    text-align: center;
+    border: 1px solid #1ab394;
+    line-height: 30px;
+}
+.tab_search button {
+    width: 100%;
+    height: 100%;
+    line-height: 30px;
+    border: none;
+}
+.btn-primary.btn-outline {
+     color: #000;
+}
+/*表格*/
+.table-responsive {
+    padding: 0;
+}
+.table, th {
+    text-align: left;
+}
+.table_host {
+    margin-bottom: 50px;
+}
+/*发布管理*/
+.table-responsive {
+    position: relative;
+}
+.table-responsive .management {
+    position: absolute;
+    left: -6px;
+    bottom: 0;
+}
+.table-responsive .management span {
+    font-weight: 700;
+}
+/*.table-responsive .management a {*/
+    /*display: inline-block;*/
+    /*width: 80px;*/
+    /*height: 30px;*/
+    /*border: 1px solid #ccc;*/
+    /*text-align: center;*/
+    /*line-height: 30px;*/
+    /*color: #fff;*/
+    /*margin-left: 20px;*/
+    /*background-color: #c2c2c2;*/
+    /*border-radius: 5px;*/
+/*}*/
+.table-responsive .pagination {
+    position: absolute;
+    right: 7px;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+}
+.btn_gap {
+    margin-right: 12px;
+}
+
+/*模态框*/
+.add_operation .modal-content {
+    margin-top: 110px;
+}
+.add_operation .modal-header .add_ip,
+.add_operation .modal-header .add_position {
+    position: relative;
+    height: 40px;
+    margin: 20px 50px 50px 50px;
+
+}
+.add_ip .ip_err_blank {
+    display: none;
+    position: absolute;
+    left: 100px;
+    top: 50px;
+    color: #ed5565;
+    font-size: 16px;
+    font-weight: bold;
+}
+.add_ip .ip_err_format {
+    display: none;
+    position: absolute;
+    left: 100px;
+    top: 50px;
+    color: #ed5565;
+    font-size: 16px;
+    font-weight: bold;
+}
+.add_position .position_err_blank {
+    display: none;
+    position: absolute;
+    left: 100px;
+    top: 50px;
+    color: #ed5565;
+    font-size: 16px;
+    font-weight: bold;
+}
+.add_operation .modal-header h2 {
+    margin-bottom: 50px;
+}
+.add_operation .modal-header .add_ip label span,
+.add_operation .modal-header .add_position label span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    width: 100px;
+    background-color: #1ab394;
+    font-size: 14px;
+    font-weight: normal;
+    color: #fff;
+    text-align: center;
+}
+.add_operation .modal-header .add_ip label input,
+.add_operation .modal-header .add_position label input {
+    position: absolute;
+    left: 100px;
+    top: 0;
+    margin: 0;
+    height: 40px;
+    width: 368px;
+    padding-left: 10px;
+    font-size: 14px;
+    font-weight: normal;
+}
+.btn-success.focus,
+.btn-success:focus {
+    color: #fff;
+    background-color: #1a7bb9 !important;
+    border-color: #1a7bb9 !important;
+}
+.wait_add {
+    padding: 0;
+}
+.ibox-content {
+    height: 779px;
+    overflow: auto;
+}
+.hostList {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}

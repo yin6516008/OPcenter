@@ -2,7 +2,6 @@ import ssl
 import socket
 import time,datetime
 import requests
-from requests.exceptions import ReadTimeout
 import json
 import re
 import random
@@ -15,7 +14,7 @@ sys.path.append(BASE_DIR)
 os.chdir(BASE_DIR)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "OPcenter.settings")
 django.setup()
-from webmoni.models import DomainName
+
 
 class Cert_check(object):
     def __init__(self,domain):
@@ -44,16 +43,8 @@ class Cert_check(object):
             self.data['expire'] = int((notAfter - nowDate) / 3600 / 24)
             # 时间格式本地化
             self.data['endDate'] = time.strftime("%Y-%m-%d", time.localtime(notAfter))
-            # print(self.domain,self.data)
             return self.data
-        # except socket.gaierror as e:
-        #     print(self.domain,e)
-        # except socket.timeout as e:
-        #     print(self.domain,e)
-        # except ssl.SSLError as e:
-        #     print(self.domain,e)
-        # except ssl.CertificateError as e:
-        #     print(self.domain,e)
+
         except Exception:
             for i in range(0,len(self.func_list)):
                 func = self.func_list.pop(random.randint(0,len(self.func_list)-1))
@@ -164,16 +155,3 @@ class Cert_check(object):
         self.data['expire'] = int(re.search(r"\d+", detail['过期时间：：']).group())
         return self.data
 
-
-
-
-if __name__ == '__main__':
-    domain_all = DomainName.objects.all()
-    print(domain_all)
-    for domain_obj in domain_all:
-        if domain_obj.check_id == 0:
-            obj = Cert_check(domain_obj.url)
-            data = obj.py_check()
-            domain_obj.cert_valid_date = data['endDate']
-            domain_obj.cert_valid_days = data['expire']
-            domain_obj.save()

@@ -1,0 +1,55 @@
+.ibox {
+    margin-top: 15px;
+}
+.div_wrap {
+    position: relative;
+    height: 72px;
+    background-color: #fff;
+}
+.div_search {
+    position: relative;
+}
+.div_table {
+
+}
+.div_table table tbody {
+    display:block;
+    height: 720px;
+    overflow-y: scroll;
+}
+table thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+.div_search > input {
+    width: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.div_search > div {
+    width: 100px;
+    position: absolute;
+    left: 150px;
+    top: 0;
+}
+.div_search button:first-child {
+    position: absolute;
+    left: 300px;
+    top: 0;
+}
+.div_search button:last-child {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.div_table {
+    position: relative;
+    margin-top: 35px;
+}
+.div_table table thead {
+    position: relative;
+    left: 0;
+    top: 0;
+}

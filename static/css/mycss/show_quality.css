@@ -9,7 +9,7 @@
 .ibox-title {
   position: relative;
 }
-.pull-left {
+.four-choose {
   margin-right: 30px;
 }
 .ibox-title {
@@ -20,13 +20,13 @@
 }
 .select_area {
   position: absolute;
-  top: 5px;
-  left: 20px;
+  top: 0px;
+  left: -855px;
 }
-.pull-left.btns {
+.four-choose.btns {
   position: absolute;
-  top: 5px;
-  left: 140px;
+  top: 0px;
+  left: -740px;
 }
 .filterBtn>button {
   padding: 6px 3px;
@@ -40,6 +40,9 @@
   color: #fff;
   width: 68px;
 }
+.filterBtn > .btn-danger {
+    color: #fff;
+}
 .filterBtn>button:hover {
   opacity: .8;
 }
@@ -51,6 +54,9 @@
 }
 .btn.btn-outline.btn-info {
   background-color: #23c6c8;
+}
+.btn.btn-outline.btn-danger {
+    background-color: #ed5565;
 }
 .tableArea {
   padding: 0 20px;
@@ -74,7 +80,6 @@
 /* 右上角搜索框 */
 .ibox-title>.pull-right {
   position: absolute;
-  width: 260px;
   top: 5px;
   right: 20px;
 }
@@ -85,7 +90,7 @@
   width: 200px;
   position: absolute;
   top: 0;
-  left: 0;
+  left: -240px;
 }
 /* 搜索确定按钮 */
 #btn_confirm {
@@ -222,6 +227,9 @@ thead>tr:hover {
   left: 55%;
 }
 /* 修改模态框 */
+.input-group {
+    margin-bottom: 40px;
+}
 .input-group .form-control {
   width: 400px;
 }
@@ -231,10 +239,221 @@ thead>tr:hover {
 /* 复选框 */
 .checkbox-area {
   position: relative;
-  right: 30px;
-  top: 10px;
+  right: 459px !important;
+  top: 15px !important;
+}
+.checkbox-area div:first-child {
+    margin-bottom: 15px;
 }
 /* 动画 */
 #waving {
   top: 50%;
+}
+
+/* 左侧选项按钮样式调整 */
+.ibox-title {
+  position: relative;
+}
+.pull-left {
+  float: left;
+  position: absolute;
+  left: 20px;
+  top: 5px;
+}
+.dropdown-menu {
+  min-width: 65px;
+  top: 34px;
+}
+.dropdown-menu-domains {
+  top: 50px;
+}
+.dropdown-menu-domains>li {
+  width: 100px;
+}
+.dropdown-menu-domains>li>a:hover {
+  background-color: #ccc;
+}
+.dropdown-menu-domains>li>a {
+  padding: 0px 14px;
+  /* margin: 4px 0; */
+  border-radius: 0;
+  text-align: center;
+}
+.dropdown-menu>li>a {
+  padding: 3px 14px;
+  border-radius: 0;
+}
+
+/*新增*/
+.input-group {
+  margin-top: 5px;
+}
+.input-group-addon {
+  width: 108px;
+  float: left;
+  margin: 0;
+  padding: 9px;
+}
+.input-group .form-control {
+  width: 400px;
+}
+
+#itemAdd {
+  background-color: #18a689;
+  margin-bottom: 0;
+  color: #fff
+}
+#itemAdd_edit {
+  background-color: #18a689;
+  margin-bottom: 0;
+  color: #fff;
+}
+.modalAdd ul>li>a{
+  text-align: center;
+}
+#itemInput,
+#itemInput_edit {
+  width: 108px;
+  float: left;
+}
+textarea {
+  width: 400px;
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+textarea:focus {
+  border: 1px solid #1BB394;
+}
+.alert-danger {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  z-index: 1;
+  width: 260px;
+  height: 70px;
+  margin: 0;
+  display: none;
+}
+.checkbox-area {
+  right: 30px;
+  top: 10px;
+}
+input[type="checkbox"] {
+  margin-left: 20px;
+}
+.caret-edit {
+  position: absolute;
+  top: 15px;
+  left: 85px;
+}
+#itemDetail_cate {
+  width: 108px
+}
+.btn.addNew {
+  background-color: #fff !important;
+}
+.btn.addNew:hover {
+  background-color: #23c6c8 !important;
+}
+.btn.addNew:hover a {
+  color: #fff;
+}
+btn-success a {
+  color: inherit;
+}
+.btn-info a {
+  color: #23c6c8;
+}
+.btn-warning a {
+  color: inherit;
+}
+.btn-danger a {
+  color: inherit;
+}
+.add-new-proName {
+  background-color: #18a689;
+}
+
+/*编辑*/
+.dropdown-menu.edit_ul {
+    min-width: 108px;
+    top: 78px;
+}
+.dropdown-menu.edit_ul li:hover a {
+    background-color: #ccc;
+}
+
+/*cdn*/
+.add_cdn {
+    position: relative;
+}
+.add_cdn span {
+    display: inline-block;
+    width: 108px;
+    height: 34px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid #e5e6e7;
+    box-sizing: border-box;
+    text-align: center;
+    line-height: 34px;
+    font-size: 14px;
+    font-weight: normal;
+}
+.add_cdn input {
+    position: absolute;
+    top: 0;
+    left: 108px;
+    font-size: 14px;
+    font-weight: normal;
+}
+.btn-refresh>ul>li:nth-child(3)>a {
+  color: #1ab394;
+}
+.edit-checkbox {
+    position: absolute;
+    top: 90px;
+    left: 0;
+}
+.modal-footer {
+    margin-top: 40px;
+  position: relative;
+}
+.modal-footer div {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+}
+.modal-footer div p {
+  color: #ed5565;
+  font-size: 16px;
+}
+.check_and_warning {
+    position: absolute;
+    left: 0;
+    bottom: -35px;
+}
+/*更新证书模态框*/
+#updateAllCert .modal-dialog {
+    width: 450px;
+    margin-top: 150px;
+}
+#updateAllCert .modal-title {
+    font-size: 22px;
+}
+#updateAllCert .modal-body {
+    text-align: center;
+}
+#updateAllCert .modal-body span {
+    font-size: 16px;
+}
+.modal-display-none {
+    display: none;
+}
+.modal-display-block {
+    display: block;
+}
+#updateAllCert .modal-footer {
+    margin-top: 0;
 }
