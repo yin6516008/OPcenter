@@ -137,26 +137,12 @@ class Domain_table(object):
             return self.DomainName.objects.filter(project_name=project_name)
 
     def fault_number(self):
-        fault_list = self.DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0) & Q(warning=0))
-        fault_number = 0
-        if len(fault_list) != 0:
-            for fault in fault_list:
-                start = datetime.datetime.now() - datetime.timedelta(minutes=5)
-                if self.MonitorData.objects.filter(Q(url_id=fault.id) & Q(datetime__gt=start) & ~Q(total_time=None)).count() < webmoni_error_trigger:
-                    fault_number += 1
+        fault_number = self.DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0) & Q(warning=0)).count()
         return fault_number
 
     def fault_domain_obj(self):
-        domainall = []
-        fault_list = DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0) & Q(warning=0))
-        fault_number = 0
-        if len(fault_list) != 0:
-            for fault in fault_list:
-                start = datetime.datetime.now() - datetime.timedelta(minutes=5)
-                if MonitorData.objects.filter(Q(url_id=fault.id) & Q(datetime__gt=start) & ~Q(total_time=None)).count() < webmoni_error_trigger:
-                    domainall.append(fault)
-                    fault_number += 1
-        return domainall
+        fault_domain = DomainName.objects.filter(~Q(status_id=100) & Q(check_id=0) & Q(warning=0))
+        return fault_domain
 
     def Not_check_number(self):
         return self.DomainName.objects.filter(check_id=1).count()

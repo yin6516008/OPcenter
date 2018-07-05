@@ -10,6 +10,5 @@ urlpatterns = [
     url(r'^minion_del/$', views.minion_del),
     url(r'^minion_search/$', views.minion_search),
     url(r'^minion_search/(\d+)/$', views.minion_search),
-    url(r'^file_editor/$', views.file_editor),
     url(r'^controlcenter/$', views.control_center),
 ]

@@ -84,13 +84,12 @@ class Send_Mail_Worker(object):
                 if self.cache.get('data') is None:
                     continue
                 for domain,y in self.cache['data'].items():
-                    print(int(len(y['areas']) / 2) + 1)
+
                     if y['failtag'] >= int(len(y['areas']) / 2) + 1:
                         DomainName.objects.filter(url=domain).update(status=99)
                         content = '域名:{}<br>'.format(domain,domain)
                         for area,val in y['areas'].items():
                             content += '{}:{}<br>'.format(node_info[area],val)
-                            print(content)
                         content += '<a href="http://139.199.77.249:8000/webmoni/Nowarning/{}/">点击不警告</a><br>'.format(domain)
                         send_mail(domain,[Ming,Lin],content)
                     else:

@@ -20,4 +20,3 @@ opcenter_slave_start:
 #    - require:
 #      - file: opcenter_slave_release
     - order: 3
-

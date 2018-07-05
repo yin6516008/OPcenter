@@ -5,7 +5,7 @@ from django.shortcuts import render,redirect,HttpResponse
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from saltstack.models import Accepted_minion
-from saltstack.salt_manage import Key_manage,Cmd_run,Configuration,State_sls
+from saltstack.salt_manage import Key_manage,Script_manage,State_sls
 from login.AuthLogin import check_login
 from Aladdin.RedisQueue import Redis_Queue
 from OPcenter.settings import SUCCESS_DATA
@@ -131,14 +131,19 @@ def minion_test(request):
         except Exception as e:
             id = request.POST.get('id')
             # 发送检测任务到redis队列   # pattern模式1=test.ping,2=grains.items
-            test = {'pattern': 1, 'id': id}
-            monion_check.publish(test)
-            grains = {'pattern': 2, 'id': id}
-            monion_check.publish(grains)
-            # 更新数据库
             if id == '*':
                 Accepted_minion.objects.all().update(status=2)
+                items = Accepted_minion.objects.all().values()
+                for item in items:
+                    id = item['id']
+                    print(id)
+                    test = {'pattern': 1, 'id': id}
+                    monion_check.publish(test)
+
             else:
+                print(id)
+                test = {'pattern': 1, 'id': id}
+                monion_check.publish(test)
                 Accepted_minion.objects.filter(id=id).update(status=2)
             # 返回结果
             SUCCESS_DATA['data'] = '检测中'
@@ -160,28 +165,10 @@ def minion_del(request):
         msg = SUCCESS_DATA
         return HttpResponse(json.dumps(msg))
 
-def minion_control(request):
-    if request.method == "POST":
-        cmdstr = request.POST.get('cmd')
-        cmd_run = Cmd_run()
-        cmdstr = 'df -h'
-        result = cmd_run.cmd_for_linux('*',cmdstr)
-        return HttpResponse(json.dumps(result))
-
-
-def file_editor(request):
-    if request.method == "POST":
-        conf = Configuration()
-        filename = request.POST.get('edit_file')
-        master_info = conf.file_edit(filename)
-        print(master_info)
-        #return HttpResponse(master_info)
-        return render(request, 'show_editor.html', {'master_info':master_info})
-
 
 def control_center(request):
     if request.method == "GET":
-        conf = Configuration()
+        conf = Script_manage()
         # 主机列表
         host_list = Accepted_minion.objects.all().order_by('-id')
         # 已导入的脚本列表

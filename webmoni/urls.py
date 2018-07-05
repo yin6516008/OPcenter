@@ -28,5 +28,6 @@ urlpatterns = [
     url(r'^nodes/create/$', views.nodes_create),
     url(r'^nodes/delete/$', views.nodes_delete),
     url(r'^log/$', views.log),
-    url(r'^log/(\d+)/(\d+)/$', views.log)
+    url(r'^log/(\d+)/(\d+)/$', views.log),
+    url(r'^Nowarning/(.*)/$', views.Nowarning)
 ]

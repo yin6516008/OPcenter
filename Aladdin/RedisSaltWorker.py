@@ -22,14 +22,16 @@ class Minion_Check_Worker(object):
         self.worker = Redis_Queue('check_minion')
         self.radio = self.worker.subscribe()
 
+
     def start(self):
+        print('Minion Check Worker 已启动')
         while True:
             # 接收队列消息
             msg = self.radio.parse_response()
-            print(msg)
+
             # 解析消息内容
             msg = eval(msg[2])
-            print('接收：', msg)
+
             # 调用test.ping测试
             minion_check = Test_ping()
             # 检测主机配置
@@ -44,7 +46,10 @@ class Execute_State_Worker(object):
     def __init__(self):
         self.worker = Redis_Queue('execute_state')
         self.radio = self.worker.subscribe()
+
+
     def start(self):
+        print('Execute State Worker 已启动')
         while True:
             # 接收队列消息
             msg = self.radio.parse_response()
@@ -66,3 +71,7 @@ class Execute_State_Worker(object):
                     response['code'] = 9527
                     response['msg'] = result
                 return response
+
+if __name__=='__main__':
+    exe_state = Execute_State_Worker()
+    exe_state.start()

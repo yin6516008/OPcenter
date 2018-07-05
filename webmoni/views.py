@@ -175,16 +175,7 @@ def tables_project(request,project_id):
 def tables_edit(request):
     if request.method == "POST":
         url_id = request.POST.get('id')
-        # check_id = request.POST.get('check_id')
-        # warning = request.POST.get('warning')
-        # cdn = request.POST.get("cdn")
         nodes = json.loads(request.POST.get('nodes'))
-        # DomainName.objects.get(id=url_id).update(check_id=check_id,warning=warning,cdn=cdn)
-        # domain_obj = DomainName.objects.get(id=url_id)
-        # domain_obj.nodes.add(*nodes)
-        # success_data['data'] = '修改成功'
-        # return HttpResponse(json.dumps(success_data))
-
         check_id = request.POST.get('check_id')
         warning = request.POST.get('warning')
         cdn = request.POST.get("cdn")
@@ -300,6 +291,7 @@ def tables_delete(request):
         DomainName.objects.filter(id=url_id).delete()
         return HttpResponse('OK')
 
+@check_login
 # 更新证书有效期
 def tables_update_cert(request):
     if request.method == 'POST':
@@ -315,6 +307,7 @@ def tables_update_cert(request):
         success_data['data'] = '已加入检测队列'
         return HttpResponse(json.dumps(success_data))
 
+@check_login
 def tables_update_all_cert(request):
     if request.method == 'POST':
         now = request.POST.get('now')

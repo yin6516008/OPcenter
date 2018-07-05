@@ -674,20 +674,20 @@
 file_roots:
   base:
     - /srv/salt
-  init:
-    - /srv/salt/init/linux
-    - /srv/salt/init/windows
+  arch:
+    - /srv/salt/linux
+    - /srv/salt/winnt
   test:
-    - /srv/salt/test/linux
-    - /srv/salt/test/windows
+    - /srv/salt/linux/test
+    - /srv/salt/winnt/test
   prod:
-    - /srv/salt/prod/linux
-    - /srv/salt/prod/windows
+    - /srv/salt/linux/prod
+    - /srv/salt/winnt/prod
 #
 
 # The master_roots setting configures a master-only copy of the file_roots dictionary,
 # used by the state compiler.
-master_roots: /srv/salt-master
+#master_roots: /srv/salt-master
 
 # When using multiple environments, each with their own top file, the
 # default behaviour is an unordered merge. To prevent top files from

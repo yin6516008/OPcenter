@@ -100,113 +100,59 @@ class Test_ping(client.LocalClient):
                 Accepted_minion.objects.filter(id=id).update(status=status)
             return result
 
-# cmd模块远程执行------------------
-class Cmd_run(client.LocalClient):
-    # win系统
-    def cmd_for_win(self,minion_id,cmd):
-        result = self.cmd(minion_id, 'cmd.powershell', [cmd])
-        print(result)
-        return result
-
-    # linux系统
-    def cmd_for_linux(self,minion_id,cmd):
-        result = self.cmd(minion_id, 'cmd.run', [cmd])
-        print(result)
-        return result
-
-
-# file模块的使用-------------------
-class File_manage(client.LocalClient):
-    # 文件权限检测
-    def access(self,minion_id,dst_file):
-        result = self.cmd(minion_id, 'file.access', [dst_file, 'f'])
-        print('file.access', result)
-        return result
-
-    # 检测文件是否存在
-    def exists(self,minion_id,dst_file):
-        result = self.cmd(minion_id, 'file.exists', [dst_file])
-        print('file.exists', result)
-        return result
-
-    # 检测路径是否有效
-    def directory_exists(self,minion_id,dst_path):
-        result = self.cmd(minion_id, 'file.directory_exists', [dst_path])
-        print('file.directory_exists', result)
-        return result
-
-    # 从绝对路径中截取文件名
-    def basename(self,minion_id,dst_file):
-        result = self.cmd(minion_id,'file.basename',[dst_file])
-        print('file.basename', result)
-        return result
-
-    # 从绝对路径中截取目录
-    def dirname(self,minion_id,dst_file):
-        result = self.cmd(minion_id,'file.dirname',[dst_file])
-        print('file.dirname', result)
-        return result
-
-    # 文件覆盖写入
-    def write(self,minion_id,dst_file,context):
-        result = self.cmd(minion_id, 'file.write', [dst_file, context])
-        print('file.write', result)
-        return result
-
-    # 文件追加写入
-    def append(self,minion_id,dst_file,context):
-        result = self.cmd(minion_id, 'file.append', [dst_file, context])
-        print('file.append', result)
-        return result
-
-    # 读取文件的内容
-    def read(self,minion_id,dst_file):
-        result = self.cmd(minion_id,'file.read',[dst_file,'binary = False'])
-        print('file.read', result)
-        return result
-
-    # 返回文件夹包含的文件列表
-    def readdir(self,minion_id,dst_path):
-        result = self.cmd(minion_id,'file.readdir',[dst_path])
-        print('file.readdir', result)
-        return result
-
-    # 重命名文件或文件夹
-    def rename(self,minion_id,src_path,dst_path):
-        result = self.cmd(minion_id, 'file.rename', [src_path, dst_path])
-        print('file.rename', result)
-        return result
-
-    # 文件本地拷贝，源文件在minion本地
-    def copy_local(self,minion_id,src_file,dst_file):
-        result = self.cmd(minion_id, 'file.copy', [src_file, dst_file])
-        print('local_copy', result)
-        return result
-
-class Copy_remote(client.LocalClient):
-    # 远程拷贝目录，源文件在master
-    def get_file(self,minion_id,src_file,dst_file):
-        result = self.cmd(minion_id, 'cp.get_file', [src_file, dst_file])
-        print('remote_copy', result)
-        return result
-
-    # 远程拷贝文件，源文件在master
-    def get_dir(self,minion_id,src_path,dst_path):
-        result = self.cmd(minion_id, 'cp.get_dir', [src_path, dst_path])
-        print('remote_copy', result)
-        return result
-
-    # 远程拷贝文件，源文件在salt://, http://, https://, ftp://, s3://, swift://
-    def get_url(self,minion_id,src_url,dst_path):
-        result = self.cmd(minion_id, 'cp.get_url', [src_url, dst_path])
-        print('remote_copy', result)
-        return result
-
-class Configuration(object):
+# master配置
+class Master_config(object):
     def __init__(self):
         self.client =  client.LocalClient
         # salt安装目录
         self.salt_dir = '/etc/salt/'
+        # salt文件管理目录
+        self.file_roots = '/srv/salt/base'
+        # 配置文件导入目录 sls_conf
+        self.sls_conf = '%s/saltstack/sls_conf/' % os.getcwd()
+
+    # master执行初始化
+    def master_init(self):
+        # 判断salt安装与否
+        if os.path.exists(self.salt_dir):
+            # 创建salt文件目录
+            linux_test = '/srv/salt/linux/test'
+            linux_prod = '/srv/salt/linux/prod'
+            winnt_test = '/srv/salt/winnt/test'
+            winnt_prod = '/srv/salt/winnt/prod'
+            os.makedirs(linux_test) if not os.path.exists(linux_test) else 'linux_test existed'
+            os.makedirs(linux_prod) if not os.path.exists(linux_prod) else 'linux_prod existed'
+            os.makedirs(winnt_test) if not os.path.exists(winnt_test) else 'winnt_test existed'
+            os.makedirs(winnt_prod) if not os.path.exists(winnt_prod) else 'winnt_prod existed'
+
+
+            # 备份master配置文件
+            if os.path.exists(self.salt_dir+'master'):
+                master_bak = 'master_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S_%f')
+                os.rename(self.salt_dir+'master', self.salt_dir+master_bak)
+                # 删除90天前的master_前缀的配置文件备份
+                for master_bak in os.listdir(self.salt_dir):
+                    if master_bak.startswith('master_') and time.time() - os.path.getmtime(self.salt_dir+master_bak) > 90*24*3600:
+                        os.remove(master_bak)
+            # 导入master的配置文件
+            shutil.copyfile(self.sls_conf + 'master', self.salt_dir + 'master')
+
+            return True
+
+        else:
+            return False
+
+# 执行状态脚本
+class State_sls(client.LocalClient):
+    # 执行剧本
+    def execute_state(self, minion_id, sls):
+        result = self.cmd(minion_id, 'state.sls', [sls])
+        return result
+
+# 管理脚本文件
+class Script_manage():
+    def __init__(self):
+        self.client =  client.LocalClient
         # salt文件管理目录
         self.file_roots = '/srv/salt/base'
         # 配置文件导入目录 sls_conf
@@ -233,61 +179,9 @@ class Configuration(object):
         with open(self.sls_conf + edit_file, 'r') as f:
             return f.read()
 
-    # master执行初始化
-    def master_init(self):
-        # 判断salt安装与否
-        if os.path.exists(self.salt_dir):
-            # 创建salt文件目录
-            # 基础环境目录
-            if not os.path.exists('/srv/salt'):
-                os.makedirs('/srv/salt')
-            # 初始化配置目录 for linux
-            if not os.path.exists('/srv/salt/init/linux'):
-                os.makedirs('/srv/salt/init/linux')
-            # 初始化配置目录 for windows
-            if not os.path.exists('/srv/salt/init/windows'):
-                os.makedirs('/srv/salt/init/windows')
-            # 测试环境目录 for linux
-            if not os.path.exists('/srv/salt/test/linux'):
-                os.makedirs('/srv/salt/test/linux')
-            # 测试环境目录 for windows
-            if not os.path.exists('/srv/salt/test/windows'):
-                os.makedirs('/srv/salt/test/windows')
-            # 生产环境目录 for linux
-            if not os.path.exists('/srv/salt/prod/linux'):
-                os.makedirs('/srv/salt/prod/linux')
-            # 生产环境目录 for windows
-            if not os.path.exists('/srv/salt/prod/windows'):
-                os.makedirs('/srv/salt/prod/windows')
-            # 备份master配置文件
-            if os.path.exists(self.salt_dir+'master'):
-                master_bak = 'master_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S_%f')
-                os.rename(self.salt_dir+'master', self.salt_dir+master_bak)
-                # 删除90天前的master_前缀的配置文件备份
-                for master_bak in os.listdir(self.salt_dir):
-                    if master_bak.startswith('master_') and time.time() - os.path.getmtime(self.salt_dir+master_bak) > 90*24*3600:
-                        os.remove(master_bak)
-            # 导入master的配置文件
-            shutil.copyfile(self.sls_conf + 'master', self.salt_dir + 'master')
-            # # 导入基础状态文件
-            # shutil.copyfile(self.sls_conf + 'env_init.sls', self.file_roots + 'init/')
-            # # 导入Python状态文件
-            # shutil.copyfile(self.sls_conf + 'python3.sls', self.file_roots + 'init/')
-            return True
-
-        else:
-            return False
-
-
+# 上传脚本文件
 class File_upload(object):
     pass
-
-class State_sls(client.LocalClient):
-    # 执行剧本
-    def execute_state(self, minion_id, sls):
-        result = self.cmd(minion_id, 'state.sls', [sls])
-        return result
-
 
 """
 # test
