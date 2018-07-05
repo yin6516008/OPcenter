@@ -50,8 +50,8 @@ def create(request):
     :return:
     """
     if request.method == 'POST':
-        check_id = 0 if request.POST.get('check_id') is None else 1
-        warning = 0 if request.POST.get('warning') is None else 1
+        check_id = request.POST.get('check_id')
+        warning = request.POST.get('warning')
         cdn = request.POST.get("cdn")
         domain = request.POST.get("domain")
         print(domain)
@@ -67,10 +67,10 @@ def create(request):
 
 
         nodes = json.loads(request.POST.get("nodes"))
-        project_obj = Project.objects.get(name=project_name)
         if Project.objects.filter(name=project_name).count() == 0:
             Project.objects.create(name=project_name)
 
+        project_obj = Project.objects.get(name=project_name)
         for i in domain.split():
             if  DomainName.objects.filter(url=i).count() >= 1:
                 except_data['data'] = '{} 已存在'.format(i)

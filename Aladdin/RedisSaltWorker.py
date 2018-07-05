@@ -1,6 +1,6 @@
 from redis import Redis
 import django
-import os,sys
+import os,sys,time
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
 os.chdir(BASE_DIR)
@@ -28,15 +28,14 @@ class Minion_Check_Worker(object):
         while True:
             # 接收队列消息
             msg = self.radio.parse_response()
-
             # 解析消息内容
             msg = eval(msg[2])
-
+            if msg['add']:
+                time.sleep(5)
             # 调用test.ping测试
             minion_check = Test_ping()
             # 检测主机配置
             grains = Grains()
-
             if msg['pattern'] == 1: # 检测主机
                 minion_check.get_status(msg['id'])
             if msg['pattern'] == 2: # 获取主机信息

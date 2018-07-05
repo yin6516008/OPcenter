@@ -280,3 +280,58 @@
     bottom: 0;
     width: 100%;
 }
+
+/*主机管理*/
+.management .btn-success {
+    margin-left: 20px;
+}
+.host-management .modal-dialog {
+    margin-top: 150px;
+}
+.host-management .modal-title {
+    font-size: 20px;
+    text-align: left;
+}
+.host-management .host-content {
+    position: relative;
+    margin-left: 60px;
+    font-size: 14px;
+}
+.host-management .host-content p {
+    margin-bottom: 20px;
+}
+.host-management .host-content div {
+    margin-bottom: 20px;
+    width: 320px;
+}
+.host-management .host-content div span {
+    display: inline-block;
+    width: 120px;
+}
+.host-management .host-content .host-content-transfer {
+    position: relative;
+}
+.host-management .host-content .host-content-transfer i {
+    position: absolute;
+    right: 10px;
+    top: 6px;
+    font-size: 20px;
+}
+.host-management .host-content .host-content-transfer ul {
+    list-style: none;
+    position: absolute;
+    width: 200px;
+    background-color: #fff;
+    right: 0;
+    top: 34px;
+    z-index: 9;
+    padding-left: 15px;
+}
+.host-management .host-content .host-content-transfer ul li {
+    height: 40px;
+}
+.host-management .host-content .form-control {
+    display: inline-block;
+    width: 200px;
+    position: absolute;
+}

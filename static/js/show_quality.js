@@ -41,8 +41,10 @@ $(function () {
     var projectId = null
     $('#itemAdd').click(function () {
         $('.cdn_value').val('');
-        $('#add_notadd').parent().css('checked', '');
-        $('#add_notwarn').parent().css('checked', '');
+        // $('#add_notadd').parent().css('checked', '');
+        // $('#add_notwarn').parent().css('checked', '');
+        $('#add_notadd').parent().removeClass('checked');
+        $('#add_notwarn').parent().removeClass('checked');
         $('.node-position>div').css('checked');
         $('#errMsg').text('');
 
@@ -120,8 +122,8 @@ $(function () {
         console.log(domain);
         console.log(project);
 
-        var check = $('#add_notadd').prop('checked') ? 1 : 0;
-        var warning = $('#add_notwarn').prop('checked') ? 1 : 0;
+        var check = $('#add_notadd').parent().prop('checked') ? 1 : 0;
+        var warning = $('#add_notwarn').parent().prop('checked') ? 1 : 0;
         var areaIdNum = $('.node-position > .icheckbox_square-green');
         for (var i = 0; i < areaIdNum.length; i++) {
             var areaId = areaIdNum[i];
@@ -137,7 +139,7 @@ $(function () {
                 'cdn': cdn,
                 'domain': domain,
                 'project': project,
-                'check': check,
+                'check_id': check,
                 'warning': warning,
                 'nodes': JSON.stringify(arr)
             },

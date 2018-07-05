@@ -4,7 +4,7 @@ import subprocess
 from django.shortcuts import render,redirect,HttpResponse
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from saltstack.models import Accepted_minion
+from saltstack.models import Accepted_minion,Project
 from saltstack.salt_manage import Key_manage,Script_manage,State_sls
 from login.AuthLogin import check_login
 from Aladdin.RedisQueue import Redis_Queue
@@ -96,12 +96,11 @@ def minion_add(request):
         # 主机信息入库
         Accepted_minion.objects.create(id=id,ipv4=ipv4,city=city,datetime=now_time,status=status)
         # 发送检测任务到redis队列
-        time.sleep(3)
         monion_check = Redis_Queue('check_minion')
         # 模式1=test.ping,2=grains.items
-        test = {'pattern': 1,'id': id}
+        test = {'pattern': 1,'id': id,'add':True}
         monion_check.publish(test)
-        grains = {'pattern': 2,'id': id}
+        grains = {'pattern': 2,'id': id,'add':True}
         monion_check.publish(grains)
 
         SUCCESS_DATA['data'] = '添加成功'
@@ -110,6 +109,13 @@ def minion_add(request):
         # 返回结果
         return HttpResponse(json.dumps(msg))
 
+def project_add(request):
+    if request.method == "POST":
+        project_name = request.POST.get('project_name')
+        if Project.objects.filter(name=project_name).count() == 0:
+            Project.objects.create(name=project_name)
+        else:
+            '组已存在'
 # 检测/刷新主机状态
 def minion_test(request):
     if request.method == "POST":
@@ -118,7 +124,7 @@ def minion_test(request):
         try:
             for id in json.loads(request.POST.get('id')):
                 # 发送检测任务到redis队列   # pattern模式1=test.ping,2=grains.items
-                test = {'pattern':1,'id': id}
+                test = {'pattern':1,'id': id,'add':False}
                 monion_check.publish(test)
                 # 更新数据库
                 Accepted_minion.objects.filter(id=id).update(status=2)
@@ -137,12 +143,12 @@ def minion_test(request):
                 for item in items:
                     id = item['id']
                     print(id)
-                    test = {'pattern': 1, 'id': id}
+                    test = {'pattern': 1, 'id': id,'add':False}
                     monion_check.publish(test)
 
             else:
                 print(id)
-                test = {'pattern': 1, 'id': id}
+                test = {'pattern': 1, 'id': id,'add':False}
                 monion_check.publish(test)
                 Accepted_minion.objects.filter(id=id).update(status=2)
             # 返回结果
