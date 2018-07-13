@@ -318,7 +318,6 @@ def master_manage(request):
         print(result)
         return HttpResponse(json.dumps(result))
 
-
 def opcenter_slave_init(request):
     if request.method == "GET":
         master = Minion_state()

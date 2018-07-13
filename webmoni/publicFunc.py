@@ -12,7 +12,8 @@ def get_areas_data(url_id):
     else:
         # 如果选择了域名,就拿到选择的域名
         defaultDomain = DomainName.objects.filter(id=url_id).first()
-
+    if defaultDomain:
+        return None,None
     # 拿到上次5分种整的时间
     m = int(datetime.datetime.now().minute / 5) * 5
     # 起始时间
@@ -64,8 +65,6 @@ def get_areas_data(url_id):
         'id': defaultDomain.id,
         'status': defaultDomain.status.event_type,
         'domain': defaultDomain.url,
-        'check_id':defaultDomain.check_id,
-        'warning':defaultDomain.warning,
         'time_list': time_list,
         'data': data
     }

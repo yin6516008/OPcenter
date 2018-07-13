@@ -38,6 +38,8 @@ def areas(request,url_id=None):
 
         project_list = Project.objects.all().order_by('id')
         defaultDomainData, graph_data = get_areas_data(url_id)
+        if graph_data is None and defaultDomainData is None:
+            return HttpResponse('还没有域名,请跳转至域名管理页面添加域名')
         return render(request,'show_areas.html',{'project_list':project_list,
                                                  'defaultDomainData':defaultDomainData,
                                                  'graph_data':graph_data})
@@ -134,7 +136,6 @@ def tables(request,page=1):
     if request.method == 'GET':
         Domain_table_obj = Domain_table()
         domainall = Domain_table_obj.domain_all().order_by('project_name')
-        print(domainall[0].project_name)
         paginator = Paginator(domainall, 20)
         try:
             one_page = paginator.page(page)

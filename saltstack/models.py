@@ -34,10 +34,10 @@ class PlayBook(models.Model):
         (0,'禁用'),
         (1,'可用'),
     )
-    project = models.ForeignKey('Project',null=False)
-    applied_file = models.CharField(max_length=100,null=False,blank=True)
-    sls = models.CharField(max_length=100, null=False, blank=True)
-    description = models.CharField(max_length=28,null=False,blank=True)
+    project = models.ForeignKey('Project')
+    applied_file = models.CharField(max_length=100,null=True,blank=True)
+    sls = models.CharField(max_length=100, null=True, blank=True)
+    description = models.CharField(max_length=28,null=True,blank=True)
     status = models.IntegerField(choices=playbook_stauts,default=1)
 
     def __str__(self):
@@ -48,16 +48,18 @@ class PlayBook(models.Model):
 
 class Async_jobs(models.Model):
     async_jobs_stauts = (
-        (0,'执行中'),
-        (1,'已完成'),
+        (0,'排队中'),
+        (1,'执行中'),
+        (2,'已完成'),
     )
-    jid = models.CharField(max_length=20,null=False)
+    jid = models.CharField(max_length=20,null=True,blank=True)
     description = models.ForeignKey('PlayBook',null=False)
     project = models.ForeignKey('Project',null=False)
     minion = models.ManyToManyField('Accepted_minion')
-    creationtime = models.DateTimeField()
+    create_time = models.DateTimeField()
     details = models.TextField(null=True,blank=True)
-    completiontime = models.DateTimeField(null=True,blank=True)
+    start_time = models.DateTimeField(null=True,blank=True)
+    duration = models.CharField(max_length=10,null=True,blank=True)
     status = models.IntegerField(choices=async_jobs_stauts,default=0)
 
 

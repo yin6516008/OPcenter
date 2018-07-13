@@ -254,19 +254,17 @@ class Minion_state(object):
         self.client = client.LocalClient()
 
 
-    def exe_sls(self, minion_list, playbook_list):
+    def exe_sls(self, minion_list, playbook):
 
         minion_list = ['md_op_linux_node133_local_vm','md_linux_op_node122_local_vmm','md_win_op_node6_local_vmm',]
-        playbook_list = ['/Linux/test111','/Linux/test222']
-
+        #playbook_list = ['/Linux/linux_init','/Linux/linux_init']
+        playbook = '/Linux/test111'
         print('主机:', minion_list)
-        print('剧本:', playbook_list)
-        func = 'state.sls'
-
-
-        jid = self.client.cmd_async(minion_list, 'state.sls', ['/Linux/test111'],tgt_type='list')
+        print('剧本:', playbook)
+        jid = self.client.cmd_async(minion_list, 'state.sls', [playbook],tgt_type='list',full_return=True)
         print(jid)
         return jid
+
         # t = 1
         # while not self.client.get_cache_returns(jid):
         #     time.sleep(1)
