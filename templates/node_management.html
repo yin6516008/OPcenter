@@ -64,11 +64,14 @@
               <form action="/webmoni/nodes/create/" method="post">
                 <div class="modal-body">
                   <div class="input-group">
-                      <input name="node_name" type="text" class="form-control" id="nodeNames" placeholder="请输入节点省份">
-                      <input name="node_ip" type="text" class="form-control" id="nodeDetail" placeholder="请输入节点IP地址">
+{#                      <input name="node_name" type="text" class="form-control" id="nodeNames" placeholder="请输入节点省份">#}
+                      {{ nodeFormsObj.node }}
+{#                      <input name="node_ip" type="text" class="form-control" id="nodeDetail" placeholder="请输入节点IP地址">#}
+                      {{ nodeFormsObj.ip }}
                   </div>
                   <div class="input-group">
-                      <textarea name="node_description" class="form-control description" id="addNodeDes" cols="30" rows="10" placeholder="输入节点的描述"></textarea>
+{#                      <textarea name="node_description" class="form-control description" id="addNodeDes" cols="30" rows="10" placeholder="输入节点的描述"></textarea>#}
+                      {{ nodeFormsObj.description }}
                   </div>
               </div>
                 <div class="modal-footer">

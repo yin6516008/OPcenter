@@ -31,10 +31,7 @@ def domain_all(request):
         if API_verify(node_id,client_ip):
             node_obj = Node.objects.get(id=node_id)
             domains = node_obj.domainname_set.all()
-            print(domains.values())
-
             success_data['data'] = list(domains.values())
-            print(success_data)
             return HttpResponse(json.dumps(success_data))
         else:
             except_data['data'] = 'API验证失败'
@@ -69,13 +66,7 @@ def check_result_submit(request):
         if API_verify(submitData.get('node'),client_ip):
             launcher = Redis_Queue(Webmoni_Send_Mail_Queue)
             try:
-                MonitorData.objects.create(
-                    url_id=submitData.get('url_id'),
-                    node_id=submitData.get('node'),
-                    datetime=submitData.get('datetime'),
-                    http_code=submitData.get('http_code'),
-                    total_time=submitData.get('total_time'),
-                )
+                MonitorData.objects.create(**submitData)
                 if not submitData.get('status') == 100:
                     Event_Log.objects.create(
                         datetime=submitData.get('datetime'),

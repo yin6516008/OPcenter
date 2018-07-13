@@ -56,12 +56,12 @@
                         <div class="dataTables_paginate paging_simple_numbers pagination-box" id="DataTables_Table_0_paginate">
                             <ul class="pagination right-position">
                                 {% if one_page.has_previous %}
-                                <li class="paginate_button previous disabled" aria-controls="DataTables_Table_0" tabindex="0" id="DataTables_Table_0_previous">
+                                <li class="paginate_button previous" aria-controls="DataTables_Table_0" tabindex="0" id="DataTables_Table_0_previous">
                                     <a href="/cert/TrustAsia_cert_list/{{ one_page.previous_page_number}}">上一页</a>
                                 </li>
                                 {% endif %}
                                 {% for row in paginator.page_range %}
-                                <li class="paginate_button active" aria-controls="DataTables_Table_0" tabindex="0">
+                                <li class="paginate_button" aria-controls="DataTables_Table_0" tabindex="0">
                                     <a href="/cert/TrustAsia_cert_list/{{ row }}/">{{ row }}</a></li>
                                 {% endfor %}
                                 {% if one_page.has_next %}

@@ -66,16 +66,12 @@ class Send_Mail_Worker(object):
             current = program.get('time') - program.get('time') % 300
             status = program.get('status')
             url_id = program.get('url_id')
-            if current == self.cache.get('current') :
+            if current == self.cache.get('current'):
                 if not self.cache['data'].get(program['domain']):
-                    self.cache['data'][program['domain']] = {'failtag':0,'areas':{}}
-                    if not status == 100:
-                        self.cache['data'][program['domain']]['failtag'] = 1
-                else:
-                    if not status == 100:
-                        self.cache['data'][program['domain']]['failtag'] += 1
+                    self.cache['data'][program['domain']] = {'failtag': 0, 'areas': {}}
+                if status != 100:
+                    self.cache['data'][program['domain']]['failtag'] += 1
                 self.cache['data'][program['domain']]['areas'][str(program.get('node'))] = program.get('total_time')
-
             else:
                 node_info = {}
                 for node in Node.objects.all():
@@ -84,16 +80,17 @@ class Send_Mail_Worker(object):
                 if self.cache.get('data') is None:
                     continue
                 for domain,y in self.cache['data'].items():
-
-                    if y['failtag'] >= int(len(y['areas']) / 2) + 1:
-                        DomainName.objects.filter(url=domain).update(status=99)
-                        content = '域名:{}<br>'.format(domain,domain)
-                        for area,val in y['areas'].items():
-                            content += '{}:{}<br>'.format(node_info[area],val)
-                        content += '<a href="http://139.199.77.249:8000/webmoni/Nowarning/{}/">点击不警告</a><br>'.format(domain)
-                        send_mail(domain,[Ming,Lin],content)
-                    else:
-                        DomainName.objects.filter(url=domain).update(status=100)
+                    domain_obj = DomainName.objects.get(url=domain)
+                    if domain_obj.warning == 0:
+                        if y['failtag'] >= int(len(y['areas']) / 2) + 1:
+                            DomainName.objects.filter(url=domain).update(status=99)
+                            content = '域名:{}<br>CDN:{}<br>项目:{}'.format(domain,domain,domain_obj.cdn,domain_obj.project_name)
+                            for area,val in y['areas'].items():
+                                content += '{}:{}<br>'.format(node_info[area],val)
+                            content += '<a href="http://139.199.77.249:8000/webmoni/Nowarning/{}/">点击不警告</a><br>'.format(domain)
+                            send_mail(domain,[Ming,Lin],content)
+                        else:
+                            DomainName.objects.filter(url=domain).update(status=100)
                 self.cache['data'].clear()
 
 

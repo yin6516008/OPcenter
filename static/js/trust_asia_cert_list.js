@@ -119,4 +119,20 @@ $(function () {
         });
     }
     searchDomain();
+
+    // 分页
+    function  pagenation() {
+        var re = /(\d+)\/$/.exec(window.location.pathname)
+        if (re == null) {
+            var paramNum = 1
+        } else {
+            var paramNum = re[1]
+        }
+        $('.pagination > li > a').each(function () {
+            if($(this).text() == paramNum) {
+                $(this).css({ "backgroundColor": "#C6C6C7", "color": "#000" });
+            }
+        })
+    }
+    pagenation();
 })

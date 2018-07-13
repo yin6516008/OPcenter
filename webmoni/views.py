@@ -3,6 +3,7 @@ from webmoni.models import DomainName
 from webmoni.models import Project
 from webmoni.models import Node
 from webmoni.models import Event_Log
+from webmoni.froms import NodeForms
 from django.forms.models import model_to_dict
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from login.AuthLogin import check_login
@@ -133,6 +134,7 @@ def tables(request,page=1):
     if request.method == 'GET':
         Domain_table_obj = Domain_table()
         domainall = Domain_table_obj.domain_all().order_by('project_name')
+        print(domainall[0].project_name)
         paginator = Paginator(domainall, 20)
         try:
             one_page = paginator.page(page)
@@ -336,18 +338,21 @@ def tables_update_all_cert(request):
 @check_login
 def nodes(request):
     if request.method == 'GET':
-        node_all = Node.objects.all()
 
-    return render(request,'node_management.html',{'node_all':node_all})
+        nodeFormsObj = NodeForms()
+        node_all = Node.objects.all()
+    return render(request,'node_management.html',{'node_all':node_all,'nodeFormsObj':nodeFormsObj})
 
 # 创建节点
 @check_login
 def nodes_create(request):
     if request.method == "POST":
-        node_name = request.POST.get('node_name')
-        node_ip = request.POST.get('node_ip')
-        node_description = request.POST.get('node_description')
-        Node.objects.create(node=node_name,ip=node_ip,description=node_description)
+        nodeFormsObj = NodeForms(request.POST)
+        if nodeFormsObj.is_valid():
+            Node.objects.create(**nodeFormsObj.clean())
+        else:
+            errors = nodeFormsObj.errors
+            print(errors)
         return redirect('/webmoni/nodes/')
 
 

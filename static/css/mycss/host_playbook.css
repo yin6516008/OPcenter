@@ -1,0 +1,292 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.ibox {
+    margin-top: 20px;
+}
+
+/*左侧*/
+table thead tr th {
+    text-align: left;
+}
+table thead tr th:nth-child(1) {
+    width: 5%;
+}
+table thead tr th:nth-child(2) {
+    width: 10%;
+}
+table thead tr th:nth-child(3) {
+    width: 25%;
+}
+table thead tr th:nth-child(4) {
+    width: 50%;
+}
+table thead tr th:nth-child(5) {
+    width: 10%;
+}
+table tbody tr:hover {
+    cursor: pointer;
+}
+table tbody tr td {
+    text-align: left;
+}
+table tbody tr td:nth-child(1) {
+    width: 5%;
+}
+table tbody tr td:nth-child(2) {
+    width: 10%;
+}
+table tbody tr td:nth-child(3) {
+    width: 25%;
+}
+table tbody tr td:nth-child(4) {
+    width: 50%;
+}
+table tbody tr td:nth-child(5) {
+    width: 10%;
+}
+.div_table table tbody {
+    display:block;
+    height: 720px;
+    overflow-y: scroll;
+}
+table thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+.btn-upload-playbook {
+    /*margin: 10px;*/
+}
+.classify_group {
+    display: inline-block;
+}
+.div_implement .btn-group {
+    margin-left: 20px;
+}
+.div_implement .btn-group .dropdown-toggle {
+    margin-top: 0px;
+}
+.div_implement .btn-group button {
+    width: 94px;
+}
+.dropdown-menu {
+    min-width: 94px;
+}
+.div_implement ul li a {
+    font-size: 14px;
+    padding: 3px 10px;
+}
+/*右侧*/
+/*上传剧本模态框*/
+.float-e-margins .btn {
+     margin-bottom: 0;
+}
+.modal-content {
+    position: relative;
+}
+.play-book .modal-dialog {
+    margin-top: 120px;
+}
+.play-book .modal-title {
+    font-size: 20px;
+    font-weight: 700;
+}
+.line {
+    width: 100%;
+    height: 2px;
+    background-color: #ccc;
+    margin: 10px 0;
+}
+.panel-info {
+    border-color: #31708f !important;
+}
+.panel-heading {
+    position: relative;
+    padding: 15px;
+    background-color: #31708f !important;
+    border-color: #31708f !important;
+}
+.panel-body {
+    height: 760px;
+    padding: 0;
+}
+.panel-body>pre {
+    overflow: auto;
+    height: 760px;
+}
+.choose-file,
+.choose-group,
+.describe-info {
+    margin-bottom: 15px;
+}
+.choose-file span,
+.choose-group span ,
+.describe-info span {
+    font-size: 14px;
+    font-weight: 700;
+}
+.play-book .modal-body> {
+    position: relative;
+}
+.play-book .modal-body>div>span {
+    font-size: 14px;
+    font-weight: 700;
+}
+.choose-file {
+    padding: 4px 10px;
+    height: 30px;
+    line-height: 20px;
+    position: relative;
+    cursor: pointer;
+    color: #888;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    margin-top: 5px;
+}
+.choose-file label {
+    font-weight: normal;
+}
+.choose-file input {
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer;
+    display: inline-block;
+    outline: none;
+    margin-top: 5px;
+}
+.choose-file:hover {
+    color: #444;
+    background: #eee;
+    border-color: #ccc;
+    text-decoration: none;
+}
+.show-file-name {
+    position: absolute;
+    left: 145px;
+    top: 50px;
+}
+.choose-group select {
+    width: 120px;
+    height: 35px;
+    padding-left: 10px;
+    outline: none;
+    font-size: 14px;
+    font-weight: normal;
+    display: inline-block;
+    background-color: #FFF;
+    background-image: none;
+    border: 1px solid #e5e6e7;
+    border-radius: 1px;
+    color: inherit;
+    display: block;
+    -webkit-transition: border-color .15s ease-in-out 0s,box-shadow .15s ease-in-out 0s;
+    transition: border-color .15s ease-in-out 0s,box-shadow .15s ease-in-out 0s;
+    margin-top: 5px;
+}
+.describe-info input[name=description] {
+    width: 100%;
+    height: 40px;
+    padding-left: 10px;
+    outline: none;
+    font-size: 14px;
+    font-weight: normal;
+    display: inline-block;
+    background-color: #FFF;
+    background-image: none;
+    border: 1px solid #e5e6e7;
+    border-radius: 1px;
+    color: inherit;
+    display: block;
+    padding: 6px 12px;
+    -webkit-transition: border-color .15s ease-in-out 0s,box-shadow .15s ease-in-out 0s;
+    transition: border-color .15s ease-in-out 0s,box-shadow .15s ease-in-out 0s;
+    margin-top: 5px;
+}
+.edit_and_del {
+    position: absolute;
+    top: 8px;
+    right: 30px;
+}
+.edit_and_del button {
+    margin-left: 15px;
+}
+
+.save_and_cancel {
+    position: absolute;
+    top: 8px;
+    right: 30px;
+    display: none;
+}
+.save_and_cancel button {
+    margin-left: 15px;
+}
+
+#playbook_editor {
+    position: absolute;
+    width: 800px;
+    height: 760px;
+}
+
+/*删除按钮模态框*/
+.confirm-del .modal-dialog {
+    margin: 115px auto;
+}
+.confirm-del .modal-header {
+    padding: 10px;
+    border-bottom: none;
+}
+.confirm-del .modal-header h6 {
+    font-size: 22px;
+    font-weight: 700;
+}
+.confirm-del .modal-footer {
+    border-top: none;
+}
+
+/*保存按钮模态框*/
+.confirm-save .modal-dialog {
+    margin: 115px auto;
+}
+.confirm-save .modal-header {
+    padding: 10px;
+    border-bottom: none;
+}
+.confirm-save .modal-header h6 {
+    font-size: 22px;
+    font-weight: 700;
+}
+.confirm-save .modal-footer {
+    border-top: none;
+}
+
+/*上传剧本保存后消息提示框*/
+.modal-tips {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+.modal-tips span {
+    text-align: center;
+    color: #e92312;
+    font-size: 16px;
+    font-weight: 700;
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    margin-left: -25%;
+    margin-right: 10%;
+    word-break: break-all;
+}

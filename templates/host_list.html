@@ -24,13 +24,33 @@
                                 <div class="panel-body panel-type">
                                     <label><span>主机ID：</span><input class="form-control" name="id" type="text" placeholder="输入主机ID或Minion_ID" value=""></label>
                                     <label><span>IP地址：</span><input class="form-control" name="ip" type="text" placeholder="输入主机IPv4地址" value=""></label>
-                                    <div class="system_type">
-                                        <span>系统类型：</span>
-                                        <input class="form-control" type="text" name="os" placeholder="选择系统类型" value="" autocomplete="off">
-                                        <i class="arrow" ></i>
-                                        <ul>
-                                            <li><a href="javascript:void(0)">Linux</a></li>
-                                            <li><a href="javascript:void(0)">Windows</a></li>
+{#                                    <div class="system_type">#}
+{#                                        <span>系统类型：</span>#}
+{#                                        <input class="form-control" type="text" name="os" placeholder="选择系统类型" value="" autocomplete="off">#}
+{#                                        <i class="arrow" ></i>#}
+{#                                        <ul>#}
+{#                                            <li><a href="javascript:void(0)">Linux</a></li>#}
+{#                                            <li><a href="javascript:void(0)">Windows</a></li>#}
+{#                                        </ul>#}
+{#                                    </div>#}
+                                    <!--<div class="choose-group">-->
+                                        <!--<span>选择分组：</span>-->
+                                        <!--<input type="text" class="form-control" name="project" placeholder="请选择分组" value="" autocomplete="off">-->
+                                        <!--<i class="fa fa-caret-down"></i>-->
+                                        <!--<ul>-->
+                                            <!--{%for row in data.project_list%}-->
+                                            <!--<li><a href="#">{{row.name}}</a></li>-->
+                                            <!--{%endfor%}-->
+                                        <!--</ul>-->
+                                    <!--</div>-->
+                                    <div class="btn-group choose-group">
+                                        <button data-toggle="dropdown" class="btn btn-primary btn-outline dropdown-toggle">选择分组 <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu ul-group">
+                                            <li><a href="/saltstack/">全部主机</a></li>
+                                            {%for row in data.project_list%}
+                                            <li><a href="/saltstack/minion_search/?project={{ row.id }}">{{row.name}}</a></li>
+                                            {%endfor%}
                                         </ul>
                                     </div>
                                 </div>
@@ -46,12 +66,11 @@
                                 <th>序号</th>
                                 <th>主机ID</th>
                                 <th>状态</th>
+                                <th>分组</th>
                                 <th>公网IP</th>
                                 <th>所在城市</th>
                                 <th>系统类型</th>
-                                <th>架构</th>
-                                <th>CPU(核)</th>
-                                <th>内存(GB)</th>
+                                <th>配置</th>
                                 <th>更新时间</th>
                                 <th>操作</th>
                             </tr>
@@ -73,12 +92,23 @@
                                 {% else %}
                                 <td>异常</td>
                                 {% endif %}
+                                {% if row.project.all.count == 0 %}
+                                <td>未分组</td>
+                                {% elif row.project.all.count == 1 %}
+                                <td>
+                                {{ row.project.first }}
+                                </td>
+                                {% else %}
+                                <td>
+                                {{ row.project.first }}&nbsp;&
+                                <div style="display: inline;color: deepskyblue" title="{% for project_obj in row.project.all %}所在组{{ forloop.counter }}：{{ project_obj.name }}
+{% endfor %}">More</div>
+                                </td>
+                                {% endif %}
                                 <td>{{ row.ipv4 }}</td>
                                 <td>{{ row.city }}</td>
                                 <td>{{ row.osfinger }}</td>
-                                <td>{{ row.cpuarch }}</td>
-                                <td>{{ row.num_cpus }}</td>
-                                <td>{{ row.mem_gib }}</td>
+                                <td>{{ row.num_cpus }}核/{{ row.mem_gib }}G</td>
                                 <td>{{ row.datetime|date:"Y-m-d H:i:s" }}</td>
                                 <!--<td><a href="" class="btn btn-primary btn_gap">查看详情</a><a href="" class="btn btn-success">远程连接</a></td>-->
                             </tr>
@@ -90,7 +120,7 @@
                         <div class="col-sm-6 management">
                             <span>批量操作：</span>
                             <button type="button" class="btn btn-danger">状态检测</button>
-                            <a href="" class="btn btn-success" data-toggle="modal" data-target="#hostManagement">主机管理</a>
+{#                            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#hostManagement" id="arrangeHost">分组管理</a>#}
                         </div>
                         <!--分页-->
                         <div class="col-sm-6 pagination">
@@ -98,7 +128,7 @@
                                 <ul class="pagination right-position">
                                     {% if data.one_page.has_previous %}
                                     <li>
-                                        <a href="{{ data.url }}{{ data.one_page.previous_page_number }}/" aria-label="Previous">
+                                        <a href="{{ data.url }}{{ data.one_page.previous_page_number }}/?id={{ data.where.id }}&ip={{ data.where.ip }}&os={{ data.where.os }}" aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
@@ -112,7 +142,7 @@
                                     {% endfor %}
                                     {% if data.one_page.has_next %}
                                     <li>
-                                        <a href="{{ data.url }}{{ data.one_page.next_page_number }}/" aria-label="Next">
+                                        <a href="{{ data.url }}{{ data.one_page.next_page_number }}/?id={{ data.where.id }}&ip={{ data.where.ip }}&os={{ data.where.os }}" aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>
@@ -138,7 +168,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            {% for row in unaccepted_list %}
+                                            {% for row in data.unaccepted_list %}
                                             <tr>
                                                 <td>{{ forloop.counter }}</td>
                                                 <td>{{ row }}</td>
@@ -193,25 +223,24 @@
                             </div>
                             <div class="modal-body">
                                 <div class="host-content">
-                                    <p>您已选择<span>1</span>个主机</p>
+                                    <p>您已选择<span>0</span>个主机</p>
                                     <div class="host-content-transfer">
                                         <span>转移至项目组：</span>
-                                        <input type="text" class="form-control" placeholder="添加分组">
+                                        <input type="text" class="form-control" placeholder="添加分组" id="chooseOrNewGroup" value="" autofocus>
                                         <i class="fa fa-caret-down"></i>
                                         <ul>
-                                            <li><a href="">添加分组</a></li>
-                                            <li><a href="">1 运维平台数据采集</a></li>
-                                            <li><a href="">2 运维平台服务器</a></li>
-                                            <li><a href="">3 windows服务器</a></li>
+
+                                            {%for row in data.project_list%}
+                                            <li><a href="#">{{row.name}}</a></li>
+                                            {%endfor%}
+                                            <li class="lastLi"><a href="#">添加分组</a></li>
+                                            
                                         </ul>
                                     </div>
-                                    <div class="host-content-first"><span>请输入分组名：</span><input type="text" class="form-control"></div>
-                                    <div class="host-content-second"><span>输入项目组名称：</span><input type="text" class="form-control"></div>
-                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
-                                <button type="button" class="btn btn-primary">移动</button>
+                                <button type="button" class="btn btn-primary" id="hostMove">移动</button>
                             </div>
                         </div>
                     </div>

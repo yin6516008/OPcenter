@@ -1,4 +1,8 @@
 /*选项卡*/
+* {
+    margin: 0;
+    padding: 0;
+}
 .tab_card {
     margin-top: 30px;
 }
@@ -25,7 +29,7 @@
 .tab_refresh {
     position: absolute;
     top: 62px;
-    right: 140px;
+    right: 630px;
 }
 .tab_refresh:hover a {
     color: #fff;
@@ -39,15 +43,26 @@
     border: 1px solid #1ab394;
     line-height: 30px;
 }
-
+.tab-content .panel-body {
+    padding-left: 150px;
+}
 .tab-content .panel-type label {
     margin-right: 20px;
 }
 .tab-content .panel-type label span {
 
 }
-.tab-content .panel-type label input {
-    width: 250px;
+.tab-content .panel-type label input[name=id] {
+    width: 240px;
+    height: 30px;
+    padding-left: 10px;
+    outline: none;
+    font-size: 14px;
+    font-weight: normal;
+    display: inline-block;
+}
+.tab-content .panel-type label input[name=ip] {
+    width: 180px;
     height: 30px;
     padding-left: 10px;
     outline: none;
@@ -57,11 +72,11 @@
 }
 .tab-content .panel-type .system_type {
     position: absolute;
-    left: 675px;
+    left: 720px;
     top: 20px;
 }
 .tab-content .panel-type .system_type input {
-    width: 250px;
+    width: 180px;
     height: 30px;
     padding-left: 10px;
     outline: none;
@@ -89,7 +104,7 @@
     position: absolute;
     right: 0;
     top: 30px;
-    width: 250px;
+    width: 180px;
     margin: 0;
     padding: 0;
     background-color: #fff;
@@ -112,7 +127,74 @@
 .tab-content .panel-type .system_type ul li:hover {
     background-color: #eee;
 }
-
+/*.tab-content .panel-type .choose-group {*/
+    /*position: absolute;*/
+    /*top: 20px;*/
+    /*right: 300px;*/
+/*}*/
+/*.tab-content .panel-type .choose-group input {*/
+    /*width: 180px;*/
+    /*height: 30px;*/
+    /*padding-left: 10px;*/
+    /*outline: none;*/
+    /*font-size: 14px;*/
+    /*font-weight: normal;*/
+    /*display: inline-block;*/
+/*}*/
+/*.tab-content .panel-type .choose-group span {*/
+    /*font-weight: 700;*/
+/*}*/
+/*.tab-content .panel-type .choose-group i {*/
+    /*position: absolute;*/
+    /*top: 6px;*/
+    /*right: 10px;*/
+    /*font-size: 20px;*/
+    /*cursor: pointer;*/
+/*}*/
+/*.tab-content .panel-type .choose-group ul {*/
+    /*list-style: none;*/
+    /*position: absolute;*/
+    /*right: 0;*/
+    /*top: 30px;*/
+    /*width: 180px;*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+    /*background-color: #fff;*/
+    /*border: 1px solid #ccc;*/
+    /*box-sizing: border-box;*/
+    /*display: none;*/
+    /*z-index: 9;*/
+    /*list-style: none;*/
+/*}*/
+/*.tab-content .panel-type .choose-group ul li {*/
+    /*width: 100%;*/
+    /*height: 30px;*/
+    /*line-height: 30px;*/
+    /*padding-left: 10px;*/
+/*}*/
+/*.tab-content .panel-type .choose-group ul li a {*/
+    /*color: #000;*/
+    /*font-size: 14px;*/
+    /*font-weight: normal;*/
+/*}*/
+/*.tab-content .panel-type .choose-group ul li:hover {*/
+    /*background-color: #eee;*/
+/*}*/
+.choose-group {
+    position: absolute;
+    top: 0px;
+    left: 20px;
+}
+.choose-group button {
+    width: 94px;
+}
+.dropdown-menu {
+    min-width: 94px;
+}
+.choose-group ul.ul-group li a {
+    font-size: 14px;
+    padding: 3px 10px;
+}
 /*搜索列表*/
 .tabs-container {
     position: relative;
@@ -126,7 +208,7 @@
 .tab_search {
     position: absolute;
     top: 62px;
-    right: 500px;
+    right: 780px;
 }
 .tab_search:hover {
     color: #fff;
@@ -307,6 +389,7 @@
 .host-management .host-content div span {
     display: inline-block;
     width: 120px;
+    line-height: 34px;
 }
 .host-management .host-content .host-content-transfer {
     position: relative;
@@ -316,6 +399,7 @@
     right: 10px;
     top: 6px;
     font-size: 20px;
+    cursor: pointer;
 }
 .host-management .host-content .host-content-transfer ul {
     list-style: none;
@@ -325,13 +409,33 @@
     right: 0;
     top: 34px;
     z-index: 9;
-    padding-left: 15px;
+    border: 1px solid #eee;
+    box-sizing: border-box;
+    display: none;
 }
 .host-management .host-content .host-content-transfer ul li {
-    height: 40px;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 15px;
+}
+.host-management .host-content .host-content-transfer ul li:hover {
+    background-color: #cceeff;
+}
+.host-management .host-content .host-content-transfer ul li a {
+    color: #000;
 }
 .host-management .host-content .form-control {
     display: inline-block;
     width: 200px;
     position: absolute;
+}
+.host-management .host-content-group .group-name {
+    display: inline-block;
+}
+.host-management .host-content-group .project-name {
+    display: none;
+}
+.host-management .host-content p span {
+    color: #23c6c8;
+    font-size: 16px;
 }

@@ -260,6 +260,9 @@ thead>tr:hover {
   left: 20px;
   top: 5px;
 }
+.dropdown-menu-domains {
+  top: 33px !important;
+}
 .dropdown-menu {
   min-width: 65px;
   top: 34px;

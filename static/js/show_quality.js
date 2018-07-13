@@ -85,6 +85,23 @@ $(function () {
         $('#add_notadd,#add_notwarn').attr('checked', false)
     })
 
+    // 点击操作按钮显示弹窗的位置
+    $('tbody > tr').each(function (item, el) {
+        if ($(el).attr('id') == 20) {
+               $(el).find('td:eq(9)').find('.dropdown-menu').css('top', '-120px');
+        }
+        // console.log(el)
+        // if (item == 19) {
+        //     el.click(function () {
+        //         console.log(123);
+        //         $('.dropdown-menu').css('top', '-120px');
+        //     })
+        // }
+    })
+    // var lastTr = $('tbody > tr:last').find('td:eq(9)');
+    // $(lastTr).click(function () {
+    //     $('.dropdown-menu').css('top', '-120px');
+    // })
     // 表单提交验证
     // $('#btn_save').attr('disabled', 'true')
     // $(document).mousemove(function () {
@@ -335,6 +352,9 @@ $(function () {
                     $('#cdn_domain').val(data.data.domain_info.cdn)
                     $('#edit_notadd').parent().addClass(0 == data.data.domain_info.check_id ? '' : 'checked');
                     $('#edit_notwarn').parent().addClass(0 == data.data.domain_info.warning ? '' : 'checked');
+
+                    $('#edit_notadd').parent().iCheck('check');
+                    $('#edit_notwarn').parent().iCheck('check');
 
                     var arrSelected = data.data.domain_info.nodes;
                     for (var i = 0; i < arrSelected.length; i++ ){

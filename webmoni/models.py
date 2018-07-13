@@ -7,11 +7,18 @@ class Node(models.Model):
     description = models.CharField(max_length=4096,null=True)
     online= models.IntegerField(null=True,default=None)
 
+    def __str__(self):
+        return self.node
+    class Meta:
+        verbose_name_plural = "节点"
+
 
 class Project(models.Model):
     name = models.CharField(max_length=20,unique=True,null=True)
     def __str__(self):
         return self.name
+    class Meta:
+        verbose_name_plural = "项目"
 
 class DomainName(models.Model):
     url = models.CharField(max_length=60,unique=True)
@@ -25,6 +32,9 @@ class DomainName(models.Model):
     nodes = models.ManyToManyField('Node')
     def __str__(self):
         return self.url
+
+    class Meta:
+        verbose_name_plural = "域名信息"
 
 class MonitorData(models.Model):
     node = models.ForeignKey('Node',to_field='id')
@@ -43,3 +53,5 @@ class Event_Type(models.Model):
     event_type = models.CharField(max_length=60,unique=True)
     def __str__(self):
         return self.event_type
+    class Meta:
+        verbose_name_plural = "事件类型"

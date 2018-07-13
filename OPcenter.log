@@ -1,0 +1,8 @@
+2018-07-13 11:49:25,532 - setup.py[line:1165] - ERROR: An un-handled exception was caught by salt's global exception handler:
+ImportError: cannot import name 'State_sls'
+Traceback (most recent call last):
+  File "Aladdin/AladdinStart.py", line 11, in <module>
+    from Aladdin.RedisSaltWorker import Minion_Check_Worker,Minion_Auto_Check_Worker
+  File "/opt/OPcenter/Aladdin/RedisSaltWorker.py", line 10, in <module>
+    from saltstack.salt_manage import Test_ping,Grains,State_sls
+ImportError: cannot import name 'State_sls'

@@ -11,11 +11,15 @@ class ProjectAdmin(admin.ModelAdmin):
 
 @admin.register(DomainName)
 class DomainNameAdmin(admin.ModelAdmin):
-    list_display = ['id','url','project_name','status','check_id','warning','cert_valid_date','cert_valid_days']
     ordering = ('id',)
     list_display_links = ['url']
+    filter_horizontal = ['nodes',]
+
+    list_display = ['id','url','project_name','status','check_id','warning','cert_valid_date','cert_valid_days',]
 
 @admin.register(Event_Type)
 class EventTypeAdmin(admin.ModelAdmin):
     list_display = ['id','event_type']
     ordering = ('id',)
+
+

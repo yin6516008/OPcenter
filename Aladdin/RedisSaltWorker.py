@@ -7,7 +7,7 @@ os.chdir(BASE_DIR)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "OPcenter.settings")
 django.setup()
 from django.conf import settings
-from saltstack.salt_manage import Test_ping,Grains,State_sls
+from saltstack.salt_manage import Test_ping,Grains,Minion_state
 
 
 redis_id = settings.REDIS_IP
@@ -41,6 +41,22 @@ class Minion_Check_Worker(object):
             if msg['pattern'] == 2: # 获取主机信息
                 grains.get_minion_items(msg['id'])
 
+class Minion_Auto_Check_Worker(object):
+    def __init__(self):
+        self.worker = Redis_Queue('check_minion')
+    def start(self):
+        print('Minion_Auto_Check_Worker 已启动')
+        while True:
+            # 设定自动检测间隔时间INTERVAL秒
+            INTERVAL = 300
+            time_remaining = INTERVAL - time.time() % INTERVAL
+            print(time_remaining)
+            # 整点开始
+            time.sleep(time_remaining)
+            # 定时发送检测任务到redis队列
+            test = {'pattern': 1,'id':'*','add':False}
+            self.worker.publish(test)
+
 class Execute_State_Worker(object):
     def __init__(self):
         self.worker = Redis_Queue('execute_state')
@@ -57,7 +73,7 @@ class Execute_State_Worker(object):
             msg = eval(msg[2])
             print('接收：', msg)
             # 执行状态
-            state_sls = State_sls()
+            state_sls = Minion_state()
             if msg['pattern'] == 1: # 执行状态
                 response = {'id':None,'code':None,'msg':None}
                 result = state_sls.execute_state(minion_id=msg['id'],sls=msg['sls'])
