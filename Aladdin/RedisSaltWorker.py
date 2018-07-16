@@ -8,7 +8,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "OPcenter.settings")
 django.setup()
 from django.conf import settings
 from saltstack.salt_manage import Test_ping,Grains,Minion_state
-
+from salt import client
 
 redis_id = settings.REDIS_IP
 redis_password = settings.REDIS_PASSWORD
@@ -57,36 +57,58 @@ class Minion_Auto_Check_Worker(object):
             test = {'pattern': 1,'id':'*','add':False}
             self.worker.publish(test)
 
-class Execute_State_Worker(object):
+class Execute_PlayBook_Worker(object):
     def __init__(self):
-        self.worker = Redis_Queue('execute_state')
+        self.worker = Redis_Queue('state_execute')
         self.radio = self.worker.subscribe()
-
-
+        self.client = client.LocalClient()
     def start(self):
-        print('Execute State Worker 已启动')
+        print('Execute PlayBook Worker 已启动')
         while True:
             # 接收队列消息
             msg = self.radio.parse_response()
-            print(msg)
             # 解析消息内容
             msg = eval(msg[2])
             print('接收：', msg)
             # 执行状态
-            state_sls = Minion_state()
-            if msg['pattern'] == 1: # 执行状态
-                response = {'id':None,'code':None,'msg':None}
-                result = state_sls.execute_state(minion_id=msg['id'],sls=msg['sls'])
-                if result:
-                    response['id'] = id
-                    response['code'] = 0
-                    response['msg'] = result
+            minion_state = Minion_state()
+            result = minion_state.exe_sls(msg['number'],msg['minion_id_list'], msg['playbook_id'])
+            print(result)
+            jid = result[0]
+            number = result[1]
+            t = 1
+            # 判断异常
+            if jid not in msg['minion_id_list'] and type(jid) == int and jid > 0:
+                # 持续查询，直到出现结果，或者连接超时
+                while not self.client.get_cache_returns(jid):
+                    time.sleep(1)
+                    if t == 600:
+                        information = 'Timeout'
+                        break
+                    else:
+                        t += 1
                 else:
-                    response['id'] = id
-                    response['code'] = 9527
-                    response['msg'] = result
-                return response
+                    information = self.client.get_cache_returns(jid)
+                # 继续查询，直到全部主机执行结果全部得到
+                if len(information) != len(msg['minion_id_list']):
+                    while len(self.client.get_cache_returns(jid)) != len(msg['minion_id_list']):
+                        time.sleep(1)
+                        if t == 600:
+                            information = 'Timeout'
+                            break
+                        else:
+                            t += 1
+                    else:
+                        information = self.client.get_cache_returns(jid)
+                minion_state.save_sls(number=number,information=information,status=2)
+                print('任务完成，继续接收消息')
+            else:
+                information = '未知错误' if jid == 0 else '主机不存在：%d'%jid
+                minion_state.save_sls(number=number, information=information,status=3)
+                print('任务异常，继续接收消息')
+                continue
+                # 继续订阅
 
-if __name__=='__main__':
-    exe_state = Execute_State_Worker()
-    exe_state.start()
+# if __name__=='__main__':
+#     exe_state = Execute_PlayBook_Worker()
+#     exe_state.start()

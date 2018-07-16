@@ -3,7 +3,7 @@ import os,shutil
 import subprocess
 import redis
 from salt import client,config,loader,key
-from saltstack.models import Accepted_minion,PlayBook,Project
+from saltstack.models import Accepted_minion,PlayBook,Project,Async_jobs
 # from saltstack.models import Unaccepted_minion
 # from saltstack.models import Exception_minion
 from Aladdin import PathTreeList
@@ -252,30 +252,37 @@ class PlayBook_manage():
 class Minion_state(object):
     def __init__(self):
         self.client = client.LocalClient()
-
-
-    def exe_sls(self, minion_list, playbook):
-
-        minion_list = ['md_op_linux_node133_local_vm','md_linux_op_node122_local_vmm','md_win_op_node6_local_vmm',]
-        #playbook_list = ['/Linux/linux_init','/Linux/linux_init']
-        playbook = '/Linux/test111'
-        print('主机:', minion_list)
-        print('剧本:', playbook)
-        jid = self.client.cmd_async(minion_list, 'state.sls', [playbook],tgt_type='list',full_return=True)
-        print(jid)
-        return jid
-
-        # t = 1
-        # while not self.client.get_cache_returns(jid):
-        #     time.sleep(1)
-        #     print(t,'*'*10,self.client.get_cache_returns(jid))
-        #     if t == 300:
-        #         print('Connection Failed')
-        #         break
-        #     else:
-        #         t += 1
-        #
-        # return self.client.get_cache_returns(jid)
+    # 执行剧本
+    def exe_sls(self,number,minion_id_list, playbook_id):
+        # 异步执行状态，minion_list是一个列表，playbook是一个字符串
+        try:
+            playbook = PlayBook.objects.get(id=playbook_id)
+        except Exception as error:
+            return error
+        minion_dict_values= Accepted_minion.objects.in_bulk(minion_id_list).values()
+        minion_list = []
+        for minion_id in minion_dict_values:
+            minion_list.append(str(minion_id))
+        if len(minion_id_list) == len(minion_list):
+            # 异步执行状态，minion_list是一个id列表，playbook.sls是一个剧本字符串
+            jid = self.client.cmd_async(minion_list, 'state.sls', [playbook.sls],tgt_type='list')
+            # 更新jid到数据库
+            start_time = datetime.datetime.fromtimestamp(time.time())
+            Async_jobs.objects.filter(number=number).update(jid=jid, start_time=start_time, status=1)
+            return (int(jid),number)
+        else:
+            for salt_id in minion_id_list:
+                if Accepted_minion.objects.filter(salt_id=salt_id).values():
+                    continue
+                else:
+                    return (int(salt_id),number)
+            else:
+                return (0, number)
+    # 保存执行结果
+    def save_sls(self,number,information,status):
+        finish_time = datetime.datetime.fromtimestamp(time.time())
+        print(number,information,status)
+        Async_jobs.objects.filter(number=number).update(information=information, finish_time=finish_time, status=status)
 
 #local.cmd('*', ['grains.items','sys.doc','cmd.run',],[[],[],['uptime'],])
 

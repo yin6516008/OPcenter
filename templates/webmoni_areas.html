@@ -2,7 +2,7 @@
 
 {% block css %}
     <link rel="stylesheet" href="/static/css/mycss/index.css">
-    <link rel="stylesheet" href="/static/css/mycss/show_areas.css">
+    <link rel="stylesheet" href="/static/css/mycss/webmoni_areas.css">
 {% endblock %}
 
 {% block content %}
@@ -91,7 +91,7 @@
 
     <!-- echarts图表-右边 -->
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
-    <script src="/static/js/show_areas.js"></script>
+    <script src="/static/js/webmoni_areas.js"></script>
     <script>
     var dom = document.getElementById("container-right");
     var myChart = echarts.init(dom);
@@ -195,4 +195,5 @@
 
 {% block js %}
     <script src="/static/js/index.js"></script>
+    <script src="/static/js/webmoni_areas.js"></script>
 {% endblock %}

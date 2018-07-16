@@ -11,9 +11,15 @@ class Project(models.Model):
         verbose_name_plural = "主机组"
 
 class Accepted_minion(models.Model):
+    status_choice = (
+        (0,'离线'),
+        (1,'在线'),
+        (2,'检测中'),
+
+    )
     salt_id = models.AutoField(primary_key=True)
     id = models.CharField(max_length=60,unique=True,null=False)
-    status = models.IntegerField(null=True,blank=True)
+    status = models.IntegerField(choices=status_choice,null=True,blank=True)
     ipv4 = models.CharField(max_length=60,null=True,blank=True)
     city = models.CharField(max_length=20,null=True,blank=True)
     osfinger = models.CharField(max_length=60,null=True,blank=True)
@@ -51,15 +57,17 @@ class Async_jobs(models.Model):
         (0,'排队中'),
         (1,'执行中'),
         (2,'已完成'),
+        (3,'异常'),
     )
     jid = models.CharField(max_length=20,null=True,blank=True)
-    description = models.ForeignKey('PlayBook',null=False)
-    project = models.ForeignKey('Project',null=False)
+    number = models.CharField(max_length=11, unique=True, null=False)
+    description = models.ForeignKey('PlayBook')
+    project = models.ForeignKey('Project')
     minion = models.ManyToManyField('Accepted_minion')
     create_time = models.DateTimeField()
-    details = models.TextField(null=True,blank=True)
     start_time = models.DateTimeField(null=True,blank=True)
-    duration = models.CharField(max_length=10,null=True,blank=True)
+    finish_time = models.DateTimeField(null=True,blank=True)
+    information = models.TextField(null=True,blank=True)
     status = models.IntegerField(choices=async_jobs_stauts,default=0)
 
 

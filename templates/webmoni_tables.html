@@ -3,22 +3,22 @@
 {% block css %}
     <link rel="stylesheet" href="/static/css/plugins/iCheck/custom.css">
     <link rel="stylesheet" href="/static/css/mycss/index.css">
-    <link rel="stylesheet" href="/static/css/mycss/show_quality.css">
-                                    {% endblock %}
+    <link rel="stylesheet" href="/static/css/mycss/webmoni_tables.css">
+{% endblock %}
 
-                                    {% block content %}
-                                    <!--右侧部分开始-->
-                                    <div class="row J_mainContent animated fadeInRight" id="content-main">
-                                        <!-- 头部工具栏 -->
-                                        <div class="ibox-title">
-                                            <div class="pull-left">
-                                                <button type="button" class="btn addNew btn-outline btn-info" data-toggle="modal" data-target="#myModal"><a href="#">新增</a></button>
-                                            </div>
-                                            <div class="pull-right">
-                                                <div class="four-choose">
-                                                    <div class="select_area">
-                                                        <div class="btn-group select_btn1">
-                                    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle ">选择项目 <span class="caret"></span>
+{% block content %}
+        <!--右侧部分开始-->
+            <div class="row J_mainContent animated fadeInRight" id="content-main">
+                <!-- 头部工具栏 -->
+                <div class="ibox-title">
+                    <div class="pull-left">
+                        <button type="button" class="btn addNew btn-outline btn-info" data-toggle="modal" data-target="#myModal"><a href="#">新增</a></button>
+                    </div>
+                    <div class="pull-right">
+                        <div class="four-choose">
+                            <div class="select_area">
+                                <div class="btn-group select_btn1">
+                                    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle ">选择域名 <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-domains" id="domainsUl">
                                         <li><a href="/webmoni/tables/">全部域名</a></li>
@@ -150,6 +150,7 @@
                     新增区域
                 </h4>
             </div>
+            <!--<form action="/webmoni/create/" method="post" id="add_edit_form">-->
                 <div class="modal-body modalAdd">
                     <div class="input-group">
                         <div class="add_cdn">
@@ -180,7 +181,7 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="node-position">
+                    <div>
                         <h4>节点位置：</h4>
                         {% for row in data.node %}
                         <span>{{ row.node }}</span>
@@ -189,12 +190,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <div>
-                        <p id="errMsg"></p>
-                    </div>
                     <button type="button" class="btn btn-default" data-dismiss="modal" id="btn_close_bottom">关闭</button>
                     <button type="submit" class="btn btn-primary" id="btn_save">保存</button>
                 </div>
+            <!--</form>-->
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
@@ -253,12 +252,16 @@
                     </div>
                   </div>
                   <hr>
-                  <div class="edit-position">
+                  <div>
                      <h4>节点位置：</h4>
-                      {% for row in data.node %}
-                      <span>{{ row.node }}</span>
-                      <input type="checkbox" class="i-checks" name="area" area_id="{{ row.id }}">
-                      {% endfor %}
+                     <span>上海：</span>
+                     <input type="checkbox" class="i-checks" name="shanghai">
+                     <span>山东：</span>
+                     <input type="checkbox" class="i-checks" name="shandong">
+                     <span>北京：</span>
+                     <input type="checkbox" class="i-checks" name="beijing">
+                     <span>广东：</span>
+                     <input type="checkbox" class="i-checks" name="guangdong">
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -302,8 +305,8 @@
 
 {% block js %}
     <script src="/static/js/plugins/iCheck/icheck.min.js"></script>
-    <script src="/static/js/show_quality.js"></script>
+    <script src="/static/js/webmoni_tables.js"></script>
     <script>
-        $(document).ready(function(){$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green"})});
+        $(document).ready(function(){$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",})});
     </script>
 {% endblock %}

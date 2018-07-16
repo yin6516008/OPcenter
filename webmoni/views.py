@@ -35,12 +35,11 @@ def areas(request,url_id=None):
         最下面表格的数据 =  defaultDomainData
     """
     if request.method == 'GET':
-
         project_list = Project.objects.all().order_by('id')
         defaultDomainData, graph_data = get_areas_data(url_id)
         if graph_data is None and defaultDomainData is None:
-            return HttpResponse('还没有域名,请跳转至域名管理页面添加域名')
-        return render(request,'show_areas.html',{'project_list':project_list,
+            return render(request,"error_page.html",{'errorInfo':'还没有域名,请跳转至域名管理页面添加域名'})
+        return render(request,'webmoni_areas.html',{'project_list':project_list,
                                                  'defaultDomainData':defaultDomainData,
                                                  'graph_data':graph_data})
 
@@ -117,19 +116,6 @@ def search(request):
         else:
             return HttpResponse(url_obj.id)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 # "域名管理"页面
 @check_login
 def tables(request,page=1):
@@ -154,7 +140,7 @@ def tables(request,page=1):
             'paginator':paginator
         }
 
-    return render(request,'domain_table.html',{'data':data})
+    return render(request,'webmoni_tables.html',{'data':data})
 
 
 # 项目筛选
@@ -170,7 +156,7 @@ def tables_project(request,project_id):
             'Not_check_number':Domain_table_obj.Not_check_number(),
             'lt_10':Domain_table_obj.lt_10()
         }
-    return render(request,'domain_table.html',{'data':data})
+    return render(request,'webmoni_tables.html',{'data':data})
 
 
 # 编辑域名
@@ -228,7 +214,7 @@ def tables_fault(request):
             'Not_check_number':Domain_table_obj.Not_check_number(),
             'lt_10': Domain_table_obj.lt_10()
         }
-    return render(request,'domain_table.html',{'data':data})
+    return render(request,'webmoni_tables.html',{'data':data})
 
 # 不检测的域名
 @check_login
@@ -243,7 +229,7 @@ def tables_notcheck(request):
             'Not_check_number':Domain_table_obj.Not_check_number(),
             'lt_10': Domain_table_obj.lt_10()
         }
-    return render(request,'domain_table.html',{'data':data})
+    return render(request,'webmoni_tables.html',{'data':data})
 
 
 # 证书即将过期的域名
@@ -259,7 +245,7 @@ def tables_lt_10(request):
             'Not_check_number':Domain_table_obj.Not_check_number(),
             'lt_10': Domain_table_obj.lt_10()
         }
-    return render(request,'domain_table.html',{'data':data})
+    return render(request,'webmoni_tables.html',{'data':data})
 
 # 域名搜索
 @check_login
@@ -284,7 +270,7 @@ def tables_search(request,url_id=None):
                 'Not_check_number': Domain_table_obj.Not_check_number(),
                 'lt_10': Domain_table_obj.lt_10()
             }
-        return render(request, 'domain_table.html', {'data': data})
+        return render(request, 'webmoni_tables.html', {'data': data})
 
 # 域名删除
 @check_login
@@ -317,7 +303,6 @@ def tables_update_all_cert(request):
         last_check_all_cert_time = 0
         if  redis_conn.get('last_check_all_cert_time') is not None:
             last_check_all_cert_time = redis_conn.get('last_check_all_cert_time').decode()
-
         now_time = int(time.time())
         if now_time - int(last_check_all_cert_time) > 7200:
             msg = {
@@ -342,7 +327,7 @@ def nodes(request):
 
         nodeFormsObj = NodeForms()
         node_all = Node.objects.all()
-    return render(request,'node_management.html',{'node_all':node_all,'nodeFormsObj':nodeFormsObj})
+    return render(request,'webmoni_nodes.html',{'node_all':node_all,'nodeFormsObj':nodeFormsObj})
 
 # 创建节点
 @check_login

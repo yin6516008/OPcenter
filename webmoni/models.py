@@ -2,10 +2,11 @@ from django.db import models
 
 # Create your models here.
 class Node(models.Model):
+    online_choice = ((0,'在线'),(1,'离线'),)
     node = models.CharField(max_length=20,unique=True)
     ip = models.CharField(max_length=20,null=True)
     description = models.CharField(max_length=4096,null=True)
-    online= models.IntegerField(null=True,default=None)
+    online= models.IntegerField(null=True,default=None,choices=online_choice)
 
     def __str__(self):
         return self.node
@@ -21,13 +22,22 @@ class Project(models.Model):
         verbose_name_plural = "项目"
 
 class DomainName(models.Model):
+    check_id_choice = (
+        (0,'检查'),
+        (1,'不检查'),
+    )
+
+    warning_choice = (
+        (0,'警告'),
+        (1,'不警告')
+    )
     url = models.CharField(max_length=60,unique=True)
     project_name = models.ForeignKey('Project',to_field='id',null=True)
     status = models.ForeignKey('Event_Type',to_field='id',null=True,default=100)
     cert_valid_date = models.CharField(null=True,max_length=20,default=None)
     cert_valid_days = models.IntegerField(null=True,default=None)
-    check_id = models.IntegerField(default=0)
-    warning = models.IntegerField(default=0)
+    check_id = models.IntegerField(default=0,choices=check_id_choice)
+    warning = models.IntegerField(default=0,choices=warning_choice)
     cdn = models.CharField(null=True,default=None,max_length=60)
     nodes = models.ManyToManyField('Node')
     def __str__(self):

@@ -172,6 +172,8 @@ def cert_TrustAsia_apply(requests):
     :return:
     """
     if requests.method == "GET":
+        TrustAsia_obj = TrustAsia()
+        TrustAsia_obj.login()
         return render(requests,"cert_TrustAsia_apply.html")
 
 def cert_TrustAsia_apply_create_order(requests):

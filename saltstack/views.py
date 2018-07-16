@@ -52,7 +52,7 @@ def accepted_list(request,page=1):
             'unaccepted_list': unaccepted_list,
         }
         # 返回页面
-        return render(request, 'host_list.html',{'data':data})
+        return render(request, 'saltstack_minion_list.html',{'data':data})
 
 # 主机搜索
 def minion_search(request,page=1):
@@ -107,7 +107,7 @@ def minion_search(request,page=1):
             'project_list':project_list,
         }
         # 返回页面
-        return render(request, 'host_list.html',{'data':data})
+        return render(request, 'saltstack_minion_list.html',{'data':data})
 
 # 添加主机
 def minion_add(request):
@@ -116,7 +116,7 @@ def minion_add(request):
         ipv4 = request.POST.get('ipv4')
         city = request.POST.get('city')
         now_time = datetime.datetime.fromtimestamp(time.time())
-        status = 2 #检测状态：0=异常，1=正常，2=检测中
+        status = 2 #检测状态：0=离线，1=正常，2=检测中
         # salt-key允许加入
         key_manage = Key_manage()
         key_manage.accept_key(minion_id=id)
@@ -190,7 +190,7 @@ def playbook(request):
         data = {'playbook_list':playbook_list,
                 'project_list':project_list,
                 }
-        return render(request, 'host_playbook.html',{'data':data})
+        return render(request, 'saltstack_playbook.html',{'data':data})
 
 # 剧本分组筛选
 def playbook_project(request,project):
@@ -200,7 +200,7 @@ def playbook_project(request,project):
         data = {'playbook_list': playbook_list,
                 'project_list': project_list,
                 }
-        return render(request, 'host_playbook.html', {'data': data})
+        return render(request, 'saltstack_playbook.html', {'data': data})
 
 # 剧本上传
 def playbook_upload(request):
@@ -278,7 +278,7 @@ def playbook_exe(request):
                 'playbook_list':playbook_list,
                 'jobs_list':jobs_list,
                 }
-        return render(request, 'host_playbook_exe.html', {'data': data})
+        return render(request, 'saltstack_playbook_exe.html', {'data': data})
 
 # 按分组筛选
 def playbook_exe_project(request,project):
@@ -294,20 +294,64 @@ def playbook_exe_project(request,project):
                 'playbook_list':playbook_list,
                 'jobs_list':jobs_list,
                 }
-        return render(request, 'host_playbook_exe.html', {'data': data})
+        return render(request, 'saltstack_playbook_exe.html', {'data': data})
 
 # 执行剧本操作
 def playbook_exe_sls(request):
-    if request.method == "GET":
-        minion_list = request.POST.get('minion_list')
-        playbook_list = request.POST.get('playbook_list')
-        minion_list = playbook_list = 1
+    if request.method == "POST":
 
-        state = Minion_state()
-        result = state.exe_sls(minion_list,playbook_list)
+        minion_id_list = request.POST.get('minion_id_list')
+        playbook_id = request.POST.get('playbook_id')
 
-        SUCCESS_DATA['data'] = result
-        return HttpResponse(json.dumps(result))
+        print(type(minion_id_list),minion_id_list)
+        print(type(playbook_id),playbook_id)
+
+        minion_id_list = json.loads(request.POST.get('minion_id_list'))
+        playbook_id = request.POST.get('playbook_id')
+
+        print(type(minion_id_list),minion_id_list)
+        print(type(playbook_id),playbook_id)
+
+
+
+        # 任务编号number=yyyymmdd+000
+        last = Async_jobs.objects.last()
+        today = datetime.date.today().strftime('%Y%m%d')
+        try:
+            number = str(int(last.number)+1) if last.number[0:8] == today else today+'001'
+        except AttributeError:
+            number = today+'001'
+
+        # 发布消息
+        state_execute = Redis_Queue('state_execute')
+        state_param = {'number': number, 'minion_id_list': minion_id_list, 'playbook_id': playbook_id}
+        state_execute.publish(state_param)
+
+        # 写入数据库
+        create_time = datetime.datetime.fromtimestamp(time.time())
+        description = PlayBook.objects.get(id=playbook_id)
+        print(description)
+        jobs_info = Async_jobs(number=number, description=description, project=description.project, create_time=create_time, status=0)
+        jobs_info.save()
+        try:
+            jobs_info.minion.add(*minion_id_list)
+        except Exception as error:
+            # 异常返回
+            EXCEPT_DATA['data'] = {'number':number,
+                                   'description': description,
+                                   'create_time': create_time,
+                                   'finish_time': '任务异常',
+                                   'error':error,
+                                   }
+            return HttpResponse(json.dumps(EXCEPT_DATA))
+
+        # 成功返回
+        SUCCESS_DATA['data'] = {'number':number,
+                                'description':description,
+                                'create_time':create_time,
+                                'finish_time':'加入队列'
+                                }
+        return HttpResponse(json.dumps(SUCCESS_DATA))
 
 def master_manage(request):
     if request.method == "GET":
