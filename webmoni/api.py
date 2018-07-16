@@ -65,13 +65,17 @@ def check_result_submit(request):
         if API_verify(client_ip) is not None:
             launcher = Redis_Queue(Webmoni_Send_Mail_Queue)
             try:
-                moni_data = submitData
-                status = moni_data.pop('status')
-                MonitorData.objects.create(**moni_data)
-                if not status == 100:
+                MonitorData.objects.create(
+                    http_code=submitData.get('http_code'),
+                    total_time=submitData.get('total_time'),
+                    datetime=submitData.get('datetime'),
+                    node_id=submitData.get('node_id'),
+                    url_id=submitData.get('url_id')
+                )
+                if not submitData.get('status') == 100:
                     Event_Log.objects.create(
                         datetime=submitData.get('datetime'),
-                        event_type_id=status,
+                        event_type_id=submitData.get('status'),
                         node_id=submitData.get('node'),
                         url_id=submitData.get('url_id'),
                     )

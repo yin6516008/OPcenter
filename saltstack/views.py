@@ -139,6 +139,8 @@ def minion_add(request):
 def minion_test(request):
     if request.method == "POST":
         monion_check = Redis_Queue('check_minion')
+        aa = request.POST.get('id')
+        print(type(aa),aa)
         # 批量检测部分主机状态
         try:
             for id in json.loads(request.POST.get('id')):
@@ -300,20 +302,11 @@ def playbook_exe_project(request,project):
 # 执行剧本操作
 def playbook_exe_sls(request):
     if request.method == "POST":
-
-        minion_id_list = request.POST.get('minion_id_list')
-        playbook_id = request.POST.get('playbook_id')
-
-        print(type(minion_id_list),minion_id_list)
-        print(type(playbook_id),playbook_id)
-
         minion_id_list = json.loads(request.POST.get('minion_id_list'))
         playbook_id = request.POST.get('playbook_id')
 
         print(type(minion_id_list),minion_id_list)
         print(type(playbook_id),playbook_id)
-
-
 
         # 生成任务编号number=yyyymmdd+000
         last = Async_jobs.objects.last()
@@ -322,6 +315,8 @@ def playbook_exe_sls(request):
             number = str(int(last.number)+1) if last.number[0:8] == today else today+'001'
         except AttributeError:
             number = today+'001'
+
+        print(number)
 
         # 发布消息
         state_execute = Redis_Queue('state_execute')
@@ -344,14 +339,68 @@ def playbook_exe_sls(request):
                                    'finish_time': '任务异常',
                                    'error':error,
                                    }
+            print(EXCEPT_DATA)
             return HttpResponse(json.dumps(EXCEPT_DATA))
 
         # 成功返回
         SUCCESS_DATA['data'] = {'number':number,
                                 'description':description,
                                 'create_time':create_time,
-                                'finish_time':'加入队列'
+                                'finish_time':'加入队列',
                                 }
+        print(SUCCESS_DATA)
+        return HttpResponse(json.dumps(SUCCESS_DATA))
+    elif request.method == "GET":
+        #minion_id_list = json.loads(request.POST.get('minion_id_list'))
+        #playbook_id = request.POST.get('playbook_id')
+
+        minion_id_list = ['28', '27']
+        playbook_id = '40'
+
+        print(type(minion_id_list),minion_id_list)
+        print(type(playbook_id),playbook_id)
+
+        # 生成任务编号number=yyyymmdd+000
+        last = Async_jobs.objects.last()
+        today = datetime.date.today().strftime('%Y%m%d')
+        try:
+            number = str(int(last.number)+1) if last.number[0:8] == today else today+'001'
+        except AttributeError:
+            number = today+'001'
+
+        print(number)
+
+        # 发布消息
+        state_execute = Redis_Queue('state_execute')
+        state_param = {'number': number, 'minion_id_list': minion_id_list, 'playbook_id': playbook_id}
+        state_execute.publish(state_param)
+
+        # 写入数据库
+        create_time = datetime.datetime.fromtimestamp(time.time())
+        description = PlayBook.objects.get(id=playbook_id)
+        print(description)
+        jobs_info = Async_jobs(number=number, description=description, project=description.project, create_time=create_time, status=0)
+        jobs_info.save()
+        try:
+            jobs_info.minion.add(*minion_id_list)
+        except Exception as error:
+            # 异常返回
+            EXCEPT_DATA['data'] = {'number':number,
+                                   'description': description,
+                                   'create_time': create_time,
+                                   'finish_time': '任务异常',
+                                   'error':error,
+                                   }
+            print(EXCEPT_DATA)
+            return HttpResponse(json.dumps(EXCEPT_DATA))
+
+        # 成功返回
+        SUCCESS_DATA['data'] = {'number':number,
+                                'description':str(description),
+                                'create_time':create_time,
+                                'finish_time':'加入队列',
+                                }
+        print(SUCCESS_DATA)
         return HttpResponse(json.dumps(SUCCESS_DATA))
 
 def master_manage(request):

@@ -4,6 +4,7 @@ $(function () {
     $('.choose').attr('disabled', true);
     $('.remove').attr('disabled', true);
     $('.empty').attr('disabled', true);
+    $('.implement').attr('disabled', true);
 
     // thead里input的全选与反选
     $("#chooseAll").click(function () {
@@ -16,13 +17,15 @@ $(function () {
         $("#chooseTbody").find(":checkbox").prop("checked",th_ckd);
         forbidClick();
         var thArr = [];
-        var allTr = $('#chooseTbody > tr').find('td').siblings('td:eq(4)');
-        console.log(allTr.length);
-        for (var i = 0; i < allTr.length; i++) {
-            var tr = allTr[i];
-            thArr.push($(tr));
-        }
+        var thArr_el = $("#chooseTbody").find(":checked");
+        thArr.push($(thArr_el).parent().parent());
         console.log(thArr);
+        $('.choose').click(function () {
+            $('#haveChosen').append(thArr);
+            $('#haveChosen > tr').find("td > input[type='checkbox']").prop('checked', false);
+            $('#chooseAll').prop('checked', false);
+            $('.choose').attr('disabled', true);
+        })
     });
 
     // tbody里input的全选与反选
@@ -88,12 +91,23 @@ $(function () {
     $('.implement').click(function () {
         var list = [];
         var list_el = $('#haveChosen').find(':checked');
-        // console.log(list_el.length);
         for (var i = 0; i < list_el.length; i++) {
             console.log(list_el);
             var minionId = $(list_el[i]).parent().siblings('td:eq(0)').attr('minion_id');
             list.push(minionId);
         }
-        console.log(list);
+        var playbookId = $('#playbookList').find('td:eq(1)').attr('playbook_id');
+        $.ajax({
+            type: 'POST',
+            url: '/saltstack/playbook_exe_sls/',
+            data: {
+                'minion_id_list': JSON.stringify(list),
+                'playbook_id': playbookId
+            },
+            success: function (msg) {
+                var data = JSON.parse(msg)
+                console.log(data);
+            }
+        })
     })
 })
