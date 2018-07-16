@@ -19,10 +19,24 @@ $(function () {
 
     // tbody里input的全选与反选
     $("#chooseTbody").find(":checkbox").click(function () {
+        var arr = [];
         $('.choose').attr('disabled', false);
         var length1 = $("#chooseTbody").find(":checkbox").length;
         var length2 = $("#chooseTbody").find(":checked").length;
-        if (length1==length2) {
+
+        var ckdNum = $("#chooseTbody").find(":checked");
+        for (var i = 0; i < ckdNum.length; i++) {
+            var trNum = ckdNum[i];
+            arr.push($(trNum).parent().parent());
+        }
+        console.log(arr);
+        $('.choose').click(function () {
+            $(this).attr('disabled', true);
+            $('#haveChosen').append(arr);
+            $('#haveChosen > tr').find("td > input[type='checkbox']").prop('checked', false);
+        })
+
+        if (length1 == length2) {
             $("#chooseAll").prop("checked",true);
         } else {
             $("#chooseAll").prop("checked",false);
@@ -31,19 +45,18 @@ $(function () {
         if (length2 > 0) {
             $('.choose').attr('disabled', false);
             // 点击选择按钮
-            var arr = [];
+            // var arr = [];
             // var ckdNum = $("#chooseTbody").find(":checked");
-            var ckdNum = $("#chooseTbody").find(":checkbox").prop('checked');
-            for (var i = 0; i < ckdNum.length; i++) {
-                var trNum = ckdNum[i];
-                arr.push($(trNum).parent().parent());
-            }
-            console.log(arr);
-            $('.choose').click(function () {
-                $(this).attr('disabled', true);
-                $('#haveChosen').append(arr);
-                $('#haveChosen > tr').find("td > input[type='checkbox']").prop('checked', false);
-            })
+            // for (var i = 0; i < ckdNum.length; i++) {
+            //     var trNum = ckdNum[i];
+            //     arr.push($(trNum).parent().parent());
+            // }
+            // console.log(arr);
+            // $('.choose').click(function () {
+            //     $(this).attr('disabled', true);
+            //     $('#haveChosen').append(arr);
+            //     $('#haveChosen > tr').find("td > input[type='checkbox']").prop('checked', false);
+            // })
         } else {
             $('.choose').attr('disabled', true);
         }

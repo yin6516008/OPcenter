@@ -257,6 +257,7 @@ def playbook_save(request):
 def playbook_del(request):
     if request.method == 'POST':
         playbook_path = request.POST.get('playbook_path')
+        print(playbook_path)
         playbook_m_obj= PlayBook_manage()
         result = playbook_m_obj.delete(playbook_path)
         if result:
@@ -383,3 +384,4 @@ def opcenter_slave_release(request):
         # result是一个字典
         print(result)
         return HttpResponse(json.dumps(result))
+

@@ -26,12 +26,12 @@ except_data = settings.EXCEPT_DATA
 # /webmoni/api/domain_all/ 发送DomainName表数据
 def domain_all(request):
     if request.method == 'POST':
-        node_id = request.POST.get('node')
         client_ip = request.META['REMOTE_ADDR']
-        if API_verify(node_id,client_ip):
-            node_obj = Node.objects.get(id=node_id)
+        node_obj = API_verify(client_ip)
+        if node_obj is not None:
             domains = node_obj.domainname_set.all()
             success_data['data'] = list(domains.values())
+            success_data['node'] = node_obj.id
             return HttpResponse(json.dumps(success_data))
         else:
             except_data['data'] = 'API验证失败'
@@ -44,9 +44,8 @@ def domain_all(request):
 # /webmoni/api/event_type/ 发送Event_Type表数据
 def event_type(request):
     if request.method == 'POST':
-        node_id = request.POST.get('node')
         client_ip = request.META['REMOTE_ADDR']
-        if API_verify(node_id,client_ip):
+        if API_verify(client_ip) is not None:
             success_data['data'] = list(Event_Type.objects.all().values())
             return HttpResponse(json.dumps(success_data))
         else:
@@ -63,7 +62,7 @@ def check_result_submit(request):
     if request.method == 'POST':
         submitData = json.loads(request.POST.get('submitData'))
         client_ip = request.META['REMOTE_ADDR']
-        if API_verify(submitData.get('node'),client_ip):
+        if API_verify(client_ip) is not None:
             launcher = Redis_Queue(Webmoni_Send_Mail_Queue)
             try:
                 MonitorData.objects.create(**submitData)
