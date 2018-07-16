@@ -43,7 +43,7 @@
                             {% for row in data.minion_list %}
                                 <tr>
                                     <td><input type="checkbox" onclick=""></td>
-                                    <td name="{{ row.salt_id }}">{{ forloop.counter }}</td>
+                                    <td minion_id="{{ row.salt_id }}">{{ forloop.counter }}</td>
                                     <td>{{ row.id }}</td>
                                     <td>{{ row.ipv4 }}</td>
                                     <td>{{ row.city }}</td>
@@ -120,7 +120,7 @@
                             {% for row in data.playbook_list %}
                             <tr name="{{ row.sls }}">
                                 <td><input type="checkbox"></td>
-                                <td name="{{ row.id }}">{{ forloop.counter }}</td>
+                                <td playbook_id="{{ row.id }}">{{ forloop.counter }}</td>
                                 <td>{{ row.sls }}</td>
                                 <td>{{ row.description }}</td>
                                 <td>{{ row.project }}</td>

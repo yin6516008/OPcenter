@@ -315,7 +315,7 @@ def playbook_exe_sls(request):
 
 
 
-        # 任务编号number=yyyymmdd+000
+        # 生成任务编号number=yyyymmdd+000
         last = Async_jobs.objects.last()
         today = datetime.date.today().strftime('%Y%m%d')
         try:
