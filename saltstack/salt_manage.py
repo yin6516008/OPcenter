@@ -72,7 +72,6 @@ class Grains(client.LocalClient):
         result = self.cmd(minion_id, 'grains.item', items)
         for id in result.keys():
             items = result[id]
-            print(items)
             now_time = datetime.datetime.fromtimestamp(time.time())
             if type(items) == dict:
                 items['datetime'] = now_time
@@ -86,11 +85,11 @@ class Grains(client.LocalClient):
 # test模块
 class Test_ping(client.LocalClient):
     # 获取主机的状态
-    def get_status(self,minion_id):
+    def get_status(self,minion_id_list):
         # id不能为空，避免异常
-        if minion_id is not None:
+        if minion_id_list is not None:
             # 接收test.ping的返回结果
-            result = self.cmd(minion_id,'test.ping',[])
+            result = self.cmd(minion_id_list,'test.ping',[],tgt_type='list')
             #result必然是一个字典
             # 更新数据库
             for id in result.keys():
@@ -98,7 +97,6 @@ class Test_ping(client.LocalClient):
                 status = 1 if result[id] else 0 # True=1；False=0
                 # 检测状态更新到数据库
                 Accepted_minion.objects.filter(id=id).update(status=status,datetime=now_time)
-            print(result)
             return result
 
 # master配置

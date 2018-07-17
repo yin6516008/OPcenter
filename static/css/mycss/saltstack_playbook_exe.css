@@ -121,6 +121,37 @@ table thead tr th:nth-child(6) {
     right: 20px;
     top: 3px;
 }
+.play-book-implement table thead tr th:nth-child(1) {
+    width: 10%;
+}
+.play-book-implement table thead tr th:nth-child(2) {
+    width: 10%;
+}
+.play-book-implement table thead tr th:nth-child(3) {
+    width: 30%;
+}
+.play-book-implement table thead tr th:nth-child(4) {
+    width: 30%;
+}
+.play-book-implement table thead tr th:nth-child(5) {
+    width: 20%;
+}
+
+.play-book-implement table tbody tr td:nth-child(1) {
+    width: 10%;
+}
+.play-book-implement table tbody tr td:nth-child(2) {
+    width: 10%;
+}
+.play-book-implement table tbody tr td:nth-child(3) {
+    width: 30%;
+}
+.play-book-implement table tbody tr td:nth-child(4) {
+    width: 30%;
+}
+.play-book-implement table tbody tr td:nth-child(5) {
+    width: 20%;
+}
 
 /*剧本执行任务日志*/
 .play-book-log table thead tr th:nth-child(1) {

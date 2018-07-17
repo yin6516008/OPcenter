@@ -5,6 +5,7 @@ $(function () {
     $('.remove').attr('disabled', true);
     $('.empty').attr('disabled', true);
     $('.implement').attr('disabled', true);
+    $('#receivedAll').attr('disabled', true);
 
     // thead里input的全选与反选
     $("#chooseAll").click(function () {
@@ -16,21 +17,26 @@ $(function () {
         }
         $("#chooseTbody").find(":checkbox").prop("checked",th_ckd);
         forbidClick();
-        var thArr = [];
-        var thArr_el = $("#chooseTbody").find(":checked");
-        thArr.push($(thArr_el).parent().parent());
-        console.log(thArr);
+
         $('.choose').click(function () {
+            $('#receivedAll').attr('disabled', false);
+            $('.empty').attr('disabled', false);
+            var thArr = [];
+            var thArr_el = $("#chooseTbody").find(":checked");
+            thArr.push($(thArr_el).parent().parent());
             $('#haveChosen').append(thArr);
             $('#haveChosen > tr').find("td > input[type='checkbox']").prop('checked', false);
             $('#chooseAll').prop('checked', false);
             $('.choose').attr('disabled', true);
         })
+        chooseFn1();
+        chooseFn2();
     });
 
     // tbody里input的全选与反选
     $("#chooseTbody").find(":checkbox").click(function () {
         $('.choose').attr('disabled', false);
+        console.log(222);
         var length1 = $("#chooseTbody").find(":checkbox").length;
         var length2 = $("#chooseTbody").find(":checked").length;
         if (length1 == length2) {
@@ -46,6 +52,8 @@ $(function () {
         }
 
         $('.choose').click(function () {
+            $('#receivedAll').attr('disabled', false);
+            $('.empty').attr('disabled', false);
             var arr = [];
             var ckdNum = $("#chooseTbody").find(":checked");
             for (var i = 0; i < ckdNum.length; i++) {
@@ -56,6 +64,7 @@ $(function () {
             console.log(arr);
             $('#haveChosen').append(arr);
             $('#haveChosen > tr').find("td > input[type='checkbox']").prop('checked', false);
+            chooseFn2();
         })
     });
 
@@ -73,41 +82,109 @@ $(function () {
     forbidClick();
 
     //-----------------已选择的主机操作部分--------------
-    // thead里input的全选与反选
-    $('#receivedAll').click(function () {
-        var received_ckd = $(this).prop('checked');
-        if (received_ckd) {
-            $('.remove').attr('disabled', false);
-            $('.empty').attr('disabled', false);
-        } else {
-            $('.remove').attr('disabled', true);
-            $('.empty').attr('disabled', true);
+    function chooseFn1() {
+        // thead里input的全选与反选
+        $('#receivedAll').click(function () {
+            var received_ckd = $(this).prop('checked');
+            if (received_ckd) {
+                $('.remove').attr('disabled', false);
+                $('.empty').attr('disabled', false);
+            } else {
+                $('.remove').attr('disabled', true);
+                $('.empty').attr('disabled', true);
+            }
+            $('#haveChosen').find(':checkbox').prop('checked',received_ckd);
+            $('.remove').click(function () {
+                $('#receivedAll').attr('disabled', true);
+                $('.empty').attr('disabled', true);
+                removeTr();
+            })
+        });
+    }
+    chooseFn1();
+
+    function chooseFn2() {
+        // tbody里input的全选与反选
+        $("#haveChosen").find(":checkbox").click(function () {
+            // $('.remove').attr('disabled', false);
+            // $('.empty').attr('disabled', false);
+            var length3 = $("#haveChosen").find(":checkbox").length;
+            var length4 = $("#haveChosen").find(":checked").length;
+            if (length3 == length4) {
+                $("#receivedAll").prop("checked",true);
+            } else {
+                $("#receivedAll").prop("checked",false);
+            }
+            // tbody 中每个input 勾选状态与选择按钮状态保持一致
+            if (length4 > 0) {
+                $('.remove').attr('disabled', false);
+                $('.empty').attr('disabled', false);
+            } else {
+                $('.remove').attr('disabled', true);
+                $('.empty').attr('disabled', true);
+            }
+            $('.remove').click(function () {
+                $('#receivedAll').attr('disabled', true);
+                $('.empty').attr('disabled', true);
+                removeTr();
+            })
+        });
+    }
+    chooseFn2();
+
+    // 封装移除函数
+    function removeTr() {
+        var arr_sec = [];
+        var ckdNumSec = $("#haveChosen").find(":checked");
+        for (var i = 0; i < ckdNumSec.length; i++) {
+            var trNumSec = $(ckdNumSec[i]).parent().parent();
+            arr_sec.push(trNumSec);
         }
-        $('#haveChosen').find(':checkbox').prop('checked',received_ckd);
+        $(this).attr('disabled', true);
+        console.log(arr_sec);
+        $('#chooseTbody').prepend(arr_sec);
+        $('#chooseTbody > tr').find("td > input[type='checkbox']").prop('checked', false);
+        $('#receivedAll').prop('checked', false);
+        $('.remove').attr('disabled', true);
+        $('.empty').attr('disabled', true);
+    }
+    removeTr();
+
+    // 清空所选
+    $('.empty').click(function () {
+        var arr_trd = [];
+        var trNum = $('#haveChosen > tr');
+        arr_trd.push(trNum);
+        $('#chooseTbody').prepend(arr_trd);
+        $(this).attr('disabled', true);
     })
 
-
     //-----------------选择剧本--------------
-    $('.implement').click(function () {
-        var list = [];
-        var list_el = $('#haveChosen').find(':checked');
-        for (var i = 0; i < list_el.length; i++) {
-            console.log(list_el);
-            var minionId = $(list_el[i]).parent().siblings('td:eq(0)').attr('minion_id');
-            list.push(minionId);
+    $('#haveChosen, #playbookList').on('click change', function () {
+        if ($('#haveChosen').find(':checked').length > 0 && $('#playbookList').find(':checked').length > 0) {
+            $('.implement').attr('disabled', false);
+            $('.implement').click(function () {
+                var list = [];
+                var list_el = $('#haveChosen').find(':checked');
+                for (var i = 0; i < list_el.length; i++) {
+                    console.log(list_el);
+                    var minionId = $(list_el[i]).parent().siblings('td:eq(0)').attr('minion_id');
+                    list.push(minionId);
+                }
+                var playbookId = $('#playbookList').find('td:eq(1)').attr('playbook_id');
+                $.ajax({
+                    type: 'POST',
+                    url: '/saltstack/playbook_exe_sls/',
+                    data: {
+                        'minion_id_list': JSON.stringify(list),
+                        'playbook_id': playbookId
+                    },
+                    success: function (msg) {
+                        var data = JSON.parse(msg)
+                        console.log(data);
+                    }
+                })
+            })
         }
-        var playbookId = $('#playbookList').find('td:eq(1)').attr('playbook_id');
-        $.ajax({
-            type: 'POST',
-            url: '/saltstack/playbook_exe_sls/',
-            data: {
-                'minion_id_list': JSON.stringify(list),
-                'playbook_id': playbookId
-            },
-            success: function (msg) {
-                var data = JSON.parse(msg)
-                console.log(data);
-            }
-        })
     })
 })

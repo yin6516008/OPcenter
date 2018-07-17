@@ -329,6 +329,12 @@ $(function () {
 
     // updated 编辑按钮 + 模态框
     $('[data-target="#editDomain"]').click(function () {
+
+        //
+        $('#edit_notadd').parent().iCheck('check');
+        $('#edit_notwarn').parent().iCheck('check');
+
+
         $('#cdn_domain,#itemDetail_edit').val('');
         console.log($('#edit_notadd').parent());
         $('#edit_notadd').parent().removeClass('checked');
@@ -347,6 +353,8 @@ $(function () {
                 var data = JSON.parse(msg);
                 console.log(data.data);
                 if (data.code == 0) {
+
+
                     $('#itemDetail_edit').val(data.data.domain_info.url)
                     $('#btn_save_edit').val(data.data.domain_info.id)
                     $('#cdn_domain').val(data.data.domain_info.cdn)
@@ -437,6 +445,7 @@ $(function () {
         var domain = $('#itemDetail_edit').val();
         var cdn = $('#cdn_domain').val();
         var editNum = $('.edit-position > .icheckbox_square-green');
+        console.log(editNum.length);
         var project = $('#editBtn').text()
         for (var i = 0; i < editNum.length; i++) {
             var areaId = editNum[i];
@@ -444,6 +453,7 @@ $(function () {
                 arr.push($(areaId).find('input').attr('area_id'));
             }
         }
+        console.log(arr);
         $.ajax({
             type: "POST",
             url: "/webmoni/tables/edit/",

@@ -8,6 +8,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "OPcenter.settings")
 django.setup()
 from django.conf import settings
 from saltstack.salt_manage import Test_ping,Grains,Minion_state
+from saltstack.models import Accepted_minion
 from salt import client
 
 redis_id = settings.REDIS_IP
@@ -22,7 +23,7 @@ class Minion_Check_Worker(object):
         self.worker = Redis_Queue('check_minion')
         self.radio = self.worker.subscribe()
 
-
+    # 检测主机队列
     def start(self):
         print('Minion Check Worker 已启动')
         while True:
@@ -30,8 +31,7 @@ class Minion_Check_Worker(object):
             msg = self.radio.parse_response()
             # 解析消息内容
             msg = eval(msg[2])
-            if msg['add']:
-                time.sleep(5)
+            time.sleep(10) if msg['add'] else None
             # 调用test.ping测试
             minion_check = Test_ping()
             # 检测主机配置
@@ -45,16 +45,17 @@ class Minion_Auto_Check_Worker(object):
     def __init__(self):
         self.worker = Redis_Queue('check_minion')
     def start(self):
-        print('Minion_Auto_Check_Worker 已启动')
+        print('Minion Auto Check Worker 已启动')
         while True:
-            # 设定自动检测间隔时间INTERVAL秒
-            INTERVAL = 300
-            time_remaining = INTERVAL - time.time() % INTERVAL
-            print(time_remaining)
-            # 整点开始
-            time.sleep(time_remaining)
+            # 设定自动检测间隔时间
+            time.sleep(600)
+            minion_id_dict = Accepted_minion.objects.values('id')
+            minion_id_list = []
+            for minion_id in minion_id_dict:
+                minion_id_list.append(minion_id['id'])
+            time.sleep(1)
             # 定时发送检测任务到redis队列
-            test = {'pattern': 1,'id':'*','add':False}
+            test = {'pattern': 1,'id':minion_id_list,'add':False}
             self.worker.publish(test)
 
 class Execute_PlayBook_Worker(object):

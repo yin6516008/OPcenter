@@ -41,7 +41,6 @@ def accepted_list(request,page=1):
         except EmptyPage:
             one_page = paginator.page(paginator.num_pages)
         where = {'id': '', 'ip': '', 'os': '', 'project': ''}
-        print(where)
         data = {
             'one_page': one_page,
             'paginator':paginator,
@@ -63,10 +62,8 @@ def minion_search(request,page=1):
         project = 'Empty_value' if request.GET.get('project') == '' else request.GET.get('project')
         if project is not None:
             where = {'id':id,'ip':ip,'project':project}
-            print('*',where)
             # 多个字段模糊查询， 双下划线前是字段名,icontains 包含 忽略大小写 ilike ‘%aaa%’
             #minion_list = Accepted_minion.objects.filter(Q(id__icontains=where['id']) | Q(ipv4__icontains=where['ip']) | Q(osfinger__icontains=where['os']) | Q(project__id=where['project'])).order_by('-salt_id')
-
             minion_list = Accepted_minion.objects.filter(project__id=where['project']).order_by('-salt_id')
         else:
             # 如果搜索条件全部为空，则回到主机列表页
@@ -77,7 +74,6 @@ def minion_search(request,page=1):
             project_id = 0 if project_item.count() == 0 else project_item[0]['id']
             # 构建查询条件字典
             where = {'id':id,'ip':ip,'project':project_id}
-            print(where)
             # 多个字段模糊查询， 双下划线前是字段名,icontains 包含 忽略大小写 ilike ‘%aaa%’
             minion_list = Accepted_minion.objects.filter(Q(id__icontains=where['id']) | Q(ipv4__icontains=where['ip']) | Q(project__id=where['project'])).order_by('-salt_id')
 
@@ -125,7 +121,7 @@ def minion_add(request):
         # 发送检测任务到redis队列
         monion_check = Redis_Queue('check_minion')
         # 模式1=test.ping,2=grains.items
-        test = {'pattern': 1,'id': id,'add':True}
+        test = {'pattern': 1,'id': [id],'add':True}
         monion_check.publish(test)
         grains = {'pattern': 2,'id': id,'add':True}
         monion_check.publish(grains)
@@ -138,36 +134,42 @@ def minion_add(request):
 # 检测主机状态
 def minion_test(request):
     if request.method == "POST":
+        # 接收id
+        id = request.POST.get('id')
+        # 实例化Redis
         monion_check = Redis_Queue('check_minion')
-        aa = request.POST.get('id')
-        print(type(aa),aa)
-        # 批量检测部分主机状态
-        try:
-            for id in json.loads(request.POST.get('id')):
-                # 发送检测任务到redis队列   # pattern模式1=test.ping,2=grains.items
-                test = {'pattern':1,'id': id,'add':False}
-                monion_check.publish(test)
-                # 更新数据库
-                Accepted_minion.objects.filter(id=id).update(status=2)
-            #返回页面
-            SUCCESS_DATA['data'] = '检测中'
-            msg = SUCCESS_DATA
-            return HttpResponse(json.dumps(msg))
-
-        # 检测一个id或*全部
-        except Exception as e:
-            id = request.POST.get('id')
-            if id == '*':
-                Accepted_minion.objects.all().update(status=2)
-            else:
-                Accepted_minion.objects.filter(id=id).update(status=2)
+        # 刷新列表，检测全部主机
+        if id == '*':
+            Accepted_minion.objects.update(status=2)
+            minion_id_dict = Accepted_minion.objects.values('id')
+            minion_id_list = []
+            for minion_id in minion_id_dict:
+                minion_id_list.append(minion_id['id'])
             # 发送检测任务到redis队列   # pattern模式1=test.ping,2=grains.items
-            test = {'pattern': 1, 'id': id,'add':False}
+            test = {'pattern': 1, 'id': minion_id_list,'add':False}
             monion_check.publish(test)
             # 返回结果
             SUCCESS_DATA['data'] = '检测中'
             msg = SUCCESS_DATA
             return HttpResponse(json.dumps(msg))
+
+        # 批量检测部分主机
+        else:
+            salt_id_list = json.loads(request.POST.get('id'))
+            id_list = Accepted_minion.objects.in_bulk(salt_id_list).values()
+            # 发送检测任务到redis队列   # pattern模式1=test.ping,2=grains.items
+            minion_id_list = []
+            # 更新数据库
+            for id in id_list:
+                minion_id_list.append(str(id))
+                Accepted_minion.objects.filter(id=id).update(status=2)
+            test = {'pattern': 1, 'id': minion_id_list, 'add': False}
+            monion_check.publish(test)
+            #返回页面
+            SUCCESS_DATA['data'] = '检测中'
+            msg = SUCCESS_DATA
+            return HttpResponse(json.dumps(msg))
+
 
 # 删除主机
 @check_login
@@ -334,60 +336,8 @@ def playbook_exe_sls(request):
         except Exception as error:
             # 异常返回
             EXCEPT_DATA['data'] = {'number':number,
-                                   'description': description,
-                                   'create_time': create_time,
-                                   'finish_time': '任务异常',
-                                   'error':error,
-                                   }
-            print(EXCEPT_DATA)
-            return HttpResponse(json.dumps(EXCEPT_DATA))
-
-        # 成功返回
-        SUCCESS_DATA['data'] = {'number':number,
-                                'description':description,
-                                'create_time':create_time,
-                                'finish_time':'加入队列',
-                                }
-        print(SUCCESS_DATA)
-        return HttpResponse(json.dumps(SUCCESS_DATA))
-    elif request.method == "GET":
-        #minion_id_list = json.loads(request.POST.get('minion_id_list'))
-        #playbook_id = request.POST.get('playbook_id')
-
-        minion_id_list = ['28', '27']
-        playbook_id = '40'
-
-        print(type(minion_id_list),minion_id_list)
-        print(type(playbook_id),playbook_id)
-
-        # 生成任务编号number=yyyymmdd+000
-        last = Async_jobs.objects.last()
-        today = datetime.date.today().strftime('%Y%m%d')
-        try:
-            number = str(int(last.number)+1) if last.number[0:8] == today else today+'001'
-        except AttributeError:
-            number = today+'001'
-
-        print(number)
-
-        # 发布消息
-        state_execute = Redis_Queue('state_execute')
-        state_param = {'number': number, 'minion_id_list': minion_id_list, 'playbook_id': playbook_id}
-        state_execute.publish(state_param)
-
-        # 写入数据库
-        create_time = datetime.datetime.fromtimestamp(time.time())
-        description = PlayBook.objects.get(id=playbook_id)
-        print(description)
-        jobs_info = Async_jobs(number=number, description=description, project=description.project, create_time=create_time, status=0)
-        jobs_info.save()
-        try:
-            jobs_info.minion.add(*minion_id_list)
-        except Exception as error:
-            # 异常返回
-            EXCEPT_DATA['data'] = {'number':number,
-                                   'description': description,
-                                   'create_time': create_time,
+                                   'description': str(description),
+                                   'create_time': create_time.strftime("%H:%M:%S"),
                                    'finish_time': '任务异常',
                                    'error':error,
                                    }
@@ -397,40 +347,10 @@ def playbook_exe_sls(request):
         # 成功返回
         SUCCESS_DATA['data'] = {'number':number,
                                 'description':str(description),
-                                'create_time':create_time,
+                                'create_time':create_time.strftime("%H:%M:%S"),
                                 'finish_time':'加入队列',
                                 }
         print(SUCCESS_DATA)
         return HttpResponse(json.dumps(SUCCESS_DATA))
 
-def master_manage(request):
-    if request.method == "GET":
-        master = Master_manage()
-        minion_id = 'md_op_linux_node133_local_vm'
-        result = master.grains_defined()
-        # result是一个字典
-        print(result)
-        return HttpResponse(json.dumps(result))
-
-def opcenter_slave_init(request):
-    if request.method == "GET":
-        master = Minion_state()
-        minion_id = 'md_op_linux_node133_local_vm'
-        opcenter_slave_release_sls = '/srv/salt/linux/init/opcenter-slave/opcenter_slave_init-only_first_time.sls'
-        sls = '/linux/init/opcenter-slave/opcenter_slave_init-only_first_time'
-        result = master.exe_sls(minion_id,sls)
-        # result是一个字典
-        print(result)
-        return HttpResponse(json.dumps(result))
-
-def opcenter_slave_release(request):
-    if request.method == "GET":
-        master = Minion_state()
-        minion_id = 'md_op_linux_node133_local_vm'
-        opcenter_slave_release_sls = '/srv/salt/linux/prod/opcenter-slave/opcenter_slave_release.sls'
-        sls = '/linux/prod/opcenter-slave/opcenter_slave_release'
-        result = master.exe_sls(minion_id,sls)
-        # result是一个字典
-        print(result)
-        return HttpResponse(json.dumps(result))
 

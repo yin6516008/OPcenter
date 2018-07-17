@@ -1,8 +1,7 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.header import Header
-from Aladdin.LogModule import logging
-
+from Aladdin.LogModule import logger
 
 sender = 'mingdeop@sina.com'
 user = 'mingdeop@sina.com'
@@ -25,6 +24,8 @@ def send_mail(title,recipients,content):
         server.sendmail(sender,recipients,message.as_string())
         return True
     except smtplib.SMTPException as e:
-        logging.warning(title,'mail send fail',e)
+        logger.warning(title,'mail send fail',e)
         return False
-
+    except smtplib.SMTPDataError as e:
+        logger.error(title,e)
+        return False

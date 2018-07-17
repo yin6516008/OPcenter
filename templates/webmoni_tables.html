@@ -252,16 +252,12 @@
                     </div>
                   </div>
                   <hr>
-                  <div>
+                  <div class="edit-position">
                      <h4>节点位置：</h4>
-                     <span>上海：</span>
-                     <input type="checkbox" class="i-checks" name="shanghai">
-                     <span>山东：</span>
-                     <input type="checkbox" class="i-checks" name="shandong">
-                     <span>北京：</span>
-                     <input type="checkbox" class="i-checks" name="beijing">
-                     <span>广东：</span>
-                     <input type="checkbox" class="i-checks" name="guangdong">
+                     {% for row in data.node%}
+                     <span>{{ row.node }}：</span>
+                     <input type="checkbox" class="i-checks" area_id="{{row.id}}">
+                     {% endfor %}
                   </div>
                 </div>
                 <div class="modal-footer">

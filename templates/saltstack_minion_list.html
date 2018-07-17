@@ -82,7 +82,7 @@
                                     <input type="checkbox">
                                 </td>
                                 <td>{{ forloop.counter|add:data.start }}</td>
-                                <td>{{ row.id }}</td>
+                                <td salt_id="{{ row.salt_id }}">{{ row.id }}</td>
                                 {% if row.status == 0 %}
                                 <td style="color: red">离线</td>
                                 {% elif row.status == 1 %}

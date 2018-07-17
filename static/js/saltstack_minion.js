@@ -217,8 +217,9 @@ $(function () {
                 var idNum = $('#tbody > tr');
                 for (var i = 0; i < idNum.length; i++) {
                     var idArr = idNum[i];
-                    arr.push($(idArr).find('td').eq(2).text());
+                    arr.push($(idArr).find('td').eq(2).attr('salt_id'));
                 }
+                console.log(arr);
                 // 提交状态
                 $('.management > button').click(function () {
                     $.ajax({
@@ -229,6 +230,7 @@ $(function () {
                         },
                         success: function (msg) {
                             var data = JSON.parse(msg);
+                            console.log(data);
                             if (data.code == 0) {
                                 window.location.reload();
                             }
@@ -272,7 +274,7 @@ $(function () {
                 var checkedNum = $('#tbody').find(':checked').prop('checked', true);
                 for (var i = 0; i < checkedNum.length; i++) {
                     var perChecked = checkedNum[i];
-                    arr.push($(perChecked).parent().parent().find('td:eq(2)').text());
+                    arr.push($(perChecked).parent().parent().find('td:eq(2)').attr('salt_id'));
                 }
                 console.log(arr);
                 $.ajax({
