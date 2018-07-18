@@ -2,6 +2,9 @@
     margin: 0;
     padding: 0;
 }
+.float-e-margins .btn {
+     margin-bottom: 0;
+}
 .ibox {
     margin-top: 20px;
 }
@@ -158,10 +161,10 @@ table thead tr th:nth-child(6) {
     width: 10%;
 }
 .play-book-log table thead tr th:nth-child(2) {
-    width: 30%;
+    width: 20%;
 }
 .play-book-log table thead tr th:nth-child(3) {
-    width: 30%;
+    width: 25%;
 }
 .play-book-log table thead tr th:nth-child(4) {
     width: 15%;
@@ -169,19 +172,104 @@ table thead tr th:nth-child(6) {
 .play-book-log table thead tr th:nth-child(5) {
     width: 15%;
 }
+.play-book-log table thead tr th:nth-child(6) {
+    width: 15%;
+}
 
 .play-book-log table tbody tr td:nth-child(1) {
     width: 10%;
 }
 .play-book-log table tbody tr td:nth-child(2) {
-    width: 30%;
+    width: 20%;
 }
 .play-book-log table tbody tr td:nth-child(3) {
-    width: 30%;
+    width: 25%;
 }
 .play-book-log table tbody tr td:nth-child(4) {
     width: 15%;
 }
 .play-book-log table tbody tr td:nth-child(5) {
     width: 15%;
+}
+.play-book-log table tbody tr td:nth-child(6) {
+    width: 15%;
+    cursor: pointer;
+}
+
+/*开始执行模态框*/
+.implement-operation .modal-header {
+    padding: 10px;
+}
+.implement-operation .modal-header h6 {
+    font-size: 16px;
+    font-weight: 700;
+}
+.implement-operation .modal-content {
+    margin-top: 70px;
+}
+.implement-operation .modal-body {
+    padding: 0;
+}
+.implement-content {
+    padding-top: 20px;
+    padding-left: 100px;
+    font-size: 14px;
+    padding-bottom: 20px;
+}
+.implement-content div p {
+    margin-left: 90px;
+}
+.implement-content .hostNum {
+    font-weight: 700;
+    font-size: 16px;
+}
+.implement-content .playbookType {
+    font-weight: 700;
+}
+/*查看详情模态框*/
+.details .modal-header {
+    padding: 5px 15px;
+    padding-bottom: 0;
+    text-align: left;
+}
+.details .modal-header .implement-result {
+    font-size: 14px;
+    color: #000;
+}
+.details .modal-header .implement-result .number_and_ctime,
+.details .modal-header .implement-result .desc_and_ftime {
+    margin: 5px 0;
+}
+.details .modal-header .implement-result .number_and_ctime div,
+.details .modal-header .implement-result .desc_and_ftime div {
+    display: inline-block;
+}
+.desc_and_ftime {
+    position: relative;
+}
+.number_and_ctime div,
+.desc_and_ftime div {
+    width: 300px;
+    text-align: left;
+}
+.desc_and_ftime div:nth-child(2) {
+    width: 200px;
+}
+.lookupJid {
+    position: absolute;
+    right: -20px;
+    top: 0;
+    color: #999;
+}
+.details .modal-body {
+    width: 100%;
+    height: 720px;
+    padding: 0;
+}
+.details .modal-body .wrap {
+    padding: 10px 20px;
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
 }

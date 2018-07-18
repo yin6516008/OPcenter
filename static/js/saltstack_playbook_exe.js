@@ -28,15 +28,16 @@ $(function () {
             $('#haveChosen > tr').find("td > input[type='checkbox']").prop('checked', false);
             $('#chooseAll').prop('checked', false);
             $('.choose').attr('disabled', true);
+            chooseFn1();
+            chooseFn2();
         })
-        chooseFn1();
-        chooseFn2();
+        // chooseFn1();
+        // chooseFn2();
     });
 
     // tbody里input的全选与反选
     $("#chooseTbody").find(":checkbox").click(function () {
         $('.choose').attr('disabled', false);
-        console.log(222);
         var length1 = $("#chooseTbody").find(":checkbox").length;
         var length2 = $("#chooseTbody").find(":checked").length;
         if (length1 == length2) {
@@ -61,7 +62,7 @@ $(function () {
                 arr.push(trNum);
             }
             $(this).attr('disabled', true);
-            console.log(arr);
+            // console.log(arr);
             $('#haveChosen').append(arr);
             $('#haveChosen > tr').find("td > input[type='checkbox']").prop('checked', false);
             chooseFn2();
@@ -141,7 +142,7 @@ $(function () {
             arr_sec.push(trNumSec);
         }
         $(this).attr('disabled', true);
-        console.log(arr_sec);
+        // console.log(arr_sec);
         $('#chooseTbody').prepend(arr_sec);
         $('#chooseTbody > tr').find("td > input[type='checkbox']").prop('checked', false);
         $('#receivedAll').prop('checked', false);
@@ -157,21 +158,46 @@ $(function () {
         arr_trd.push(trNum);
         $('#chooseTbody').prepend(arr_trd);
         $(this).attr('disabled', true);
+        $('#receivedAll').prop('checked', false);
+        $('#receivedAll').attr('disabled', true);
     })
 
     //-----------------选择剧本--------------
-    $('#haveChosen, #playbookList').on('click change', function () {
-        if ($('#haveChosen').find(':checked').length > 0 && $('#playbookList').find(':checked').length > 0) {
-            $('.implement').attr('disabled', false);
-            $('.implement').click(function () {
-                var list = [];
-                var list_el = $('#haveChosen').find(':checked');
-                for (var i = 0; i < list_el.length; i++) {
-                    console.log(list_el);
-                    var minionId = $(list_el[i]).parent().siblings('td:eq(0)').attr('minion_id');
-                    list.push(minionId);
+    function choosePlaybook() {
+        $('#playbookList').find(':radio').click(function () {
+            if ($('#playbookList').find(':checked').length > 0) {
+                $('.implement').attr('disabled', false);
+            }
+        });
+        $('.implement').click(function () {
+            var playbookId;
+            var descInfo;
+            var inputs = $('#playbookList').find(':radio');
+            for (var i = 0; i < inputs.length; i++) {
+                var input = inputs[i];
+                if ($(input).prop('checked') == true) {
+                    playbookId = $(input).parent().siblings('td:eq(0)').attr('playbook_id');
+                    descInfo = $(input).parent().siblings('td:eq(2)').text();
                 }
-                var playbookId = $('#playbookList').find('td:eq(1)').attr('playbook_id');
+            }
+            console.log(playbookId);
+            var list = [];
+            var list_el = $('#haveChosen').find(':checkbox');
+            for (var i = 0; i < list_el.length; i++) {
+                // console.log(list_el);
+                var minionId = $(list_el[i]).parent().siblings('td:eq(0)').attr('minion_id');
+                list.push(minionId);
+            }
+            console.log(list);
+            $('.hostNum').text(list.length);
+            $('.playbookType').text(descInfo);
+
+            if ($('.hostNum').text() == 0) {
+                $('#confirmImplement').attr('disabled', true);
+            } else {
+                $('#confirmImplement').attr('disabled', false);
+            }
+            $('#confirmImplement').click(function () {
                 $.ajax({
                     type: 'POST',
                     url: '/saltstack/playbook_exe_sls/',
@@ -180,11 +206,49 @@ $(function () {
                         'playbook_id': playbookId
                     },
                     success: function (msg) {
-                        var data = JSON.parse(msg)
-                        console.log(data);
+                        var data = JSON.parse(msg);
+                        window.location.reload();
+                        if (data.code == 0) {
+                            // $('#implementLog').prepend(`
+                            //                             <tr>
+                            //                                 <td>${data.data.total}</td>
+                            //                                 <td>${data.data.number}</td>
+                            //                                 <td>${data.data.description}</td>
+                            //                                 <td>${data.data.create_time}</td>
+                            //                                 <td>${data.data.finish_time}</td>
+                            //                             </tr>`);
+                            $('#startImplement').hide();
+                            $('.modal-backdrop').hide();
+                        }
                     }
-                })
+                });
             })
+        })
+    }
+    choosePlaybook();
+    
+    //-----------查看详情-------------
+    $('.showInfo').click(function () {
+        var number = $(this).siblings('td:eq(1)').attr('number');
+        console.log(number);
+        var jid = $(this).siblings('td:eq(1)').attr('jid');
+        console.log(jid);
+        if (jid == 0) {
+            $('.lookupJid').hide();
+        } else {
+            $('.jobId').text(jid);
         }
+        var description = $(this).siblings('td:eq(2)').attr('description');
+        var createTime = $(this).siblings('td:eq(3)').attr('ctime');
+        var finishTime = $(this).siblings('td:eq(4)').attr('ftime');
+        var info = $(this).attr('info');
+        var obj = JSON.parse(info);
+        var jsonObj = JSON.stringify(obj, null, 2);
+        // jsonObj = jsonObj.replace(/(\r\n)|(\n)/g,'<br>');
+        $('.jobNumber').text(number);
+        $('.jobDesc').text(description);
+        $('.jobCtime').text(createTime);
+        $('.jobFtime').text(finishTime);
+        $('.wrap').text(jsonObj);
     })
 })

@@ -198,7 +198,6 @@ $(function () {
     refrshList();
 
     // 状态检测
-    function checkStatus() {
         if ($('#check_status').prop('checked', false) && $('#tbody').find(':checkbox').prop('checked', false)) {
             $('.management > button').attr('disabled', true);
             $('.management > a').attr('disabled', true);
@@ -207,8 +206,8 @@ $(function () {
             $('.management > a').attr('disabled', false);
         }
 
+        var th_arr = [];
         $('#check_status').click(function () {
-            var arr = [];
             var ckd = $(this).prop('checked');
             $('#tbody').find(':checkbox').prop('checked', ckd);
             if (ckd) {
@@ -217,16 +216,16 @@ $(function () {
                 var idNum = $('#tbody > tr');
                 for (var i = 0; i < idNum.length; i++) {
                     var idArr = idNum[i];
-                    arr.push($(idArr).find('td').eq(2).attr('salt_id'));
+                    th_arr.push($(idArr).find('td').eq(2).attr('salt_id'));
                 }
-                console.log(arr);
+                console.log(th_arr);
                 // 提交状态
                 $('.management > button').click(function () {
                     $.ajax({
                         type: 'POST',
                         url: '/saltstack/minion_test/',
                         data: {
-                            'id': JSON.stringify(arr)
+                            'id': JSON.stringify(th_arr)
                         },
                         success: function (msg) {
                             var data = JSON.parse(msg);
@@ -242,8 +241,8 @@ $(function () {
                 $('.management > a').attr('disabled', true);
             }
         });
-        $('#tbody').find(':checkbox').click(function () {
 
+    $('#tbody').find(':checkbox').click(function () {
             var len1=$('#tbody').find(':checkbox').length;
             var len2=$('#tbody').find(':checked').length;
             if(len1==len2){
@@ -252,48 +251,37 @@ $(function () {
                 $('#check_status').prop('checked', false);
             }
             if (len2 > 0) {
-                $('.management > button').attr('disabled', false);
-                $('.management > a').attr('disabled', false);
+                $('#implementCheck').attr('disabled', false);
+
             } else {
                 $('.management > button').attr('disabled', true);
                 $('.management > a').attr('disabled', true);
 
             }
-
-            // 获取状态检测所需的id
-            // var arr = [];
-            // var checkedNum = $('#tbody').find(':checked').prop('checked', true);
-            // for (var i = 0; i < checkedNum.length; i++) {
-            //     var perChecked = checkedNum[i];
-            //     arr.push($(perChecked).parent().parent().find('td:eq(2)').text());
-            // }
-
-            // 提交状态
-            $('.management > button').click(function () {
-                var arr = [];
-                var checkedNum = $('#tbody').find(':checked').prop('checked', true);
-                for (var i = 0; i < checkedNum.length; i++) {
-                    var perChecked = checkedNum[i];
-                    arr.push($(perChecked).parent().parent().find('td:eq(2)').attr('salt_id'));
-                }
-                console.log(arr);
-                $.ajax({
-                    type: 'POST',
-                    url: '/saltstack/minion_test/',
-                    data: {
-                        'id': JSON.stringify(arr)
-                    },
-                    success: function (msg) {
-                        var data = JSON.parse(msg);
-                        if (data.code == 0) {
-                            window.location.reload();
-                        }
-                    }
-                })
-            })
         });
-    }
-    checkStatus();
+    $('#implementCheck').click(function () {
+        var tb_arr = [];
+        var checkedNum = $('#tbody').find(':checked');
+        for (var i = 0; i < checkedNum.length; i++) {
+            var perChecked = $(checkedNum[i]).parent().siblings('td:eq(1)').attr('salt_id');
+            tb_arr.push(perChecked);
+        }
+        console.log(tb_arr);
+        $.ajax({
+            type: 'POST',
+            url: '/saltstack/minion_test/',
+            data: {
+                'id': JSON.stringify(tb_arr)
+            },
+            success: function (msg) {
+                var data = JSON.parse(msg);
+                if (data.code == 0) {
+                    window.location.reload();
+                }
+            }
+        })
+    })
+
 
     // 主机管理
     function hostArrangement() {

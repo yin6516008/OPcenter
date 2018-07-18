@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="ibox float-e-margins">
+<div class="ibox float-e-margins">
     <div class="ibox-content">
         <div class="row row-lg">
             <div class="col-sm-6">
@@ -103,7 +103,7 @@
                     <div class="host-operation-heading">
                         <span>剧本列表</span>
                         <span>选择需要执行的剧本</span>
-                        <button type="button" class="btn btn-success implement">开始执行</button>
+                        <button type="button" class="btn btn-success implement" data-toggle="modal" data-target="#startImplement">开始执行</button>
                     </div>
                     <div class="play-book-implement">
                         <table class="table table-striped table_host">
@@ -144,28 +144,34 @@
                             <thead>
                             <tr>
                                 <th>序号</th>
-                                <th>任务 ID</th>
+                                <th>任务编号</th>
                                 <th>任务描述</th>
                                 <th>开始时间</th>
                                 <th>结束时间</th>
+                                <th>执行结果</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="implementLog">
                             {% for row in data.jobs_list %}
                             <tr>
                                 <td>{{ forloop.revcounter }}</td>
-                                <td style="" id="{{ row.jid }}" name="{{ row.number }}">{{ row.number }}</td>
-                                <td>{{ row.description }}</td>
-                                <td>{{ row.create_time|date:"H:i:s" }}</td>
+                                <td style="" jid="{{ row.jid }}" number="{{ row.number }}">{{ row.number }}</td>
+                                <td description="{{ row.description }}">{{ row.description }}</td>
+                                <td ctime="{{ row.create_time|date:'H:i:s' }}">{{ row.create_time|date:"H:i:s" }}</td>
                             {#                                0=排队 1=执行中 2=执行完成 3=异常    #}
                                 {% if row.status == 0 %}
-                                <td style="color: yellowgreen">正在排队</td>
+                                <td style="color: yellowgreen; text-decoration: underline; cursor: pointer;"><a href="" onclick="choosePlaybook()">正在排队</a></td>
                                 {% elif row.status == 1 %}
-                                <td style="color: deepskyblue">正在执行</td>
+                                <td style="color: deepskyblue; text-decoration: underline; cursor: pointer;"><a href="" onclick="choosePlaybook()">正在执行</a></td>
                                 {% elif row.status == 2  %}
-                                <td style="color: green" title="{{ row.information }}">{{ row.finish_time|date:"H:i:s" }}</td>
+                                <td ftime="{{ row.finish_time|date:'H:i:s' }}">{{ row.finish_time|date:"H:i:s" }}</td>
                                 {% elif row.status == 3 %}
-                                <td style="color: red" title="{{ row.information }}">任务异常</td>
+                                <td style="color: red">任务异常</td>
+                                {% endif %}
+                                {% if row.status == 0 or row.status == 1 %}
+                                <td></td>
+                                {% else %}
+                                <td style="color: green;text-decoration: underline" info="{{ row.information }}" class="showInfo" data-toggle="modal" data-target="#myShow">查看</td>
                                 {% endif %}
                             </tr>
                             {% endfor %}
@@ -174,6 +180,54 @@
                     </div>
                 </div>
                 <!-- End Example Hide Header -->
+            </div>
+            <!--开始执行模态框-->
+            <div class="modal inmodal implement-operation" id="startImplement" tabindex="-1" role="dialog"  aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content animated fadeIn">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h6>执行操作</h6>
+                        </div>
+                        <div class="modal-body">
+                            <div class="implement-content">
+                                <p>您已选择&nbsp;<span class="hostNum"></span>&nbsp;台主机</p>
+                                <div>您已选择剧本：
+                                    <p>《<span class="playbookType"></span>》</p>
+                                </div>
+                                <p>是否确认执行？</p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="confirmImplement">确认</button>
+                            <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--查看模态框-->
+            <div class="modal inmodal fade" id="myShow" tabindex="-1" role="dialog"  aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content details">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <div class="implement-result">
+                                <div class="number_and_ctime">
+                                    <div><span>任务编号：</span><span class="jobNumber"></span></div>
+                                    <div><span>开始时间：</span><span class="jobCtime"></span></div>
+                                </div>
+                                <div class="desc_and_ftime">
+                                    <div><span>任务描述：</span><span class="jobDesc"></span></div>
+                                    <div><span>结束时间：</span><span class="jobFtime"></span></div>
+                                    <div class="lookupJid"><span>LOOKUP_JID：</span><span class="jobId"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <pre class="wrap"></pre>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

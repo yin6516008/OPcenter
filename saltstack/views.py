@@ -14,7 +14,8 @@ from saltstack.forms import PlayBookForm
 # Create your views here.
 
 # 主机列表：minion_list=已添加；unaccepted_list=待添加
-def accepted_list(request,page=1):
+@check_login
+def salt_minions(request,page=1):
     if request.method == "GET":
         key_manage = Key_manage()
         # 已经允许的salt-key
@@ -54,6 +55,7 @@ def accepted_list(request,page=1):
         return render(request, 'saltstack_minion_list.html',{'data':data})
 
 # 主机搜索
+@check_login
 def minion_search(request,page=1):
     if request.method == "GET":
         # 如果搜索条件为空，则赋值一个字符串
@@ -106,6 +108,7 @@ def minion_search(request,page=1):
         return render(request, 'saltstack_minion_list.html',{'data':data})
 
 # 添加主机
+@check_login
 def minion_add(request):
     if request.method == "POST":
         id = request.POST.get('id')
@@ -132,6 +135,7 @@ def minion_add(request):
         return HttpResponse(json.dumps(msg))
 
 # 检测主机状态
+@check_login
 def minion_test(request):
     if request.method == "POST":
         # 接收id
@@ -170,7 +174,6 @@ def minion_test(request):
             msg = SUCCESS_DATA
             return HttpResponse(json.dumps(msg))
 
-
 # 删除主机
 @check_login
 def minion_del(request):
@@ -187,6 +190,7 @@ def minion_del(request):
         return HttpResponse(json.dumps(msg))
 
 # 剧本管理
+@check_login
 def playbook(request):
     if request.method == 'GET':
         playbook_list = PlayBook.objects.all().order_by('-id')
@@ -197,6 +201,7 @@ def playbook(request):
         return render(request, 'saltstack_playbook.html',{'data':data})
 
 # 剧本分组筛选
+@check_login
 def playbook_project(request,project):
     if request.method == "GET":
         playbook_list = PlayBook.objects.filter(project__name=project).order_by('id')
@@ -207,6 +212,7 @@ def playbook_project(request,project):
         return render(request, 'saltstack_playbook.html', {'data': data})
 
 # 剧本上传
+@check_login
 def playbook_upload(request):
     if request.method == 'POST':
         file_obj = request.FILES
@@ -215,6 +221,7 @@ def playbook_upload(request):
         return HttpResponse(json.dumps(result))
 
 # 剧本编辑
+@check_login
 def playbook_edit(request):
     if request.method == 'POST':
         playbook_id = request.POST.get('playbook_id')
@@ -236,10 +243,12 @@ def playbook_edit(request):
             return HttpResponse(json.dumps(EXCEPT_DATA))
 
 # 剧本保存
+@check_login
 def playbook_save(request):
     if request.method == 'POST':
         playbook_path = request.POST.get('playbook_path')
         playbook_context = request.POST.get('playbook_context')
+        print('*'*10,playbook_path,'\n',playbook_context)
         playbook_m_obj = PlayBook_manage()
         result = playbook_m_obj.save(playbook_path,playbook_context)
         if result:
@@ -258,10 +267,10 @@ def playbook_save(request):
             return HttpResponse(json.dumps(EXCEPT_DATA))
 
 # 剧本删除
+@check_login
 def playbook_del(request):
     if request.method == 'POST':
         playbook_path = request.POST.get('playbook_path')
-        print(playbook_path)
         playbook_m_obj= PlayBook_manage()
         result = playbook_m_obj.delete(playbook_path)
         if result:
@@ -272,12 +281,15 @@ def playbook_del(request):
             return HttpResponse(json.dumps(EXCEPT_DATA))
 
 # 执行剧本主页
+@check_login
 def playbook_exe(request):
     if request.method == "GET":
+
         project_list = Project.objects.all().order_by('-id')
         minion_list = Accepted_minion.objects.all().order_by('-id')
         playbook_list = PlayBook.objects.exclude(sls__icontains='文件').order_by('-id')
-        jobs_list = Async_jobs.objects.all().order_by('-id')
+        jobs_list = Async_jobs.objects.defer('information').order_by('-id')
+        print(jobs_list[1].number)
         data = {'project_list':project_list,
                 'minion_list':minion_list,
                 'playbook_list':playbook_list,
@@ -286,12 +298,12 @@ def playbook_exe(request):
         return render(request, 'saltstack_playbook_exe.html', {'data': data})
 
 # 按分组筛选
+@check_login
 def playbook_exe_project(request,project):
     if request.method == "GET":
-        print(project)
         project_list = Project.objects.all().values().order_by('-id')
         minion_list = Accepted_minion.objects.filter(project__name=project).order_by('-id')
-        playbook_list = PlayBook.objects.filter(project__name=project).order_by('-id')
+        playbook_list = PlayBook.objects.filter(project__name=project).exclude(sls__icontains='文件').order_by('-id')
         jobs_list = Async_jobs.objects.filter(project__name=project).order_by('-id')
 
         data = {'project_list':project_list,
@@ -302,14 +314,12 @@ def playbook_exe_project(request,project):
         return render(request, 'saltstack_playbook_exe.html', {'data': data})
 
 # 执行剧本操作
+@check_login
 def playbook_exe_sls(request):
     if request.method == "POST":
         minion_id_list = json.loads(request.POST.get('minion_id_list'))
         playbook_id = request.POST.get('playbook_id')
-
-        print(type(minion_id_list),minion_id_list)
-        print(type(playbook_id),playbook_id)
-
+        print('#'*20,minion_id_list,playbook_id)
         # 生成任务编号number=yyyymmdd+000
         last = Async_jobs.objects.last()
         today = datetime.date.today().strftime('%Y%m%d')
@@ -318,8 +328,6 @@ def playbook_exe_sls(request):
         except AttributeError:
             number = today+'001'
 
-        print(number)
-
         # 发布消息
         state_execute = Redis_Queue('state_execute')
         state_param = {'number': number, 'minion_id_list': minion_id_list, 'playbook_id': playbook_id}
@@ -327,8 +335,9 @@ def playbook_exe_sls(request):
 
         # 写入数据库
         create_time = datetime.datetime.fromtimestamp(time.time())
+        print('*'*20,playbook_id)
         description = PlayBook.objects.get(id=playbook_id)
-        print(description)
+        print('*'*20,description,description.project)
         jobs_info = Async_jobs(number=number, description=description, project=description.project, create_time=create_time, status=0)
         jobs_info.save()
         try:
@@ -338,19 +347,17 @@ def playbook_exe_sls(request):
             EXCEPT_DATA['data'] = {'number':number,
                                    'description': str(description),
                                    'create_time': create_time.strftime("%H:%M:%S"),
-                                   'finish_time': '任务异常',
                                    'error':error,
                                    }
-            print(EXCEPT_DATA)
             return HttpResponse(json.dumps(EXCEPT_DATA))
-
         # 成功返回
         SUCCESS_DATA['data'] = {'number':number,
                                 'description':str(description),
                                 'create_time':create_time.strftime("%H:%M:%S"),
-                                'finish_time':'加入队列',
+                                'success':'Join the queue',
                                 }
-        print(SUCCESS_DATA)
+
         return HttpResponse(json.dumps(SUCCESS_DATA))
 
+# 远程终端
 

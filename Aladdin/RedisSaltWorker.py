@@ -70,7 +70,7 @@ class Execute_PlayBook_Worker(object):
             msg = self.radio.parse_response()
             # 解析消息内容
             msg = eval(msg[2])
-            print('接收：', msg)
+            print('state_execute频道接收消息：', msg)
             # 执行状态
             minion_state = Minion_state()
             result = minion_state.exe_sls(msg['number'],msg['minion_id_list'], msg['playbook_id'])
@@ -84,7 +84,7 @@ class Execute_PlayBook_Worker(object):
                 while not self.client.get_cache_returns(jid):
                     time.sleep(1)
                     if t == 600:
-                        information = 'Timeout'
+                        information = {'ERROR':'Timeout'}
                         break
                     else:
                         t += 1
@@ -95,18 +95,18 @@ class Execute_PlayBook_Worker(object):
                     while len(self.client.get_cache_returns(jid)) != len(msg['minion_id_list']):
                         time.sleep(1)
                         if t == 600:
-                            information = 'Timeout'
+                            information = {'ERROR':'Timeout'}
                             break
                         else:
                             t += 1
                     else:
                         information = self.client.get_cache_returns(jid)
                 minion_state.save_sls(number=number,information=information,status=2)
-                print('任务完成，继续接收消息')
+                print('任务完成，state_execute频道继续接收消息')
             else:
-                information = '未知错误' if jid == 0 else '主机不存在：%d'%jid
+                information = {'ERROR':'未选择主机或剧本'} if jid == 0 else {'不存在的主机':result[0]}
                 minion_state.save_sls(number=number, information=information,status=3)
-                print('任务异常，继续接收消息')
+                print('任务异常，state_execute频道继续接收消息')
                 continue
                 # 继续订阅
 

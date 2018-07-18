@@ -99,8 +99,26 @@ $(function () {
                 }
             })
         }
-        // 删除
-        $('#del_btn').click(function () {
+
+        // 编辑
+        $('#edit_btn').click(function () {
+            $('#playbook_show').hide();
+            $('#playbook_editor').show();
+            $('.save_and_cancel').show();
+        });
+
+
+        // 取消
+        $('#cancel_btn').click(function () {
+            $('#playbook_show').show();
+            $('#playbook_editor').hide();
+            $('.save_and_cancel').hide();
+        })
+    })
+    // 删除
+    $('#del_btn').click(function () {
+        if ($("tr[name='playbook_row']")[0].hasAttribute('show_status')) {
+            var playbook_path = $("tr[show_status='1']").find('td:eq(3)').text();
             $('#confirmDel').click(function () {
                 $('#playbook_show').empty();
                 // $('#playbook_editor').empty();
@@ -125,51 +143,46 @@ $(function () {
                     }
                 })
             })
-        });
+        }
+    });
+    // 保存
+    $('#save_btn').click(function () {
+        var playbook_path;
+        var trs = $("tr[name='playbook_row']");
+        for (var i = 0; i < trs.length; i++) {
+            var tr = trs[i];
+            if (tr.hasAttribute('show_status')) {
+                playbook_path = $(tr).find('td:eq(3)').text();
+            }
+        }
+        var editor = ace.edit("playbook_editor");
+        var playbook_context = editor.getValue();
+        console.log(playbook_path);
 
-        // 编辑
-        $('#edit_btn').click(function () {
-            $('#playbook_show').hide();
-            $('#playbook_editor').show();
-            $('.save_and_cancel').show();
-        });
+        $('#confirmSave').click(function () {
+            $.ajax({
+                type: 'POST',
+                url: '/saltstack/playbook_save/',
+                data: {
+                    'playbook_path': playbook_path,
+                    'playbook_context': playbook_context
+                },
+                success: function (msg) {
+                    var data = JSON.parse(msg);
+                    if (data.code == 0) {
+                        $('.confirm-save').hide();
+                        $('.modal-backdrop').hide();
 
-        // 保存
-        $('#save_btn').click(function () {
-            var editor = ace.edit("playbook_editor")
-            var playbook_context = editor.getValue()
-            $('#confirmSave').click(function () {
-                $.ajax({
-                    type: 'POST',
-                    url: '/saltstack/playbook_save/',
-                    data: {
-                        'playbook_path': playbook_path,
-                        'playbook_context': playbook_context
-                    },
-                    success: function (msg) {
-                        var data = JSON.parse(msg);
-                        if (data.code == 0) {
-                            $('.confirm-save').hide();
-                            $('.modal-backdrop').hide();
-
-                            $('#playbook_show').show();
-                            $('#playbook_editor').hide();
-                            $('.save_and_cancel').hide();
-                            $('#playbook_path').empty().append(data.data.playbook_path);
-                            $('#playbook_show').empty().append(data.data.playbook_content);
-                            editor.setValue(data.data.playbook_content);
-                        }
+                        $('#playbook_show').show();
+                        $('#playbook_editor').hide();
+                        $('.save_and_cancel').hide();
+                        $('#playbook_path').empty().append(data.data.playbook_path);
+                        $('#playbook_show').empty().append(data.data.playbook_content);
+                        editor.setValue(data.data.playbook_content);
                     }
-                })
+                }
             })
         })
-        // 取消
-        $('#cancel_btn').click(function () {
-            $('#playbook_show').show();
-            $('#playbook_editor').hide();
-            $('.save_and_cancel').hide();
-        })
-    })
-
+    });
 
 })

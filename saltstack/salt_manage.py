@@ -1,5 +1,4 @@
-import time,datetime
-import os,shutil
+import time,datetime,os,shutil,json
 import subprocess
 import redis
 from salt import client,config,loader,key
@@ -256,7 +255,7 @@ class Minion_state(object):
         try:
             playbook = PlayBook.objects.get(id=playbook_id)
         except Exception as error:
-            return error
+            return (error, number)
         minion_dict_values= Accepted_minion.objects.in_bulk(minion_id_list).values()
         minion_list = []
         for minion_id in minion_dict_values:
@@ -279,8 +278,7 @@ class Minion_state(object):
     # 保存执行结果
     def save_sls(self,number,information,status):
         finish_time = datetime.datetime.fromtimestamp(time.time())
-        print(number,information,status)
-        Async_jobs.objects.filter(number=number).update(information=information, finish_time=finish_time, status=status)
+        Async_jobs.objects.filter(number=number).update(finish_time=finish_time, information=json.dumps(information), status=status)
 
 #local.cmd('*', ['grains.items','sys.doc','cmd.run',],[[],[],['uptime'],])
 

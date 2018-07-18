@@ -3,9 +3,9 @@ from saltstack import views
 
 urlpatterns = [
     # 主机管理
-    url(r'^$', views.accepted_list),
-    url(r'^minion_list/$', views.accepted_list),
-    url(r'^minion_list/(\d+)/$', views.accepted_list),
+    url(r'^$', views.salt_minions),
+    url(r'^minion_list/$', views.salt_minions),
+    url(r'^minion_list/(\d+)/$', views.salt_minions),
     url(r'^minion_add/$', views.minion_add),
     url(r'^minion_test/$', views.minion_test),
     url(r'^minion_del/$', views.minion_del),
@@ -21,6 +21,6 @@ urlpatterns = [
     url(r'^playbook_exe/$', views.playbook_exe),
     url(r'^playbook_exe/(.*)/$', views.playbook_exe_project),
     url(r'^playbook_exe_sls/$', views.playbook_exe_sls),
-    # 主机操作
+    # 远程终端
 
 ]

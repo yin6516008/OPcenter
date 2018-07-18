@@ -26,7 +26,7 @@ def domain_all(request):
         client_ip = request.META['REMOTE_ADDR']
         node_obj = API_verify(client_ip)
         if node_obj is not None:
-            domains = node_obj.domainname_set.all()
+            domains = node_obj.domainname_set.filter(check_id=0)
             success_data['data'] = list(domains.values())
             success_data['node'] = node_obj.id
             return HttpResponse(json.dumps(success_data))
