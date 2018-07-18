@@ -171,7 +171,7 @@
                                 {% if row.status == 0 or row.status == 1 %}
                                 <td></td>
                                 {% else %}
-                                <td style="color: green;text-decoration: underline" info="{{ row.information }}" class="showInfo" data-toggle="modal" data-target="#myShow">查看</td>
+                                <td style="color: green;text-decoration: underline" number="{{ row.number }}" class="showInfo" data-toggle="modal" data-target="#myShow">查看</td>
                                 {% endif %}
                             </tr>
                             {% endfor %}
@@ -225,6 +225,17 @@
                         </div>
                         <div class="modal-body">
                             <pre class="wrap"></pre>
+                            <!-- 动画 -->
+                            <div id="playbookResult">
+                                <h3>正在加载···</h3>
+                                <div class="sk-spinner sk-spinner-wave">
+                                    <div class="sk-rect1"></div>
+                                    <div class="sk-rect2"></div>
+                                    <div class="sk-rect3"></div>
+                                    <div class="sk-rect4"></div>
+                                    <div class="sk-rect5"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -236,4 +247,5 @@
 
 {% block js %}
     <script src="/static/js/saltstack_playbook_exe.js"></script>
+<!--<script src="/static/js/json2yaml.js"></script>-->
 {% endblock %}

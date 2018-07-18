@@ -208,6 +208,7 @@ table thead tr th:nth-child(6) {
     margin-top: 70px;
 }
 .implement-operation .modal-body {
+    position: relative;
     padding: 0;
 }
 .implement-content {
@@ -272,4 +273,13 @@ table thead tr th:nth-child(6) {
     height: 100%;
     overflow-x: auto;
     overflow-y: auto;
+}
+
+/*动画*/
+#playbookResult {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    margin-left: -5%;
+    display: none;
 }

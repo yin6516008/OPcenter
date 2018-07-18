@@ -229,10 +229,9 @@ $(function () {
     
     //-----------查看详情-------------
     $('.showInfo').click(function () {
+        $('#playbookResult').show();
         var number = $(this).siblings('td:eq(1)').attr('number');
-        console.log(number);
         var jid = $(this).siblings('td:eq(1)').attr('jid');
-        console.log(jid);
         if (jid == 0) {
             $('.lookupJid').hide();
         } else {
@@ -241,14 +240,25 @@ $(function () {
         var description = $(this).siblings('td:eq(2)').attr('description');
         var createTime = $(this).siblings('td:eq(3)').attr('ctime');
         var finishTime = $(this).siblings('td:eq(4)').attr('ftime');
-        var info = $(this).attr('info');
-        var obj = JSON.parse(info);
-        var jsonObj = JSON.stringify(obj, null, 2);
-        // jsonObj = jsonObj.replace(/(\r\n)|(\n)/g,'<br>');
         $('.jobNumber').text(number);
         $('.jobDesc').text(description);
         $('.jobCtime').text(createTime);
         $('.jobFtime').text(finishTime);
-        $('.wrap').text(jsonObj);
+        $.ajax({
+            type: 'POST',
+            url: '/saltstack/playbook_exe_result/',
+            data: {'number': number},
+            success: function (msg) {
+                $('#playbookResult').hide();
+                var data = JSON.parse(msg);
+                // if (data.code == 0) {
+                //     // var obj = JSON.parse(data.data.infomation);
+                //     // var obj = JSON.parse(data.data.infomation);
+                    var jsonObj = JSON.stringify(data,null,2);
+                    $('.wrap').text(jsonObj);
+                //     $('.wrap').text(data.data.infomation);
+                // }
+            }
+        })
     })
 })

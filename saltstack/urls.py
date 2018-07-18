@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^playbook_exe/$', views.playbook_exe),
     url(r'^playbook_exe/(.*)/$', views.playbook_exe_project),
     url(r'^playbook_exe_sls/$', views.playbook_exe_sls),
+    url(r'^playbook_exe_result/$', views.playbook_exe_result),
     # 远程终端
 
 ]

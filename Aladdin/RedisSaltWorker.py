@@ -83,7 +83,7 @@ class Execute_PlayBook_Worker(object):
                 # 持续查询，直到出现结果，或者连接超时
                 while not self.client.get_cache_returns(jid):
                     time.sleep(1)
-                    if t == 600:
+                    if t == 1200:
                         information = {'ERROR':'Timeout'}
                         break
                     else:
@@ -94,7 +94,7 @@ class Execute_PlayBook_Worker(object):
                 if len(information) != len(msg['minion_id_list']):
                     while len(self.client.get_cache_returns(jid)) != len(msg['minion_id_list']):
                         time.sleep(1)
-                        if t == 600:
+                        if t == 1200:
                             information = {'ERROR':'Timeout'}
                             break
                         else:

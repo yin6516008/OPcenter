@@ -1,4 +1,4 @@
-import datetime,time,os,shutil
+import datetime,time,os,shutil,yaml
 import json
 import subprocess
 from django.shortcuts import render,redirect,HttpResponse
@@ -289,7 +289,6 @@ def playbook_exe(request):
         minion_list = Accepted_minion.objects.all().order_by('-id')
         playbook_list = PlayBook.objects.exclude(sls__icontains='文件').order_by('-id')
         jobs_list = Async_jobs.objects.defer('information').order_by('-id')
-        print(jobs_list[1].number)
         data = {'project_list':project_list,
                 'minion_list':minion_list,
                 'playbook_list':playbook_list,
@@ -304,7 +303,7 @@ def playbook_exe_project(request,project):
         project_list = Project.objects.all().values().order_by('-id')
         minion_list = Accepted_minion.objects.filter(project__name=project).order_by('-id')
         playbook_list = PlayBook.objects.filter(project__name=project).exclude(sls__icontains='文件').order_by('-id')
-        jobs_list = Async_jobs.objects.filter(project__name=project).order_by('-id')
+        jobs_list = Async_jobs.objects.defer('information').filter(project__name=project).order_by('-id')
 
         data = {'project_list':project_list,
                 'minion_list':minion_list,
@@ -319,7 +318,7 @@ def playbook_exe_sls(request):
     if request.method == "POST":
         minion_id_list = json.loads(request.POST.get('minion_id_list'))
         playbook_id = request.POST.get('playbook_id')
-        print('#'*20,minion_id_list,playbook_id)
+
         # 生成任务编号number=yyyymmdd+000
         last = Async_jobs.objects.last()
         today = datetime.date.today().strftime('%Y%m%d')
@@ -335,9 +334,9 @@ def playbook_exe_sls(request):
 
         # 写入数据库
         create_time = datetime.datetime.fromtimestamp(time.time())
-        print('*'*20,playbook_id)
+
         description = PlayBook.objects.get(id=playbook_id)
-        print('*'*20,description,description.project)
+
         jobs_info = Async_jobs(number=number, description=description, project=description.project, create_time=create_time, status=0)
         jobs_info.save()
         try:
@@ -359,5 +358,11 @@ def playbook_exe_sls(request):
 
         return HttpResponse(json.dumps(SUCCESS_DATA))
 
+def playbook_exe_result(request):
+    if request.method == "POST":
+        number = request.POST.get('number')
+        job_obj = Async_jobs.objects.get(number=number)
+        information = str(job_obj.information)
+        return  HttpResponse(information)
 # 远程终端
 
