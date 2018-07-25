@@ -54,8 +54,11 @@
     color: #fff;
 }
 .host-and-success div:first-child {
-    width: 300px;
+    width: 80%;
     margin-right: 20px;
+}
+.host-and-success div:nth-child(2) {
+    margin-left: 110px;
 }
 .table-info {
     display: none;
