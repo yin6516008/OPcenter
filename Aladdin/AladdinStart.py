@@ -8,7 +8,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "OPcenter.settings")
 django.setup()
 
 from Aladdin.RedisWebmoniWorker import Send_Mail_Worker,Check_Cert_Worker
-from Aladdin.RedisSaltWorker import Minion_Check_Worker,Minion_Auto_Check_Worker,Execute_PlayBook_Worker
+from Aladdin.RedisSaltWorker import Minion_Check_Worker,Saltstack_Auto_Worker,Execute_PlayBook_Worker
 
 
 
@@ -17,7 +17,7 @@ if __name__ == '__main__':
         Send_Mail_Worker,
         Check_Cert_Worker,
         Minion_Check_Worker,
-        Minion_Auto_Check_Worker,
+        Saltstack_Auto_Worker,
         Execute_PlayBook_Worker,
     ]
     for worker in worker_list:

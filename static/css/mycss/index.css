@@ -1,5 +1,7 @@
 html {
-  min-width: 990px;
+  /*min-width: 990px;*/
+  min-width: 1920px;
+  overflow-x: auto;
 }
 body.fixed-sidebar.mini-navbar .navbar-static-side {
   width: 75px;
@@ -24,6 +26,11 @@ body.fixed-sidebar.mini-navbar .navbar-static-side {
 }
 .nav-header:hover {
   cursor: pointer;
+}
+.nav-header .profile-element img {
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 .navbar.navbar-static-top {
   min-height: 50px;

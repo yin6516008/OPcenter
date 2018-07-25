@@ -1,7 +1,13 @@
 $(function () {
+    // 左侧边栏
+    $('#side-menu>li:nth-of-type(3)').addClass('active')
+    $('#side-menu>li:nth-of-type(3)>ul').removeClass('ulhide')
+    $('#side-menu>li:nth-of-type(3)>ul').addClass('collapse')
+    $('#side-menu>li:nth-of-type(3)>ul').addClass('in')
+
     // 上传剧本
     $('.btn-upload-playbook').click(function () {
-        $('.show-file-name > span').text('未上传任何文件');
+        $('.show-file-name > span').text('未选择任何文件');
         $('#uploadPlayBook').attr('disabled', true);
     })
     // 上传文件
@@ -13,12 +19,12 @@ $(function () {
             $('.modal-tips').show();
             $('.modal-tips').find('span').text('请上传小于100kb的文件!');
             $('#uploadPlayBook').attr('disabled', true);
-            setTimeout(function () {
-                $('.modal-tips').hide();
-            },1000)
+            // setTimeout(function () {
+            //     $('.modal-tips').hide();
+            // },1000)
         }
         if ($(this).val() == '') {
-            $('.show-file-name > span').text('未上传任何文件');
+            $('.show-file-name > span').text('未选择任何文件');
         }
     })
     // 上传剧本
@@ -37,7 +43,7 @@ $(function () {
                     $('.modal-tips').show();
                     $('.modal-tips').find('span').text(data.data);
                     setTimeout(function () {
-                        $('.modal-tips').hide();
+                        // $('.modal-tips').hide();
                         $('.modal').hide();
                         $('.modal-backdrop').hide();
                     },1000)
@@ -45,9 +51,9 @@ $(function () {
                 if (data.code == 9527) {
                     $('.modal-tips').show();
                     $('.modal-tips').find('span').text(data.data);
-                    setTimeout(function () {
-                        $('.modal-tips').hide();
-                    },2000)
+                    // setTimeout(function () {
+                    //     $('.modal-tips').hide();
+                    // },2000)
                 }
             }
         })

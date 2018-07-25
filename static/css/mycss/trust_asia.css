@@ -48,8 +48,8 @@
     border-bottom: 1px dashed #23c6c8;
 }
 pre {
-    background: #2f4050;
-    color: #fff;
+    /*background: #2f4050;*/
+    color: #000;
     font-size: 16px;
     margin-top: 25px;
 }
@@ -71,7 +71,7 @@ pre {
 #TXT_info span,
 #TXT_info h4,
 #TXT_info p {
-    color: #fff;
+    color: #000;
     font-family: "Microsoft YaHei", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 15px;
@@ -98,8 +98,8 @@ pre {
     box-shadow: 5px 5px 10px;
 }
 .panel-info>.panel-heading {
-    background-color: #31708f;
-    border-color: #31708f;
+    background-color: #2f4050;
+    border-color: #2f4050;
     font-size: 20px;
 }
 #content-main>.col-sm-7,
@@ -121,10 +121,10 @@ pre {
     margin-right: 30px;
 }
 .download-box a {
-    color: #fff;
+    color: #000;
 }
 #wave h3 {
-    color: #fff;
+    color: #000;
 }
 
 /*搜索框样式*/
@@ -152,7 +152,7 @@ pre {
 }
 .panel-body {
     position: relative;
-    background-color: #2f4050;
+    background-color: #7977774a;
 }
 /*列表按钮*/
 .cert-button {
@@ -204,6 +204,9 @@ pre {
     vertical-align: middle;
 }
 .input-radio span {
-    color: #fff;
+    color: #000;
     padding-right: 10px;
+}
+.btn.pull-right {
+    border: 1px solid #0000009c !important;
 }

@@ -1,11 +1,7 @@
 import time,datetime,os,shutil,json
-import subprocess
-import redis
 from salt import client,config,loader,key
 from saltstack.models import Accepted_minion,PlayBook,Project,Async_jobs
-# from saltstack.models import Unaccepted_minion
-# from saltstack.models import Exception_minion
-from Aladdin import PathTreeList
+from saltstack.salt_sls_ret_format import PlayBookResponse
 from OPcenter.settings import BASE_DIR,SUCCESS_DATA,EXCEPT_DATA
 
 # 管理key
@@ -42,7 +38,6 @@ class Key_manage(object):
             self.keys.accept(minion_id)
             return True
         except Exception as err:
-            print(err)
             return err
 
     # 拒绝minion的key
@@ -64,11 +59,11 @@ class Key_manage(object):
 # Grains的使用----------------
 class Grains(client.LocalClient):
     # grains获取节点信息
-    def get_minion_items(self,minion_id):
+    def get_minion_items(self,minion_id_list):
         # 定义需要获取的信息
         items = ['id', 'osfinger', 'cpu_model', 'num_cpus', 'mem_total']
         # 获取minion_id的硬件信息
-        result = self.cmd(minion_id, 'grains.item', items)
+        result = self.cmd(minion_id_list, 'grains.item', items,tgt_type='list')
         for id in result.keys():
             items = result[id]
             now_time = datetime.datetime.fromtimestamp(time.time())
@@ -76,9 +71,11 @@ class Grains(client.LocalClient):
                 items['datetime'] = now_time
                 mem_gib = 0.5 if round((items['mem_total'])/1024) == 0 else round((items['mem_total'])/1024)
                 items['mem_gib'] = mem_gib
+                items['status'] = 1
                 Accepted_minion.objects.filter(id=id).update(**items)
             else:
-                Accepted_minion.objects.filter(id=id).update(status=0,datetime=now_time)
+                errinfo={'id':id,'datetime': now_time, 'status': 0, 'cpu_model': '主机不在线', 'osfinger': '主机不在线', 'mem_gib': 0, 'mem_total': 0,'num_cpus': 0,}
+                Accepted_minion.objects.filter(id=id).update(**errinfo)
         return  result
 
 # test模块
@@ -144,35 +141,6 @@ class Master_manage():
         #result = client.LocalClient().cmd(minion_id, 'grains.item', ['md_op_linux_beijing_opcenter-slave','md_op_linux_shanghai_opcenter-slave','md_op_linux_qingdao_opcenter-slave','md_op_linux_shenzhen_opcenter-slave'])
         return result
 
-    def opcenter_slave_init(self,minion_id):
-
-        opcenter_slave_config_path = '/srv/salt/linux/init/opcenter-slave/'
-        opcenter_slave_config_file = '/srv/salt/linux/init/opcenter-slave/config.py'
-        opcenter_slave_init_sls = '/srv/salt/linux/init/opcenter-slave/opcenter_slave_init-only_first_time.sls'
-        opcenter_slave_release_sls = '/srv/salt/linux/prod/opcenter-slave/opcenter_slave_release.sls'
-
-        if not os.path.exists(opcenter_slave_config_path):
-            os.makedirs(opcenter_slave_config_path)
-        if os.path.exists(opcenter_slave_config_file):
-            config_bak = datetime.datetime.now().strftime('%Y%m%d_%H%M%S_%f') + '_config'
-            os.rename(opcenter_slave_config_file, opcenter_slave_config_path + config_bak)
-        if os.path.exists(opcenter_slave_init_sls):
-            opcenter_slave_bak = datetime.datetime.now().strftime('%Y%m%d_%H%M%S_%f') + '_opcenter_slave'
-            os.rename(opcenter_slave_init_sls,opcenter_slave_config_path + opcenter_slave_bak)
-
-        if os.path.exists(opcenter_slave_release_sls):
-            opcenter_slave_bak = datetime.datetime.now().strftime('%Y%m%d_%H%M%S_%f') + '_opcenter_slave'
-            os.rename(opcenter_slave_release_sls,'/srv/salt/linux/prod/opcenter-slave/' + opcenter_slave_bak)
-        shutil.copyfile(self.state_sls + 'opcenter_slave_release.sls', opcenter_slave_release_sls)
-
-        # 导入config的配置文件
-        shutil.copyfile(self.init_conf + 'config.py', opcenter_slave_config_file)
-        # opcenter-slave项目执行初始化
-        shutil.copyfile(self.init_conf + 'opcenter_slave_init-only_first_time.sls', opcenter_slave_init_sls)
-        # 执行初始化
-        result = client.LocalClient().cmd_async(minion_id, 'state.sls', ['/linux/init/opcenter-slave/opcenter_slave_init-only_first_time'])
-        return result
-
 class PlayBook_manage():
     def __init__(self):
         # 配置文件导入目录 sls_conf
@@ -197,21 +165,20 @@ class PlayBook_manage():
             project = file_info.decode().splitlines()[0][2:]
             description = file_info.decode().splitlines()[1][2:]
         except Exception as error:
-            EXCEPT_DATA['data'] = '{} 必须使用utf-8编码：'.format(file_obj['file_context'].name)+ str(error)[0:32]
+            EXCEPT_DATA['data'] = '必须是utf-8编码：{} '.format(file_obj['file_context'].name)+ str(error)[0:70]
             return EXCEPT_DATA
         project_obj = Project.objects.filter(name=project).first()
         if project_obj is None :
-            EXCEPT_DATA['data'] = '{} 组不存在'.format(project)
+            EXCEPT_DATA['data'] = '不存在的分组：{} '.format(str(project)[0:52])
             return EXCEPT_DATA
         applied_file = os.path.join(self.srv_salt,project_obj.name,file_obj['file_context'].name)
         os.makedirs(os.path.dirname(applied_file)) if not os.path.exists(os.path.dirname(applied_file)) else None
         applied_file_count = PlayBook.objects.filter(applied_file=applied_file).count()
         if applied_file_count != 0 :
             # 返回结果
-            EXCEPT_DATA['data'] = '{} 文件已存在'.format(file_obj['file_context'].name)
+            EXCEPT_DATA['data'] = '文件名已存在：{} '.format(file_obj['file_context'].name)
             return EXCEPT_DATA
         else:
-            print(type(file_info), file_info)
             # 保存为文件
             with open(applied_file, 'wb') as f:
                 for chunk in file_obj['file_context'].chunks():
@@ -276,33 +243,13 @@ class Minion_state(object):
             else:
                 return (0, number)
     # 保存执行结果
-    def save_sls(self,number,information,status):
+    def save_sls(self,number,information):
         finish_time = datetime.datetime.fromtimestamp(time.time())
-        Async_jobs.objects.filter(number=number).update(finish_time=finish_time, information=json.dumps(information), status=status)
-
-#local.cmd('*', ['grains.items','sys.doc','cmd.run',],[[],[],['uptime'],])
-
-
-"""
-# test
-
-km = Key_manage()
-km.accept_key('md_win_op_node5_local_vmm')
-
-grains = Grains()
-grains.get_node_info('md_linux_op_node1_local_vmm')
-grains.get_node_info('md_win_op_node5_local_vmm')
-
-lc = Cmd_run()
-lc.cmd_for_win('md_win_op_node5_local_vmm','gci . -r | measure -property length -sum')
-lc.cmd_for_linux('md_linux_op_node1_local_vmm','df -h')
-
-fm = File_manage()
-fm.access('md_linux_op_node1_local_vmm','/tmp/abc.py')
-fm.write('md_linux_op_node1_local_vmm','/tmp/abc.py','写入到src')
-fm.append('md_linux_op_node1_local_vmm','/tmp/abc.py','追加到src')
-fm.basename('md_linux_op_node1_local_vmm','/tmp/abc.py')
-fm.local_copy('md_linux_op_node1_local_vmm','/tmp/1salt.py','/tmp/abc.py')
-fm = File_manage()
-fm.remote_copy('*','salt://base/prod/OPcenter-slave','/opt/OPcenter-slave')
-"""
+        if 'ERROR' in information:
+            Async_jobs.objects.filter(number=number).update(finish_time=finish_time, status=3,success_total=0,information=json.dumps(information))
+        else:
+            format_info = PlayBookResponse(information)
+            try:
+                Async_jobs.objects.filter(number=number).update(finish_time=finish_time, status=2, success_total=format_info.all['success'],information=format_info.all)
+            except Exception:
+                Async_jobs.objects.filter(number=number).update(finish_time=finish_time, status=2, success_total=0, information=format_info.all)

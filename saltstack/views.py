@@ -18,19 +18,12 @@ from saltstack.forms import PlayBookForm
 def salt_minions(request,page=1):
     if request.method == "GET":
         key_manage = Key_manage()
-        # 已经允许的salt-key
-        accepted_list = key_manage.accepted_minion()
         # 未允许的salt-key
         unaccepted_list = key_manage.unaccepted_minion()
-        # 查询出以允许的Key的主机信息
+        # 已添加的主机列表
         minion_list = Accepted_minion.objects.all().order_by('-salt_id')
         # 列出分组信息
         project_list = Project.objects.all().order_by('-id')
-        # 如果salt-key已经不存在，则标记异常:status=3
-        for minion in minion_list.values('id'):
-            if minion['id'] not in accepted_list:
-                exception_minion = (minion['id'])
-                Accepted_minion.objects.filter(id=exception_minion).update(status=3)
         # 每页page_row_num条，生成分页实例paginator对象
         page_row_num = 15
         paginator = Paginator(minion_list, page_row_num)
@@ -78,7 +71,6 @@ def minion_search(request,page=1):
             where = {'id':id,'ip':ip,'project':project_id}
             # 多个字段模糊查询， 双下划线前是字段名,icontains 包含 忽略大小写 ilike ‘%aaa%’
             minion_list = Accepted_minion.objects.filter(Q(id__icontains=where['id']) | Q(ipv4__icontains=where['ip']) | Q(project__id=where['project'])).order_by('-salt_id')
-
         # 每页page_row_num条，生成分页实例paginator对象
         page_row_num = 15
         paginator = Paginator(minion_list, page_row_num)
@@ -126,7 +118,7 @@ def minion_add(request):
         # 模式1=test.ping,2=grains.items
         test = {'pattern': 1,'id': [id],'add':True}
         monion_check.publish(test)
-        grains = {'pattern': 2,'id': id,'add':True}
+        grains = {'pattern': 2,'id': [id],'add':True}
         monion_check.publish(grains)
 
         SUCCESS_DATA['data'] = '添加成功'
@@ -140,14 +132,15 @@ def minion_test(request):
     if request.method == "POST":
         # 接收id
         id = request.POST.get('id')
-        # 实例化Redis
+        minion_id_list = []
+        # 实例化
         monion_check = Redis_Queue('check_minion')
-        # 刷新列表，检测全部主机
+        key_manage = Key_manage()
+        # 检测全部主机在线状态
         if id == '*':
             Accepted_minion.objects.update(status=2)
-            minion_id_dict = Accepted_minion.objects.values('id')
-            minion_id_list = []
-            for minion_id in minion_id_dict:
+            minion_id_obj = Accepted_minion.objects.values('id')
+            for minion_id in minion_id_obj:
                 minion_id_list.append(minion_id['id'])
             # 发送检测任务到redis队列   # pattern模式1=test.ping,2=grains.items
             test = {'pattern': 1, 'id': minion_id_list,'add':False}
@@ -157,19 +150,28 @@ def minion_test(request):
             msg = SUCCESS_DATA
             return HttpResponse(json.dumps(msg))
 
-        # 批量检测部分主机
+        # 批量检测部分主机信息
         else:
             salt_id_list = json.loads(request.POST.get('id'))
-            id_list = Accepted_minion.objects.in_bulk(salt_id_list).values()
+            minion_id_obj = Accepted_minion.objects.in_bulk(salt_id_list).values()
+            # 已经允许的salt-key
+            accepted_list = key_manage.accepted_minion()
+            for minion_id in minion_id_obj:
+                # 判断主机有效性
+                if str(minion_id) in accepted_list:
+                    # 更新数据库
+                    Accepted_minion.objects.filter(id=minion_id).update(status=2)
+                    # 添加到检测列表
+                    minion_id_list.append(str(minion_id))
+                else:
+                    # salt-key已不存在，标记为异常:status=3
+                    now_time = datetime.datetime.fromtimestamp(time.time())
+                    errinfo = {'datetime': now_time, 'status': 3, 'cpu_model': '', 'osfinger': '不存在的salt-key','mem_gib': 0, 'mem_total': 0, 'num_cpus': 0, }
+                    Accepted_minion.objects.filter(id=minion_id).update(**errinfo)
             # 发送检测任务到redis队列   # pattern模式1=test.ping,2=grains.items
-            minion_id_list = []
-            # 更新数据库
-            for id in id_list:
-                minion_id_list.append(str(id))
-                Accepted_minion.objects.filter(id=id).update(status=2)
-            test = {'pattern': 1, 'id': minion_id_list, 'add': False}
-            monion_check.publish(test)
-            #返回页面
+            grains = {'pattern': 2, 'id': minion_id_list, 'add': False}
+            monion_check.publish(grains)
+            # 返回页面
             SUCCESS_DATA['data'] = '检测中'
             msg = SUCCESS_DATA
             return HttpResponse(json.dumps(msg))
@@ -248,7 +250,6 @@ def playbook_save(request):
     if request.method == 'POST':
         playbook_path = request.POST.get('playbook_path')
         playbook_context = request.POST.get('playbook_context')
-        print('*'*10,playbook_path,'\n',playbook_context)
         playbook_m_obj = PlayBook_manage()
         result = playbook_m_obj.save(playbook_path,playbook_context)
         if result:
@@ -282,35 +283,46 @@ def playbook_del(request):
 
 # 执行剧本主页
 @check_login
-def playbook_exe(request):
+def playbook_exe(request,project='all_projects',days=3):  #默认显示全部分组和最近三天的任务日志
     if request.method == "GET":
+        # 当前时间
+        to_day = datetime.datetime.now()
+        # timedelta(int(days)-1)计算结果为天数差，由此得出起始日期from_day
+        from_day = datetime.date.today() - datetime.timedelta(int(days)-1)
+        print(from_day,to_day)
+        # 不筛选组，仅筛选日期
+        if project == 'all_projects':
+            project_list = Project.objects.all().order_by('-id')
+            minion_list = Accepted_minion.objects.exclude(status=3).order_by('-id')
+            playbook_list = PlayBook.objects.exclude(sls__icontains='文件').order_by('-id')
+            jobs_list = Async_jobs.objects.defer('information').filter(create_time__range=(from_day,to_day)).order_by('-id')
+            data = {'project_list': project_list,
+                    'minion_list': minion_list,
+                    'playbook_list': playbook_list,
+                    'jobs_list': jobs_list,
+                    'filter_project': project,
+                    'filter_days':days,
+                    'to_day':to_day,
+                    'from_day':from_day,
+                    }
+            return render(request, 'saltstack_playbook_exe.html', {'data': data})
 
-        project_list = Project.objects.all().order_by('-id')
-        minion_list = Accepted_minion.objects.all().order_by('-id')
-        playbook_list = PlayBook.objects.exclude(sls__icontains='文件').order_by('-id')
-        jobs_list = Async_jobs.objects.defer('information').order_by('-id')
-        data = {'project_list':project_list,
-                'minion_list':minion_list,
-                'playbook_list':playbook_list,
-                'jobs_list':jobs_list,
-                }
-        return render(request, 'saltstack_playbook_exe.html', {'data': data})
-
-# 按分组筛选
-@check_login
-def playbook_exe_project(request,project):
-    if request.method == "GET":
-        project_list = Project.objects.all().values().order_by('-id')
-        minion_list = Accepted_minion.objects.filter(project__name=project).order_by('-id')
-        playbook_list = PlayBook.objects.filter(project__name=project).exclude(sls__icontains='文件').order_by('-id')
-        jobs_list = Async_jobs.objects.defer('information').filter(project__name=project).order_by('-id')
-
-        data = {'project_list':project_list,
-                'minion_list':minion_list,
-                'playbook_list':playbook_list,
-                'jobs_list':jobs_list,
-                }
-        return render(request, 'saltstack_playbook_exe.html', {'data': data})
+        # 筛选组和日期
+        else:
+            project_list = Project.objects.all().values().order_by('-id')
+            minion_list = Accepted_minion.objects.filter(project__name=project).exclude(status=3).order_by('-id')
+            playbook_list = PlayBook.objects.filter(project__name=project).exclude(sls__icontains='文件').order_by('-id')
+            jobs_list = Async_jobs.objects.defer('information').filter(create_time__range=(from_day,to_day)).filter(project__name=project).order_by('-id')
+            data = {'project_list': project_list,
+                    'minion_list': minion_list,
+                    'playbook_list': playbook_list,
+                    'jobs_list': jobs_list,
+                    'filter_project': project,
+                    'filter_days':days,
+                    'to_day': to_day,
+                    'from_day': from_day,
+                    }
+            return render(request, 'saltstack_playbook_exe.html', {'data': data})
 
 # 执行剧本操作
 @check_login
@@ -334,10 +346,8 @@ def playbook_exe_sls(request):
 
         # 写入数据库
         create_time = datetime.datetime.fromtimestamp(time.time())
-
         description = PlayBook.objects.get(id=playbook_id)
-
-        jobs_info = Async_jobs(number=number, description=description, project=description.project, create_time=create_time, status=0)
+        jobs_info = Async_jobs(number=number, description=description, project=description.project, create_time=create_time, status=0, targets_total=len(minion_id_list))
         jobs_info.save()
         try:
             jobs_info.minion.add(*minion_id_list)
@@ -358,11 +368,24 @@ def playbook_exe_sls(request):
 
         return HttpResponse(json.dumps(SUCCESS_DATA))
 
-def playbook_exe_result(request):
+# 查询剧本执行结果
+def playbook_exe_ret(request,number=0):
     if request.method == "POST":
         number = request.POST.get('number')
         job_obj = Async_jobs.objects.get(number=number)
-        information = str(job_obj.information)
+        information = str(job_obj.information) if job_obj.information is not None else json.dumps({'ERROR':'NULL'})
         return  HttpResponse(information)
+    if request.method == "GET":
+        job_obj = Async_jobs.objects.get(number=number)
+        header = {'number':number,
+                'description':str(job_obj.description),
+                'create_time':job_obj.create_time.strftime("%H:%M:%S"),
+                'finish_time':job_obj.finish_time.strftime("%H:%M:%S"),
+                'targets_total':int(job_obj.targets_total),
+                'success_total':int(job_obj.success_total),
+                'fail_total':int(job_obj.targets_total)-int(job_obj.success_total),
+                'jid':str(job_obj.jid),
+                }
+        return render(request, 'saltstack_playbook_exe_ret.html', {'header':header,'data':eval(job_obj.information)})
 # 远程终端
 

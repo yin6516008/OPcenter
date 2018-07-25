@@ -69,29 +69,5 @@ class Async_jobs(models.Model):
     finish_time = models.DateTimeField(null=True,blank=True)
     information = models.TextField(null=True,blank=True)
     status = models.IntegerField(choices=async_jobs_stauts,default=0)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    success_total = models.IntegerField(null=True,blank=True)
+    targets_total = models.IntegerField(null=True,blank=True)

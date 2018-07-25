@@ -1,4 +1,10 @@
 $(function () {
+    // 左侧边栏
+    $('#side-menu>li:nth-of-type(3)').addClass('active')
+    $('#side-menu>li:nth-of-type(3)>ul').removeClass('ulhide')
+    $('#side-menu>li:nth-of-type(3)>ul').addClass('collapse')
+    $('#side-menu>li:nth-of-type(3)>ul').addClass('in')
+
     // 系统类型选择
     function sysTypeChoose() {
         $('.panel-type > div').find('input').click(function () {
@@ -197,7 +203,9 @@ $(function () {
     }
     refrshList();
 
-    // 状态检测
+    //---------状态检测-------
+    // 手动刷新
+    function manualCkeck() {
         if ($('#check_status').prop('checked', false) && $('#tbody').find(':checkbox').prop('checked', false)) {
             $('.management > button').attr('disabled', true);
             $('.management > a').attr('disabled', true);
@@ -242,7 +250,7 @@ $(function () {
             }
         });
 
-    $('#tbody').find(':checkbox').click(function () {
+        $('#tbody').find(':checkbox').click(function () {
             var len1=$('#tbody').find(':checkbox').length;
             var len2=$('#tbody').find(':checked').length;
             if(len1==len2){
@@ -259,28 +267,37 @@ $(function () {
 
             }
         });
-    $('#implementCheck').click(function () {
-        var tb_arr = [];
-        var checkedNum = $('#tbody').find(':checked');
-        for (var i = 0; i < checkedNum.length; i++) {
-            var perChecked = $(checkedNum[i]).parent().siblings('td:eq(1)').attr('salt_id');
-            tb_arr.push(perChecked);
-        }
-        console.log(tb_arr);
-        $.ajax({
-            type: 'POST',
-            url: '/saltstack/minion_test/',
-            data: {
-                'id': JSON.stringify(tb_arr)
-            },
-            success: function (msg) {
-                var data = JSON.parse(msg);
-                if (data.code == 0) {
-                    window.location.reload();
-                }
+
+        $('#implementCheck').click(function () {
+            var tb_arr = [];
+            var checkedNum = $('#tbody').find(':checked');
+            for (var i = 0; i < checkedNum.length; i++) {
+                var perChecked = $(checkedNum[i]).parent().siblings('td:eq(1)').attr('salt_id');
+                tb_arr.push(perChecked);
             }
-        })
-    })
+            console.log(tb_arr);
+            $.ajax({
+                type: 'POST',
+                url: '/saltstack/minion_test/',
+                data: {
+                    'id': JSON.stringify(tb_arr)
+                },
+                success: function (msg) {
+                    var data = JSON.parse(msg);
+                    if (data.code == 0) {
+                        window.location.reload();
+                    }
+                }
+            })
+        });
+    }
+    manualCkeck();
+
+    // 自动刷新
+    function  autoFresh() {
+        window.location.reload();
+    }
+    setTimeout(autoFresh, 600000);
 
 
     // 主机管理

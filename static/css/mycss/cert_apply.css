@@ -48,8 +48,8 @@
   border-bottom: 1px dashed #23c6c8;
 }
 pre {
-  background: #2f4050;
-  color: #fff;
+  /*background: #2f4050;*/
+  color: #000;
   font-size: 16px;
     margin-top: 25px;
 }
@@ -68,7 +68,7 @@ pre {
 #TXT_info span,
 #TXT_info h4,
 #TXT_info p {
-    color: #fff;
+    color: #000;
     font-family: "Microsoft YaHei", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 16px;
@@ -98,8 +98,8 @@ pre {
 
 .panel-info>.panel-heading {
     font-size: 20px;
-    background-color: #31708f;
-    border-color: #31708f;
+    background-color: #2f4050;
+    border-color: #2f4050;
 
 }
 #content-main>.col-sm-6 {
@@ -113,7 +113,7 @@ pre {
 
 .panel-body {
     position: relative;
-    background-color: #2f4050;
+    background-color: #ccc;
 }
 
 .download-box {
@@ -125,11 +125,11 @@ pre {
   margin-right: 30px;
 }
 .download-box a {
-    color: #fff;
+    color: #000;
 }
 
 #wave h3 {
-    color: #fff;
+    color: #000;
 }
 /*搜索框样式*/
 .input-group {

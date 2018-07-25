@@ -6,3 +6,236 @@ Traceback (most recent call last):
   File "/opt/OPcenter/Aladdin/RedisSaltWorker.py", line 10, in <module>
     from saltstack.salt_manage import Test_ping,Grains,State_sls
 ImportError: cannot import name 'State_sls'
+2018-07-19 10:17:11,383 - setup.py[line:1165] - ERROR: An un-handled exception was caught by salt's global exception handler:
+OSError: [Errno 5] Input/output error
+Traceback (most recent call last):
+  File "/usr/local/python3/lib/python3.5/threading.py", line 914, in _bootstrap_inner
+    self.run()
+  File "/usr/local/python3/lib/python3.5/threading.py", line 862, in run
+    self._target(*self._args, **self._kwargs)
+  File "/opt/OPcenter/Aladdin/RedisSaltWorker.py", line 104, in start
+    minion_state.save_sls(number=number,information=information,status=2)
+  File "/opt/OPcenter/saltstack/salt_manage.py", line 280, in save_sls
+    print(information)
+OSError: [Errno 5] Input/output error
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/python3/lib/python3.5/threading.py", line 882, in _bootstrap
+    self._bootstrap_inner()
+  File "/usr/local/python3/lib/python3.5/threading.py", line 924, in _bootstrap_inner
+    (self.name, _format_exc()), file=_sys.stderr)
+OSError: [Errno 5] Input/output error
+2018-07-20 09:46:11,575 - setup.py[line:1165] - ERROR: An un-handled exception was caught by salt's global exception handler:
+ConnectionError: Error 111 connecting to 127.0.0.1:6379. Connection refused.
+Traceback (most recent call last):
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 484, in connect
+    sock = self._connect()
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 541, in _connect
+    raise err
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 529, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/client.py", line 2408, in _execute
+    return command(*args)
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 610, in send_command
+    self.send_packed_command(self.pack_command(*args))
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 585, in send_packed_command
+    self.connect()
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 489, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:6379. Connection refused.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 484, in connect
+    sock = self._connect()
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 541, in _connect
+    raise err
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 529, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "Aladdin/AladdinStart.py", line 24, in <module>
+    w = worker()
+  File "/opt/OPcenter/Aladdin/RedisWebmoniWorker.py", line 59, in __init__
+    self.radio = self.worker.subscribe()
+  File "/opt/OPcenter/Aladdin/RedisQueue.py", line 23, in subscribe
+    pub.subscribe(self.chan_sub)
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/client.py", line 2482, in subscribe
+    ret_val = self.execute_command('SUBSCRIBE', *iterkeys(new_channels))
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/client.py", line 2404, in execute_command
+    self._execute(connection, connection.send_command, *args)
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/client.py", line 2415, in _execute
+    connection.connect()
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 489, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:6379. Connection refused.
+2018-07-20 09:47:17,002 - setup.py[line:1165] - ERROR: An un-handled exception was caught by salt's global exception handler:
+ConnectionError: Error 111 connecting to 127.0.0.1:6379. Connection refused.
+Traceback (most recent call last):
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 484, in connect
+    sock = self._connect()
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 541, in _connect
+    raise err
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 529, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/client.py", line 2408, in _execute
+    return command(*args)
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 610, in send_command
+    self.send_packed_command(self.pack_command(*args))
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 585, in send_packed_command
+    self.connect()
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 489, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:6379. Connection refused.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 484, in connect
+    sock = self._connect()
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 541, in _connect
+    raise err
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 529, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "Aladdin/AladdinStart.py", line 24, in <module>
+    w = worker()
+  File "/opt/OPcenter/Aladdin/RedisWebmoniWorker.py", line 59, in __init__
+    self.radio = self.worker.subscribe()
+  File "/opt/OPcenter/Aladdin/RedisQueue.py", line 23, in subscribe
+    pub.subscribe(self.chan_sub)
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/client.py", line 2482, in subscribe
+    ret_val = self.execute_command('SUBSCRIBE', *iterkeys(new_channels))
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/client.py", line 2404, in execute_command
+    self._execute(connection, connection.send_command, *args)
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/client.py", line 2415, in _execute
+    connection.connect()
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 489, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:6379. Connection refused.
+2018-07-20 09:47:28,752 - setup.py[line:1165] - ERROR: An un-handled exception was caught by salt's global exception handler:
+ConnectionError: Error 111 connecting to 127.0.0.1:6379. Connection refused.
+Traceback (most recent call last):
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 484, in connect
+    sock = self._connect()
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 541, in _connect
+    raise err
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 529, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/client.py", line 2408, in _execute
+    return command(*args)
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 610, in send_command
+    self.send_packed_command(self.pack_command(*args))
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 585, in send_packed_command
+    self.connect()
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 489, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:6379. Connection refused.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 484, in connect
+    sock = self._connect()
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 541, in _connect
+    raise err
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 529, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "Aladdin/AladdinStart.py", line 24, in <module>
+    w = worker()
+  File "/opt/OPcenter/Aladdin/RedisWebmoniWorker.py", line 59, in __init__
+    self.radio = self.worker.subscribe()
+  File "/opt/OPcenter/Aladdin/RedisQueue.py", line 23, in subscribe
+    pub.subscribe(self.chan_sub)
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/client.py", line 2482, in subscribe
+    ret_val = self.execute_command('SUBSCRIBE', *iterkeys(new_channels))
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/client.py", line 2404, in execute_command
+    self._execute(connection, connection.send_command, *args)
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/client.py", line 2415, in _execute
+    connection.connect()
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 489, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:6379. Connection refused.
+2018-07-23 09:03:16,380 - setup.py[line:1165] - ERROR: An un-handled exception was caught by salt's global exception handler:
+ConnectionError: Error 111 connecting to 127.0.0.1:6379. Connection refused.
+Traceback (most recent call last):
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 484, in connect
+    sock = self._connect()
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 541, in _connect
+    raise err
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 529, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/client.py", line 2408, in _execute
+    return command(*args)
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 610, in send_command
+    self.send_packed_command(self.pack_command(*args))
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 585, in send_packed_command
+    self.connect()
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 489, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:6379. Connection refused.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 484, in connect
+    sock = self._connect()
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 541, in _connect
+    raise err
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 529, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "Aladdin/AladdinStart.py", line 24, in <module>
+    w = worker()
+  File "/opt/OPcenter/Aladdin/RedisWebmoniWorker.py", line 59, in __init__
+    self.radio = self.worker.subscribe()
+  File "/opt/OPcenter/Aladdin/RedisQueue.py", line 23, in subscribe
+    pub.subscribe(self.chan_sub)
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/client.py", line 2482, in subscribe
+    ret_val = self.execute_command('SUBSCRIBE', *iterkeys(new_channels))
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/client.py", line 2404, in execute_command
+    self._execute(connection, connection.send_command, *args)
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/client.py", line 2415, in _execute
+    connection.connect()
+  File "/root/Envs/OPcenter/lib/python3.5/site-packages/redis/connection.py", line 489, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:6379. Connection refused.

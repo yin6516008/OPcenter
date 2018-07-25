@@ -13,10 +13,10 @@
             <div class="div_implement">
                 <button type="button" class="btn btn-primary btn-upload-playbook" data-toggle="modal" data-target="#playBook">上传剧本</button>
                 <div class="btn-group">
-                    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">选择分组 <span class="caret"></span>
+                    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">按组筛选 <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a href="/saltstack/playbook/">全部剧本</a></li>
+                        <li><a href="/saltstack/playbook/">全部</a></li>
                         {%for row in data.project_list%}
                         <li><a href="/saltstack/playbook/{{row.name}}/">{{row.name}}</a></li>
                         {%endfor%}
@@ -62,15 +62,27 @@
                     </div>
                     <form id="uploadform" enctype="multipart/form-data">
                         <div class="modal-body">
-                            <div><span>选择本地文件：</span></div>
-                            <div class="choose-file"><input type="file" name="file_context" alt="" id="uploadFile">点击上传文件
+                            <div>
+                                <span>剧本文件规范：文件内容第一行注释是所属分组，第二行注释是用途描述</span>
+                            </div>
+                            <div class="play-book-example">
+                                <span>示例：</span>
+                                <div class="play-book-example-content">
+                                    <div><span># Linux</span><span>***文件第一行内容：分组</span></div>
+                                    <div><span># Linux系统初始化操作</span><span>***文件第二行内容：描述</span></div>
+                                    <div><span># 第一行注释是剧本所属组，第二行注释是剧本描述</span><span>***文件第三行内容：备注</span></div>
+                                    <div><span># </span><span>***文件第四行内容：空行</span></div>
+                                    <div><span>正文开始</span><span>***文件第五行内容：正文</span></div>
+                                </div>
+                            </div>
+                            <div class="choose-file"><input type="file" name="file_context" alt="" id="uploadFile">选择本地文件
                             </div>
                             <div class="show-file-name"><span>未选择任何文件</span></div>
                         </div>
                     </form>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
-                        <button type="button" class="btn btn-primary" id="uploadPlayBook">保存</button>
+                        <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" id="uploadPlayBook">上传</button>
                     </div>
                     <div class="modal-tips">
                         <span></span>

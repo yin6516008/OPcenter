@@ -1,4 +1,6 @@
 $(function () {
+
+
     // -------------主机列表选择按钮---------
     // 页面初始化选择按钮和移除按钮默认处于禁止点击状态
     $('.choose').attr('disabled', true);
@@ -244,13 +246,16 @@ $(function () {
         $('.jobDesc').text(description);
         $('.jobCtime').text(createTime);
         $('.jobFtime').text(finishTime);
+        console.log(number);
         $.ajax({
             type: 'POST',
-            url: '/saltstack/playbook_exe_result/',
+            url: '/saltstack/playbook_exe_ret/',
             data: {'number': number},
             success: function (msg) {
+                console.log(msg);
                 $('#playbookResult').hide();
                 var data = JSON.parse(msg);
+                console.log(data);
                 // if (data.code == 0) {
                 //     // var obj = JSON.parse(data.data.infomation);
                 //     // var obj = JSON.parse(data.data.infomation);
@@ -261,4 +266,9 @@ $(function () {
             }
         })
     })
+    // 左侧边栏
+    $('#side-menu>li:nth-of-type(3)').addClass('active')
+    $('#side-menu>li:nth-of-type(3)>ul').removeClass('ulhide')
+    $('#side-menu>li:nth-of-type(3)>ul').addClass('collapse')
+    $('#side-menu>li:nth-of-type(3)>ul').addClass('in')
 })

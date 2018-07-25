@@ -1,3 +1,6 @@
+#side-menu>li:nth-of-type(3)>ul>li:nth-of-type(1)>a {
+    color: #fff;
+}
 /*选项卡*/
 * {
     margin: 0;
@@ -127,59 +130,6 @@
 .tab-content .panel-type .system_type ul li:hover {
     background-color: #eee;
 }
-/*.tab-content .panel-type .choose-group {*/
-    /*position: absolute;*/
-    /*top: 20px;*/
-    /*right: 300px;*/
-/*}*/
-/*.tab-content .panel-type .choose-group input {*/
-    /*width: 180px;*/
-    /*height: 30px;*/
-    /*padding-left: 10px;*/
-    /*outline: none;*/
-    /*font-size: 14px;*/
-    /*font-weight: normal;*/
-    /*display: inline-block;*/
-/*}*/
-/*.tab-content .panel-type .choose-group span {*/
-    /*font-weight: 700;*/
-/*}*/
-/*.tab-content .panel-type .choose-group i {*/
-    /*position: absolute;*/
-    /*top: 6px;*/
-    /*right: 10px;*/
-    /*font-size: 20px;*/
-    /*cursor: pointer;*/
-/*}*/
-/*.tab-content .panel-type .choose-group ul {*/
-    /*list-style: none;*/
-    /*position: absolute;*/
-    /*right: 0;*/
-    /*top: 30px;*/
-    /*width: 180px;*/
-    /*margin: 0;*/
-    /*padding: 0;*/
-    /*background-color: #fff;*/
-    /*border: 1px solid #ccc;*/
-    /*box-sizing: border-box;*/
-    /*display: none;*/
-    /*z-index: 9;*/
-    /*list-style: none;*/
-/*}*/
-/*.tab-content .panel-type .choose-group ul li {*/
-    /*width: 100%;*/
-    /*height: 30px;*/
-    /*line-height: 30px;*/
-    /*padding-left: 10px;*/
-/*}*/
-/*.tab-content .panel-type .choose-group ul li a {*/
-    /*color: #000;*/
-    /*font-size: 14px;*/
-    /*font-weight: normal;*/
-/*}*/
-/*.tab-content .panel-type .choose-group ul li:hover {*/
-    /*background-color: #eee;*/
-/*}*/
 .choose-group {
     position: absolute;
     top: 0px;
@@ -207,24 +157,25 @@
 }
 .tab_search {
     position: absolute;
-    top: 62px;
+    top: 59px;
     right: 780px;
+    border-radius: 4px;
 }
 .tab_search:hover {
     color: #fff;
 }
 .tab_search {
     width: 100px;
-    height: 30px;
-    color: #000;
+    height: 34px;
     text-align: center;
-    border: 1px solid #1ab394;
-    line-height: 30px;
+    /*border: 1px solid #1ab394;*/
+    line-height: 34px;
+    border-radius: 4px;
 }
 .tab_search button {
     width: 100%;
     height: 100%;
-    line-height: 30px;
+    line-height: 24px;
     border: none;
 }
 .btn-primary.btn-outline {
