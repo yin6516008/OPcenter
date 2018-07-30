@@ -16,11 +16,11 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
-from login import views
+from index import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.login),
+    url(r'^$', views.index),
     url(r'^login/', include('login.urls')),
     url(r'^index/', include('index.urls')),
     url(r'^webmoni/', include('webmoni.urls')),

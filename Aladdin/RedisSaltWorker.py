@@ -46,13 +46,23 @@ class Minion_Check_Worker(object):
 class Saltstack_Auto_Worker(object):
     def __init__(self):
         # 设定自动执行的间隔时间
-        self.interval = 300
+        self.interval = 200
         # 实例化检测队列
         self.check_minion = Redis_Queue('check_minion')
 
     def start(self):
         print('Saltstack Auto Worker 已启动')
         while True:
+
+            # -----------------定时统计主机执行剧本的次数---开始-------------------------
+            minion_id_list = Accepted_minion.objects.all()
+            for minion_obj in minion_id_list:
+                jobs_count = Async_jobs.objects.filter(minion__id=minion_obj.id).count()
+                Accepted_minion.objects.filter(id=minion_obj.id).update(jobs_count=jobs_count)
+            # -----------------定时统计主机执行剧本的次数---结束-------------------------
+
+            time.sleep(self.interval)
+
             # -----------------自动检测执行剧本排队异常---开始---------------------------
             # 0=排队 1=执行中 2=执行完成 3=异常
             hours_ago = datetime.datetime.fromtimestamp(time.time()-3600*3)
@@ -68,7 +78,9 @@ class Saltstack_Auto_Worker(object):
                 else:
                     Async_jobs.objects.filter(id=job.id).update(status=3,success_total=0)
             # -----------------自动检测执行剧本排队异常---结束---------------------------
+
             time.sleep(self.interval)
+
             # -----------------自动检测在线离线---开始----------------------------------
             minion_id_list = []
             # 从salt-key获取所有minion
@@ -89,8 +101,10 @@ class Saltstack_Auto_Worker(object):
             test = {'pattern': 1,'id':minion_id_list,'add':False}
             self.check_minion.publish(test)
             # -----------------自动检测在线离线---结束----------------------------------
+
             # 等待进入下一回合
             time.sleep(self.interval)
+
 
 # 接收剧本执行命令
 class Execute_PlayBook_Worker(object):

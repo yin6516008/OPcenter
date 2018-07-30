@@ -8,7 +8,7 @@ class Project(models.Model):
         return self.name
 
     class Meta:
-        verbose_name_plural = "主机组"
+        verbose_name_plural = "主机分组"
 
 class Accepted_minion(models.Model):
     status_choice = (
@@ -29,9 +29,11 @@ class Accepted_minion(models.Model):
     mem_gib = models.CharField(max_length=10,null=True, blank=True)
     datetime = models.DateTimeField()
     project = models.ManyToManyField('Project')
+    jobs_count = models.IntegerField(null=True,default=0)
 
     def __str__(self):
         return self.id
+
     class Meta:
         verbose_name_plural = "主机列表"
 
@@ -50,7 +52,7 @@ class PlayBook(models.Model):
         return self.description
 
     class Meta:
-        verbose_name_plural = "剧本"
+        verbose_name_plural = "剧本管理"
 
 class Async_jobs(models.Model):
     async_jobs_stauts = (
@@ -69,5 +71,5 @@ class Async_jobs(models.Model):
     finish_time = models.DateTimeField(null=True,blank=True)
     information = models.TextField(null=True,blank=True)
     status = models.IntegerField(choices=async_jobs_stauts,default=0)
-    success_total = models.IntegerField(null=True,blank=True)
-    targets_total = models.IntegerField(null=True,blank=True)
+    success_total = models.IntegerField(null=True,default=0)
+    targets_total = models.IntegerField(null=True,default=0)

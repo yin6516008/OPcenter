@@ -51,10 +51,52 @@ class Check_Cert_Worker(object):
                                                          cert_valid_days=cert_info['expire'])
 
 
+# class Send_Mail_Worker(object):
+#     def __init__(self):
+#         self.cache = {'current':0,'data':{}}
+#         self.worker = Redis_Queue(Webmoni_Send_Mail_Queue)
+#         self.radio = self.worker.subscribe()
+#
+#     def start(self):
+#         print('Send Mail Worker 已启动')
+#         while True:
+#             msg = self.radio.parse_response()
+#             program = eval(msg[2].decode())
+#             current = program.get('time') - program.get('time') % 300
+#             status = program.get('status')
+#             url_id = program.get('url_id')
+#             if current == self.cache.get('current'):
+#                 if not self.cache['data'].get(program['domain']):
+#                     self.cache['data'][program['domain']] = {'failtag': 0, 'areas': {}}
+#                 if status != 100:
+#                     self.cache['data'][program['domain']]['failtag'] += 1
+#                 self.cache['data'][program['domain']]['areas'][str(program.get('node'))] = program.get('total_time')
+#             else:
+#                 node_info = {}
+#                 for node in Node.objects.all():
+#                     node_info[str(node.id)] = node.node
+#                 self.cache['current'] = current
+#                 if self.cache.get('data') is None:
+#                     continue
+#                 for domain,y in self.cache['data'].items():
+#                     domain_obj = DomainName.objects.get(url=domain)
+#                     if domain_obj.warning == 0:
+#                         if y['failtag'] >= int(len(y['areas']) / 2) + 1:
+#                             DomainName.objects.filter(url=domain).update(status=99)
+#                             content = '域名:{}<br>CDN:{}<br>项目:{}<br>'.format(domain,domain_obj.cdn,domain_obj.project_name)
+#                             for area,val in y['areas'].items():
+#                                 content += '{}:{}<br>'.format(node_info[area],val)
+#                             content += '<a href="http://139.199.77.249:8000/webmoni/Nowarning/{}/">点击不警告</a><br>'.format(domain)
+#                             send_mail(domain,[Ming,Lin],content)
+#                         else:
+#                             DomainName.objects.filter(url=domain).update(status=100)
+#                 self.cache['data'].clear()
+
 
 class Send_Mail_Worker(object):
     def __init__(self):
-        self.cache = {'current':0,'data':{}}
+        self.current = 0
+        self.now_data = {}
         self.worker = Redis_Queue(Webmoni_Send_Mail_Queue)
         self.radio = self.worker.subscribe()
 
@@ -63,37 +105,38 @@ class Send_Mail_Worker(object):
         while True:
             msg = self.radio.parse_response()
             program = eval(msg[2].decode())
-            current = program.get('time') - program.get('time') % 300
+            current_Timestamp = program.get('time') - program.get('time') % 300
+            if self.current == 0:
+                self.current = current_Timestamp
             status = program.get('status')
             url_id = program.get('url_id')
-            if current == self.cache.get('current'):
-                if not self.cache['data'].get(program['domain']):
-                    self.cache['data'][program['domain']] = {'failtag': 0, 'areas': {}}
+            if self.current != current_Timestamp:
+                self.send_mail(self.now_data)
+                self.now_data.clear()
+                self.current = current_Timestamp
+
+            # 本次数据没有超过5分钟的情况
+            if self.current == current_Timestamp:
+                if not self.now_data.get(program['domain']):
+                    self.now_data[program['domain']] = {'failtag': 0, 'areas': {}}
                 if status != 100:
-                    self.cache['data'][program['domain']]['failtag'] += 1
-                self.cache['data'][program['domain']]['areas'][str(program.get('node'))] = program.get('total_time')
-            else:
-                node_info = {}
-                for node in Node.objects.all():
-                    node_info[str(node.id)] = node.node
-                self.cache['current'] = current
-                if self.cache.get('data') is None:
-                    continue
-                for domain,y in self.cache['data'].items():
-                    domain_obj = DomainName.objects.get(url=domain)
-                    if domain_obj.warning == 0:
-                        if y['failtag'] >= int(len(y['areas']) / 2) + 1:
-                            DomainName.objects.filter(url=domain).update(status=99)
-                            content = '域名:{}<br>CDN:{}<br>项目:{}<br>'.format(domain,domain_obj.cdn,domain_obj.project_name)
-                            for area,val in y['areas'].items():
-                                content += '{}:{}<br>'.format(node_info[area],val)
-                            content += '<a href="http://139.199.77.249:8000/webmoni/Nowarning/{}/">点击不警告</a><br>'.format(domain)
-                            send_mail(domain,[Ming,Lin],content)
-                        else:
-                            DomainName.objects.filter(url=domain).update(status=100)
-                self.cache['data'].clear()
+                    self.now_data[program['domain']]['failtag'] += 1
+                self.now_data[program['domain']]['areas'][str(program.get('node'))] = program.get('total_time')
 
 
-
-
-
+    def send_mail(self,last_data):
+        node_info = {}
+        for node in Node.objects.all():
+            node_info[str(node.id)] = node.node
+        for domain, y in last_data.items():
+            domain_obj = DomainName.objects.get(url=domain)
+            if domain_obj.warning == 0:
+                if y['failtag'] >= int(len(y['areas']) / 2) + 1:
+                    DomainName.objects.filter(url=domain).update(status=99)
+                    content = '域名:{}<br>CDN:{}<br>项目:{}<br>'.format(domain, domain_obj.cdn, domain_obj.project_name)
+                    for area, val in y['areas'].items():
+                        content += '{}:{}<br>'.format(node_info[area], val)
+                    content += '<a href="http://47.91.239.10:80/webmoni/Nowarning/{}/">点击不警告</a><br>'.format(domain)
+                    send_mail(domain, [Ming, Lin], content)
+                else:
+                    DomainName.objects.filter(url=domain).update(status=100)

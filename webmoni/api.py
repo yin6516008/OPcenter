@@ -56,12 +56,12 @@ def event_type(request):
 
 # /webmoni/api/normal_domain/ 获取并保存正确的检测结果
 def check_result_submit(request):
+    launcher = Redis_Queue(Webmoni_Send_Mail_Queue)
     if request.method == 'POST':
         submitData = json.loads(request.POST.get('submitData'))
         client_ip = request.META['REMOTE_ADDR']
         node_obj = API_verify(client_ip)
         if node_obj is not None:
-            launcher = Redis_Queue(Webmoni_Send_Mail_Queue)
             try:
                 MonitorData.objects.create(
                     http_code=submitData.get('http_code'),

@@ -36,43 +36,49 @@ table thead tr th {
     text-align: left;
 }
 table thead tr th:nth-child(1) {
-    width: 10%;
+    width: 5%;
 }
 table thead tr th:nth-child(2) {
-    width: 7%;
+    width: 6%;
 }
 table thead tr th:nth-child(3) {
-    width: 40%;
+    width: 45%;
 }
 table thead tr th:nth-child(4) {
-    width: 20%;
-}
-table thead tr th:nth-child(5) {
     width: 15%;
 }
+table thead tr th:nth-child(5) {
+    width: 10%;
+}
 table thead tr th:nth-child(6) {
-    width: 8%;
+    width: 6%;
+}
+table thead tr th:nth-child(7) {
+    width: 13%;
 }
 table tbody tr td {
     text-align: left;
 }
 table tbody tr td:nth-child(1) {
-    width: 10%;
+    width: 5%;
 }
 table tbody tr td:nth-child(2) {
-    width: 7%;
+    width: 6%;
 }
 table tbody tr td:nth-child(3) {
-    width: 40%;
+    width: 45%;
 }
 table tbody tr td:nth-child(4) {
-    width: 20%;
-}
-table tbody tr td:nth-child(5) {
     width: 15%;
 }
-table thead tr th:nth-child(6) {
-    width: 8%;
+table tbody tr td:nth-child(5) {
+    width: 10%;
+}
+table tbody tr td:nth-child(6) {
+    width: 6%;
+}
+table tbody tr td:nth-child(7) {
+    width: 13%;
 }
 
 .host-operation-heading {

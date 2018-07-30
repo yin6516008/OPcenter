@@ -6,6 +6,10 @@ html {
 body.fixed-sidebar.mini-navbar .navbar-static-side {
   width: 75px;
 }
+body.mini-navbar .nav-header {
+  padding: 0;
+  background: url("/static/img/logo1.png") no-repeat center center #fff;
+}
 .dropdown.profile-element {
   float: right;
   margin-right: 60px;  

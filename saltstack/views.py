@@ -2,7 +2,7 @@ import datetime,time,os,shutil,yaml
 import json
 import subprocess
 from django.shortcuts import render,redirect,HttpResponse
-from django.db.models import Q
+from django.db.models import Q,F
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from saltstack.models import Accepted_minion,Project,PlayBook,Async_jobs
 from saltstack.salt_manage import Key_manage,Master_manage,PlayBook_manage,Minion_state
@@ -285,44 +285,52 @@ def playbook_del(request):
 @check_login
 def playbook_exe(request,project='all_projects',days=3):  #默认显示全部分组和最近三天的任务日志
     if request.method == "GET":
+        # 如果日期筛选全部，则查询8888天前到现在的
+        days = 8888 if int(days) == 0 else int(days)
+        host = request.GET.get('host')
         # 当前时间
         to_day = datetime.datetime.now()
         # timedelta(int(days)-1)计算结果为天数差，由此得出起始日期from_day
-        from_day = datetime.date.today() - datetime.timedelta(int(days)-1)
-        print(from_day,to_day)
-        # 不筛选组，仅筛选日期
-        if project == 'all_projects':
-            project_list = Project.objects.all().order_by('-id')
-            minion_list = Accepted_minion.objects.exclude(status=3).order_by('-id')
-            playbook_list = PlayBook.objects.exclude(sls__icontains='文件').order_by('-id')
-            jobs_list = Async_jobs.objects.defer('information').filter(create_time__range=(from_day,to_day)).order_by('-id')
-            data = {'project_list': project_list,
-                    'minion_list': minion_list,
-                    'playbook_list': playbook_list,
-                    'jobs_list': jobs_list,
-                    'filter_project': project,
-                    'filter_days':days,
-                    'to_day':to_day,
-                    'from_day':from_day,
-                    }
-            return render(request, 'saltstack_playbook_exe.html', {'data': data})
+        from_day = datetime.date.today() - datetime.timedelta(days-1)
+        days = 0 if days == 8888 else days
+        project_list = Project.objects.all().order_by('-id')
+        # 组和日期的筛选
+        if host is None:
+            # 不筛选组，仅筛选日期
+            if project == 'all_projects':
+                minion_list = Accepted_minion.objects.exclude(status=3).order_by('-id')
+                playbook_list = PlayBook.objects.exclude(sls__icontains='文件').order_by('-id')
+                jobs_list = Async_jobs.objects.defer('information').filter(create_time__range=(from_day,to_day)).order_by('-id')
+            # 筛选组和日期
+            else:
+                minion_list = Accepted_minion.objects.filter(project__name=project).exclude(status=3).order_by('-id')
+                playbook_list = PlayBook.objects.filter(project__name=project).exclude(sls__icontains='文件').order_by('-id')
+                jobs_list = Async_jobs.objects.defer('information').filter(create_time__range=(from_day,to_day)).filter(project__name=project).order_by('-id')
 
-        # 筛选组和日期
+         # 查看单个主机的历史执行记录
         else:
-            project_list = Project.objects.all().values().order_by('-id')
-            minion_list = Accepted_minion.objects.filter(project__name=project).exclude(status=3).order_by('-id')
-            playbook_list = PlayBook.objects.filter(project__name=project).exclude(sls__icontains='文件').order_by('-id')
-            jobs_list = Async_jobs.objects.defer('information').filter(create_time__range=(from_day,to_day)).filter(project__name=project).order_by('-id')
-            data = {'project_list': project_list,
-                    'minion_list': minion_list,
-                    'playbook_list': playbook_list,
-                    'jobs_list': jobs_list,
-                    'filter_project': project,
-                    'filter_days':days,
-                    'to_day': to_day,
-                    'from_day': from_day,
-                    }
-            return render(request, 'saltstack_playbook_exe.html', {'data': data})
+            # 不筛选组，仅筛选日期
+            if project == 'all_projects':
+                minion_list = Accepted_minion.objects.exclude(status=3).order_by('-id')
+                playbook_list = PlayBook.objects.exclude(sls__icontains='文件').order_by('-id')
+            # 筛选组和日期
+            else:
+                minion_list = Accepted_minion.objects.filter(project__name=project).exclude(status=3).order_by('-id')
+                playbook_list = PlayBook.objects.filter(project__name=project).exclude(sls__icontains='文件').order_by('-id')
+            jobs_list = Async_jobs.objects.defer('information').filter(create_time__range=(from_day,to_day)).filter(minion__id=host).order_by('-id')
+
+        data = {'project_list': project_list,
+                'minion_list': minion_list,
+                'playbook_list': playbook_list,
+                'jobs_list': jobs_list,
+                'filter_project': project,
+                'filter_days':days,
+                'host': host,
+                'to_day':to_day,
+                'from_day':from_day,
+                }
+        return render(request, 'saltstack_playbook_exe.html', {'data': data})
+
 
 # 执行剧本操作
 @check_login
@@ -344,13 +352,16 @@ def playbook_exe_sls(request):
         state_param = {'number': number, 'minion_id_list': minion_id_list, 'playbook_id': playbook_id}
         state_execute.publish(state_param)
 
-        # 写入数据库
+        # 执行记录写入数据库
         create_time = datetime.datetime.fromtimestamp(time.time())
         description = PlayBook.objects.get(id=playbook_id)
         jobs_info = Async_jobs(number=number, description=description, project=description.project, create_time=create_time, status=0, targets_total=len(minion_id_list))
         jobs_info.save()
         try:
             jobs_info.minion.add(*minion_id_list)
+            # 更新主机任务计数
+            for salt_id in minion_id_list:
+                Accepted_minion.objects.filter(salt_id=salt_id).update(jobs_count=F('jobs_count') + 1)
         except Exception as error:
             # 异常返回
             EXCEPT_DATA['data'] = {'number':number,

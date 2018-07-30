@@ -126,7 +126,7 @@ class TrustAsia(object):
             password_file = domaindir + 'password-' + domain + '.txt'
 
             with open(pem,"w") as f:
-                f.write(cert_key["cert"])
+                f.write(cert_key["cert"]+'\n'+cert_key["cacert"])
 
             with open(CA_cert,"w") as pf:
                 pf.write(cert_key["cacert"])
